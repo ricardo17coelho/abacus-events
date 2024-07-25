@@ -147,11 +147,6 @@ router.beforeEach(async (to) => {
   if (!requiresNoAuth) {
     if (session?.user) {
       setCurrentUser(session.user);
-      if (to.path === '/') {
-        return {
-          name: 'dashboard'
-        };
-      }
     } else {
       if (currentUser) {
         logout();
@@ -163,7 +158,7 @@ router.beforeEach(async (to) => {
     }
   } else {
     const isAuthRoute = to.name as string;
-    if (isAuthRoute.startsWith('auth-') && session?.user) {
+    if (isAuthRoute.startsWith('auth-') && currentUser) {
       return {
         name: 'dashboard'
       };

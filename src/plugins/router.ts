@@ -94,7 +94,7 @@ const router = createRouter({
       path: '/',
       component: () => import('@/layouts/LayoutDefault.vue'),
       meta: {
-        requiresNoAuth: false
+        requiresNoAuth: true
       },
       children: [
         {
@@ -137,7 +137,6 @@ supabase().auth.onAuthStateChange((event: AuthChangeEvent) => {
 router.beforeEach(async (to) => {
   const { setCurrentUser, currentUser } = useAuthStore();
   const { logout } = useAuthUser();
-
   const requiresNoAuth = to.meta.requiresNoAuth === true;
 
   const {

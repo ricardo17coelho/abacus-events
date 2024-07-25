@@ -33,10 +33,10 @@ const router = useRouter();
 const password = ref('');
 const loading = ref(false);
 
-const { update } = useAuthUser();
+const { updateUser } = useAuthUser();
 async function onSubmit() {
   loading.value = true;
-  const { error, data } = await update({
+  const { error, data } = await updateUser({
     password: password.value
   });
   console.log(error, data);

@@ -1,5 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import { supabase } from '@/services/supabase';
+import type { AuthChangeEvent } from '@supabase/supabase-js';
+import { useAuthStore } from '@/stores/auth';
+import useAuthUser from '@/composables/auth-user';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -55,6 +58,7 @@ const router = createRouter({
           component: () => import('@/views/auth/AuthCallback.vue'),
           beforeEnter: (to) => {
             /* Parse the route hash into a dictionary */
+            // eslint-disable-next-line  @typescript-eslint/no-explicit-any
             const hashDictionary = {} as any;
             // first remove the actual '#' character
             const hash = to.hash.replace('#', '');
@@ -107,15 +111,16 @@ const router = createRouter({
         {
           path: '/dashboard',
           name: 'dashboard',
-          component: () => import('@/views/Dashboard.vue')
+          component: () => import('@/views/DashboardView.vue')
         }
       ]
     }
   ]
 });
 
-supabase().auth.onAuthStateChange((event) => {
+supabase().auth.onAuthStateChange((event: AuthChangeEvent) => {
   console.log(event);
+  if (!event) return;
   if (event == 'SIGNED_OUT') return router.push('/signin');
   if (event == 'SIGNED_IN') {
     const routeName = router.currentRoute.value.name;
@@ -130,6 +135,9 @@ supabase().auth.onAuthStateChange((event) => {
 });
 
 router.beforeEach(async (to) => {
+  const { setCurrentUser, currentUser } = useAuthStore();
+  const { logout } = useAuthUser();
+
   const requiresNoAuth = to.meta.requiresNoAuth === true;
 
   const {
@@ -138,20 +146,24 @@ router.beforeEach(async (to) => {
 
   if (!requiresNoAuth) {
     if (session?.user) {
+      setCurrentUser(session.user);
       if (to.path === '/') {
         return {
           name: 'dashboard'
         };
       }
     } else {
+      if (currentUser) {
+        logout();
+      }
       return {
         name: 'auth-sign-in',
         query: { redirect: to.path }
       };
     }
   } else {
-    const isAuthRoute = to.name?.startsWith('auth-');
-    if (isAuthRoute && session?.user) {
+    const isAuthRoute = to.name as string;
+    if (isAuthRoute.startsWith('auth-') && session?.user) {
       return {
         name: 'dashboard'
       };

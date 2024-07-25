@@ -1,7 +1,7 @@
 import i18n from '@/plugins/i18n';
 import type { ValidationRuleBaseParams } from './types/validationRuleBaseParams';
 
-export interface RuleEmailParams extends ValidationRuleBaseParams {}
+export type RuleEmailParams = ValidationRuleBaseParams;
 
 /**
  * Rule validate email

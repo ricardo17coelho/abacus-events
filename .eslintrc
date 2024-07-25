@@ -1,27 +1,17 @@
 {
   "root": true,
   "extends": [
+    "./.eslintrc-auto-import.json",
     "plugin:vue/vue3-essential",
     "eslint:recommended",
-    "@vue/eslint-config-typescript/recommended",
-    "@vue/eslint-config-prettier"
+    "@vue/eslint-config-typescript",
+    "@vue/eslint-config-prettier/skip-formatting",
+    "plugin:prettier/recommended",
+    "@vue/eslint-config-typescript/recommended"
   ],
-  "env": {
-    "vue/setup-compiler-macros": true
-  },
-  "overrides": [
-    {
-      "files": [
-        "**/__tests__/*.spec.{js,ts,jsx,tsx}",
-        "cypress/integration/**.spec.{js,ts,jsx,tsx}"
-      ],
-      "extends": ["plugin:cypress/recommended"]
-    }
-  ],
-  "prettier/prettier": [
-    "error",
-    {
-      "endOfLine": "auto"
-    }
-  ]
+  "plugins": ["prettier", "@typescript-eslint"],
+  "parserOptions": {
+    "ecmaVersion": "latest",
+    "warnOnUnsupportedTypeScriptVersion": false
+  }
 }

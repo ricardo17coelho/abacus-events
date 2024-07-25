@@ -1,7 +1,7 @@
-import { supabase } from "@/services/supabase";
+import { supabase } from '@/services/supabase';
 
-export const useAuthStore = defineStore("auth", {
+export const useAuthStore = defineStore('auth', {
   state: () => {
     return { supabase };
-  },
+  }
 });

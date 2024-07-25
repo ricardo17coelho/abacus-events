@@ -1,4 +1,3 @@
-
 import i18n from '@/plugins/i18n';
 import type { ValidationRuleBaseParams } from './types/validationRuleBaseParams';
 import { isNullOrUndefined } from '../isNullOrUndefined';

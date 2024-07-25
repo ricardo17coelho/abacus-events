@@ -6,7 +6,7 @@
       text="The page you were looking for does not exist"
     >
       <template #actions>
-        <VBtnPrimary :to="{  path: '/' }" class="self-center">
+        <VBtnPrimary :to="{ path: '/' }" class="self-center">
           Go home
         </VBtnPrimary>
       </template>
@@ -15,5 +15,4 @@
 </template>
 <script lang="ts" setup>
 import ContainerCentered from '@/components/containers/ContainerCentered.vue';
-
 </script>

@@ -1,6 +1,4 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import { useAuthStore } from '@/stores/auth';
-import pinia from '@/stores';
 import { supabase } from '@/services/supabase';
 
 const router = createRouter({

@@ -38,12 +38,15 @@ const router = createRouter({
           path: '/resetpassword',
           name: 'auth-reset-password',
           component: () => import('@/views/auth/ResetPassword.vue'),
-          beforeEnter: (to) => {
+          beforeEnter: async (to) => {
             // only allow navigation to reset password
             // if we actually clicked a proper reset password link
             // which provides the type=recovery hash key
             if (!to.hash.includes('type=recovery')) {
-              if (supabase().auth.user()) return '/';
+              const {
+                data: { user }
+              } = await supabase().auth.getUser();
+              if (user) return '/';
               return '/signin';
             }
           }
@@ -89,13 +92,24 @@ const router = createRouter({
       path: '/',
       component: () => import('@/layouts/LayoutDefault.vue'),
       meta: {
-        requiresAuth: false
+        requiresNoAuth: false
       },
       children: [
         {
           path: '/',
           name: 'home',
           component: () => import('@/views/HomeView.vue')
+        }
+      ]
+    },
+    {
+      path: '/dashboard',
+      component: () => import('@/layouts/LayoutDefault.vue'),
+      children: [
+        {
+          path: '/dashboard',
+          name: 'dashboard',
+          component: () => import('@/views/Dashboard.vue')
         }
       ]
     }
@@ -118,23 +132,30 @@ supabase().auth.onAuthStateChange((event) => {
 });
 
 router.beforeEach(async (to) => {
-  if (to.meta.requiresAuth) {
-    const {
-      data: { session }
-    } = await supabase().auth.getSession();
-    if (!session?.user) {
+  const requiresNoAuth = to.meta.requiresNoAuth === true;
+
+  const {
+    data: { session }
+  } = await supabase().auth.getSession();
+
+  if (!requiresNoAuth) {
+    if (session?.user) {
+      if (to.path === '/') {
+        return {
+          name: 'dashboard'
+        };
+      }
+    } else {
       return {
-        path: '/signin'
+        name: 'auth-sign-in',
+        query: { redirect: to.path }
       };
     }
-  }
-  if (to.meta.requiresNoAuth) {
-    const {
-      data: { session }
-    } = await supabase().auth.getSession();
-    if (session?.user) {
+  } else {
+    const isAuthRoute = to.name?.startsWith('auth-');
+    if (isAuthRoute && session?.user) {
       return {
-        path: '/'
+        name: 'dashboard'
       };
     }
   }

@@ -54,7 +54,6 @@ onMounted(() => onGetAllParkingLots());
 
 function getStatusColor(parkingLot: ParkingLot) {
   const i = (parkingLot.filled_slots * 100) / parkingLot.total_slots;
-  console.warn(i);
   if (i >= 100) {
     return 'error';
   } else if (i > 80) {

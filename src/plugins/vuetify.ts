@@ -14,7 +14,6 @@ import * as labsComponents from 'vuetify/labs/components';
 
 // Translations provided by Vuetify
 import { en, pt } from 'vuetify/locale';
-import colors from 'vuetify/lib/util/colors';
 
 import { VBtn } from 'vuetify/components';
 
@@ -22,8 +21,8 @@ export const themes: Record<string, ThemeDefinition> = {
   light: {
     dark: false,
     colors: {
-      primary: colors.blue.base,
-      secondary: colors.blue.lighten4
+      primary: '#386867',
+      secondary: '#F0E8D9'
     }
   }
 };
@@ -61,7 +60,8 @@ const opts = {
       color: undefined
     },
     VBtnPrimary: {
-      color: 'primary'
+      color: 'primary',
+      variant: 'flat'
     },
     VBtnSecondary: {
       variant: 'outlined',

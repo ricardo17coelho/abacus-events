@@ -135,11 +135,11 @@ const loading = computed(() => emailLoading.value);
 
 function onBtnDevClick() {
   credentials.value = {
-    email: 'devel@rmorgado.ch',
-    password: 'Test.12345',
+    email: import.meta.env.VITE_DEV_USER_EMAIL,
+    password: import.meta.env.VITE_DEV_USER_PW,
     data: {
-      firstname: 'Ricardo',
-      lastname: 'Coelho'
+      firstname: 'Joe',
+      lastname: 'Doe'
     }
   };
   nextTick(() => emailAuth());

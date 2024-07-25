@@ -121,12 +121,16 @@ const router = createRouter({
 supabase().auth.onAuthStateChange((event: AuthChangeEvent) => {
   console.log(event);
   if (!event) return;
-  if (event == 'SIGNED_OUT') return router.push('/signin');
-  if (event == 'SIGNED_IN') {
+  if (event === 'SIGNED_OUT') {
+    const authStore = useAuthStore();
+    authStore.currentUser = undefined;
+    router.push('/');
+    return;
+  } else if (event === 'SIGNED_IN') {
     const routeName = router.currentRoute.value.name;
     console.log('routeName', routeName);
 
-    if (routeName == 'callback') {
+    if (routeName === 'callback') {
       setTimeout(() => {
         return router.push({ name: 'home' });
       }, 0);

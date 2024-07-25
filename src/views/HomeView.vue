@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <h1 class="text-3xl font-medium">Abacus SommerParty Parking</h1>
+    <h1 class="text-h5 text-md-h4 font-medium">Sommer Party Parking</h1>
 
     <v-row>
       <v-col
@@ -9,7 +9,52 @@
         cols="12"
         lg="6"
       >
-        <v-card
+        <v-card class="mx-auto" max-width="500" border flat>
+          <v-list-item class="px-6" height="88">
+            <template #title>
+              {{ parkingLot.name }}
+              <div>
+                <v-chip prepend-icon="mdi-home-map-marker" size="small">{{
+                  parkingLot.location
+                }}</v-chip>
+              </div>
+            </template>
+
+            <template #append>
+              <v-chip :color="getStatusColor(parkingLot)"
+                >{{ getParkingLotStatusText(parkingLot) }}
+              </v-chip>
+            </template>
+          </v-list-item>
+
+          <v-divider />
+
+          <v-card-text class="text-medium-emphasis pa-6">
+            <div class="text-h6 mb-6">
+              <v-icon>mdi-car</v-icon>
+              Anzahl Parkplätze
+            </div>
+            <div class="text-h4 font-weight-black mb-4">
+              {{ parkingLot.filled_slots }} / {{ parkingLot.total_slots }}
+            </div>
+
+            <v-progress-linear
+              bg-color="surface-variant"
+              :color="getStatusColor(parkingLot)"
+              class="mb-6"
+              height="10"
+              :model-value="
+                calculatePercentage(
+                  parkingLot.filled_slots,
+                  parkingLot.total_slots
+                )
+              "
+              rounded="pill"
+            ></v-progress-linear>
+          </v-card-text>
+        </v-card>
+
+        <!-- <v-card
           :title="parkingLot.name"
           :color="getStatusColor(parkingLot)"
           variant="tonal"
@@ -18,10 +63,20 @@
             <v-chip>{{ parkingLot.location }}</v-chip>
           </template>
           <v-card-text>
+            <v-progress-linear
+              :model-value="
+                calculatePercentage(
+                  parkingLot.filled_slots,
+                  parkingLot.total_slots
+                )
+              "
+              max="100"
+            ></v-progress-linear>
+            <v-icon>mdi-car</v-icon>
             Anzahl Parkplätze
             {{ parkingLot.filled_slots }} von {{ parkingLot.total_slots }}
           </v-card-text>
-        </v-card>
+        </v-card> -->
       </v-col>
     </v-row>
   </v-container>
@@ -29,7 +84,7 @@
 
 <script setup lang="ts">
 import useApiParkingLot from '@/api/parking-lots';
-import type { ParkingLot } from '@/types/ParkingLot';
+import { PARKING_LOT_STATUS, type ParkingLot } from '@/types/ParkingLot';
 import { useI18n } from 'vue-i18n';
 import { toast } from 'vue-sonner';
 
@@ -52,13 +107,44 @@ async function onGetAllParkingLots() {
 
 onMounted(() => onGetAllParkingLots());
 
+function calculatePercentage(filledSlots: number, totalSlots: number) {
+  return (filledSlots * 100) / totalSlots;
+}
+
 function getStatusColor(parkingLot: ParkingLot) {
-  const i = (parkingLot.filled_slots * 100) / parkingLot.total_slots;
-  if (i >= 100) {
-    return 'error';
-  } else if (i > 80) {
-    return 'warning';
+  const status = getParkingLotStatus(parkingLot);
+  switch (status) {
+    case 'FULL':
+      return 'error';
+    case 'ALMOST_FULL':
+      return 'warning';
+    default:
+      return 'green';
   }
-  return 'green';
+}
+
+function getParkingLotStatus(parkingLot: ParkingLot) {
+  const i = calculatePercentage(
+    parkingLot.filled_slots,
+    parkingLot.total_slots
+  );
+  if (i >= 100) {
+    return PARKING_LOT_STATUS.FULL;
+  } else if (i > 80) {
+    return PARKING_LOT_STATUS.ALMOST_FULL;
+  }
+  return PARKING_LOT_STATUS.FREE;
+}
+
+function getParkingLotStatusText(parkingLot: ParkingLot) {
+  const status = getParkingLotStatus(parkingLot);
+  switch (status) {
+    case 'FULL':
+      return t('labels.parking_lot.full');
+    case 'ALMOST_FULL':
+      return t('labels.parking_lot.almost_full');
+    default:
+      return t('labels.parking_lot.free');
+  }
 }
 </script>

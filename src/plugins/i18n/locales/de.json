@@ -1,1 +1,9 @@
-{}
+{
+  "labels": {
+    "parking_lot": {
+      "full": "Besetzt",
+      "almost_full": "Fast besetzt",
+      "free": "Frei"
+    }
+  }
+}

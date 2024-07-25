@@ -4,6 +4,9 @@ interface ImportMetaEnv {
   // add .env variables.
   readonly VITE_SUPABASE_URL: string;
   readonly VITE_SUPABASE_KEY: string;
+
+  readonly VITE_DEV_USER_EMAIL: string;
+  readonly VITE_DEV_USER_PW: string;
 }
 
 interface ImportMeta {

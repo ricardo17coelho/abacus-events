@@ -1,4 +1,3 @@
-import { supabase } from '@/services/supabase';
 import { clone } from '@/utils/clone';
 import type { User } from '@supabase/supabase-js';
 
@@ -28,7 +27,6 @@ export const useAuthStore = defineStore('authStore', () => {
 
   return {
     // state
-    supabase,
     currentUser,
     currentUserMetadata,
     currentUserDisplayName,

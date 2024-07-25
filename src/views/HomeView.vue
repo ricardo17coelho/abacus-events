@@ -53,30 +53,6 @@
             ></v-progress-linear>
           </v-card-text>
         </v-card>
-
-        <!-- <v-card
-          :title="parkingLot.name"
-          :color="getStatusColor(parkingLot)"
-          variant="tonal"
-        >
-          <template #subtitle>
-            <v-chip>{{ parkingLot.location }}</v-chip>
-          </template>
-          <v-card-text>
-            <v-progress-linear
-              :model-value="
-                calculatePercentage(
-                  parkingLot.filled_slots,
-                  parkingLot.total_slots
-                )
-              "
-              max="100"
-            ></v-progress-linear>
-            <v-icon>mdi-car</v-icon>
-            Anzahl Parkplätze
-            {{ parkingLot.filled_slots }} von {{ parkingLot.total_slots }}
-          </v-card-text>
-        </v-card> -->
       </v-col>
     </v-row>
   </v-container>

@@ -1,0 +1,115 @@
+<template>
+  <v-form
+    ref="formRef"
+    class="flex w-full flex-col items-start"
+    @submit.prevent="emailAuth"
+  >
+    <v-row dense>
+      <v-col cols="12">
+        <v-text-field
+          id="email"
+          v-model="credentials.email"
+          required
+          :disabled="loading"
+          label="Email"
+          name="email"
+          type="email"
+          placeholder="Enter your email"
+          :rules="[rulesValidation.ruleRequired, rulesValidation.ruleEmail]"
+        />
+      </v-col>
+      <v-col cols="12">
+        <FieldPassword
+          id="password"
+          v-model="credentials.password"
+          :disabled="loading"
+          class="mb-4 w-full"
+          name="password"
+          label="Password"
+          placeholder="Enter your password"
+      /></v-col>
+    </v-row>
+
+    <v-row dense>
+      <v-col cols="12" sm="6">
+        <v-btn
+          :to="{ name: 'auth-forgot-password' }"
+          variant="text"
+          :block="isDisplayXs"
+        >
+          Forgot your password?
+        </v-btn>
+      </v-col>
+      <v-col cols="12" sm="6" align="end">
+        <VBtnPrimary
+          :loading="emailLoading"
+          :disabled="loading"
+          type="submit"
+          :block="isDisplayXs"
+        >
+          {{ 'Sign In' }}
+        </VBtnPrimary>
+      </v-col>
+      <v-col v-if="isDevEnv()" cols="12">
+        <VBtnDev
+          prepend-icon="mdi-bug"
+          :block="isDisplayXs"
+          @click="onBtnDevClick"
+        >
+          Auto DEV Sign Up
+        </VBtnDev>
+      </v-col>
+    </v-row>
+  </v-form>
+</template>
+
+<script lang="ts" setup>
+import FieldPassword from '@/components/fields/FieldPassword.vue';
+import { isDevEnv } from '@/utils';
+import { toast } from 'vue-sonner';
+import { useDisplay } from 'vuetify';
+import useAuthUser from '@/composables/auth-user';
+import rulesValidation from '@/utils/validations';
+import { useI18n } from 'vue-i18n';
+
+const router = useRouter();
+const display = useDisplay();
+const { t } = useI18n();
+
+const isDisplayXs = computed(() => display.xs.value);
+
+const credentials = ref({
+  email: '',
+  password: ''
+});
+
+const emailLoading = ref(false);
+
+const { login } = useAuthUser();
+const formRef = ref();
+
+async function emailAuth() {
+  const { valid } = await formRef.value.validate();
+  if (valid) {
+    emailLoading.value = true;
+    const { data, error } = await login(credentials.value);
+    if (data.user) router.push({ name: 'dashboard' });
+    else if (error) {
+      toast.error(error.message);
+      emailLoading.value = false;
+    }
+  } else {
+    toast.error(t('errors.validation.invalid'));
+  }
+}
+
+const loading = computed(() => emailLoading.value);
+
+function onBtnDevClick() {
+  credentials.value = {
+    email: 'devel@rmorgado.ch',
+    password: 'Test.12345'
+  };
+  nextTick(() => emailAuth());
+}
+</script>

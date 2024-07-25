@@ -1,0 +1,16 @@
+{
+    "$schema": "https://json.schemastore.org/prettierrc",
+    "semi": true,
+    "singleQuote": true,
+    "trailingComma": "none",
+    "endOfLine": "auto",
+    "plugins": [],
+    "overrides": [
+      {
+        "files": ["*.yml"],
+        "options": {
+          "singleQuote": false
+        }
+      }
+    ]
+  }

@@ -16,6 +16,10 @@ export const useAuthStore = defineStore('authStore', () => {
     return `${currentUserMetadata.value?.firstname} ${currentUserMetadata.value?.lastname}`;
   });
 
+  const currentUserRoles = computed(
+    () => currentUser.value?.app_metadata?.userroles
+  );
+
   function setCurrentUser(supabaseUser: User) {
     if (!supabaseUser) return;
     if (currentUser.value) {
@@ -30,7 +34,7 @@ export const useAuthStore = defineStore('authStore', () => {
     currentUser,
     currentUserMetadata,
     currentUserDisplayName,
-
+    currentUserRoles,
     setCurrentUser
   };
 });

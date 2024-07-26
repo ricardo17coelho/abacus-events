@@ -5,6 +5,8 @@ import vue from '@vitejs/plugin-vue';
 import vuetify, { transformAssetUrls } from 'vite-plugin-vuetify';
 import AutoImport from 'unplugin-auto-import/vite';
 import circleDependency from 'vite-plugin-circular-dependency';
+import VueI18nPlugin from '@intlify/unplugin-vue-i18n/vite';
+import { resolve, dirname } from 'path';
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -19,6 +21,14 @@ export default defineConfig({
       styles: {
         configFile: 'src/styles/settings.scss'
       }
+    }),
+    VueI18nPlugin({
+      /* options */
+      // locale messages resource pre-compile option
+      include: resolve(
+        dirname(fileURLToPath(import.meta.url)),
+        './src/plugins/i18n/locales/**'
+      )
     }),
     AutoImport({
       // targets to transform

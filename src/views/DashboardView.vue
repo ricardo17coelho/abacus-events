@@ -10,7 +10,7 @@
         lg="6"
       >
         <ParkingLotCard :parking-lot="parkingLot">
-          <v-card-actions>
+          <v-card-actions v-if="isCurrentUserAdminOrHelper">
             <v-row class="pa-2">
               <v-col>
                 <v-btn
@@ -46,12 +46,14 @@
 import useApiParkingLot from '@/api/parking-lots';
 import ParkingLotCard from '@/components/ParkingLotCard.vue';
 import UserGreetings from '@/components/UserGreetings.vue';
+import { useAuthStore } from '@/stores/auth';
 import type { ParkingLot } from '@/types/ParkingLot';
 import { toast } from 'vue-sonner';
 
 const parkingLots = ref<ParkingLot[]>([]);
 
 const { getParkingLots, updateParkingLot } = useApiParkingLot();
+const { isCurrentUserAdminOrHelper } = useAuthStore();
 
 const fetchData = async () => {
   const { data, error } = await getParkingLots();
@@ -68,6 +70,14 @@ onMounted(() => {
   fetchData();
 });
 
+// eslint-disable-next-line  @typescript-eslint/no-explicit-any
+function mutateParkingLotById(id: string, payload: Record<any, any>) {
+  const idx = parkingLots.value.findIndex((i) => i.id === id);
+  if (idx > -1) {
+    Object.assign(parkingLots.value[idx], payload);
+  }
+}
+
 async function onClickUp(parkingLot: ParkingLot) {
   const payload = {
     filled_slots: parkingLot.filled_slots + 1
@@ -78,10 +88,7 @@ async function onClickUp(parkingLot: ParkingLot) {
     return;
   }
   if (data) {
-    const idx = parkingLots.value.findIndex((i) => i.id === parkingLot.id);
-    if (idx > -1) {
-      Object.assign(parkingLots.value[idx], payload);
-    }
+    mutateParkingLotById(parkingLot.id, data);
   }
 }
 
@@ -95,10 +102,7 @@ async function onClickDown(parkingLot: ParkingLot) {
     return;
   }
   if (data) {
-    const idx = parkingLots.value.findIndex((i) => i.id === parkingLot.id);
-    if (idx > -1) {
-      Object.assign(parkingLots.value[idx], payload);
-    }
+    mutateParkingLotById(parkingLot.id, data);
   }
 }
 </script>

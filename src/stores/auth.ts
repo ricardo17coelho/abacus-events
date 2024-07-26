@@ -17,7 +17,19 @@ export const useAuthStore = defineStore('authStore', () => {
   });
 
   const currentUserRoles = computed(
-    () => currentUser.value?.app_metadata?.userroles
+    () => currentUser.value?.app_metadata?.userroles || []
+  );
+
+  const isCurrentUserAdmin = computed(() =>
+    currentUserRoles.value.includes('ADMIN')
+  );
+
+  const isCurrentUserHelper = computed(() =>
+    currentUserRoles.value.includes('HELPER')
+  );
+
+  const isCurrentUserAdminOrHelper = computed(
+    () => isCurrentUserAdmin.value || isCurrentUserHelper.value
   );
 
   function setCurrentUser(supabaseUser: User) {
@@ -35,6 +47,9 @@ export const useAuthStore = defineStore('authStore', () => {
     currentUserMetadata,
     currentUserDisplayName,
     currentUserRoles,
+    isCurrentUserAdmin,
+    isCurrentUserHelper,
+    isCurrentUserAdminOrHelper,
     setCurrentUser
   };
 });

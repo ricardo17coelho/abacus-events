@@ -28,6 +28,7 @@ import useConfetti from '@/composables/confetti';
 import { type ParkingLot } from '@/types/ParkingLot';
 import { useI18n } from 'vue-i18n';
 import { toast } from 'vue-sonner';
+import { supabase } from '@/services/supabase';
 
 const { t } = useI18n();
 
@@ -36,6 +37,14 @@ const parkingLots = ref<ParkingLot[]>([]);
 const { getParkingLots } = useApiParkingLot();
 
 const { basic } = useConfetti();
+
+// eslint-disable-next-line  @typescript-eslint/no-explicit-any
+function mutateParkingLotById(id: string, payload: Record<any, any>) {
+  const idx = parkingLots.value.findIndex((i) => i.id === id);
+  if (idx > -1) {
+    Object.assign(parkingLots.value[idx], payload);
+  }
+}
 
 const fetchData = async () => {
   const { data, error } = await getParkingLots();
@@ -48,7 +57,30 @@ const fetchData = async () => {
   }
 };
 
+const subscribeToChanges = () => {
+  const channel = supabase()
+    .channel('parking_lots')
+    .on(
+      'postgres_changes',
+      { event: 'UPDATE', schema: 'public', table: 'parking_lots' },
+      (payload) => {
+        fetchData();
+        if (payload.new) {
+          mutateParkingLotById(payload.new.id, payload.new);
+        }
+      }
+    )
+    .subscribe();
+
+  return channel;
+};
+
 onMounted(() => {
   fetchData();
+  const subscription = subscribeToChanges();
+  console.warn('subscription', subscription);
+  onUnmounted(() => {
+    supabase().removeChannel(subscription);
+  });
 });
 </script>

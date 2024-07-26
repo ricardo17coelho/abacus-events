@@ -1,7 +1,13 @@
 <template>
   <v-container>
-    <h1 class="text-h5 text-md-h4 font-medium">Sommer Party Parking</h1>
-
+    <v-row>
+      <v-col align="center">
+        <h1 class="text-h5 text-md-h4 font-medium">
+          Sommer Party Parking
+          <span @click="basic"> 🎉 </span>
+        </h1>
+      </v-col>
+    </v-row>
     <v-row>
       <v-col
         v-for="parkingLot in parkingLots"
@@ -60,6 +66,7 @@
 
 <script setup lang="ts">
 import useApiParkingLot from '@/api/parking-lots';
+import useConfetti from '@/composables/confetti';
 import { PARKING_LOT_STATUS, type ParkingLot } from '@/types/ParkingLot';
 import { useI18n } from 'vue-i18n';
 import { toast } from 'vue-sonner';
@@ -69,6 +76,8 @@ const { t } = useI18n();
 const parkingLots = ref<ParkingLot[]>([]);
 
 const { getParkingLots } = useApiParkingLot();
+
+const { basic } = useConfetti();
 
 async function onGetAllParkingLots() {
   const { data, error } = await getParkingLots();

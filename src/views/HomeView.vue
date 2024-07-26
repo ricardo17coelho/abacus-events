@@ -10,7 +10,7 @@
     </v-row>
     <v-row>
       <v-col
-        v-for="parkingLot in parkingLots"
+        v-for="parkingLot in parkingLotsSorted"
         :key="parkingLot.id"
         cols="12"
         lg="6"
@@ -25,14 +25,28 @@
 import useApiParkingLot from '@/api/parking-lots';
 import ParkingLotCard from '@/components/ParkingLotCard.vue';
 import useConfetti from '@/composables/confetti';
-import { type ParkingLot } from '@/types/ParkingLot';
+import { type ParkingLot, type ParkingLotStatus } from '@/types/ParkingLot';
 import { useI18n } from 'vue-i18n';
 import { toast } from 'vue-sonner';
 import { supabase } from '@/services/supabase';
+import useParkingLot from '@/composables/parking-lot';
 
 const { t } = useI18n();
 
 const parkingLots = ref<ParkingLot[]>([]);
+
+const { getParkingLotStatus } = useParkingLot();
+
+const parkingLotsSorted = computed(() => {
+  const orderStatus: ParkingLotStatus[] = ['FREE', 'ALMOST_FULL', 'FULL'];
+  return parkingLots.value
+    .slice(0)
+    .sort(
+      (x, y) =>
+        orderStatus.indexOf(getParkingLotStatus(x)) -
+        orderStatus.indexOf(getParkingLotStatus(y))
+    );
+});
 
 const { getParkingLots } = useApiParkingLot();
 

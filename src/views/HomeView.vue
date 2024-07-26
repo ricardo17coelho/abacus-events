@@ -38,7 +38,7 @@
           <v-card-text class="text-medium-emphasis pa-6">
             <div class="text-h6 mb-6">
               <v-icon>mdi-car</v-icon>
-              Anzahl Parkplätze
+              {{ $t('labels.n_of_parking_spaces') }}
             </div>
             <div class="text-h4 font-weight-black mb-4">
               {{ parkingLot.filled_slots }} / {{ parkingLot.total_slots }}

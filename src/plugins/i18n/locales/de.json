@@ -1,9 +1,27 @@
 {
+  "errors": {
+    "error_occurred": "Fehler aufgetreten",
+    "validation": {
+      "invalid": "Bitte überprüfen Sie Ihre Eingabe"
+    }
+  },
   "labels": {
     "parking_lot": {
       "full": "Besetzt",
       "almost_full": "Fast besetzt",
       "free": "Frei"
-    }
+    },
+    "n_of_parking_spaces": "Anzahl Parkplätze"
+  },
+  "validation": {
+    "email": "Das E-Mail-Feld muss eine gültige E-Mail-Adresse enthalten.",
+    "max": "Das Feld darf nicht mehr als 1 Zeichen enthalten | Das Feld darf nicht mehr als {n} Zeichen enthalten",
+    "min": "Das Feld muss mehr als 1 Zeichen enthalten | Das Feld muss mehr als {n} Zeichen enthalten",
+    "required": "Feld erforderlich"
+  },
+  "labls": {
+    "programm": "Programm",
+    "logout": "Ausloggen",
+    "login": "Anmelden"
   }
 }

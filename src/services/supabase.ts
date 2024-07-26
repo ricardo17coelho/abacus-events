@@ -5,5 +5,3 @@ const supabaseKey = import.meta.env.VITE_SUPABASE_KEY as string;
 const supabaseClient = createClient(supabaseUrl, supabaseKey, {});
 
 export const supabase = () => supabaseClient;
-
-export default { supabase };

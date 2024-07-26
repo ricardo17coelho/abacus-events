@@ -4,7 +4,7 @@
       <v-col align="center">
         <h1 class="text-h5 text-md-h4 font-medium">
           Sommer Party Parking
-          <span @click="basic"> 🎉 </span>
+          <span class="prevent-select" @click="basic"> 🎉 </span>
         </h1>
       </v-col>
     </v-row>

@@ -23,5 +23,8 @@
     "programm": "Programm",
     "logout": "Ausloggen",
     "login": "Anmelden"
+  },
+  "buttons": {
+    "save": "Speichern"
   }
 }

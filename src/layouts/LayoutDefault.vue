@@ -2,7 +2,7 @@
   <v-app full-height>
     <v-container class="fill-height py-0 mx-auto">
       <v-row>
-        <v-col align="center">
+        <v-col>
           <v-layout full-height max-width="1200">
             <TheAppBar />
             <v-main class="text-slate-700 dark:text-slate-300">

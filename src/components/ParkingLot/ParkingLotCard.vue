@@ -1,21 +1,18 @@
 <template>
-  <v-card v-if="parkingLot" class="mx-auto" max-width="500" border flat>
-    <v-list-item class="px-6" height="88">
-      <template #title>
-        {{ parkingLot.name }}
-        <div>
-          <v-chip prepend-icon="mdi-home-map-marker" size="small">
-            {{ parkingLot.location }}
-          </v-chip>
-        </div>
+  <v-card v-if="parkingLot" width="100%" border flat>
+    <v-card-item :title="parkingLot.name">
+      <template #subtitle>
+        <v-chip prepend-icon="mdi-home-map-marker" size="small">
+          {{ parkingLot.location }}
+        </v-chip>
       </template>
-
       <template #append>
+        <slot name="actions"></slot>
         <v-chip :color="getStatusColor(parkingLot)"
           >{{ getParkingLotStatusText(parkingLot) }}
         </v-chip>
       </template>
-    </v-list-item>
+    </v-card-item>
 
     <v-divider />
 

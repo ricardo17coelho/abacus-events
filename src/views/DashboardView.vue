@@ -3,6 +3,21 @@
 
   <v-container>
     <v-row>
+      <v-col align="end">
+        <ParkingLotDialog @success="onSuccessUpdate">
+          <template #activator="{ props: activatorProps }">
+            <v-btn
+              v-bind="activatorProps"
+              variant="text"
+              prepend-icon="mdi-plus"
+            >
+              Add
+            </v-btn>
+          </template>
+        </ParkingLotDialog>
+      </v-col>
+    </v-row>
+    <v-row>
       <v-col
         v-for="parkingLot in parkingLots"
         :key="parkingLot.id"
@@ -10,31 +25,27 @@
         lg="6"
       >
         <ParkingLotCard :parking-lot="parkingLot">
+          <template #actions>
+            <ParkingLotDialog
+              :parking-lot-id="parkingLot.id"
+              @success="onSuccessUpdate"
+            >
+              <template #activator="{ props: activatorProps }">
+                <v-btn v-bind="activatorProps" variant="text" icon="mdi-pencil">
+                </v-btn>
+              </template>
+            </ParkingLotDialog>
+          </template>
           <v-card-actions v-if="isCurrentUserAdminOrHelper">
-            <v-row class="pa-2">
-              <v-col>
-                <v-btn
-                  variant="flat"
-                  block
-                  color="primary"
-                  :disabled="parkingLot.filled_slots >= parkingLot.total_slots"
-                  @click="onClickUp(parkingLot)"
-                >
-                  Up +
-                </v-btn>
-              </v-col>
-              <v-col>
-                <v-btn
-                  variant="flat"
-                  block
-                  color="secondary"
-                  :disabled="parkingLot.filled_slots === 0"
-                  @click="onClickDown(parkingLot)"
-                >
-                  Down -
-                </v-btn>
-              </v-col>
-            </v-row>
+            <v-number-input
+              :model-value="parkingLot.filled_slots"
+              color="primary"
+              bg-color="primary"
+              control-variant="split"
+              :min="0"
+              :max="parkingLot.total_slots"
+              @update:model-value="onUpdateFilledSlot($event, parkingLot.id)"
+            ></v-number-input>
           </v-card-actions>
         </ParkingLotCard>
       </v-col>
@@ -44,11 +55,15 @@
 
 <script setup lang="ts">
 import useApiParkingLot from '@/api/parking-lots';
-import ParkingLotCard from '@/components/ParkingLotCard.vue';
+import ParkingLotCard from '@/components/ParkingLot/ParkingLotCard.vue';
+import ParkingLotDialog from '@/components/ParkingLot/ParkingLotDialog.vue';
 import UserGreetings from '@/components/UserGreetings.vue';
 import { useAuthStore } from '@/stores/auth';
 import type { ParkingLot } from '@/types/ParkingLot';
+import { useI18n } from 'vue-i18n';
 import { toast } from 'vue-sonner';
+
+const { t } = useI18n();
 
 const parkingLots = ref<ParkingLot[]>([]);
 
@@ -72,37 +87,29 @@ onMounted(() => {
 
 // eslint-disable-next-line  @typescript-eslint/no-explicit-any
 function mutateParkingLotById(id: string, payload: Record<any, any>) {
+  console.warn('mutateParkingLotById', id, payload);
   const idx = parkingLots.value.findIndex((i) => i.id === id);
+  console.warn('idx', idx);
   if (idx > -1) {
     Object.assign(parkingLots.value[idx], payload);
   }
 }
 
-async function onClickUp(parkingLot: ParkingLot) {
+async function onUpdateFilledSlot(value: number, id: string) {
   const payload = {
-    filled_slots: parkingLot.filled_slots + 1
+    filled_slots: value
   };
-  const { data, error } = await updateParkingLot(parkingLot.id, payload);
+  const { data, error } = await updateParkingLot(id, payload);
   if (error) {
     toast.error(t('errors.error_occurred'));
     return;
   }
   if (data) {
-    mutateParkingLotById(parkingLot.id, data);
+    mutateParkingLotById(id, data);
   }
 }
 
-async function onClickDown(parkingLot: ParkingLot) {
-  const payload = {
-    filled_slots: parkingLot.filled_slots - 1
-  };
-  const { data, error } = await updateParkingLot(parkingLot.id, payload);
-  if (error) {
-    toast.error(t('errors.error_occurred'));
-    return;
-  }
-  if (data) {
-    mutateParkingLotById(parkingLot.id, data);
-  }
+function onSuccessUpdate(parkingLot: ParkingLot) {
+  mutateParkingLotById(parkingLot.id, parkingLot);
 }
 </script>

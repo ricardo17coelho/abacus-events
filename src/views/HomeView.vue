@@ -23,7 +23,7 @@
 
 <script setup lang="ts">
 import useApiParkingLot from '@/api/parking-lots';
-import ParkingLotCard from '@/components/ParkingLotCard.vue';
+import ParkingLotCard from '@/components/ParkingLot/ParkingLotCard.vue';
 import useConfetti from '@/composables/confetti';
 import { type ParkingLot, type ParkingLotStatus } from '@/types/ParkingLot';
 import { useI18n } from 'vue-i18n';

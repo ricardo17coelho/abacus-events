@@ -2,7 +2,11 @@
   <v-card v-if="parkingLot" width="100%" border flat>
     <v-card-item :title="parkingLot.name">
       <template #subtitle>
-        <v-chip prepend-icon="mdi-home-map-marker" size="small">
+        <v-chip
+          prepend-icon="mdi-home-map-marker"
+          size="small"
+          :href="parkingLot.location_url || undefined"
+        >
           {{ parkingLot.location }}
         </v-chip>
       </template>

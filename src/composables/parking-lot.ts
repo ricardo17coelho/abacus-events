@@ -37,11 +37,11 @@ export default function useParkingLot() {
     const status = getParkingLotStatus(parkingLot);
     switch (status) {
       case 'FULL':
-        return t('labels.parking_lot.full');
+        return t('labels.parking_lot_status.full');
       case 'ALMOST_FULL':
-        return t('labels.parking_lot.almost_full');
+        return t('labels.parking_lot_status.almost_full');
       default:
-        return t('labels.parking_lot.free');
+        return t('labels.parking_lot_status.free');
     }
   }
 

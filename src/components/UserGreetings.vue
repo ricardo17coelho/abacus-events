@@ -7,6 +7,7 @@
       <span v-if="currentUserDisplayName">
         {{ currentUserDisplayName }}
       </span>
+      <span class="prevent-select" @click="randomDirection"> 🎉 </span>
       <v-chip
         v-for="currentUserRole in currentUserRoles"
         :key="currentUserRole"
@@ -22,6 +23,7 @@
 
 <script setup lang="ts">
 // stores
+import useConfetti from '@/composables/confetti';
 import { useAuthStore } from '@/stores/auth';
 // composables
 import { useI18n } from 'vue-i18n';
@@ -30,6 +32,8 @@ const { currentUser, currentUserDisplayName, currentUserRoles } =
   useAuthStore();
 
 const i18n = useI18n();
+const { randomDirection } = useConfetti();
+setInterval(randomDirection, 10000);
 
 const currentTime = ref();
 function timer() {
@@ -50,6 +54,12 @@ const greetingMsg = computed(() => {
   return greet;
 });
 </script>
+
+<style>
+#confetti-canvas {
+  z-index: 900;
+}
+</style>
 
 <i18n lang="json">
 {

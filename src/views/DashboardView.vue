@@ -1,8 +1,7 @@
 <template>
   <UserGreetings />
-
   <v-container>
-    <v-row>
+    <v-row v-if="isCurrentUserAdmin">
       <v-col align="end">
         <ParkingLotDialog @success="onSuccessUpdate">
           <template #activator="{ props: activatorProps }">
@@ -27,6 +26,7 @@
         <ParkingLotCard :parking-lot="parkingLot">
           <template #actions>
             <ParkingLotDialog
+              v-if="isCurrentUserAdmin"
               :parking-lot-id="parkingLot.id"
               @success="onSuccessUpdate"
             >
@@ -68,7 +68,7 @@ const { t } = useI18n();
 const parkingLots = ref<ParkingLot[]>([]);
 
 const { getParkingLots, updateParkingLot } = useApiParkingLot();
-const { isCurrentUserAdminOrHelper } = useAuthStore();
+const { isCurrentUserAdminOrHelper, isCurrentUserAdmin } = useAuthStore();
 
 const fetchData = async () => {
   const { data, error } = await getParkingLots();

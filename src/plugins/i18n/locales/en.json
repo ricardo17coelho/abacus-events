@@ -1,21 +1,30 @@
 {
   "errors": {
-    "error_occurred": "Error occurred",
+    "error_occurred": "An error occurred",
     "validation": {
-      "invalid": "Please check your entry"
+      "invalid": "Please check your input"
     }
   },
   "labels": {
-    "parking_lot": {
+    "parking_lot": "Car Park",
+    "parking_lot_status": {
       "full": "Full",
-      "almost_full": "Almost full",
+      "almost_full": "Almost Full",
       "free": "Free"
     },
-    "n_of_parking_spaces": "Number of parking spaces"
+    "programm": "Programme",
+    "logout": "Log Out",
+    "login": "Log In",
+    "n_of_parking_spaces": "Number of Parking Spaces",
+    "name": "Name",
+    "location": "Location Name",
+    "location_url": "Location URL",
+    "slots_total": "Max. Spaces",
+    "slots_filled": "Filled Spaces"
   },
   "validation": {
-    "email": "Email field must be a valid email.",
-    "max": "The field cannot contain more than 1 character | The field cannot contain more than {n} characters",
+    "email": "The email field must contain a valid email address.",
+    "max": "The field may not contain more than 1 character | The field may not contain more than {n} characters",
     "min": "The field must contain more than 1 character | The field must contain more than {n} characters",
     "required": "Field required"
   },

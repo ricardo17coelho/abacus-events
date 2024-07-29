@@ -44,6 +44,7 @@ const { t } = useI18n();
 const DEFAULT_FORM = {
   name: '',
   location: '',
+  location_url: '',
   total_slots: '',
   filled_slots: ''
 };

@@ -6,23 +6,27 @@
     }
   },
   "labels": {
-    "parking_lot": {
+    "parking_lot": "Parkplatz",
+    "parking_lot_status": {
       "full": "Besetzt",
       "almost_full": "Fast besetzt",
       "free": "Frei"
     },
-    "n_of_parking_spaces": "Anzahl Parkplätze"
+    "programm": "Programm",
+    "logout": "Ausloggen",
+    "login": "Anmelden",
+    "n_of_parking_spaces": "Anzahl Parkplätze",
+    "name": "Name",
+    "location": "Standortname",
+    "location_url": "Standort URL",
+    "slots_total": "Max. Plätze",
+    "slots_filled": "Besetzte Plätze"
   },
   "validation": {
     "email": "Das E-Mail-Feld muss eine gültige E-Mail-Adresse enthalten.",
     "max": "Das Feld darf nicht mehr als 1 Zeichen enthalten | Das Feld darf nicht mehr als {n} Zeichen enthalten",
     "min": "Das Feld muss mehr als 1 Zeichen enthalten | Das Feld muss mehr als {n} Zeichen enthalten",
     "required": "Feld erforderlich"
-  },
-  "labls": {
-    "programm": "Programm",
-    "logout": "Ausloggen",
-    "login": "Anmelden"
   },
   "buttons": {
     "save": "Speichern"

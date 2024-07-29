@@ -20,14 +20,14 @@
           href="https://summer-party.events.abacus.ch/"
           :icon="$vuetify.display.xs ? 'mdi-clipboard-text' : undefined"
           :size="$vuetify.display.xs ? 'small' : undefined"
-          :text="$vuetify.display.smAndUp ? $t('labls.programm') : undefined"
+          :text="$vuetify.display.smAndUp ? $t('labels.programm') : undefined"
         >
         </VBtnPrimary>
         <VBtnPrimary
           v-if="currentUser"
           :icon="$vuetify.display.xs ? 'mdi-logout' : undefined"
           :size="$vuetify.display.xs ? 'small' : undefined"
-          :text="$vuetify.display.smAndUp ? $t('labls.logout') : undefined"
+          :text="$vuetify.display.smAndUp ? $t('labels.logout') : undefined"
           @click="logout"
         >
         </VBtnPrimary>
@@ -36,7 +36,7 @@
           :icon="$vuetify.display.xs ? 'mdi-login' : undefined"
           :to="{ name: 'auth-sign-in' }"
           :size="$vuetify.display.xs ? 'small' : undefined"
-          :text="$vuetify.display.smAndUp ? $t('labls.login') : undefined"
+          :text="$vuetify.display.smAndUp ? $t('labels.login') : undefined"
         >
         </VBtnPrimary>
       </div>

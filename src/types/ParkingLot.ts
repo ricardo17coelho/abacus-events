@@ -3,6 +3,7 @@ export type ParkingLot = {
   created_at: string;
   name: string;
   location?: string;
+  location_url?: string;
   total_slots: number;
   filled_slots: number;
 };

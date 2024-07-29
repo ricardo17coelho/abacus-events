@@ -2,8 +2,7 @@
   <ContainerCentered>
     <v-card :width="$vuetify.display.xs ? undefined : '500'">
       <v-card-title>
-        <h1 class="mx-auto text-h4 font-bold">TITLE</h1>
-        <h1 class="mx-auto text-h5 font-bold">SUBTITLE</h1>
+        <h1 class="mx-auto text-h4 font-bold">Aba Summer Party</h1>
       </v-card-title>
       <v-card-text>
         <router-view />

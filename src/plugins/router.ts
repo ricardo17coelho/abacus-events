@@ -166,7 +166,6 @@ router.beforeEach(async (to) => {
   const {
     data: { session }
   } = await supabase().auth.getSession();
-
   if (!requiresNoAuth) {
     if (session?.user) {
       setCurrentUser(session.user);
@@ -181,6 +180,9 @@ router.beforeEach(async (to) => {
     }
   } else {
     const isAuthRoute = to.name as string;
+    if (session?.user) {
+      setCurrentUser(session.user);
+    }
     if (isAuthRoute.startsWith('auth-') && currentUser) {
       return {
         name: 'dashboard'

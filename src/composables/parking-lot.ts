@@ -1,4 +1,4 @@
-import { PARKING_LOT_STATUS, type ParkingLot } from '@/types/ParkingLot';
+import { PARKING_LOT_STATUS, type ParkingLot } from '@/api/types/ParkingLot';
 import { useI18n } from 'vue-i18n';
 
 export default function useParkingLot() {

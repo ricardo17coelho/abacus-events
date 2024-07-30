@@ -5,164 +5,115 @@
         <AppTitle :title="$t('title.program')" />
       </v-col>
     </v-row>
-    <v-row>
-      <v-col align="center">
-        <AppDialog max-width="1000" fullscreen>
-          <template v-slot:activator="{ props: activatorProps }">
-            <v-btn
-              v-bind="activatorProps"
-              color="primary"
-              text="Plan"
-              :block="$vuetify.display.xs"
-              variant="flat"
-            ></v-btn>
-          </template>
-
-          <template #content>
-            <AppLoadingIcon v-show="!pdfLoaded" />
-            <VuePDF
-              v-show="pdfLoaded"
-              :pdf="pdf"
-              :scale="scale"
-              @loaded="pdfLoaded = true"
-            />
-          </template>
-          <template #actions>
-            <v-spacer />
-            <div class="d-flex justify-space-between align-center ga-3">
+    <AppLoader v-if="isLoading" />
+    <template v-else>
+      <v-row v-if="isCurrentUserAdmin">
+        <v-col align="end">
+          <ProgramTimelineDialog
+            category="ADULTS"
+            @success="mutateById($event.id, $event)"
+          >
+            <template #activator="{ props: activatorProps }">
               <v-btn
-                variant="flat"
-                color="primary"
-                @click="scale = scale > 0.25 ? scale - 0.25 : scale"
+                v-bind="activatorProps"
+                variant="text"
+                prepend-icon="mdi-plus"
               >
-                -
+                Add
               </v-btn>
-              <span>{{ scale * 100 }}%</span>
-              <v-btn
-                variant="flat"
-                color="primary"
-                @click="scale = scale < 2 ? scale + 0.25 : scale"
-              >
-                +
+            </template>
+          </ProgramTimelineDialog>
+        </v-col>
+      </v-row>
+      <v-row>
+        <v-col align="center">
+          <AppPdfDialog pdf-url="/files/plan.pdf" />
+        </v-col>
+      </v-row>
+      <AppTimeline :items="sortedItems">
+        <template v-if="isCurrentUserAdmin" #actions="{ item }">
+          <ProgramTimelineDialog
+            v-if="isCurrentUserAdmin"
+            :program-timetable-id="item.id"
+            category="ADULTS"
+            @success="mutateById($event.id, $event)"
+          >
+            <template #activator="{ props: activatorProps }">
+              <v-btn v-bind="activatorProps" variant="text" icon="mdi-pencil">
               </v-btn>
-            </div>
-
-            <v-spacer />
-          </template>
-        </AppDialog>
-      </v-col>
-    </v-row>
-    <v-timeline align="start" side="end">
-      <v-timeline-item
-        v-for="item in items"
-        :key="item.title"
-        dot-color="primary"
-        :icon="item.icon"
-        :size="$vuetify.display.mdAndUp ? 'x-large' : undefined"
-      >
-        <div class="d-flex" :class="{ 'flex-column': $vuetify.display.xs }">
-          <span class="me-4">{{ `${item.timeStart}-${item.timeEnd}` }}</span>
-          <div>
-            <div>
-              <strong>{{ item.title }}</strong>
-            </div>
-            <div v-if="item.note" class="text-caption text-primary">
-              <v-icon>mdi-information-variant</v-icon>
-              {{ item.note }}
-            </div>
-            <div>
-              <v-chip
-                v-for="location in item.locations"
-                :key="`${item.title}-${location}`"
-                size="small"
-                class="mr-1"
-                color="primary"
-                variant="tonal"
-                prepend-icon="mdi-home-map-marker"
-              >
-                {{ location }}
-              </v-chip>
-            </div>
-          </div>
-        </div>
-      </v-timeline-item>
-    </v-timeline>
+            </template>
+          </ProgramTimelineDialog>
+          <v-btn
+            color="error"
+            variant="text"
+            icon="mdi-delete"
+            @click="onDeleteItem(item)"
+          >
+          </v-btn>
+        </template>
+      </AppTimeline>
+    </template>
   </v-container>
 </template>
 
 <script setup lang="ts">
-import AppDialog from '@/components/app/AppDialog.vue';
-import AppLoadingIcon from '@/components/app/AppLoadingIcon.vue';
 import AppTitle from '@/components/app/AppTitle.vue';
 
-import { VuePDF, usePDF } from '@tato30/vue-pdf';
+import AppTimeline from '../components/app/AppTimeline.vue';
+import AppPdfDialog from '@/components/app/AppPdfDialog.vue';
+import { useAuthStore } from '@/stores/auth';
+import ProgramTimelineDialog from '@/components/program-timetable/ProgramTimelineDialog.vue';
+import { toast } from 'vue-sonner';
+import useApiProgramTimeline from '@/api/program-timeline';
+import type { ProgramTimeline } from '@/api/types/ProgramTimeline';
+import { useI18n } from 'vue-i18n';
+import AppLoader from '@/components/app/AppLoader.vue';
 
-const scale = ref(1);
-const { pdf, info } = usePDF('/files/plan.pdf');
-console.log(`Document info: ${info}`);
+const { isCurrentUserAdmin } = useAuthStore();
 
-const pdfLoaded = ref(false);
+const { getProgramTimelinesByCategory, removeProgramTimeline } =
+  useApiProgramTimeline();
 
-const items = computed(() => [
-  {
-    title: 'AbaBand',
-    locations: ['Festzelt'],
-    timeStart: '15.00',
-    timeEnd: '16.00',
-    icon: 'mdi-music'
-  },
-  {
-    title: 'Unplugged-Group',
-    locations: ['Festzelt'],
-    timeStart: '17.30',
-    timeEnd: '18.00',
-    icon: 'mdi-music'
-  },
-  {
-    title: 'Speech',
-    locations: ['Festzelt (AbaHome 2 if it rains)'],
-    note: 'Livebrodcast to Auditorium, AbaHome 2, Kurraum',
-    timeStart: '18.00',
-    timeEnd: '18.30',
-    icon: 'mdi-microphone-variant'
-  },
-  {
-    title: 'Catalyst',
-    locations: ['Festzelt'],
-    note: 'Unplugged-Group Abacus-Campus',
-    timeStart: '18.30',
-    timeEnd: '19.30',
-    icon: 'mdi-music'
-  },
-  {
-    title: 'Unplugged-Group',
-    locations: ['Festzelt'],
-    note: 'Announcement Justina',
-    timeStart: '19.30',
-    timeEnd: '20.00',
-    icon: 'mdi-music'
-  },
-  {
-    title: 'Justina Lee Brown',
-    locations: ['Festzelt'],
-    timeStart: '20.00',
-    timeEnd: '21.00',
-    icon: 'mdi-music'
-  },
-  {
-    title: 'Karaoke',
-    locations: ['AbaHome 2', 'MA-Bar'],
-    timeStart: '21.00',
-    timeEnd: '01.00',
-    icon: 'mdi-music'
-  },
-  {
-    title: 'Silent Disco',
-    locations: ['AbaHome 2', 'EG'],
-    note: 'DJ in the Al Covo',
-    timeStart: '21.00',
-    timeEnd: '01.00',
-    icon: 'mdi-music-circle'
+const items = ref<ProgramTimeline[]>([]);
+
+const sortedItems = computed(() => {
+  return items.value.slice().sort((a, b) => {
+    const aStart = parseFloat(a.time_start.replace('.', '')) / 100;
+    const bStart = parseFloat(b.time_start.replace('.', '')) / 100;
+    if (aStart !== bStart) return aStart - bStart;
+    const aEnd = parseFloat(a.time_end.replace('.', '')) / 100;
+    const bEnd = parseFloat(b.time_end.replace('.', '')) / 100;
+    return aEnd - bEnd;
+  });
+});
+
+// eslint-disable-next-line  @typescript-eslint/no-explicit-any
+function mutateById(id: string, payload: Record<any, any>) {
+  const idx = items.value.findIndex((i) => i.id === id);
+  if (idx > -1) {
+    Object.assign(items.value[idx], payload);
   }
-]);
+}
+
+const { t } = useI18n();
+
+const isLoading = ref(false);
+const fetchData = async () => {
+  isLoading.value = true;
+  const { data, error } = await getProgramTimelinesByCategory('ADULTS');
+  if (error) {
+    toast.error(t('errors.error_occurred'));
+    return;
+  }
+  if (data) {
+    items.value = data;
+  }
+  isLoading.value = false;
+};
+
+fetchData();
+
+async function onDeleteItem(item: ProgramTimeline) {
+  await removeProgramTimeline(item.id);
+}
 </script>

@@ -20,7 +20,11 @@
     "location": "Standortname",
     "location_url": "Standort URL",
     "slots_total": "Max. Plätze",
-    "slots_filled": "Besetzte Plätze"
+    "slots_filled": "Besetzte Plätze",
+    "time_start": "Startzeit",
+    "time_end": "Schlusszeit",
+    "icon": "Icon",
+    "note": "Notiz"
   },
   "validation": {
     "email": "Das E-Mail-Feld muss eine gültige E-Mail-Adresse enthalten.",

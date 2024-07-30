@@ -1,5 +1,5 @@
 import useApi from '@/composables/api';
-import type { ParkingLot } from '@/types/ParkingLot';
+import type { ParkingLot } from '@/api/types/ParkingLot';
 
 export default function useApiParkingLot() {
   const { find, findById, create, update, remove } = useApi();

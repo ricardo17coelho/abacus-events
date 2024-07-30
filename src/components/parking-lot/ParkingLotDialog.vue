@@ -21,7 +21,7 @@ import ParkingLotForm from './ParkingLotForm.vue';
 // api's
 import useApiParkingLot from '@/api/parking-lots';
 // types & constants
-import type { ParkingLot } from '@/types/ParkingLot';
+import type { ParkingLot } from '@/api/types/ParkingLot';
 // composables
 import { toast } from 'vue-sonner';
 import { useI18n } from 'vue-i18n';

@@ -33,14 +33,27 @@ const { currentUser, currentUserDisplayName, currentUserRoles } =
 
 const i18n = useI18n();
 const { randomDirection } = useConfetti();
-setInterval(randomDirection, 10000);
 
 const currentTime = ref();
 function timer() {
   currentTime.value = new Date();
 }
-timer();
-setInterval(timer, 1000);
+
+const intervalTimer = ref<null | ReturnType<typeof setTimeout>>(null);
+const intervalConfetti = ref<null | ReturnType<typeof setTimeout>>(null);
+
+onMounted(() => {
+  // start timer
+  timer();
+  intervalTimer.value = setInterval(timer, 1000);
+  // start confetti random
+  setInterval(randomDirection, 10000);
+});
+
+onUnmounted(() => {
+  clearInterval(intervalTimer.value);
+  clearInterval(intervalConfetti.value);
+});
 
 const greetingMsg = computed(() => {
   const hrs = currentTime.value?.getHours();

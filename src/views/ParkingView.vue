@@ -20,9 +20,9 @@
 
 <script setup lang="ts">
 import useApiParkingLot from '@/api/parking-lots';
-import ParkingLotCard from '@/components/ParkingLot/ParkingLotCard.vue';
+import ParkingLotCard from '@/components/parking-lot/ParkingLotCard.vue';
 import AppTitle from '@/components/app/AppTitle.vue';
-import { type ParkingLot, type ParkingLotStatus } from '@/types/ParkingLot';
+import { type ParkingLot, type ParkingLotStatus } from '@/api/types/ParkingLot';
 import { useI18n } from 'vue-i18n';
 import { toast } from 'vue-sonner';
 import { supabase } from '@/services/supabase';

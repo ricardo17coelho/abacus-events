@@ -19,7 +19,12 @@
     "location": "Location Name",
     "location_url": "Location URL",
     "slots_total": "Max. Spaces",
-    "slots_filled": "Filled Spaces"
+    "slots_filled": "Filled Spaces",
+    "program_timetable": "Program timetable",
+    "time_end": "Time end",
+    "time_start": "Time start",
+    "icon": "Icon",
+    "note": "Note"
   },
   "validation": {
     "email": "The email field must contain a valid email address.",

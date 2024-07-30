@@ -1,6 +1,6 @@
 import { supabase } from '@/services/supabase';
 import { v4 as uuidv4 } from 'uuid';
-import type { FindFilter, FindOrder } from '@/types/QueryTypes';
+import type { FindFilter, FindOrder } from '@/api/types/QueryTypes';
 
 export default function useApi() {
   function findById<T>(

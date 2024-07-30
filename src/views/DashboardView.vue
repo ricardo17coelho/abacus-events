@@ -55,11 +55,11 @@
 
 <script setup lang="ts">
 import useApiParkingLot from '@/api/parking-lots';
-import ParkingLotCard from '@/components/ParkingLot/ParkingLotCard.vue';
-import ParkingLotDialog from '@/components/ParkingLot/ParkingLotDialog.vue';
+import ParkingLotCard from '@/components/parking-lot/ParkingLotCard.vue';
+import ParkingLotDialog from '@/components/parking-lot/ParkingLotDialog.vue';
 import UserGreetings from '@/components/UserGreetings.vue';
 import { useAuthStore } from '@/stores/auth';
-import type { ParkingLot } from '@/types/ParkingLot';
+import type { ParkingLot } from '@/api/types/ParkingLot';
 import { useI18n } from 'vue-i18n';
 import { toast } from 'vue-sonner';
 
@@ -87,9 +87,7 @@ onMounted(() => {
 
 // eslint-disable-next-line  @typescript-eslint/no-explicit-any
 function mutateParkingLotById(id: string, payload: Record<any, any>) {
-  console.warn('mutateParkingLotById', id, payload);
   const idx = parkingLots.value.findIndex((i) => i.id === id);
-  console.warn('idx', idx);
   if (idx > -1) {
     Object.assign(parkingLots.value[idx], payload);
   }

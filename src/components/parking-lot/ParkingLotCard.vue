@@ -46,7 +46,7 @@
 
 <script setup lang="ts">
 import useParkingLot from '@/composables/parking-lot';
-import { type ParkingLot } from '@/types/ParkingLot';
+import { type ParkingLot } from '@/api/types/ParkingLot';
 
 defineProps({
   parkingLot: {

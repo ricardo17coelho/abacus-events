@@ -96,7 +96,7 @@ const items = computed(() => [
     icon: 'mdi-music'
   },
   {
-    title: 'Silint Disco',
+    title: 'Silent Disco',
     locations: ['AbaHome 2', 'EG'],
     note: 'DJ in the Al Covo',
     timeStart: '21.00',

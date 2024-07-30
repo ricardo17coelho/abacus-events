@@ -108,6 +108,11 @@ const router = createRouter({
           component: () => import('@/views/ProgramView.vue')
         },
         {
+          path: '/program-kids',
+          name: 'program-kids',
+          component: () => import('@/views/ProgramKidsView.vue')
+        },
+        {
           path: '/parking',
           name: 'parking',
           component: () => import('@/views/ParkingView.vue')

@@ -5,7 +5,7 @@
   <v-container class="align-center">
     <v-row>
       <v-col v-for="link in links" :key="link.id" cols="12" sm="6">
-        <v-card variant="tonal" color="primary" :to="link.to">
+        <v-card variant="tonal" color="primary" :to="link.to" height="100%">
           <template #title>
             <v-card-title class="text-h5"> {{ link.title }} </v-card-title>
           </template>
@@ -35,16 +35,23 @@ const links = computed(() => [
     to: { name: 'program' }
   },
   {
+    id: 'program-kids',
+    title: 'Kidsprogramm',
+    description: '',
+    icon: 'mdi-balloon',
+    to: { name: 'program-kids' }
+  },
+  {
     id: 'parking',
     title: 'Parking',
-    description: 'Timetable und Stop`s',
+    description: 'Live Verfügbarkeit PP & Standorte',
     icon: 'mdi-car',
     to: { name: 'parking' }
   },
   {
     id: 'shuttle-schedule',
     title: 'Shuttle-Fahrplan',
-    description: 'Live Verfügbarkeit PP & Standorte',
+    description: 'Timetable und Stop`s',
     icon: 'mdi-bus',
     to: { name: 'shuttle-schedule' }
   }

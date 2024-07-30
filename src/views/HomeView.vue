@@ -29,7 +29,7 @@
 const links = computed(() => [
   {
     id: 'program',
-    title: 'Programm',
+    title: 'Adults Programm',
     description: 'Timetable & Geländeplan Shuttle',
     icon: 'mdi-clipboard-text',
     to: { name: 'program' }

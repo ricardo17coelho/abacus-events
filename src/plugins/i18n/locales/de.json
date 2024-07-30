@@ -1,4 +1,10 @@
 {
+  "categories": {
+    "KIDS": "Kinder",
+    "ADULTS": "Erwachsen",
+    "FOOD": "Essen",
+    "BEVARAGE": "Getränk"
+  },
   "errors": {
     "error_occurred": "Fehler aufgetreten",
     "validation": {
@@ -24,7 +30,9 @@
     "time_start": "Startzeit",
     "time_end": "Schlusszeit",
     "icon": "Icon",
-    "note": "Notiz"
+    "note": "Notiz",
+    "program_timeline": "Programm timeline",
+    "category": "Kategorie"
   },
   "validation": {
     "email": "Das E-Mail-Feld muss eine gültige E-Mail-Adresse enthalten.",

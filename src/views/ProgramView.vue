@@ -7,6 +7,17 @@
     </v-row>
     <AppLoader v-if="isLoading" />
     <template v-else>
+      <v-chip-group v-model="currentCategoryFilter" mandatory>
+        <v-chip
+          v-for="category in categories"
+          :key="category.title"
+          :text="category.title"
+          :value="category.value"
+          :prepend-icon="category.icon"
+          variant="outlined"
+          filter
+        ></v-chip>
+      </v-chip-group>
       <v-row v-if="isCurrentUserAdmin">
         <v-col align="end">
           <ProgramTimelineDialog
@@ -65,11 +76,17 @@ import { useAuthStore } from '@/stores/auth';
 import ProgramTimelineDialog from '@/components/program-timetable/ProgramTimelineDialog.vue';
 import { toast } from 'vue-sonner';
 import useApiProgramTimeline from '@/api/program-timeline';
-import type { ProgramTimeline } from '@/api/types/ProgramTimeline';
+import {
+  PROGRAM_TIMELINE_CATEGORY,
+  type ProgramTimeline
+} from '@/api/types/ProgramTimeline';
 import { useI18n } from 'vue-i18n';
 import AppLoader from '@/components/app/AppLoader.vue';
+import useProgramCategories from '@/composables/program-categories';
 
 const { isCurrentUserAdmin } = useAuthStore();
+
+const currentCategoryFilter = ref(PROGRAM_TIMELINE_CATEGORY.ADULTS);
 
 const { getProgramTimelinesByCategory, removeProgramTimeline } =
   useApiProgramTimeline();
@@ -87,11 +104,12 @@ const sortedItems = computed(() => {
   });
 });
 
-// eslint-disable-next-line  @typescript-eslint/no-explicit-any
-function mutateById(id: string, payload: Record<any, any>) {
+function mutateById(id: string, payload: ProgramTimeline) {
   const idx = items.value.findIndex((i) => i.id === id);
   if (idx > -1) {
     Object.assign(items.value[idx], payload);
+  } else {
+    items.value.push(payload);
   }
 }
 
@@ -100,7 +118,9 @@ const { t } = useI18n();
 const isLoading = ref(false);
 const fetchData = async () => {
   isLoading.value = true;
-  const { data, error } = await getProgramTimelinesByCategory('ADULTS');
+  const { data, error } = await getProgramTimelinesByCategory(
+    currentCategoryFilter.value
+  );
   if (error) {
     toast.error(t('errors.error_occurred'));
     return;
@@ -114,6 +134,26 @@ const fetchData = async () => {
 fetchData();
 
 async function onDeleteItem(item: ProgramTimeline) {
-  await removeProgramTimeline(item.id);
+  const { error } = await removeProgramTimeline(item.id);
+  if (error) {
+    toast.error(t('errors.error_occurred'));
+    return;
+  }
+  const idx = items.value.findIndex((i) => i.id === item.id);
+  console.warn(idx);
+  if (idx > -1) {
+    items.value = items.value.slice(1, idx);
+  }
 }
+
+const { categories } = useProgramCategories();
+
+watch(
+  () => currentCategoryFilter.value,
+  async (newValue) => {
+    if (newValue) {
+      fetchData();
+    }
+  }
+);
 </script>

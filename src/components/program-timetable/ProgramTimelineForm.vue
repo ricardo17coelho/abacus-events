@@ -15,6 +15,18 @@
       </v-col>
     </v-row>
     <v-row dense>
+      <v-col>
+        <v-select
+          v-model="model.category"
+          :items="categories"
+          :label="$t('labels.category')"
+          name="field-category"
+          :rules="[rulesValidation.ruleRequired]"
+        >
+        </v-select>
+      </v-col>
+    </v-row>
+    <v-row dense>
       <v-col
         cols="12"
         v-for="(_, idx) in model.locations"
@@ -81,11 +93,21 @@
 
 <script lang="ts" setup>
 // utils
+import { PROGRAM_TIMELINE_CATEGORY } from '@/api/types/ProgramTimeline';
 import rulesValidation from '@/utils/validations';
 
 const model = defineModel({ type: Object, default: () => ({}) });
 
 const formRef = ref();
+
+const categories = computed(() =>
+  Object.values(PROGRAM_TIMELINE_CATEGORY).map((i) => {
+    return {
+      value: i,
+      title: i
+    };
+  })
+);
 
 defineExpose({ formRef });
 </script>

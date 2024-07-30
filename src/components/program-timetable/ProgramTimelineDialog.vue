@@ -1,7 +1,7 @@
 <template>
   <AppDialog
     v-model="model"
-    :title="$t('labels.program_timetable')"
+    :title="$t('labels.program_timeline')"
     max-width="600"
   >
     <template #activator="activatorProps">
@@ -56,6 +56,7 @@ const { t } = useI18n();
 
 const DEFAULT_FORM = {
   title: '',
+  category: '',
   locations: [''],
   time_start: '',
   time_end: '',
@@ -97,10 +98,7 @@ async function onSave() {
       }
     } else {
       // add
-      const { error, data } = await createProgramTimeline({
-        ...form.value,
-        category: props.category
-      });
+      const { error, data } = await createProgramTimeline(form.value);
 
       if (error) {
         if (error.message) {

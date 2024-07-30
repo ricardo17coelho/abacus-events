@@ -19,7 +19,13 @@
           </template>
 
           <template #content>
-            <VuePDF :pdf="pdf" :scale="scale" />
+            <AppLoadingIcon v-show="!pdfLoaded" />
+            <VuePDF
+              v-show="pdfLoaded"
+              :pdf="pdf"
+              :scale="scale"
+              @loaded="pdfLoaded = true"
+            />
           </template>
           <template #actions>
             <v-spacer />
@@ -60,6 +66,10 @@
             <div>
               <strong>{{ item.title }}</strong>
             </div>
+            <div v-if="item.note" class="text-caption text-primary">
+              <v-icon>mdi-information-variant</v-icon>
+              {{ item.note }}
+            </div>
             <div>
               <v-chip
                 v-for="location in item.locations"
@@ -82,6 +92,7 @@
 
 <script setup lang="ts">
 import AppDialog from '@/components/app/AppDialog.vue';
+import AppLoadingIcon from '@/components/app/AppLoadingIcon.vue';
 import AppTitle from '@/components/app/AppTitle.vue';
 
 import { VuePDF, usePDF } from '@tato30/vue-pdf';
@@ -89,6 +100,8 @@ import { VuePDF, usePDF } from '@tato30/vue-pdf';
 const scale = ref(1);
 const { pdf, info } = usePDF('/files/plan.pdf');
 console.log(`Document info: ${info}`);
+
+const pdfLoaded = ref(false);
 
 const items = computed(() => [
   {

@@ -12,7 +12,6 @@
       "almost_full": "Almost Full",
       "free": "Free"
     },
-    "programm": "Programme",
     "logout": "Log Out",
     "login": "Log In",
     "n_of_parking_spaces": "Number of Parking Spaces",
@@ -30,5 +29,10 @@
   },
   "buttons": {
     "save": "Save"
+  },
+  "title": {
+    "parking": "Parking",
+    "program": "Program",
+    "shuttle_schedule": "Shuttle schedule"
   }
 }

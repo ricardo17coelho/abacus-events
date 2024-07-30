@@ -98,9 +98,24 @@ const router = createRouter({
       },
       children: [
         {
-          path: '/',
+          path: '',
           name: 'home',
           component: () => import('@/views/HomeView.vue')
+        },
+        {
+          path: '/program',
+          name: 'program',
+          component: () => import('@/views/ProgramView.vue')
+        },
+        {
+          path: '/parking',
+          name: 'parking',
+          component: () => import('@/views/ParkingView.vue')
+        },
+        {
+          path: '/shuttle-schedule',
+          name: 'shuttle-schedule',
+          component: () => import('@/views/ShuttleSchedule.vue')
         }
       ]
     },

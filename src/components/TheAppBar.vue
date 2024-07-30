@@ -1,6 +1,8 @@
 <template>
   <v-app-bar flat>
-    <v-img src="/logos/abacus.svg" max-width="200" width="150"> </v-img>
+    <router-link to="/">
+      <v-img src="/logos/abacus.svg" max-width="200" width="150"> </v-img>
+    </router-link>
     <v-spacer></v-spacer>
     <template #append>
       <div
@@ -15,14 +17,7 @@
           :available-locales="availableLocalesFiltered"
           hide-full-text
         />
-        <VBtnPrimary
-          v-if="!currentUser"
-          href="https://summer-party.events.abacus.ch/"
-          :icon="$vuetify.display.xs ? 'mdi-clipboard-text' : undefined"
-          :size="$vuetify.display.xs ? 'small' : undefined"
-          :text="$vuetify.display.smAndUp ? $t('labels.programm') : undefined"
-        >
-        </VBtnPrimary>
+
         <VBtnPrimary
           v-if="currentUser"
           :icon="$vuetify.display.xs ? 'mdi-logout' : undefined"

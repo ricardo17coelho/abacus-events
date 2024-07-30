@@ -9,6 +9,11 @@
           <template #title>
             <v-card-title class="text-h5"> {{ link.title }} </v-card-title>
           </template>
+          <template #subtitle>
+            <v-card-subtitle class="text-wrap">
+              {{ link.description }}
+            </v-card-subtitle>
+          </template>
           <template #append>
             <v-avatar rounded="0" size="50">
               <v-icon size="50" color="primary">{{ link.icon }}</v-icon>
@@ -25,18 +30,21 @@ const links = computed(() => [
   {
     id: 'program',
     title: 'Programm',
+    description: 'Timetable & Geländeplan Shuttle',
     icon: 'mdi-clipboard-text',
     to: { name: 'program' }
   },
   {
     id: 'parking',
     title: 'Parking',
+    description: 'Timetable und Stop`s',
     icon: 'mdi-car',
     to: { name: 'parking' }
   },
   {
     id: 'shuttle-schedule',
     title: 'Shuttle-Fahrplan',
+    description: 'Live Verfügbarkeit PP & Standorte',
     icon: 'mdi-bus',
     to: { name: 'shuttle-schedule' }
   }

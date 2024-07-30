@@ -17,6 +17,7 @@
   "dependencies": {
     "@mdi/font": "^7.4.47",
     "@supabase/supabase-js": "^2.44.4",
+    "@tato30/vue-pdf": "^1.10.0",
     "@vueuse/core": "^10.11.0",
     "canvas-confetti": "^1.9.3",
     "lodash": "^4.17.21",

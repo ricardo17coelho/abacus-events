@@ -36,11 +36,56 @@
         </div>
       </v-timeline-item>
     </v-timeline>
+
+    <AppDialog max-width="1000" :fullscreen="$vuetify.display.smAndDown">
+      <template v-slot:activator="{ props: activatorProps }">
+        <v-btn
+          v-bind="activatorProps"
+          color="primary"
+          text="Plan"
+          block
+          variant="flat"
+        ></v-btn>
+      </template>
+
+      <template #content>
+        <VuePDF :pdf="pdf" :scale="scale" />
+      </template>
+      <template #actions>
+        <v-spacer />
+        <div class="d-flex justify-space-between align-center ga-3">
+          <v-btn
+            variant="flat"
+            color="primary"
+            @click="scale = scale > 0.25 ? scale - 0.25 : scale"
+          >
+            -
+          </v-btn>
+          <span>{{ scale * 100 }}%</span>
+          <v-btn
+            variant="flat"
+            color="primary"
+            @click="scale = scale < 2 ? scale + 0.25 : scale"
+          >
+            +
+          </v-btn>
+        </div>
+
+        <v-spacer />
+      </template>
+    </AppDialog>
   </v-container>
 </template>
 
 <script setup lang="ts">
+import AppDialog from '@/components/app/AppDialog.vue';
 import AppTitle from '@/components/app/AppTitle.vue';
+
+import { VuePDF, usePDF } from '@tato30/vue-pdf';
+
+const scale = ref(1);
+const { pdf, info } = usePDF('/files/plan.pdf');
+console.log(`Document info: ${info}`);
 
 const items = computed(() => [
   {

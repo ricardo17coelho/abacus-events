@@ -5,6 +5,47 @@
         <AppTitle :title="$t('title.program')" />
       </v-col>
     </v-row>
+    <v-row>
+      <v-col align="center">
+        <AppDialog max-width="1000" fullscreen>
+          <template v-slot:activator="{ props: activatorProps }">
+            <v-btn
+              v-bind="activatorProps"
+              color="primary"
+              text="Plan"
+              :block="$vuetify.display.xs"
+              variant="flat"
+            ></v-btn>
+          </template>
+
+          <template #content>
+            <VuePDF :pdf="pdf" :scale="scale" />
+          </template>
+          <template #actions>
+            <v-spacer />
+            <div class="d-flex justify-space-between align-center ga-3">
+              <v-btn
+                variant="flat"
+                color="primary"
+                @click="scale = scale > 0.25 ? scale - 0.25 : scale"
+              >
+                -
+              </v-btn>
+              <span>{{ scale * 100 }}%</span>
+              <v-btn
+                variant="flat"
+                color="primary"
+                @click="scale = scale < 2 ? scale + 0.25 : scale"
+              >
+                +
+              </v-btn>
+            </div>
+
+            <v-spacer />
+          </template>
+        </AppDialog>
+      </v-col>
+    </v-row>
     <v-timeline align="start" side="end">
       <v-timeline-item
         v-for="item in items"
@@ -36,44 +77,6 @@
         </div>
       </v-timeline-item>
     </v-timeline>
-
-    <AppDialog max-width="1000" :fullscreen="$vuetify.display.smAndDown">
-      <template v-slot:activator="{ props: activatorProps }">
-        <v-btn
-          v-bind="activatorProps"
-          color="primary"
-          text="Plan"
-          block
-          variant="flat"
-        ></v-btn>
-      </template>
-
-      <template #content>
-        <VuePDF :pdf="pdf" :scale="scale" />
-      </template>
-      <template #actions>
-        <v-spacer />
-        <div class="d-flex justify-space-between align-center ga-3">
-          <v-btn
-            variant="flat"
-            color="primary"
-            @click="scale = scale > 0.25 ? scale - 0.25 : scale"
-          >
-            -
-          </v-btn>
-          <span>{{ scale * 100 }}%</span>
-          <v-btn
-            variant="flat"
-            color="primary"
-            @click="scale = scale < 2 ? scale + 0.25 : scale"
-          >
-            +
-          </v-btn>
-        </div>
-
-        <v-spacer />
-      </template>
-    </AppDialog>
   </v-container>
 </template>
 

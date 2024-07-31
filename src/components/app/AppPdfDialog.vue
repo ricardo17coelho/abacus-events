@@ -1,13 +1,16 @@
 <template>
   <AppDialog max-width="1000" fullscreen>
-    <template v-slot:activator="{ props: activatorProps }">
-      <v-btn
+    <template #activator="{ props: activatorProps }">
+      <v-fab
         v-bind="activatorProps"
+        class="me-4"
+        location="bottom end"
+        app
+        icon
         color="primary"
-        text="Plan"
-        :block="$vuetify.display.xs"
-        variant="flat"
-      ></v-btn>
+      >
+        Plan
+      </v-fab>
     </template>
 
     <template #content>
@@ -56,7 +59,7 @@ const props = defineProps({
   }
 });
 
-const scale = ref(1);
+const scale = ref(0.25);
 const { pdf, info } = usePDF(props.pdfUrl);
 console.log(`Document info: ${info}`);
 

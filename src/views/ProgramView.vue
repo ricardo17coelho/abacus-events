@@ -10,8 +10,10 @@
       <div class="text-center">
         <v-chip-group
           v-model="currentCategoryFilter"
-          mandatory
           class="categories-chip-group"
+          color="primary"
+          mandatory
+          column
         >
           <v-chip
             v-for="category in categories"

@@ -7,17 +7,23 @@
     </v-row>
     <AppLoader v-if="isLoading" />
     <template v-else>
-      <v-chip-group v-model="currentCategoryFilter" mandatory>
-        <v-chip
-          v-for="category in categories"
-          :key="category.title"
-          :text="category.title"
-          :value="category.value"
-          :prepend-icon="category.icon"
-          variant="outlined"
-          filter
-        ></v-chip>
-      </v-chip-group>
+      <div class="text-center">
+        <v-chip-group
+          v-model="currentCategoryFilter"
+          mandatory
+          class="categories-chip-group"
+        >
+          <v-chip
+            v-for="category in categories"
+            :key="category.title"
+            :text="category.title"
+            :value="category.value"
+            :prepend-icon="category.icon"
+            variant="outlined"
+            filter
+          ></v-chip>
+        </v-chip-group>
+      </div>
       <v-row v-if="isCurrentUserAdmin">
         <v-col align="end">
           <ProgramTimelineDialog
@@ -157,3 +163,9 @@ watch(
   }
 );
 </script>
+
+<style scoped lang="scss">
+.categories-chip-group :deep(.v-slide-group__content) {
+  justify-content: center;
+}
+</style>

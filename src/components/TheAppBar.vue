@@ -1,5 +1,5 @@
 <template>
-  <v-app-bar flat>
+  <v-app-bar flat class="px-1">
     <router-link to="/">
       <v-img src="/logos/abacus.svg" max-width="200" width="150"> </v-img>
     </router-link>

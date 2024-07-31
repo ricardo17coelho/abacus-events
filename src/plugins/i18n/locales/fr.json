@@ -1,6 +1,12 @@
 {
+  "categories": {
+    "KIDS": "Enfants",
+    "ADULTS": "Adultes",
+    "FOOD": "Nourriture",
+    "BEVARAGE": "Boisson"
+  },
   "errors": {
-    "error_occurred": "Erreur survenue",
+    "error_occurred": "Une erreur s'est produite",
     "validation": {
       "invalid": "Veuillez vérifier votre saisie"
     }
@@ -17,18 +23,29 @@
     "login": "Connexion",
     "n_of_parking_spaces": "Nombre de places de parking",
     "name": "Nom",
-    "location": "Nom du lieu",
-    "location_url": "URL du lieu",
-    "slots_total": "Places max.",
-    "slots_filled": "Places occupées"
+    "location": "Nom de l'emplacement",
+    "location_url": "URL de l'emplacement",
+    "slots_total": "Places totales",
+    "slots_filled": "Places occupées",
+    "time_start": "Heure de début",
+    "time_end": "Heure de fin",
+    "icon": "Icône",
+    "note": "Note",
+    "program_timeline": "Chronologie du programme",
+    "category": "Catégorie"
   },
   "validation": {
-    "email": "Le champ e-mail doit contenir une adresse e-mail valide.",
-    "max": "Le champ ne peut pas contenir plus de 1 caractère | Le champ ne peut pas contenir plus de {n} caractères",
+    "email": "Le champ email doit contenir une adresse email valide.",
+    "max": "Le champ ne doit pas contenir plus de 1 caractère | Le champ ne doit pas contenir plus de {n} caractères",
     "min": "Le champ doit contenir plus de 1 caractère | Le champ doit contenir plus de {n} caractères",
     "required": "Champ requis"
   },
   "buttons": {
     "save": "Enregistrer"
+  },
+  "title": {
+    "parking": "Parking",
+    "program": "Infos",
+    "shuttle_schedule": "Horaire de la navette"
   }
 }

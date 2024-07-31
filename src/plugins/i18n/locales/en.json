@@ -1,4 +1,10 @@
 {
+  "categories": {
+    "KIDS": "Kids",
+    "ADULTS": "Adults",
+    "FOOD": "Food",
+    "BEVARAGE": "Beverage"
+  },
   "errors": {
     "error_occurred": "An error occurred",
     "validation": {
@@ -6,30 +12,31 @@
     }
   },
   "labels": {
-    "parking_lot": "Car Park",
+    "parking_lot": "Parking Lot",
     "parking_lot_status": {
       "full": "Full",
       "almost_full": "Almost Full",
       "free": "Free"
     },
-    "logout": "Log Out",
-    "login": "Log In",
+    "programm": "Program",
+    "logout": "Logout",
+    "login": "Login",
     "n_of_parking_spaces": "Number of Parking Spaces",
     "name": "Name",
     "location": "Location Name",
     "location_url": "Location URL",
     "slots_total": "Max. Spaces",
-    "slots_filled": "Filled Spaces",
-    "program_timeline": "Program timetable",
-    "time_end": "Time end",
-    "time_start": "Time start",
+    "slots_filled": "Occupied Spaces",
+    "time_start": "Start Time",
+    "time_end": "End Time",
     "icon": "Icon",
     "note": "Note",
+    "program_timeline": "Program Timeline",
     "category": "Category"
   },
   "validation": {
     "email": "The email field must contain a valid email address.",
-    "max": "The field may not contain more than 1 character | The field may not contain more than {n} characters",
+    "max": "The field must not contain more than 1 character | The field must not contain more than {n} characters",
     "min": "The field must contain more than 1 character | The field must contain more than {n} characters",
     "required": "Field required"
   },
@@ -38,7 +45,7 @@
   },
   "title": {
     "parking": "Parking",
-    "program": "infos",
-    "shuttle_schedule": "Shuttle schedule"
+    "program": "Info",
+    "shuttle_schedule": "Shuttle Schedule"
   }
 }

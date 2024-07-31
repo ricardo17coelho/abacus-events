@@ -1,34 +1,51 @@
 {
+  "categories": {
+    "KIDS": "Bambini",
+    "ADULTS": "Adulti",
+    "FOOD": "Cibo",
+    "BEVARAGE": "Bevande"
+  },
   "errors": {
-    "error_occurred": "Errore occorso",
+    "error_occurred": "Si è verificato un errore",
     "validation": {
-      "invalid": "Si prega di controllare l'inserimento"
+      "invalid": "Si prega di controllare l'input"
     }
   },
   "labels": {
     "parking_lot": "Parcheggio",
     "parking_lot_status": {
-      "full": "Completo",
-      "almost_full": "Quasi completo",
+      "full": "Pieno",
+      "almost_full": "Quasi pieno",
       "free": "Libero"
     },
     "programm": "Programma",
     "logout": "Disconnettersi",
-    "login": "Accedere",
+    "login": "Accedi",
     "n_of_parking_spaces": "Numero di posti auto",
     "name": "Nome",
-    "location": "Nome del luogo",
-    "location_url": "URL del luogo",
-    "slots_total": "Posti max.",
-    "slots_filled": "Posti occupati"
+    "location": "Nome della posizione",
+    "location_url": "URL della posizione",
+    "slots_total": "Posti totali",
+    "slots_filled": "Posti occupati",
+    "time_start": "Ora di inizio",
+    "time_end": "Ora di fine",
+    "icon": "Icona",
+    "note": "Nota",
+    "program_timeline": "Cronologia del programma",
+    "category": "Categoria"
   },
   "validation": {
-    "email": "Il campo e-mail deve contenere un indirizzo e-mail valido.",
-    "max": "Il campo non può contenere più di 1 carattere | Il campo non può contenere più di {n} caratteri",
+    "email": "Il campo email deve contenere un indirizzo email valido.",
+    "max": "Il campo non deve contenere più di 1 carattere | Il campo non deve contenere più di {n} caratteri",
     "min": "Il campo deve contenere più di 1 carattere | Il campo deve contenere più di {n} caratteri",
     "required": "Campo richiesto"
   },
   "buttons": {
-    "save": "Salvare"
+    "save": "Salva"
+  },
+  "title": {
+    "parking": "Parcheggio",
+    "program": "Info",
+    "shuttle_schedule": "Orario della navetta"
   }
 }

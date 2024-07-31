@@ -69,7 +69,7 @@ const links = computed(() => [
 
 .flash {
   display: inline-block;
-  animation: flash 3s infinite;
+  animation: flash 4s infinite;
   color: red;
   font-size: 24px; /* Adjust the size of the icon */
 }

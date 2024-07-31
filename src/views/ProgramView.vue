@@ -115,7 +115,9 @@ function mutateById(id: string, payload: ProgramTimeline) {
   if (idx > -1) {
     Object.assign(items.value[idx], payload);
   } else {
-    items.value.push(payload);
+    if (payload.category === currentCategoryFilter.value) {
+      items.value.push(payload);
+    }
   }
 }
 

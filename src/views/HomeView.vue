@@ -15,6 +15,9 @@
             </v-card-subtitle>
           </template>
           <template #append>
+            <v-icon v-if="link.id === 'parking'" class="flash" color="red">
+              mdi-broadcast
+            </v-icon>
             <v-avatar rounded="0" size="50">
               <v-icon size="50" color="primary">{{ link.icon }}</v-icon>
             </v-avatar>
@@ -50,3 +53,39 @@ const links = computed(() => [
   }
 ]);
 </script>
+
+<style scoped lang="scss">
+@keyframes flash {
+  0%,
+  50%,
+  100% {
+    opacity: 1;
+  }
+  25%,
+  75% {
+    opacity: 0;
+  }
+}
+
+.flash {
+  display: inline-block;
+  animation: flash 3s infinite;
+  color: red;
+  font-size: 24px; /* Adjust the size of the icon */
+}
+
+.live-alert {
+  display: flex;
+  align-items: center;
+  background-color: black;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+.live-text {
+  margin-left: 5px;
+  font-size: 18px; /* Adjust the size of the text */
+  font-weight: bold;
+}
+</style>

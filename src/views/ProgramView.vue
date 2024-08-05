@@ -13,6 +13,7 @@
           class="categories-chip-group"
           color="primary"
           mandatory
+          mobile
           column
         >
           <v-chip
@@ -23,6 +24,7 @@
             :prepend-icon="category.icon"
             variant="outlined"
             filter
+            centered
           ></v-chip>
         </v-chip-group>
       </div>

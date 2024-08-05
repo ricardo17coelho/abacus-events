@@ -23,14 +23,8 @@
             - Haltestelle Sonnrainweg) ausweichen!
           </div>
         </v-alert>
-        <v-alert
-          class="my-6"
-          type="warning"
-          variant="tonal"
-          border="start"
-          rounded="lg"
-          density="compact"
-        >
+        <v-alert class="my-6" border="start" rounded="lg" density="compact">
+          <v-icon>mdi-information-variant-circle-outline</v-icon>
           VBSG-Bus ist mit EXTRAFAHRT beschriftet
         </v-alert>
         <v-card class="my-6">
@@ -131,6 +125,19 @@
                       href="https://maps.app.goo.gl/cbYMd9uyUQYjAQBSA"
                     >
                       Hodlertrasse, 9008 St. Gallen (St. Fiden PP)
+                    </a>
+                  </div>
+                </div>
+              </v-timeline-item>
+
+              <v-timeline-item icon="mdi-arrow-down">
+                <div>
+                  <div>
+                    <a
+                      class="link-external"
+                      href="https://maps.app.goo.gl/DorgNiRHPizxKwnU7"
+                    >
+                      Radisson (Halt auf Verlangen)
                     </a>
                   </div>
                 </div>

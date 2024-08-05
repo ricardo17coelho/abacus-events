@@ -13,9 +13,18 @@
           <div>
             <strong>{{ item.title }}</strong>
           </div>
-          <div v-if="item.note" class="text-caption text-primary">
-            <v-icon>mdi-information-variant</v-icon>
-            {{ item.note }}
+          <div v-if="item.note" class="text-caption text-primary text-break">
+            <a
+              v-if="isValidHttpUrl(item.note)"
+              class="link-external"
+              :href="item.note"
+            >
+              {{ item.note }}
+            </a>
+            <div v-else>
+              <v-icon>mdi-information-variant</v-icon>
+              {{ item.note }}
+            </div>
           </div>
           <div>
             <v-chip
@@ -39,6 +48,7 @@
 
 <script setup lang="ts">
 import type { ProgramTimeline } from '@/api/types/ProgramTimeline';
+import { isValidHttpUrl } from '@/utils/isValidUrl';
 import type { PropType } from 'vue';
 
 defineProps({

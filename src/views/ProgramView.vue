@@ -1,5 +1,5 @@
 <template>
-  <v-container class="align-center">
+  <v-container class="align-center pa-0">
     <v-row>
       <v-col align="center">
         <AppTitle :title="$t('title.program')" />

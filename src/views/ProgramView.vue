@@ -46,7 +46,20 @@
       </v-row>
       <v-row>
         <v-col align="center">
-          <AppPdfDialog pdf-url="/files/plan.pdf" />
+          <ProgramPlan>
+            <template #activator="activatorProps">
+              <v-fab
+                v-bind="activatorProps"
+                class="me-4"
+                location="bottom end"
+                app
+                icon
+                color="primary"
+              >
+                Plan
+              </v-fab>
+            </template>
+          </ProgramPlan>
         </v-col>
       </v-row>
       <AppTimeline :items="sortedItems">
@@ -78,10 +91,10 @@
 <script setup lang="ts">
 import AppTitle from '@/components/app/AppTitle.vue';
 
-import AppTimeline from '../components/app/AppTimeline.vue';
-import AppPdfDialog from '@/components/app/AppPdfDialog.vue';
+import AppTimeline from '@/components/app/AppTimeline.vue';
+import ProgramPlan from '@/components/program/ProgramPlan.vue';
 import { useAuthStore } from '@/stores/auth';
-import ProgramTimelineDialog from '@/components/program-timetable/ProgramTimelineDialog.vue';
+import ProgramTimelineDialog from '@/components/program/program-timetable/ProgramTimelineDialog.vue';
 import { toast } from 'vue-sonner';
 import useApiProgramTimeline from '@/api/program-timeline';
 import {

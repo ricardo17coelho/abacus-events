@@ -1,16 +1,7 @@
 <template>
   <AppDialog max-width="1000" fullscreen>
     <template #activator="{ props: activatorProps }">
-      <v-fab
-        v-bind="activatorProps"
-        class="me-4"
-        location="bottom end"
-        app
-        icon
-        color="primary"
-      >
-        Plan
-      </v-fab>
+      <slot name="activator" :props="activatorProps"></slot>
     </template>
 
     <template #content>

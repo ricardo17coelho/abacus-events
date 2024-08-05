@@ -7,7 +7,17 @@
       <v-col v-for="link in links" :key="link.id" cols="12" sm="6">
         <v-card variant="tonal" color="primary" :to="link.to" height="100%">
           <template #title>
-            <v-card-title class="text-h5"> {{ link.title }} </v-card-title>
+            <v-card-title class="text-h5">
+              {{ link.title }}
+              <v-icon
+                v-if="link.id === 'parking'"
+                class="flash mb-2"
+                size="20"
+                color="red"
+              >
+                mdi-broadcast
+              </v-icon>
+            </v-card-title>
           </template>
           <template #subtitle>
             <v-card-subtitle class="text-wrap">
@@ -15,9 +25,6 @@
             </v-card-subtitle>
           </template>
           <template #append>
-            <v-icon v-if="link.id === 'parking'" class="flash" color="red">
-              mdi-broadcast
-            </v-icon>
             <v-avatar rounded="0" size="50">
               <v-icon size="50" color="primary">{{ link.icon }}</v-icon>
             </v-avatar>
@@ -70,22 +77,6 @@ const links = computed(() => [
 .flash {
   display: inline-block;
   animation: flash 4s infinite;
-  color: red;
-  font-size: 24px; /* Adjust the size of the icon */
-}
-
-.live-alert {
-  display: flex;
-  align-items: center;
-  background-color: black;
-  color: white;
-  padding: 5px 10px;
-  border-radius: 5px;
-}
-
-.live-text {
-  margin-left: 5px;
-  font-size: 18px; /* Adjust the size of the text */
-  font-weight: bold;
+  color: rgb(var(--v-theme-error));
 }
 </style>

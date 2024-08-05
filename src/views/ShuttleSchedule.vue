@@ -44,40 +44,15 @@
               dot-color="primary"
               density="compact"
             >
-              <v-timeline-item icon="mdi-arrow-down">
+              <v-timeline-item
+                v-for="(item, idx) in itemsOutward"
+                :key="`${idx}-outward`"
+                icon="mdi-arrow-down"
+              >
                 <div>
                   <div>
-                    <a
-                      class="link-external"
-                      href="https://maps.app.goo.gl/uWM6UuKsAZzeYGnJA"
-                    >
-                      Hauptbahnhof St. Gallen- Lagerstrasse, 9000 St. Gallen
-                    </a>
-                  </div>
-                </div>
-              </v-timeline-item>
-
-              <v-timeline-item icon="mdi-arrow-down">
-                <div>
-                  <div>
-                    <a
-                      class="link-external"
-                      href="https://maps.app.goo.gl/cbYMd9uyUQYjAQBSA"
-                    >
-                      Hodlertrasse, 9008 St. Gallen (St. Fiden PP)
-                    </a>
-                  </div>
-                </div>
-              </v-timeline-item>
-
-              <v-timeline-item icon="mdi-arrow-down">
-                <div>
-                  <div>
-                    <a
-                      class="link-external"
-                      href="https://maps.app.goo.gl/132fBr3KKb8cczPWA"
-                    >
-                      Abacus, Wittenbach
+                    <a class="link-external" :href="item.link" target="_blank">
+                      {{ item.text }}
                     </a>
                   </div>
                 </div>
@@ -89,7 +64,7 @@
         <v-card class="my-6">
           <template #title>
             <v-icon color="primary" size="x-small">mdi-bus-clock</v-icon>
-            Rücktransport
+            Rückfahrt
           </template>
           <template #subtitle>
             <div class="text-wrap">21:30-01:30 Uhr (im 30min Takt)</div>
@@ -104,53 +79,15 @@
               dot-color="primary"
               density="compact"
             >
-              <v-timeline-item icon="mdi-arrow-down">
+              <v-timeline-item
+                v-for="(item, idx) in itemsReturn"
+                :key="`${idx}-return`"
+                icon="mdi-arrow-down"
+              >
                 <div>
                   <div>
-                    <a
-                      class="link-external"
-                      href="https://maps.app.goo.gl/132fBr3KKb8cczPWA"
-                    >
-                      Abacus, Wittenbach
-                    </a>
-                  </div>
-                </div>
-              </v-timeline-item>
-
-              <v-timeline-item icon="mdi-arrow-down">
-                <div>
-                  <div>
-                    <a
-                      class="link-external"
-                      href="https://maps.app.goo.gl/cbYMd9uyUQYjAQBSA"
-                    >
-                      Hodlertrasse, 9008 St. Gallen (St. Fiden PP)
-                    </a>
-                  </div>
-                </div>
-              </v-timeline-item>
-
-              <v-timeline-item icon="mdi-arrow-down">
-                <div>
-                  <div>
-                    <a
-                      class="link-external"
-                      href="https://maps.app.goo.gl/DorgNiRHPizxKwnU7"
-                    >
-                      Radisson (Halt auf Verlangen)
-                    </a>
-                  </div>
-                </div>
-              </v-timeline-item>
-
-              <v-timeline-item icon="mdi-arrow-down">
-                <div>
-                  <div>
-                    <a
-                      class="link-external"
-                      href="https://maps.app.goo.gl/uWM6UuKsAZzeYGnJA"
-                    >
-                      Hauptbahnhof St. Gallen- Lagerstrasse, 9000 St. Gallen
+                    <a class="link-external" :href="item.link" target="_blank">
+                      {{ item.text }}
                     </a>
                   </div>
                 </div>
@@ -166,4 +103,38 @@
 <script setup lang="ts">
 import AppTitle from '@/components/app/AppTitle.vue';
 import ContainerCentered from '@/components/containers/ContainerCentered.vue';
+
+const itemsOutward = computed(() => [
+  {
+    text: 'Hauptbahnhof St. Gallen- Lagerstrasse, 9000 St. Gallen',
+    link: 'https://maps.app.goo.gl/uWM6UuKsAZzeYGnJA'
+  },
+  {
+    text: 'Hodlertrasse, 9008 St. Gallen (St. Fiden PP)',
+    link: 'https://maps.app.goo.gl/cbYMd9uyUQYjAQBSA'
+  },
+  {
+    text: 'Abacus, Wittenbach',
+    link: 'https://maps.app.goo.gl/132fBr3KKb8cczPWA'
+  }
+]);
+
+const itemsReturn = computed(() => [
+  {
+    text: 'Abacus, Wittenbach',
+    link: 'https://maps.app.goo.gl/132fBr3KKb8cczPWA'
+  },
+  {
+    text: 'Hodlertrasse, 9008 St. Gallen (St. Fiden PP)',
+    link: 'https://maps.app.goo.gl/cbYMd9uyUQYjAQBSA'
+  },
+  {
+    text: 'Radisson (Halt auf Verlangen)',
+    link: 'https://maps.app.goo.gl/DorgNiRHPizxKwnU7'
+  },
+  {
+    text: 'Hauptbahnhof St. Gallen- Lagerstrasse, 9000 St. Gallen',
+    link: 'https://maps.app.goo.gl/uWM6UuKsAZzeYGnJA'
+  }
+]);
 </script>

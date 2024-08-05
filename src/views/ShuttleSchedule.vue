@@ -13,6 +13,7 @@
           variant="tonal"
           border="start"
           rounded="lg"
+          density="compact"
         >
           <div>Zwischen 19.00 - 21.30 Uhr verkehrt KEIN Shuttlebus</div>
           <div>
@@ -28,6 +29,7 @@
           variant="tonal"
           border="start"
           rounded="lg"
+          density="compact"
         >
           VBSG-Bus ist mit EXTRAFAHRT beschriftet
         </v-alert>

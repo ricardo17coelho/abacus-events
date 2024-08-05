@@ -48,6 +48,7 @@
               side="end"
               truncate-line="both"
               dot-color="primary"
+              density="compact"
             >
               <v-timeline-item icon="mdi-arrow-down">
                 <div>
@@ -107,6 +108,7 @@
               side="end"
               truncate-line="both"
               dot-color="primary"
+              density="compact"
             >
               <v-timeline-item icon="mdi-arrow-down">
                 <div>

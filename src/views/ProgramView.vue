@@ -46,24 +46,6 @@
           </ProgramTimelineDialog>
         </v-col>
       </v-row>
-      <v-row>
-        <v-col align="center">
-          <ProgramPlan>
-            <template #activator="activatorProps">
-              <v-fab
-                v-bind="activatorProps"
-                class="me-4"
-                location="bottom end"
-                app
-                icon
-                color="primary"
-              >
-                Plan
-              </v-fab>
-            </template>
-          </ProgramPlan>
-        </v-col>
-      </v-row>
       <AppTimeline :items="sortedItems">
         <template v-if="isCurrentUserAdmin" #actions="{ item }">
           <ProgramTimelineDialog
@@ -86,6 +68,30 @@
           </v-btn>
         </template>
       </AppTimeline>
+      <ContainerCentered>
+        <ProgramPlan :images="images">
+          <template #activator="activatorProps">
+            <v-fab
+              v-bind="activatorProps"
+              class="me-4"
+              location="bottom end"
+              app
+              icon
+              color="primary"
+            >
+              Plan
+            </v-fab>
+            <v-img
+              v-for="image in images"
+              :key="image"
+              v-bind="activatorProps"
+              class="mx-4"
+              :src="image"
+              max-width="200"
+            ></v-img>
+          </template>
+        </ProgramPlan>
+      </ContainerCentered>
     </template>
   </v-container>
 </template>
@@ -101,15 +107,19 @@ import { toast } from 'vue-sonner';
 import useApiProgramTimeline from '@/api/program-timeline';
 import {
   PROGRAM_TIMELINE_CATEGORY,
-  type ProgramTimeline
+  type ProgramTimeline,
+  type ProgramTimelineCategory
 } from '@/api/types/ProgramTimeline';
 import { useI18n } from 'vue-i18n';
 import AppLoader from '@/components/app/AppLoader.vue';
 import useProgramCategories from '@/composables/program-categories';
+import ContainerCentered from '@/components/containers/ContainerCentered.vue';
 
 const { isCurrentUserAdmin } = useAuthStore();
 
-const currentCategoryFilter = ref(PROGRAM_TIMELINE_CATEGORY.ADULTS);
+const currentCategoryFilter = ref<ProgramTimelineCategory>(
+  PROGRAM_TIMELINE_CATEGORY.ADULTS
+);
 
 const { getProgramTimelinesByCategory, removeProgramTimeline } =
   useApiProgramTimeline();
@@ -181,6 +191,24 @@ watch(
     }
   }
 );
+
+const images = computed(() => {
+  if (
+    [PROGRAM_TIMELINE_CATEGORY.ADULTS, PROGRAM_TIMELINE_CATEGORY.KIDS].includes(
+      currentCategoryFilter.value
+    )
+  ) {
+    return ['/images/plan.png'];
+  } else if (currentCategoryFilter.value === PROGRAM_TIMELINE_CATEGORY.FOOD) {
+    return [];
+  } else if (
+    currentCategoryFilter.value === PROGRAM_TIMELINE_CATEGORY.BEVARAGE
+  ) {
+    return ['/images/drinks.png', '/images/cocktails.png'];
+  }
+
+  return [];
+});
 </script>
 
 <style scoped lang="scss">

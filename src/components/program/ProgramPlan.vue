@@ -12,6 +12,12 @@
 <script setup lang="ts">
 import VueEasyLightbox, { useEasyLightbox } from 'vue-easy-lightbox';
 
+const props = defineProps({
+  images: {
+    type: Array as PropType<string[]>,
+    default: () => []
+  }
+});
 const {
   // methods
   show,
@@ -22,7 +28,7 @@ const {
   imgsRef
 } = useEasyLightbox({
   // src / src[]
-  imgs: ['/images/plan.png'],
+  imgs: props.images,
   // initial index
   initIndex: 0
 });

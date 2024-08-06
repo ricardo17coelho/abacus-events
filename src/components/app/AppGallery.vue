@@ -8,14 +8,7 @@
         }"
         align="center"
       >
-        <v-col
-          v-for="image in images"
-          :key="image"
-          cols="12"
-          sm="6"
-          md="4"
-          align="center"
-        >
+        <v-col v-for="image in images" :key="image" cols="3" align="center">
           <v-hover>
             <template v-slot:default="{ isHovering, props: hoverProps }">
               <v-img
@@ -24,7 +17,7 @@
                 cover
                 class="cursor-pointer"
                 :class="{ 'elevation-10': isHovering }"
-                max-width="200"
+                max-width="150"
               >
                 <template v-slot:placeholder>
                   <v-row

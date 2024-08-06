@@ -1,8 +1,8 @@
 <template>
   <v-timeline align="start" side="end">
     <v-timeline-item
-      v-for="item in items"
-      :key="showDefaultTranslationOrEmpty(item.title)"
+      v-for="(item, idx) in items"
+      :key="`${idx}-title-${showDefaultTranslationOrEmpty(item.title)}`"
       dot-color="primary"
       :icon="item.icon"
       :size="$vuetify.display.mdAndUp ? 'x-large' : undefined"
@@ -13,7 +13,10 @@
           <div>
             <strong>{{ showDefaultTranslationOrEmpty(item.title) }}</strong>
           </div>
-          <div v-if="item.note" class="text-caption text-primary text-break">
+          <div
+            v-if="showDefaultTranslationOrEmpty(item.note)"
+            class="text-caption text-primary text-break"
+          >
             <a
               v-if="isValidHttpUrl(showDefaultTranslationOrEmpty(item.note))"
               class="link-external"

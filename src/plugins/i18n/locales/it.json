@@ -35,7 +35,9 @@
     "category": "Categoria",
     "add": "Aggiungi",
     "outward_journey": "Andata",
-    "return_journey": "Ritorno"
+    "return_journey": "Ritorno",
+    "plan": "planimetria",
+    "drinks": "menu bevande"
   },
   "validation": {
     "email": "Il campo email deve contenere un indirizzo email valido.",

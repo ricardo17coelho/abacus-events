@@ -35,7 +35,9 @@
     "category": "Kategorie",
     "add": "Hinzufügen",
     "outward_journey": "Hinfahrt",
-    "return_journey": "Rückfahrt"
+    "return_journey": "Rückfahrt",
+    "plan": "Geländeplan",
+    "drinks": "Getränkkarte"
   },
   "validation": {
     "email": "Das E-Mail-Feld muss eine gültige E-Mail-Adresse enthalten.",

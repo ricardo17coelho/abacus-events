@@ -28,8 +28,19 @@
           ></v-chip>
         </v-chip-group>
       </div>
-      <ContainerCentered v-if="images.length > 0" class="my-10">
-        <AppGallery :images="images"></AppGallery>
+
+      <ContainerCentered v-if="images.length > 0" class="my-5">
+        <AppImagesView :images="images">
+          <template #activator="activatorProps">
+            <v-btn
+              v-bind="activatorProps"
+              color="primary"
+              :prepend-icon="imagesBtn.icon"
+            >
+              {{ imagesBtn.text }}
+            </v-btn>
+          </template>
+        </AppImagesView>
       </ContainerCentered>
 
       <v-row v-if="isCurrentUserAdmin">
@@ -92,7 +103,7 @@ import { useI18n } from 'vue-i18n';
 import AppLoader from '@/components/app/AppLoader.vue';
 import useProgramCategories from '@/composables/program-categories';
 import ContainerCentered from '@/components/containers/ContainerCentered.vue';
-import AppGallery from '@/components/app/AppGallery.vue';
+import AppImagesView from '@/components/app/AppImagesView.vue';
 
 const { isCurrentUserAdmin } = useAuthStore();
 
@@ -172,21 +183,18 @@ watch(
 );
 
 const images = computed(() => {
-  if (
-    [PROGRAM_TIMELINE_CATEGORY.ADULTS, PROGRAM_TIMELINE_CATEGORY.KIDS].includes(
-      currentCategoryFilter.value
-    )
-  ) {
-    return ['/images/plan.png'];
-  } else if (currentCategoryFilter.value === PROGRAM_TIMELINE_CATEGORY.FOOD) {
-    return [];
-  } else if (
-    currentCategoryFilter.value === PROGRAM_TIMELINE_CATEGORY.BEVERAGE
-  ) {
+  if (currentCategoryFilter.value === PROGRAM_TIMELINE_CATEGORY.BEVERAGE) {
     return ['/images/drinks.png', '/images/cocktails.png'];
   }
+  return ['/images/plan.png'];
+});
 
-  return [];
+const imagesBtn = computed(() => {
+  if (currentCategoryFilter.value === PROGRAM_TIMELINE_CATEGORY.BEVERAGE) {
+    return { text: t('labels.drinks'), icon: 'mdi-glass-cocktail' };
+  }
+
+  return { text: t('labels.plan'), icon: 'mdi-map' };
 });
 </script>
 

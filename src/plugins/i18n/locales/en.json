@@ -35,7 +35,9 @@
     "category": "Category",
     "add": "Add",
     "outward_journey": "Outbound Journey",
-    "return_journey": "Return Journey"
+    "return_journey": "Return Journey",
+    "plan": "site plan",
+    "drinks": "drinks menu"
   },
   "validation": {
     "email": "The email field must contain a valid email address.",

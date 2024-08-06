@@ -1,12 +1,12 @@
 {
   "categories": {
     "KIDS": "Kinder",
-    "ADULTS": "Erwachsen",
+    "ADULTS": "Erwachsene",
     "FOOD": "Essen",
-    "BEVARAGE": "Bar's"
+    "BEVERAGE": "Getränk"
   },
   "errors": {
-    "error_occurred": "Fehler aufgetreten",
+    "error_occurred": "Ein Fehler ist aufgetreten",
     "validation": {
       "invalid": "Bitte überprüfen Sie Ihre Eingabe"
     }
@@ -14,25 +14,28 @@
   "labels": {
     "parking_lot": "Parkplatz",
     "parking_lot_status": {
-      "full": "Besetzt",
-      "almost_full": "Fast besetzt",
+      "full": "Voll",
+      "almost_full": "Fast voll",
       "free": "Frei"
     },
     "programm": "Programm",
-    "logout": "Ausloggen",
+    "logout": "Abmelden",
     "login": "Anmelden",
-    "n_of_parking_spaces": "Anzahl Parkplätze",
+    "n_of_parking_spaces": "Anzahl der Parkplätze",
     "name": "Name",
     "location": "Standortname",
-    "location_url": "Standort URL",
+    "location_url": "Standort-URL",
     "slots_total": "Max. Plätze",
-    "slots_filled": "Besetzte Plätze",
+    "slots_filled": "Belegte Plätze",
     "time_start": "Startzeit",
-    "time_end": "Schlusszeit",
-    "icon": "Icon",
+    "time_end": "Endzeit",
+    "icon": "Symbol",
     "note": "Notiz",
-    "program_timeline": "Programm timeline",
-    "category": "Kategorie"
+    "program_timeline": "Programmablauf",
+    "category": "Kategorie",
+    "add": "Hinzufügen",
+    "outward_journey": "Hinfahrt",
+    "return_journey": "Rückfahrt"
   },
   "validation": {
     "email": "Das E-Mail-Feld muss eine gültige E-Mail-Adresse enthalten.",
@@ -44,8 +47,48 @@
     "save": "Speichern"
   },
   "title": {
-    "parking": "Parkplatz",
-    "program": "Infos",
+    "parking": "Parken",
+    "program": "Informationen",
     "shuttle_schedule": "Shuttle-Fahrplan"
+  },
+  "fields": {
+    "password": {
+      "label": "Passwort",
+      "hint": "Mindestens 8 Zeichen"
+    }
+  },
+  "not_found": {
+    "headline": "Hoppla, 404",
+    "title": "Seite nicht gefunden",
+    "text": "Die gesuchte Seite existiert nicht"
+  },
+  "home": {
+    "links": {
+      "program": {
+        "title": "Programm",
+        "description": "LineUp, F&B, allgemeine Info`s"
+      },
+      "parking": {
+        "title": "Parking",
+        "description": "Live Verfügbarkeit PP & Standorte"
+      },
+      "shuttle_schedule": {
+        "title": "Shuttle-Fahrplan",
+        "description": "Timetable und Stop`s"
+      }
+    }
+  },
+  "views": {
+    "shuttle_schedule": {
+      "info_01": "Zwischen 19.00 - 21.30 Uhr verkehrt KEIN Shuttlebus",
+      "info_02": "bitte auf ÖV ({link} - Haltestelle Sonnrainweg) ausweichen!",
+      "alert_01": "VBSG-Bus ist mit EXTRAFAHRT beschriftet",
+      "outward_journey": {
+        "info": "13:30-19:00 Uhr (im 30min Takt)"
+      },
+      "return_journey": {
+        "info": "21:30-01:30 Uhr (im 30min Takt)"
+      }
+    }
   }
 }

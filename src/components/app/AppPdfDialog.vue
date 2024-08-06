@@ -51,8 +51,7 @@ const props = defineProps({
 });
 
 const scale = ref(0.25);
-const { pdf, info } = usePDF(props.pdfUrl);
-console.log(`Document info: ${info}`);
+const { pdf } = usePDF(props.pdfUrl);
 
 const pdfLoaded = ref(false);
 </script>

@@ -15,25 +15,28 @@
           rounded="lg"
           density="compact"
         >
-          <div>Zwischen 19.00 - 21.30 Uhr verkehrt KEIN Shuttlebus</div>
           <div>
-            bitte auf ÖV (<a class="link-external" href="https://www.sbb.ch/">
-              SBB
-            </a>
-            - Haltestelle Sonnrainweg) ausweichen!
+            {{ $t('views.shuttle_schedule.info_01') }}
           </div>
+          <i18n-t keypath="views.shuttle_schedule.info_02" tag="div">
+            <template #link>
+              <a class="link-external" href="https://www.sbb.ch/"> SBB </a>
+            </template>
+          </i18n-t>
         </v-alert>
         <v-alert class="my-6" border="start" rounded="lg" density="compact">
           <v-icon>mdi-information-variant-circle-outline</v-icon>
-          VBSG-Bus ist mit EXTRAFAHRT beschriftet
+          {{ $t('views.shuttle_schedule.alert_01') }}
         </v-alert>
         <v-card class="my-6">
           <template #title>
             <v-icon color="primary" size="x-small">mdi-bus-clock</v-icon>
-            Hinfahrt
+            {{ $t('labels.outward_journey') }}
           </template>
           <template #subtitle>
-            <div class="text-wrap">13:30-19:00 Uhr (im 30min Takt)</div>
+            <div class="text-wrap">
+              {{ $t('views.shuttle_schedule.outward_journey.info') }}
+            </div>
           </template>
           <v-card-item>
             <v-timeline
@@ -64,10 +67,12 @@
         <v-card class="my-6">
           <template #title>
             <v-icon color="primary" size="x-small">mdi-bus-clock</v-icon>
-            Rückfahrt
+            {{ $t('labels.return_journey') }}
           </template>
           <template #subtitle>
-            <div class="text-wrap">21:30-01:30 Uhr (im 30min Takt)</div>
+            <div class="text-wrap">
+              {{ $t('views.shuttle_schedule.return_journey.info') }}
+            </div>
           </template>
 
           <v-card-item>

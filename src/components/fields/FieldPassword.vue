@@ -7,8 +7,8 @@
     ]"
     :type="show ? 'text' : 'password'"
     name="field-password"
-    label="Visible"
-    hint="At least 8 characters"
+    :label="$t('fields.password.label')"
+    :hint="$t('fields.password.hint')"
     v-bind="$attrs"
     @click:append-inner="show = !show"
   ></v-text-field>

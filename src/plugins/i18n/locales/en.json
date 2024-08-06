@@ -3,22 +3,22 @@
     "KIDS": "Kids",
     "ADULTS": "Adults",
     "FOOD": "Food",
-    "BEVARAGE": "Beverage"
+    "BEVERAGE": "Beverage"
   },
   "errors": {
-    "error_occurred": "An error occurred",
+    "error_occurred": "An error has occurred",
     "validation": {
       "invalid": "Please check your input"
     }
   },
   "labels": {
-    "parking_lot": "Parking Lot",
+    "parking_lot": "Car Park",
     "parking_lot_status": {
       "full": "Full",
       "almost_full": "Almost Full",
       "free": "Free"
     },
-    "programm": "Program",
+    "programm": "Programme",
     "logout": "Logout",
     "login": "Login",
     "n_of_parking_spaces": "Number of Parking Spaces",
@@ -31,8 +31,11 @@
     "time_end": "End Time",
     "icon": "Icon",
     "note": "Note",
-    "program_timeline": "Program Timeline",
-    "category": "Category"
+    "program_timeline": "Programme Timeline",
+    "category": "Category",
+    "add": "Add",
+    "outward_journey": "Outbound Journey",
+    "return_journey": "Return Journey"
   },
   "validation": {
     "email": "The email field must contain a valid email address.",
@@ -45,7 +48,47 @@
   },
   "title": {
     "parking": "Parking",
-    "program": "Info",
+    "program": "Information",
     "shuttle_schedule": "Shuttle Schedule"
+  },
+  "fields": {
+    "password": {
+      "label": "Password",
+      "hint": "At least 8 characters"
+    }
+  },
+  "not_found": {
+    "headline": "Whoops, 404",
+    "title": "Page not found",
+    "text": "The page you were looking for does not exist"
+  },
+  "home": {
+    "links": {
+      "program": {
+        "title": "Programme",
+        "description": "LineUp, F&B, general info"
+      },
+      "parking": {
+        "title": "Parking",
+        "description": "Live availability of parking spaces & locations"
+      },
+      "shuttle_schedule": {
+        "title": "Shuttle Schedule",
+        "description": "Timetable and stops"
+      }
+    }
+  },
+  "views": {
+    "shuttle_schedule": {
+      "info_01": "Between 19:00 - 21:30 there is NO shuttle bus",
+      "info_02": "please use public transport ({link} - Sonnrainweg stop)!",
+      "alert_01": "VBSG bus is labelled with EXTRA TRIP",
+      "outward_journey": {
+        "info": "13:30-19:00 (every 30 minutes)"
+      },
+      "return_journey": {
+        "info": "21:30-01:30 (every 30 minutes)"
+      }
+    }
   }
 }

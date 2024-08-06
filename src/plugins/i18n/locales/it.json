@@ -3,12 +3,12 @@
     "KIDS": "Bambini",
     "ADULTS": "Adulti",
     "FOOD": "Cibo",
-    "BEVARAGE": "Bevande"
+    "BEVERAGE": "Bevanda"
   },
   "errors": {
     "error_occurred": "Si è verificato un errore",
     "validation": {
-      "invalid": "Si prega di controllare l'input"
+      "invalid": "Si prega di controllare il proprio input"
     }
   },
   "labels": {
@@ -20,32 +20,75 @@
     },
     "programm": "Programma",
     "logout": "Disconnettersi",
-    "login": "Accedi",
+    "login": "Accedere",
     "n_of_parking_spaces": "Numero di posti auto",
     "name": "Nome",
     "location": "Nome della posizione",
     "location_url": "URL della posizione",
-    "slots_total": "Posti totali",
+    "slots_total": "Posti massimi",
     "slots_filled": "Posti occupati",
     "time_start": "Ora di inizio",
     "time_end": "Ora di fine",
     "icon": "Icona",
     "note": "Nota",
     "program_timeline": "Cronologia del programma",
-    "category": "Categoria"
+    "category": "Categoria",
+    "add": "Aggiungi",
+    "outward_journey": "Andata",
+    "return_journey": "Ritorno"
   },
   "validation": {
     "email": "Il campo email deve contenere un indirizzo email valido.",
     "max": "Il campo non deve contenere più di 1 carattere | Il campo non deve contenere più di {n} caratteri",
     "min": "Il campo deve contenere più di 1 carattere | Il campo deve contenere più di {n} caratteri",
-    "required": "Campo richiesto"
+    "required": "Campo obbligatorio"
   },
   "buttons": {
     "save": "Salva"
   },
   "title": {
     "parking": "Parcheggio",
-    "program": "Info",
+    "program": "Informazioni",
     "shuttle_schedule": "Orario della navetta"
+  },
+  "fields": {
+    "password": {
+      "label": "Password",
+      "hint": "Almeno 8 caratteri"
+    }
+  },
+  "not_found": {
+    "headline": "Ops, 404",
+    "title": "Pagina non trovata",
+    "text": "La pagina che stavi cercando non esiste"
+  },
+  "home": {
+    "links": {
+      "program": {
+        "title": "Programma",
+        "description": "LineUp, F&B, informazioni generali"
+      },
+      "parking": {
+        "title": "Parcheggio",
+        "description": "Disponibilità in diretta dei parcheggi e posizioni"
+      },
+      "shuttle_schedule": {
+        "title": "Orario della navetta",
+        "description": "Orari e fermate"
+      }
+    }
+  },
+  "views": {
+    "shuttle_schedule": {
+      "info_01": "Tra le 19:00 e le 21:30 non c'è navetta",
+      "info_02": "si prega di utilizzare i mezzi pubblici ({link} - fermata Sonnrainweg)!",
+      "alert_01": "Il bus VBSG è etichettato EXTRA CORSA",
+      "outward_journey": {
+        "info": "13:30-19:00 (ogni 30 minuti)"
+      },
+      "return_journey": {
+        "info": "21:30-01:30 (ogni 30 minuti)"
+      }
+    }
   }
 }

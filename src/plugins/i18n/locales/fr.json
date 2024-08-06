@@ -3,7 +3,7 @@
     "KIDS": "Enfants",
     "ADULTS": "Adultes",
     "FOOD": "Nourriture",
-    "BEVARAGE": "Boisson"
+    "BEVERAGE": "Boisson"
   },
   "errors": {
     "error_occurred": "Une erreur s'est produite",
@@ -23,16 +23,19 @@
     "login": "Connexion",
     "n_of_parking_spaces": "Nombre de places de parking",
     "name": "Nom",
-    "location": "Nom de l'emplacement",
-    "location_url": "URL de l'emplacement",
-    "slots_total": "Places totales",
+    "location": "Nom du lieu",
+    "location_url": "URL du lieu",
+    "slots_total": "Nb max. de places",
     "slots_filled": "Places occupées",
     "time_start": "Heure de début",
     "time_end": "Heure de fin",
     "icon": "Icône",
     "note": "Note",
     "program_timeline": "Chronologie du programme",
-    "category": "Catégorie"
+    "category": "Catégorie",
+    "add": "Ajouter",
+    "outward_journey": "Aller",
+    "return_journey": "Retour"
   },
   "validation": {
     "email": "Le champ email doit contenir une adresse email valide.",
@@ -45,7 +48,47 @@
   },
   "title": {
     "parking": "Parking",
-    "program": "Infos",
-    "shuttle_schedule": "Horaire de la navette"
+    "program": "Informations",
+    "shuttle_schedule": "Horaires de la navette"
+  },
+  "fields": {
+    "password": {
+      "label": "Mot de passe",
+      "hint": "Au moins 8 caractères"
+    }
+  },
+  "not_found": {
+    "headline": "Oups, 404",
+    "title": "Page non trouvée",
+    "text": "La page que vous cherchez n'existe pas"
+  },
+  "home": {
+    "links": {
+      "program": {
+        "title": "Programme",
+        "description": "LineUp, F&B, infos générales"
+      },
+      "parking": {
+        "title": "Parking",
+        "description": "Disponibilité des places de parking en direct & emplacements"
+      },
+      "shuttle_schedule": {
+        "title": "Horaires de la navette",
+        "description": "Horaires et arrêts"
+      }
+    }
+  },
+  "views": {
+    "shuttle_schedule": {
+      "info_01": "Entre 19:00 et 21:30, il n'y a PAS de navette",
+      "info_02": "veuillez utiliser les transports publics ({link} - arrêt Sonnrainweg) !",
+      "alert_01": "Le bus VBSG est marqué EXTRA COURSE",
+      "outward_journey": {
+        "info": "13:30-19:00 (toutes les 30 minutes)"
+      },
+      "return_journey": {
+        "info": "21:30-01:30 (toutes les 30 minutes)"
+      }
+    }
   }
 }

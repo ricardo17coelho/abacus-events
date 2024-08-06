@@ -36,25 +36,29 @@
 </template>
 
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n';
+
+const { t } = useI18n();
+
 const links = computed(() => [
   {
     id: 'program',
-    title: 'Programm',
-    description: 'LineUp, F&B, allgemeine Info`s',
+    title: t('home.links.program.title'),
+    description: t('home.links.program.description'),
     icon: 'mdi-clipboard-text',
     to: { name: 'program' }
   },
   {
     id: 'parking',
-    title: 'Parking',
-    description: 'Live Verfügbarkeit PP & Standorte',
+    title: t('home.links.parking.title'),
+    description: t('home.links.parking.description'),
     icon: 'mdi-car',
     to: { name: 'parking' }
   },
   {
     id: 'shuttle-schedule',
-    title: 'Shuttle-Fahrplan',
-    description: 'Timetable und Stop`s',
+    title: t('home.links.shuttle_schedule.title'),
+    description: t('home.links.shuttle_schedule.description'),
     icon: 'mdi-bus',
     to: { name: 'shuttle-schedule' }
   }

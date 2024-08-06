@@ -28,6 +28,10 @@
           ></v-chip>
         </v-chip-group>
       </div>
+      <ContainerCentered v-if="images.length > 0" class="my-10">
+        <AppGallery :images="images"></AppGallery>
+      </ContainerCentered>
+
       <v-row v-if="isCurrentUserAdmin">
         <v-col align="end">
           <ProgramTimelineDialog
@@ -68,9 +72,6 @@
           </v-btn>
         </template>
       </AppTimeline>
-      <ContainerCentered>
-        <AppGallery :images="images"></AppGallery>
-      </ContainerCentered>
     </template>
   </v-container>
 </template>

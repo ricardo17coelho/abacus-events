@@ -89,6 +89,9 @@
       "return_journey": {
         "info": "21:30-01:30 (toutes les 30 minutes)"
       }
+    },
+    "parking": {
+      "alert_01": "Si tu as un PP fixe dans AbaHome II, merci de l'utiliser. Merci 😇"
     }
   }
 }

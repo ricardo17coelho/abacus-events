@@ -2,7 +2,7 @@ export const PROGRAM_TIMELINE_CATEGORY = {
   KIDS: 'KIDS',
   ADULTS: 'ADULTS',
   FOOD: 'FOOD',
-  BEVARAGE: 'BEVARAGE'
+  BEVERAGE: 'BEVERAGE'
 } as const;
 
 export type ProgramTimelineCategory =

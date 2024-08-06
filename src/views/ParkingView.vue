@@ -5,6 +5,10 @@
         <AppTitle :title="$t('title.parking')" />
       </v-col>
     </v-row>
+    <v-alert class="my-6" border="start" rounded="lg" density="compact">
+      <v-icon>mdi-information-variant-circle-outline</v-icon>
+      {{ $t('views.parking.alert_01') }}
+    </v-alert>
     <v-row>
       <v-col
         v-for="parkingLot in parkingLots"

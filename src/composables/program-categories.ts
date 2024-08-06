@@ -15,7 +15,7 @@ export default function useProgramCategories() {
         return 'mdi-account-multiple';
       case 'FOOD':
         return 'mdi-food';
-      case 'BEVARAGE':
+      case 'BEVERAGE':
         return 'mdi-beer';
       default:
         return '';

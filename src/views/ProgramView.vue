@@ -180,7 +180,7 @@ const images = computed(() => {
   } else if (currentCategoryFilter.value === PROGRAM_TIMELINE_CATEGORY.FOOD) {
     return [];
   } else if (
-    currentCategoryFilter.value === PROGRAM_TIMELINE_CATEGORY.BEVARAGE
+    currentCategoryFilter.value === PROGRAM_TIMELINE_CATEGORY.BEVERAGE
   ) {
     return ['/images/drinks.png', '/images/cocktails.png'];
   }

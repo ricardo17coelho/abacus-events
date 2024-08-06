@@ -69,28 +69,7 @@
         </template>
       </AppTimeline>
       <ContainerCentered>
-        <ProgramPlan :images="images">
-          <template #activator="activatorProps">
-            <v-fab
-              v-bind="activatorProps"
-              class="me-4"
-              location="bottom end"
-              app
-              icon
-              color="primary"
-            >
-              Plan
-            </v-fab>
-            <v-img
-              v-for="image in images"
-              :key="image"
-              v-bind="activatorProps"
-              class="mx-4"
-              :src="image"
-              max-width="200"
-            ></v-img>
-          </template>
-        </ProgramPlan>
+        <AppGallery :images="images"></AppGallery>
       </ContainerCentered>
     </template>
   </v-container>
@@ -98,9 +77,7 @@
 
 <script setup lang="ts">
 import AppTitle from '@/components/app/AppTitle.vue';
-
 import AppTimeline from '@/components/app/AppTimeline.vue';
-import ProgramPlan from '@/components/program/ProgramPlan.vue';
 import { useAuthStore } from '@/stores/auth';
 import ProgramTimelineDialog from '@/components/program/program-timetable/ProgramTimelineDialog.vue';
 import { toast } from 'vue-sonner';
@@ -114,6 +91,7 @@ import { useI18n } from 'vue-i18n';
 import AppLoader from '@/components/app/AppLoader.vue';
 import useProgramCategories from '@/composables/program-categories';
 import ContainerCentered from '@/components/containers/ContainerCentered.vue';
+import AppGallery from '@/components/app/AppGallery.vue';
 
 const { isCurrentUserAdmin } = useAuthStore();
 

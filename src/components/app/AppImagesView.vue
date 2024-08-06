@@ -18,6 +18,7 @@ const props = defineProps({
     default: () => []
   }
 });
+
 const {
   // methods
   show,

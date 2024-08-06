@@ -46,7 +46,8 @@
     "required": "Champ requis"
   },
   "buttons": {
-    "save": "Enregistrer"
+    "save": "Enregistrer",
+    "add": "Ajouter"
   },
   "title": {
     "parking": "Parking",
@@ -57,6 +58,10 @@
     "password": {
       "label": "Mot de passe",
       "hint": "Au moins 8 caractères"
+    },
+    "multi_language_text": {
+      "field_value_label": "Valeur",
+      "field_key_label": "Langue"
     }
   },
   "not_found": {

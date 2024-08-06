@@ -1,3 +1,5 @@
+import type { TitleI18n } from '@/types/TitleI18n';
+
 export const PROGRAM_TIMELINE_CATEGORY = {
   KIDS: 'KIDS',
   ADULTS: 'ADULTS',
@@ -11,11 +13,11 @@ export type ProgramTimelineCategory =
 export type ProgramTimeline = {
   id: string;
   created_at: string;
-  title: string;
+  title: TitleI18n;
   locations?: string[];
   time_start?: string;
   time_end?: string;
-  note?: string;
+  note?: TitleI18n;
   icon?: string;
   category: ProgramTimelineCategory;
 };

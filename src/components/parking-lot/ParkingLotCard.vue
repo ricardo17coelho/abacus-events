@@ -1,6 +1,6 @@
 <template>
   <v-card v-if="parkingLot" width="100%" border flat>
-    <v-card-item :title="parkingLot.name">
+    <v-card-item :title="showDefaultTranslationOrEmpty(parkingLot.name)">
       <template #subtitle>
         <v-chip
           prepend-icon="mdi-home-map-marker"
@@ -47,6 +47,7 @@
 <script setup lang="ts">
 import useParkingLot from '@/composables/parking-lot';
 import { type ParkingLot } from '@/api/types/ParkingLot';
+import { showDefaultTranslationOrEmpty } from '@/utils/showDefaultTranslationOrEmpty';
 
 defineProps({
   parkingLot: {

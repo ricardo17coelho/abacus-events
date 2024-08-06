@@ -39,10 +39,12 @@ const model = defineModel({ type: Boolean, default: false });
 
 const emit = defineEmits(['success']);
 
-const { t } = useI18n();
+const { t, locale } = useI18n();
 
 const DEFAULT_FORM = {
-  name: '',
+  name: {
+    [locale.value]: ''
+  },
   location: '',
   location_url: '',
   total_slots: '',

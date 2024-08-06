@@ -2,16 +2,31 @@
   <v-form ref="formRef">
     <v-row dense>
       <v-col>
-        <v-text-field
-          v-model="model.title"
-          :label="$t('labels.name')"
-          :rules="[rulesValidation.ruleRequired]"
-        >
-        </v-text-field>
+        <DialogTitleI18n :i18n="model.title" @save="model.title = $event">
+          <template #activator="{ props: activatorProps }">
+            <v-text-field
+              :model-value="modelValueTitleI18n"
+              :label="$t('labels.name')"
+              :rules="[rulesValidation.ruleRequired]"
+              readonly
+              v-bind="activatorProps"
+            >
+            </v-text-field>
+          </template>
+        </DialogTitleI18n>
       </v-col>
       <v-col>
-        <v-text-field v-model="model.note" :label="$t('labels.note')">
-        </v-text-field>
+        <DialogTitleI18n :i18n="model.note" @save="model.note = $event">
+          <template #activator="{ props: activatorProps }">
+            <v-text-field
+              :model-value="modelValueNoteI18n"
+              :label="$t('labels.note')"
+              readonly
+              v-bind="activatorProps"
+            >
+            </v-text-field>
+          </template>
+        </DialogTitleI18n>
       </v-col>
     </v-row>
     <v-row dense>
@@ -94,7 +109,9 @@
 <script lang="ts" setup>
 // utils
 import { PROGRAM_TIMELINE_CATEGORY } from '@/api/types/ProgramTimeline';
+import { showDefaultTranslationOrEmpty } from '@/utils/showDefaultTranslationOrEmpty';
 import rulesValidation from '@/utils/validations';
+import DialogTitleI18n from '../../dialogs/DialogTitleI18n.vue';
 
 const model = defineModel({ type: Object, default: () => ({}) });
 
@@ -107,6 +124,14 @@ const categories = computed(() =>
       title: i
     };
   })
+);
+
+const modelValueTitleI18n = computed(() =>
+  showDefaultTranslationOrEmpty(model.value?.title)
+);
+
+const modelValueNoteI18n = computed(() =>
+  showDefaultTranslationOrEmpty(model.value?.note)
 );
 
 defineExpose({ formRef });

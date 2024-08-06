@@ -2,12 +2,18 @@
   <v-form ref="formRef">
     <v-row dense>
       <v-col>
-        <v-text-field
-          v-model="model.name"
-          :label="$t('labels.name')"
-          :rules="[rulesValidation.ruleRequired]"
-        >
-        </v-text-field>
+        <DialogTitleI18n :i18n="model.name" @save="model.name = $event">
+          <template #activator="{ props: activatorProps }">
+            <v-text-field
+              :model-value="modelValueNameI18n"
+              :label="$t('labels.name')"
+              :rules="[rulesValidation.ruleRequired]"
+              readonly
+              v-bind="activatorProps"
+            >
+            </v-text-field>
+          </template>
+        </DialogTitleI18n>
       </v-col>
     </v-row>
     <v-row dense>
@@ -54,11 +60,17 @@
 
 <script lang="ts" setup>
 // utils
+import { showDefaultTranslationOrEmpty } from '@/utils/showDefaultTranslationOrEmpty';
 import rulesValidation from '@/utils/validations';
+import DialogTitleI18n from '../dialogs/DialogTitleI18n.vue';
 
 const model = defineModel({ type: Object, default: () => ({}) });
 
 const formRef = ref();
+
+const modelValueNameI18n = computed(() =>
+  showDefaultTranslationOrEmpty(model.value?.name)
+);
 
 defineExpose({ formRef });
 </script>

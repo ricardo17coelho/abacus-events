@@ -8,6 +8,7 @@
       <slot name="activator" v-bind="activatorProps"></slot>
     </template>
     <template #content>
+      {{ form }}
       <ProgramTimelineForm v-model="form" ref="formRef" />
     </template>
     <template #actions>
@@ -52,10 +53,15 @@ const model = defineModel({ type: Boolean, default: false });
 
 const emit = defineEmits(['success']);
 
-const { t } = useI18n();
+const { t, locale } = useI18n();
 
 const DEFAULT_FORM = {
-  title: '',
+  title: {
+    [locale.value]: ''
+  },
+  note: {
+    [locale.value]: ''
+  },
   category: '',
   locations: [''],
   time_start: '',

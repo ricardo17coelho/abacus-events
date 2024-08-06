@@ -46,7 +46,8 @@
     "required": "Field required"
   },
   "buttons": {
-    "save": "Save"
+    "save": "Save",
+    "add": "Add"
   },
   "title": {
     "parking": "Parking",
@@ -57,6 +58,10 @@
     "password": {
       "label": "Password",
       "hint": "At least 8 characters"
+    },
+    "multi_language_text": {
+      "field_value_label": "Value",
+      "field_key_label": "Language"
     }
   },
   "not_found": {

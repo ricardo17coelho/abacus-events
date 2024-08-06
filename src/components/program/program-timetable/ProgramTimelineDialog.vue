@@ -8,7 +8,6 @@
       <slot name="activator" v-bind="activatorProps"></slot>
     </template>
     <template #content>
-      {{ form }}
       <ProgramTimelineForm v-model="form" ref="formRef" />
     </template>
     <template #actions>

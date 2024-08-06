@@ -2,7 +2,7 @@
   <v-timeline align="start" side="end">
     <v-timeline-item
       v-for="item in items"
-      :key="item.title"
+      :key="showDefaultTranslationOrEmpty(item.title)"
       dot-color="primary"
       :icon="item.icon"
       :size="$vuetify.display.mdAndUp ? 'x-large' : undefined"
@@ -11,19 +11,19 @@
         <span class="me-4">{{ `${item.time_start}-${item.time_end}` }}</span>
         <div>
           <div>
-            <strong>{{ item.title }}</strong>
+            <strong>{{ showDefaultTranslationOrEmpty(item.title) }}</strong>
           </div>
           <div v-if="item.note" class="text-caption text-primary text-break">
             <a
-              v-if="isValidHttpUrl(item.note)"
+              v-if="isValidHttpUrl(showDefaultTranslationOrEmpty(item.note))"
               class="link-external"
-              :href="item.note"
+              :href="showDefaultTranslationOrEmpty(item.note)"
             >
-              {{ item.note }}
+              {{ showDefaultTranslationOrEmpty(item.note) }}
             </a>
             <div v-else>
               <v-icon>mdi-information-variant</v-icon>
-              {{ item.note }}
+              {{ showDefaultTranslationOrEmpty(item.note) }}
             </div>
           </div>
           <div>
@@ -49,6 +49,7 @@
 <script setup lang="ts">
 import type { ProgramTimeline } from '@/api/types/ProgramTimeline';
 import { isValidHttpUrl } from '@/utils/isValidUrl';
+import { showDefaultTranslationOrEmpty } from '@/utils/showDefaultTranslationOrEmpty';
 import type { PropType } from 'vue';
 
 defineProps({

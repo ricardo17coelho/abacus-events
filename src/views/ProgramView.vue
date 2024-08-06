@@ -55,7 +55,7 @@
                 variant="text"
                 prepend-icon="mdi-plus"
               >
-                Add
+                {{ $t('buttons.add') }}
               </v-btn>
             </template>
           </ProgramTimelineDialog>

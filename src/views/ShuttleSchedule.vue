@@ -2,7 +2,7 @@
   <v-container class="align-center">
     <v-row>
       <v-col align="center">
-        <AppTitle :title="$t('title.shuttle_schedule')" />
+        <AppTitle :title="$t('title.shuttle_schedule')" show-go-home-button />
       </v-col>
     </v-row>
     <ContainerCentered class="px-0">

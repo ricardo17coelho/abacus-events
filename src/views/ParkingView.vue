@@ -2,7 +2,7 @@
   <v-container>
     <v-row>
       <v-col align="center">
-        <AppTitle :title="$t('title.parking')" />
+        <AppTitle :title="$t('title.parking')" show-go-home-button />
       </v-col>
     </v-row>
     <v-alert class="my-6" border="start" rounded="lg" density="compact">

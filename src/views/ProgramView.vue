@@ -2,7 +2,7 @@
   <v-container class="align-center pa-0">
     <v-row>
       <v-col align="center">
-        <AppTitle :title="$t('title.program')" />
+        <AppTitle :title="$t('title.program')" show-go-home-button />
       </v-col>
     </v-row>
     <AppLoader v-if="isLoading" />

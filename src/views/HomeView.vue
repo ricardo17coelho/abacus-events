@@ -1,22 +1,16 @@
 <template>
   <v-container class="align-center">
-    <v-img src="/logos/abacus-summer-party-2024-banner.png"> </v-img>
+    <v-img src="/logos/abacus-summer-party-2024-banner.png" max-height="600">
+    </v-img>
   </v-container>
   <v-container class="align-center">
     <v-row>
-      <v-col v-for="link in links" :key="link.id" cols="12" sm="6">
+      <v-col v-for="link in links" :key="link.id" cols="12" sm="6" lg="4">
         <v-card variant="tonal" color="primary" :to="link.to" height="100%">
           <template #title>
             <v-card-title class="text-h5">
               {{ link.title }}
-              <v-icon
-                v-if="link.id === 'parking'"
-                class="flash mb-2"
-                size="20"
-                color="red"
-              >
-                mdi-broadcast
-              </v-icon>
+              <AppLiveLabel v-if="link.id === 'parking'" />
             </v-card-title>
           </template>
           <template #subtitle>
@@ -37,6 +31,7 @@
 
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n';
+import AppLiveLabel from '../components/app/AppLiveLabel.vue';
 
 const { t } = useI18n();
 
@@ -64,23 +59,3 @@ const links = computed(() => [
   }
 ]);
 </script>
-
-<style scoped lang="scss">
-@keyframes flash {
-  0%,
-  50%,
-  100% {
-    opacity: 1;
-  }
-  25%,
-  75% {
-    opacity: 0;
-  }
-}
-
-.flash {
-  display: inline-block;
-  animation: flash 4s infinite;
-  color: rgb(var(--v-theme-error));
-}
-</style>

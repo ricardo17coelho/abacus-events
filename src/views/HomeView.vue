@@ -1,12 +1,26 @@
 <template>
   <v-container class="align-center">
-    <v-img src="/logos/abacus-summer-party-2024-banner.png" max-height="600">
-    </v-img>
+    <AppImagesView :images="['/logos/abacus-summer-party-2024-banner.png']">
+      <template #activator="activatorProps">
+        <v-img
+          v-bind="activatorProps"
+          src="/logos/abacus-summer-party-2024-banner.png"
+          max-height="600"
+        >
+        </v-img>
+      </template>
+    </AppImagesView>
   </v-container>
   <v-container class="align-center">
     <v-row>
-      <v-col v-for="link in links" :key="link.id" cols="12" sm="6" lg="4">
-        <v-card variant="tonal" color="primary" :to="link.to" height="100%">
+      <v-col v-for="link in links" :key="link.id" cols="12" sm="6" lg="3">
+        <v-card
+          variant="tonal"
+          color="primary"
+          :to="link.to"
+          height="100%"
+          density="compact"
+        >
           <template #title>
             <v-card-title class="text-h5">
               {{ link.title }}
@@ -19,19 +33,49 @@
             </v-card-subtitle>
           </template>
           <template #append>
-            <v-avatar rounded="0" size="50">
-              <v-icon size="50" color="primary">{{ link.icon }}</v-icon>
+            <v-avatar rounded="0" size="40">
+              <v-icon size="40" color="primary">{{ link.icon }}</v-icon>
+            </v-avatar>
+          </template>
+        </v-card>
+      </v-col>
+      <v-col>
+        <v-card
+          variant="tonal"
+          color="primary"
+          height="100%"
+          density="compact"
+          @click="showGallery = true"
+        >
+          <template #title>
+            <v-card-title class="text-h5"> PLAN </v-card-title>
+          </template>
+          <template #subtitle>
+            <v-card-subtitle class="text-wrap"> #TODO </v-card-subtitle>
+          </template>
+          <template #append>
+            <v-avatar rounded="0" size="40">
+              <v-icon size="40" color="primary">mdi-map</v-icon>
             </v-avatar>
           </template>
         </v-card>
       </v-col>
     </v-row>
+    <AppImagesView
+      v-model="showGallery"
+      :images="[
+        '/images/plan.png',
+        '/images/drinks.png',
+        '/images/cocktails.png'
+      ]"
+    />
   </v-container>
 </template>
 
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n';
 import AppLiveLabel from '../components/app/AppLiveLabel.vue';
+import AppImagesView from '@/components/app/AppImagesView.vue';
 
 const { t } = useI18n();
 
@@ -58,4 +102,6 @@ const links = computed(() => [
     to: { name: 'shuttle-schedule' }
   }
 ]);
+
+const showGallery = ref(false);
 </script>

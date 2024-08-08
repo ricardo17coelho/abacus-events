@@ -5,7 +5,7 @@
     :visible="visibleRef"
     :imgs="imgsRef"
     :index="indexRef"
-    @hide="onHide"
+    @hide="onEasyLightBoxHide"
   />
 </template>
 
@@ -18,6 +18,8 @@ const props = defineProps({
     default: () => []
   }
 });
+
+const model = defineModel({ type: Boolean, default: false });
 
 const {
   // methods
@@ -33,4 +35,18 @@ const {
   // initial index
   initIndex: 0
 });
+
+function onEasyLightBoxHide() {
+  onHide();
+  model.value = false;
+}
+
+watch(
+  () => model.value,
+  (newValue) => {
+    if (newValue) {
+      show();
+    }
+  }
+);
 </script>

@@ -14,13 +14,7 @@
   <v-container class="align-center">
     <v-row>
       <v-col v-for="link in links" :key="link.id" cols="12" sm="6" lg="3">
-        <v-card
-          variant="tonal"
-          color="primary"
-          :to="link.to"
-          height="100%"
-          density="compact"
-        >
+        <v-card variant="tonal" color="primary" :to="link.to" height="100%">
           <template #title>
             <v-card-title class="text-h5">
               {{ link.title }}
@@ -44,7 +38,6 @@
           variant="tonal"
           color="primary"
           height="100%"
-          density="compact"
           @click="showGallery = true"
         >
           <template #title>

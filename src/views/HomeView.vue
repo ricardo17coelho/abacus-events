@@ -5,7 +5,8 @@
         <v-img
           v-bind="activatorProps"
           src="/logos/abacus-summer-party-2024-banner.png"
-          max-height="600"
+          max-height="400"
+          cover
         >
         </v-img>
       </template>
@@ -14,9 +15,15 @@
   <v-container class="align-center">
     <v-row>
       <v-col v-for="link in links" :key="link.id" cols="12" sm="6" lg="3">
-        <v-card variant="tonal" color="primary" :to="link.to" height="100%">
+        <v-card
+          variant="tonal"
+          color="primary"
+          :to="link.to"
+          height="100%"
+          :density="$vuetify.display.xs ? 'compact' : 'default'"
+        >
           <template #title>
-            <v-card-title class="text-h5">
+            <v-card-title class="text-h6 text-sm-h5">
               {{ link.title }}
               <AppLiveLabel v-if="link.id === 'parking'" />
             </v-card-title>
@@ -38,13 +45,11 @@
           variant="tonal"
           color="primary"
           height="100%"
+          :density="$vuetify.display.xs ? 'compact' : 'default'"
           @click="showGallery = true"
         >
           <template #title>
-            <v-card-title class="text-h5"> PLAN </v-card-title>
-          </template>
-          <template #subtitle>
-            <v-card-subtitle class="text-wrap"> #TODO </v-card-subtitle>
+            <v-card-title class="text-h6 text-sm-h5"> PLAN </v-card-title>
           </template>
           <template #append>
             <v-avatar rounded="0" size="40">

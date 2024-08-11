@@ -7,53 +7,32 @@
       :min-width="$vuetify.display.width > 1200 ? 1200 : '100%'"
     >
       <TheAppBar />
-      <v-container class="py-0 mx-auto">
-        <v-row align="center" justify="center" class="fill-height">
-          <v-main>
-            <v-container
-              fluid
-              class="overflow-auto"
-              :class="{
-                'main-container-with-footer': isRouteRoot,
-                'main-container': !isRouteRoot
-              }"
-            >
-              <RouterView />
-            </v-container>
-          </v-main>
-        </v-row>
-      </v-container>
+
+      <v-main class="overflow-auto">
+        <v-container
+          fluid
+          :class="{
+            'main-container-with-footer': isRouteRoot,
+            'main-container': !isRouteRoot
+          }"
+          class="overflow-auto"
+        >
+          <RouterView />
+        </v-container>
+
+        <TheFooter
+          v-if="isRouteRoot"
+          :app="$vuetify.display.smAndUp"
+          absolute
+        />
+      </v-main>
     </v-layout>
-    <v-footer
-      v-if="isRouteRoot"
-      absolute
-      color="secondary-lighten-1"
-      class="d-flex flex-column"
-    >
-      <v-row justify="center" no-gutters>
-        <v-col class="text-center text-body-2" cols="12">
-          <v-btn
-            color="primary"
-            href="tel:+41 76 414 90 56"
-            prepend-icon="mdi-phone"
-            slim
-            variant="text"
-          >
-            Sara Corradini
-          </v-btn>
-        </v-col>
-        <v-col class="text-center text-caption" cols="12">
-          {{ new Date().getFullYear() }} ©
-          <strong>Abacus Research AG</strong>
-          | C2
-        </v-col>
-      </v-row>
-    </v-footer>
   </v-app>
 </template>
 
 <script lang="ts" setup>
 import TheAppBar from '@/components/TheAppBar.vue';
+import TheFooter from '@/components/TheFooter.vue';
 
 const route = useRoute();
 const isRouteRoot = computed(() => route.path === '/');
@@ -68,6 +47,6 @@ const isRouteRoot = computed(() => route.path === '/');
 }
 
 .main-container-with-footer {
-  height: calc(100svh - 64px - 52px);
+  height: calc(100svh - 64px - 72px);
 }
 </style>

@@ -3,7 +3,7 @@
     <TheAppBar />
 
     <v-main class="overflow-auto">
-      <v-container class="main-container overflow-auto app-container">
+      <v-container class="main-container overflow-auto app-container py-0">
         <RouterView />
       </v-container>
     </v-main>

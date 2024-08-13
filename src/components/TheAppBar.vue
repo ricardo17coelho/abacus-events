@@ -12,6 +12,15 @@
           'ga-5': $vuetify.display.smAndUp
         }"
       >
+        <v-btn
+          color="primary"
+          href="tel:+41 76 414 90 56"
+          icon="mdi-phone"
+          slim
+          size="small"
+          variant="text"
+        >
+        </v-btn>
         <MenuLanguage
           v-model="locale"
           :available-locales="availableLocalesFiltered"

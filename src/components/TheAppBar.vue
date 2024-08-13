@@ -1,10 +1,10 @@
 <template>
   <v-app-bar flat class="px-1">
-    <router-link to="/">
-      <v-img src="/logos/abacus.svg" max-width="200" width="150"> </v-img>
-    </router-link>
-    <v-spacer></v-spacer>
-    <template #append>
+    <v-container class="d-flex align-center py-0 app-container">
+      <router-link to="/">
+        <v-img src="/logos/abacus.svg" max-width="200" width="150"> </v-img>
+      </router-link>
+      <v-spacer></v-spacer>
       <div
         class="d-flex"
         :class="{
@@ -35,7 +35,7 @@
         >
         </VBtnPrimary>
       </div>
-    </template>
+    </v-container>
   </v-app-bar>
 </template>
 

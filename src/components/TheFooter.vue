@@ -7,6 +7,7 @@
           href="tel:+41 76 414 90 56"
           prepend-icon="mdi-phone"
           slim
+          size="small"
           variant="text"
         >
           Sara Corradini

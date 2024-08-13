@@ -1,5 +1,5 @@
 <template>
-  <v-timeline align="start" side="end">
+  <v-timeline align="start" side="end" truncate-line="both">
     <v-timeline-item
       v-for="(item, idx) in items"
       :key="`${idx}-title-${showDefaultTranslationOrEmpty(item.title)}`"

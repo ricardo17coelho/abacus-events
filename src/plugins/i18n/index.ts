@@ -22,4 +22,8 @@ const i18n = createI18n({
 export type AppLocales = 'de' | 'en' | 'fr' | 'it';
 export type AppLocalesAvailable = Partial<AppLocales>;
 
+watchEffect(() => {
+  document.documentElement.lang = i18n.global.locale.value;
+});
+
 export default i18n;

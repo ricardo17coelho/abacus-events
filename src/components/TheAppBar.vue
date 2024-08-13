@@ -59,6 +59,23 @@ const { logout } = useAuthUser();
 
 const { locale, availableLocales } = useI18n();
 
+const lsLocale = useLocalStorage('locale', locale.value);
+
+watch(
+  () => lsLocale.value,
+  (newValue) => {
+    locale.value = newValue;
+  },
+  { immediate: true }
+);
+
+watch(
+  () => locale.value,
+  (newValue) => {
+    lsLocale.value = newValue;
+  }
+);
+
 const availableLocalesFiltered = computed(() =>
   availableLocales.filter(
     (availableLocale: string) => availableLocale !== locale.value

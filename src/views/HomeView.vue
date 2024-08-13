@@ -49,7 +49,9 @@
           @click="showGallery = true"
         >
           <template #title>
-            <v-card-title class="text-h6 text-sm-h5"> PLAN </v-card-title>
+            <v-card-title class="text-h6 text-sm-h5">
+              {{ $t('labels.plan') }}
+            </v-card-title>
           </template>
           <template #append>
             <v-avatar rounded="0" size="40">
@@ -59,14 +61,7 @@
         </v-card>
       </v-col>
     </v-row>
-    <AppImagesView
-      v-model="showGallery"
-      :images="[
-        '/images/plan.png',
-        '/images/drinks.png',
-        '/images/cocktails.png'
-      ]"
-    />
+    <AppImagesView v-model="showGallery" :images="['/images/plan.png']" />
   </v-container>
 </template>
 

@@ -25,6 +25,7 @@
     "name": "Name",
     "location": "Standortname",
     "location_url": "Standort-URL",
+    "stop_on_request": "Halt auf Verlangen",
     "slots_total": "Max. Plätze",
     "slots_filled": "Belegte Plätze",
     "time_start": "Startzeit",

@@ -108,6 +108,9 @@
 <script setup lang="ts">
 import AppTitle from '@/components/app/AppTitle.vue';
 import ContainerCentered from '@/components/containers/ContainerCentered.vue';
+import { useI18n } from 'vue-i18n';
+
+const { t } = useI18n();
 
 const itemsOutward = computed(() => [
   {
@@ -134,7 +137,7 @@ const itemsReturn = computed(() => [
     link: 'https://maps.app.goo.gl/cbYMd9uyUQYjAQBSA'
   },
   {
-    text: 'Radisson (Halt auf Verlangen)',
+    text: `Radisson (${t('labels.stop_on_request')})`,
     link: 'https://maps.app.goo.gl/DorgNiRHPizxKwnU7'
   },
   {

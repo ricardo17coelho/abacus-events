@@ -18,25 +18,26 @@
       "almost_full": "Almost Full",
       "free": "Free"
     },
-    "programm": "Programme",
+    "programm": "Program",
     "logout": "Logout",
     "login": "Login",
     "n_of_parking_spaces": "Number of Parking Spaces",
     "name": "Name",
     "location": "Location Name",
     "location_url": "Location URL",
+    "stop_on_request": "Stop on request",
     "slots_total": "Max. Spaces",
     "slots_filled": "Occupied Spaces",
     "time_start": "Start Time",
     "time_end": "End Time",
     "icon": "Icon",
     "note": "Note",
-    "program_timeline": "Programme Timeline",
+    "program_timeline": "Program Timeline",
     "category": "Category",
     "add": "Add",
     "outward_journey": "Outbound Journey",
     "return_journey": "Return Journey",
-    "plan": "site plan",
+    "plan": "Site plan",
     "drinks": "drinks menu"
   },
   "validation": {
@@ -72,7 +73,7 @@
   "home": {
     "links": {
       "program": {
-        "title": "Programme",
+        "title": "Program",
         "description": "LineUp, F&B, general info"
       },
       "parking": {

@@ -25,6 +25,7 @@
     "name": "Nom",
     "location": "Nom du lieu",
     "location_url": "URL du lieu",
+    "stop_on_request": "Arrêt sur demande",
     "slots_total": "Nb max. de places",
     "slots_filled": "Places occupées",
     "time_start": "Heure de début",

@@ -4,6 +4,7 @@
       <template #activator="activatorProps">
         <v-img
           v-bind="activatorProps"
+          class="rounded-lg"
           src="/logos/abacus-summer-party-2024-banner.png"
           max-height="400"
           cover

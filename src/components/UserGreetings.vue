@@ -47,7 +47,7 @@ onMounted(() => {
   timer();
   intervalTimer.value = setInterval(timer, 1000);
   // start confetti random
-  setInterval(randomDirection, 10000);
+  intervalConfetti.value = setInterval(randomDirection, 10000);
 });
 
 onUnmounted(() => {

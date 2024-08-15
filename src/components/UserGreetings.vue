@@ -40,19 +40,15 @@ function timer() {
 }
 
 const intervalTimer = ref<null | ReturnType<typeof setTimeout>>(null);
-const intervalConfetti = ref<null | ReturnType<typeof setTimeout>>(null);
 
 onMounted(() => {
   // start timer
   timer();
   intervalTimer.value = setInterval(timer, 1000);
-  // start confetti random
-  intervalConfetti.value = setInterval(randomDirection, 10000);
 });
 
 onUnmounted(() => {
   clearInterval(intervalTimer.value);
-  clearInterval(intervalConfetti.value);
 });
 
 const greetingMsg = computed(() => {

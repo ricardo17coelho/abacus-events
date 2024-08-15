@@ -4,8 +4,8 @@ import type { ParkingLot } from '@/api/types/ParkingLot';
 export default function useApiParkingLot() {
   const { find, findById, create, update, remove } = useApi();
 
-  function getParkingLots() {
-    return find('parking_lots', [], '*');
+  function getParkingLots(range = [0, 10]) {
+    return find('parking_lots', [], '*', range);
   }
 
   function getParkingLotById(ParkingLotId: string) {

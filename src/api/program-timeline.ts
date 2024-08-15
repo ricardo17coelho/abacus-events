@@ -8,13 +8,29 @@ import type { FindFilter } from './types/QueryTypes';
 export default function useApiProgramTimeline() {
   const { find, findById, create, update, remove } = useApi();
 
-  function getProgramTimelines(select = '*', filters: FindFilter[] = []) {
-    return find('program_timeline', filters, select);
+  function getProgramTimelines(
+    select = '*',
+    filters: FindFilter[] = [],
+    range = [0, 100]
+  ) {
+    return find(
+      'program_timeline',
+      filters,
+      select,
+      range,
+      [['time_start', { ascending: true }]],
+      {
+        count: 'exact'
+      }
+    );
   }
 
-  function getProgramTimelinesByCategory(category: ProgramTimelineCategory) {
+  function getProgramTimelinesByCategory(
+    category: ProgramTimelineCategory,
+    range = [0, 100]
+  ) {
     const filters: FindFilter[] = [['category', 'eq', category]];
-    return getProgramTimelines('*', filters);
+    return getProgramTimelines('*', filters, range);
   }
 
   function getProgramTimelineById(ProgramTimelineId: string) {

@@ -29,3 +29,8 @@ export type FindFilter = [
 ];
 
 export type FindOrder = [column: string, ascending?: boolean];
+
+export type FindSelect = {
+  head?: boolean;
+  count?: 'exact' | 'planned' | 'estimated';
+};

@@ -1,6 +1,6 @@
 import { supabase } from '@/services/supabase';
 import { v4 as uuidv4 } from 'uuid';
-import type { FindFilter, FindOrder } from '@/api/types/QueryTypes';
+import type { FindFilter, FindOrder, FindSelect } from '@/api/types/QueryTypes';
 
 export default function useApi() {
   function findById<T>(
@@ -16,14 +16,15 @@ export default function useApi() {
       .single<T>();
   }
 
-  function find(
+  async function find(
     table: string,
     filters: FindFilter[],
     select = '*',
     range = [0, 10],
-    orders: FindOrder[] = []
+    orders: FindOrder[] = [],
+    count: FindSelect = {}
   ) {
-    const query = supabase().from(table).select(select);
+    const query = supabase().from(table).select(select, count);
 
     // filters is an array of FindFilters, so we chain each filter to the query builder
     filters.forEach(([column, op, value]) => {

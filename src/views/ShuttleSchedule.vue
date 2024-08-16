@@ -119,7 +119,7 @@ const itemsOutward = computed(() => [
   },
   {
     text: 'Hodlertrasse, 9008 St. Gallen (St. Fiden PP)',
-    link: 'https://maps.app.goo.gl/cbYMd9uyUQYjAQBSA'
+    link: 'https://maps.app.goo.gl/E7ad57eY74PiDWRj8'
   },
   {
     text: 'Abacus, Wittenbach',
@@ -134,7 +134,7 @@ const itemsReturn = computed(() => [
   },
   {
     text: 'Hodlertrasse, 9008 St. Gallen (St. Fiden PP)',
-    link: 'https://maps.app.goo.gl/cbYMd9uyUQYjAQBSA'
+    link: 'https://maps.app.goo.gl/E7ad57eY74PiDWRj8'
   },
   {
     text: `Radisson (${t('labels.stop_on_request')})`,

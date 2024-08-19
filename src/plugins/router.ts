@@ -22,7 +22,11 @@ const router = createRouter({
         {
           path: '/signup',
           name: 'auth-sign-up',
-          component: () => import('@/views/auth/SignUp.vue')
+          component: () => import('@/views/auth/SignUp.vue'),
+          beforeEnter: () => {
+            if (import.meta.env.VITE_AUTH_SIGN_UP_ENABLED !== 'true')
+              return '/404';
+          }
         },
         {
           path: '/forgotPassword',

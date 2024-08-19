@@ -7,7 +7,7 @@
       {{ subtitle }}
     </v-card-subtitle>
     <v-card-text class="px-0">
-      <slot />
+      <slot></slot>
     </v-card-text>
     <template #actions v-if="$slots.actions">
       <slot name="actions" />

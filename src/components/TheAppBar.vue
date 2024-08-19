@@ -35,14 +35,6 @@
           @click="logout"
         >
         </VBtnPrimary>
-        <VBtnPrimary
-          v-else
-          :icon="$vuetify.display.xs ? 'mdi-login' : undefined"
-          :to="{ name: 'auth-sign-in' }"
-          :size="$vuetify.display.xs ? 'small' : undefined"
-          :text="$vuetify.display.smAndUp ? $t('labels.login') : undefined"
-        >
-        </VBtnPrimary>
       </div>
     </v-container>
   </v-app-bar>

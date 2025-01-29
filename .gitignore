@@ -12,6 +12,7 @@ node_modules
 dist
 dist-ssr
 *.local
+*.prod
 
 /cypress/videos/
 /cypress/screenshots/

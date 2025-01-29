@@ -2,7 +2,10 @@
   <v-form ref="formRef">
     <v-row dense>
       <v-col>
-        <DialogTitleI18n :i18n="model.title" @save="model.title = $event">
+        <DialogTitleI18n
+          :i18n="model.title"
+          @save="model.title = $event"
+        >
           <template #activator="{ props: activatorProps }">
             <v-text-field
               :model-value="modelValueTitleI18n"
@@ -10,21 +13,22 @@
               :rules="[rulesValidation.ruleRequired]"
               readonly
               v-bind="activatorProps"
-            >
-            </v-text-field>
+            />
           </template>
         </DialogTitleI18n>
       </v-col>
       <v-col>
-        <DialogTitleI18n :i18n="model.note" @save="model.note = $event">
+        <DialogTitleI18n
+          :i18n="model.note"
+          @save="model.note = $event"
+        >
           <template #activator="{ props: activatorProps }">
             <v-text-field
               :model-value="modelValueNoteI18n"
               :label="$t('labels.note')"
               readonly
               v-bind="activatorProps"
-            >
-            </v-text-field>
+            />
           </template>
         </DialogTitleI18n>
       </v-col>
@@ -37,15 +41,14 @@
           :label="$t('labels.category')"
           name="field-category"
           :rules="[rulesValidation.ruleRequired]"
-        >
-        </v-select>
+        />
       </v-col>
     </v-row>
     <v-row dense>
       <v-col
-        cols="12"
         v-for="(_, idx) in model.locations"
         :key="`location-field-${idx}`"
+        cols="12"
       >
         <v-text-field
           v-model="model.locations[idx]"
@@ -55,7 +58,7 @@
             <v-btn
               v-if="
                 model.locations.length === 0 ||
-                idx === model.locations.length - 1
+                  idx === model.locations.length - 1
               "
               slim
               size="small"
@@ -76,31 +79,37 @@
       </v-col>
     </v-row>
     <v-row dense>
-      <v-col cols="12" sm="6">
+      <v-col
+        cols="12"
+        sm="6"
+      >
         <v-text-field
           v-model="model.time_start"
           :label="$t('labels.time_start')"
           hint="Format NN:NN ex: 18:00"
-        >
-        </v-text-field>
+        />
       </v-col>
-      <v-col cols="12" sm="6">
+      <v-col
+        cols="12"
+        sm="6"
+      >
         <v-text-field
           v-model="model.time_end"
           :label="$t('labels.time_end')"
           hint="Format NN:NN ex: 18:00"
-        >
-        </v-text-field>
+        />
       </v-col>
     </v-row>
     <v-row dense>
-      <v-col cols="12" sm="6">
+      <v-col
+        cols="12"
+        sm="6"
+      >
         <v-text-field
           v-model="model.icon"
           :label="$t('labels.icon')"
           hint="An icon from MDI"
-        >
-        </v-text-field>
+        />
       </v-col>
     </v-row>
   </v-form>

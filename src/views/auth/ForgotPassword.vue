@@ -1,6 +1,12 @@
 <template>
-  <AuthCard title="Lost your password?" subtitle="Let's sort that for you">
-    <v-form class="flex w-full flex-col items-start" @submit.prevent="onSubmit">
+  <AuthCard
+    title="Lost your password?"
+    subtitle="Let's sort that for you"
+  >
+    <v-form
+      class="flex w-full flex-col items-start"
+      @submit.prevent="onSubmit"
+    >
       <v-text-field
         v-model="email"
         required
@@ -14,7 +20,12 @@
 
       <v-row>
         <v-col align="end">
-          <VBtnPrimary :loading="loading" type="submit"> Reset </VBtnPrimary>
+          <VBtnPrimary
+            :loading="loading"
+            type="submit"
+          >
+            Reset
+          </VBtnPrimary>
         </v-col>
       </v-row>
     </v-form>
@@ -22,7 +33,10 @@
     <template #actions>
       <span class="text-sm">
         Do u want to sign in?
-        <v-btn variant="plain" :to="{ name: 'auth-sign-in' }">Sign in</v-btn>
+        <v-btn
+          variant="plain"
+          :to="{ name: 'auth-sign-in' }"
+        >Sign in</v-btn>
       </span>
     </template>
   </AuthCard>

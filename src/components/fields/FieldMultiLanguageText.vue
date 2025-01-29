@@ -4,11 +4,17 @@
       v-if="Object.keys(model).length === 0"
       @click="onAddLanguageField"
     >
-      <v-icon start>mdi-plus</v-icon>
+      <v-icon start>
+        mdi-plus
+      </v-icon>
       {{ btnAdd || $t('buttons.add') }}
     </VBtnSecondary>
     <template v-else>
-      <v-row v-for="(_, modelKey) in model" :key="modelKey" dense>
+      <v-row
+        v-for="(_, modelKey) in model"
+        :key="modelKey"
+        dense
+      >
         <v-col cols="4">
           <v-select
             :model-value="modelKey"
@@ -38,7 +44,7 @@
             v-model="model[modelKey]"
             :label="
               fieldValueLabel ||
-              $t('fields.multi_language_text.field_value_label')
+                $t('fields.multi_language_text.field_value_label')
             "
             clearable
             autofocus
@@ -53,18 +59,22 @@
                 variant="text"
                 class="mt-1"
                 @click="onRemoveLanguageFieldByLangKey(modelKey)"
-              >
-              </v-btn>
+              />
             </template>
           </v-text-field>
         </v-col>
-        <v-col cols="12" align-self="start">
+        <v-col
+          cols="12"
+          align-self="start"
+        >
           <v-btn
             v-if="showBtnAddByIndex(modelKey)"
             class="mt-1"
             @click="onAddLanguageField"
           >
-            <v-icon start>mdi-plus</v-icon>
+            <v-icon start>
+              mdi-plus
+            </v-icon>
             {{ btnAdd || $t('buttons.add') }}
           </v-btn>
         </v-col>

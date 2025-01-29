@@ -8,14 +8,19 @@
           src="/logos/abacus-summer-party-2024-banner.png"
           max-height="400"
           cover
-        >
-        </v-img>
+        />
       </template>
     </AppImagesView>
   </v-container>
   <v-container class="align-center">
     <v-row>
-      <v-col v-for="link in sortedLinks" :key="link.id" cols="12" sm="6" lg="3">
+      <v-col
+        v-for="link in sortedLinks"
+        :key="link.id"
+        cols="12"
+        sm="6"
+        lg="3"
+      >
         <v-card
           variant="tonal"
           color="primary"
@@ -40,14 +45,25 @@
             </v-card-subtitle>
           </template>
           <template #append>
-            <v-avatar rounded="0" size="40">
-              <v-icon size="40" color="primary">{{ link.icon }}</v-icon>
+            <v-avatar
+              rounded="0"
+              size="40"
+            >
+              <v-icon
+                size="40"
+                color="primary"
+              >
+                {{ link.icon }}
+              </v-icon>
             </v-avatar>
           </template>
         </v-card>
       </v-col>
     </v-row>
-    <AppImagesView v-model="showGallery" :images="['/images/plan.png']" />
+    <AppImagesView
+      v-model="showGallery"
+      :images="['/images/plan.png']"
+    />
   </v-container>
 </template>
 

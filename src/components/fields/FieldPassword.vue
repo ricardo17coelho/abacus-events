@@ -11,7 +11,7 @@
     :hint="$t('fields.password.hint')"
     v-bind="$attrs"
     @click:append-inner="show = !show"
-  ></v-text-field>
+  />
 </template>
 
 <script setup lang="ts">

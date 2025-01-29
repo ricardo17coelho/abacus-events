@@ -5,13 +5,22 @@
     max-width="600"
   >
     <template #activator="activatorProps">
-      <slot name="activator" v-bind="activatorProps"></slot>
+      <slot
+        name="activator"
+        v-bind="activatorProps"
+      />
     </template>
     <template #content>
-      <ProgramTimelineForm v-model="form" ref="formRef" />
+      <ProgramTimelineForm
+        ref="formRef"
+        v-model="form"
+      />
     </template>
     <template #actions>
-      <VBtnPrimary :loading="isLoading" @click="onSave">
+      <VBtnPrimary
+        :loading="isLoading"
+        @click="onSave"
+      >
         {{ $t('buttons.save') }}
       </VBtnPrimary>
     </template>

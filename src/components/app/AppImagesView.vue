@@ -1,5 +1,8 @@
 <template>
-  <slot name="activator" :onClick="show"></slot>
+  <slot
+    name="activator"
+    :on-click="show"
+  />
 
   <vue-easy-lightbox
     :visible="visibleRef"

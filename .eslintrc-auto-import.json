@@ -302,6 +302,17 @@
     "watchImmediate": true,
     "watchPausable": true,
     "watchThrottled": true,
-    "watchTriggerable": true
+    "watchTriggerable": true,
+    "DirectiveBinding": true,
+    "MaybeRef": true,
+    "MaybeRefOrGetter": true,
+    "onElementRemoval": true,
+    "onWatcherCleanup": true,
+    "useCountdown": true,
+    "useId": true,
+    "useModel": true,
+    "usePreferredReducedTransparency": true,
+    "useSSRWidth": true,
+    "useTemplateRef": true
   }
 }

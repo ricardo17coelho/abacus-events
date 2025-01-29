@@ -31,8 +31,11 @@
               @success="onSuccessUpdate"
             >
               <template #activator="{ props: activatorProps }">
-                <v-btn v-bind="activatorProps" variant="text" icon="mdi-pencil">
-                </v-btn>
+                <v-btn
+                  v-bind="activatorProps"
+                  variant="text"
+                  icon="mdi-pencil"
+                />
               </template>
             </ParkingLotDialog>
           </template>
@@ -45,7 +48,7 @@
               :min="0"
               :max="parkingLot.total_slots"
               @update:model-value="onUpdateFilledSlot($event, parkingLot.id)"
-            ></v-number-input>
+            />
           </v-card-actions>
         </ParkingLotCard>
       </v-col>

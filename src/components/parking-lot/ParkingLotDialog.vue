@@ -1,13 +1,26 @@
 <template>
-  <AppDialog v-model="model" :title="$t('labels.parking_lot')" max-width="600">
+  <AppDialog
+    v-model="model"
+    :title="$t('labels.parking_lot')"
+    max-width="600"
+  >
     <template #activator="activatorProps">
-      <slot name="activator" v-bind="activatorProps"></slot>
+      <slot
+        name="activator"
+        v-bind="activatorProps"
+      />
     </template>
     <template #content>
-      <ParkingLotForm v-model="form" ref="formRef" />
+      <ParkingLotForm
+        ref="formRef"
+        v-model="form"
+      />
     </template>
     <template #actions>
-      <VBtnPrimary :loading="isLoading" @click="onSave">
+      <VBtnPrimary
+        :loading="isLoading"
+        @click="onSave"
+      >
         {{ $t('buttons.save') }}
       </VBtnPrimary>
     </template>

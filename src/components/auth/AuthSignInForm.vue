@@ -27,11 +27,15 @@
           name="password"
           label="Password"
           placeholder="Enter your password"
-      /></v-col>
+        />
+      </v-col>
     </v-row>
 
     <v-row dense>
-      <v-col cols="12" sm="6">
+      <v-col
+        cols="12"
+        sm="6"
+      >
         <v-btn
           :to="{ name: 'auth-forgot-password' }"
           variant="text"
@@ -40,7 +44,11 @@
           Forgot your password?
         </v-btn>
       </v-col>
-      <v-col cols="12" sm="6" align="end">
+      <v-col
+        cols="12"
+        sm="6"
+        align="end"
+      >
         <VBtnPrimary
           :loading="emailLoading"
           :disabled="loading"
@@ -50,7 +58,10 @@
           {{ 'Sign In' }}
         </VBtnPrimary>
       </v-col>
-      <v-col v-if="isDevEnv()" cols="12">
+      <v-col
+        v-if="isDevEnv()"
+        cols="12"
+      >
         <VBtnDev
           prepend-icon="mdi-bug"
           :block="isDisplayXs"

@@ -1,5 +1,9 @@
 <template>
-  <v-timeline align="start" side="end" truncate-line="both">
+  <v-timeline
+    align="start"
+    side="end"
+    truncate-line="both"
+  >
     <v-timeline-item
       v-for="(item, idx) in items"
       :key="`${idx}-title-${showDefaultTranslationOrEmpty(item.title)}`"
@@ -7,7 +11,10 @@
       :icon="item.icon"
       :size="$vuetify.display.mdAndUp ? 'x-large' : undefined"
     >
-      <div class="d-flex" :class="{ 'flex-column': $vuetify.display.xs }">
+      <div
+        class="d-flex"
+        :class="{ 'flex-column': $vuetify.display.xs }"
+      >
         <span class="me-4">{{ `${item.time_start}-${item.time_end}` }}</span>
         <div>
           <div>
@@ -44,7 +51,10 @@
           </div>
         </div>
       </div>
-      <slot name="actions" :item="item"></slot>
+      <slot
+        name="actions"
+        :item="item"
+      />
     </v-timeline-item>
   </v-timeline>
 </template>

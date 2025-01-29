@@ -13,7 +13,10 @@
       </v-container>
     </v-main>
 
-    <TheFooter v-if="isRouteRoot" :app="$vuetify.display.smAndUp" />
+    <TheFooter
+      v-if="isRouteRoot"
+      :app="$vuetify.display.smAndUp"
+    />
   </v-app>
 </template>
 

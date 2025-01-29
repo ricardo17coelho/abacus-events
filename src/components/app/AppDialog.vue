@@ -11,7 +11,10 @@
     v-bind="$attrs"
   >
     <template #activator="activatorProps">
-      <slot name="activator" v-bind="activatorProps"></slot>
+      <slot
+        name="activator"
+        v-bind="activatorProps"
+      />
     </template>
     <v-card
       flat
@@ -26,14 +29,20 @@
           :icon="fullscreen ? 'mdi-fullscreen-exit' : 'mdi-fullscreen'"
           size="small"
           @click="fullscreen = !fullscreen"
-        >
-        </v-btn>
+        />
         <v-spacer />
-        <v-btn icon="$close" size="small" @click="model = false"> </v-btn>
+        <v-btn
+          icon="$close"
+          size="small"
+          @click="model = false"
+        />
       </template>
 
       <v-card-text>
-        <slot v-if="loading" name="loading">
+        <slot
+          v-if="loading"
+          name="loading"
+        >
           <div class="text-center">
             <div>
               <AppLoader />
@@ -43,11 +52,14 @@
             </div>
           </div>
         </slot>
-        <slot v-else name="content"> </slot>
+        <slot
+          v-else
+          name="content"
+        />
       </v-card-text>
 
       <v-card-actions v-if="!loading">
-        <slot name="actions"> </slot>
+        <slot name="actions" />
       </v-card-actions>
     </v-card>
   </v-dialog>

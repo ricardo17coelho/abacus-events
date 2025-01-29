@@ -2,11 +2,18 @@
   <v-container class="align-center">
     <v-row>
       <v-col align="center">
-        <AppTitle :title="$t('title.shuttle_schedule')" show-go-home-button />
+        <AppTitle
+          :title="$t('title.shuttle_schedule')"
+          show-go-home-button
+        />
       </v-col>
     </v-row>
     <ContainerCentered class="px-0">
-      <v-card flat max-width="500" class="px-2">
+      <v-card
+        flat
+        max-width="500"
+        class="px-2"
+      >
         <v-alert
           class="my-6"
           type="warning"
@@ -18,19 +25,35 @@
           <div>
             {{ $t('views.shuttle_schedule.info_01') }}
           </div>
-          <i18n-t keypath="views.shuttle_schedule.info_02" tag="div">
+          <i18n-t
+            keypath="views.shuttle_schedule.info_02"
+            tag="div"
+          >
             <template #link>
-              <a class="link-external" href="https://www.sbb.ch/"> SBB </a>
+              <a
+                class="link-external"
+                href="https://www.sbb.ch/"
+              > SBB </a>
             </template>
           </i18n-t>
         </v-alert>
-        <v-alert class="my-6" border="start" rounded="lg" density="compact">
+        <v-alert
+          class="my-6"
+          border="start"
+          rounded="lg"
+          density="compact"
+        >
           <v-icon>mdi-information-variant-circle-outline</v-icon>
           {{ $t('views.shuttle_schedule.alert_01') }}
         </v-alert>
         <v-card class="my-6">
           <template #title>
-            <v-icon color="primary" size="x-small">mdi-bus-clock</v-icon>
+            <v-icon
+              color="primary"
+              size="x-small"
+            >
+              mdi-bus-clock
+            </v-icon>
             {{ $t('labels.outward_journey') }}
           </template>
           <template #subtitle>
@@ -54,7 +77,11 @@
               >
                 <div>
                   <div>
-                    <a class="link-external" :href="item.link" target="_blank">
+                    <a
+                      class="link-external"
+                      :href="item.link"
+                      target="_blank"
+                    >
                       {{ item.text }}
                     </a>
                   </div>
@@ -66,7 +93,12 @@
 
         <v-card class="my-6">
           <template #title>
-            <v-icon color="primary" size="x-small">mdi-bus-clock</v-icon>
+            <v-icon
+              color="primary"
+              size="x-small"
+            >
+              mdi-bus-clock
+            </v-icon>
             {{ $t('labels.return_journey') }}
           </template>
           <template #subtitle>
@@ -91,7 +123,11 @@
               >
                 <div>
                   <div>
-                    <a class="link-external" :href="item.link" target="_blank">
+                    <a
+                      class="link-external"
+                      :href="item.link"
+                      target="_blank"
+                    >
                       {{ item.text }}
                     </a>
                   </div>

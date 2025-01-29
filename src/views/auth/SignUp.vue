@@ -7,7 +7,10 @@
     <template #actions>
       <span class="text-sm">
         Already registered?
-        <v-btn :to="{ name: 'auth-sign-in' }" variant="plain">
+        <v-btn
+          :to="{ name: 'auth-sign-in' }"
+          variant="plain"
+        >
           Sign in here!
         </v-btn>
       </span>

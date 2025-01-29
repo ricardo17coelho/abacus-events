@@ -2,7 +2,10 @@
   <v-form ref="formRef">
     <v-row dense>
       <v-col>
-        <DialogTitleI18n :i18n="model.name" @save="model.name = $event">
+        <DialogTitleI18n
+          :i18n="model.name"
+          @save="model.name = $event"
+        >
           <template #activator="{ props: activatorProps }">
             <v-text-field
               :model-value="modelValueNameI18n"
@@ -10,16 +13,17 @@
               :rules="[rulesValidation.ruleRequired]"
               readonly
               v-bind="activatorProps"
-            >
-            </v-text-field>
+            />
           </template>
         </DialogTitleI18n>
       </v-col>
     </v-row>
     <v-row dense>
       <v-col>
-        <v-text-field v-model="model.location" :label="$t('labels.location')">
-        </v-text-field>
+        <v-text-field
+          v-model="model.location"
+          :label="$t('labels.location')"
+        />
       </v-col>
     </v-row>
     <v-row dense>
@@ -27,12 +31,14 @@
         <v-text-field
           v-model="model.location_url"
           :label="$t('labels.location_url')"
-        >
-        </v-text-field>
+        />
       </v-col>
     </v-row>
     <v-row dense>
-      <v-col cols="12" sm="6">
+      <v-col
+        cols="12"
+        sm="6"
+      >
         <v-number-input
           v-model="model.total_slots"
           :label="$t('labels.slots_total')"
@@ -41,18 +47,21 @@
           variant="outlined"
           :min="0"
           inset
-        ></v-number-input>
+        />
       </v-col>
-      <v-col cols="12" sm="6">
+      <v-col
+        cols="12"
+        sm="6"
+      >
         <v-number-input
-          type="number"
           v-model="model.filled_slots"
+          type="number"
           :label="$t('labels.slots_filled')"
           control-variant="stacked"
           variant="outlined"
           :min="0"
           inset
-        ></v-number-input>
+        />
       </v-col>
     </v-row>
   </v-form>

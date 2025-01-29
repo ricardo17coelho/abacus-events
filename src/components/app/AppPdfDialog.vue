@@ -1,7 +1,13 @@
 <template>
-  <AppDialog max-width="1000" fullscreen>
+  <AppDialog
+    max-width="1000"
+    fullscreen
+  >
     <template #activator="{ props: activatorProps }">
-      <slot name="activator" :props="activatorProps"></slot>
+      <slot
+        name="activator"
+        :props="activatorProps"
+      />
     </template>
 
     <template #content>

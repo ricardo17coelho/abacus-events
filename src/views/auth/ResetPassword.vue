@@ -1,6 +1,12 @@
 <template>
-  <AuthCard title="Reset Password" subtitle="Choose a new password below">
-    <v-form class="flex w-full flex-col items-start" @submit.prevent="onSubmit">
+  <AuthCard
+    title="Reset Password"
+    subtitle="Choose a new password below"
+  >
+    <v-form
+      class="flex w-full flex-col items-start"
+      @submit.prevent="onSubmit"
+    >
       <FieldPassword
         id="password"
         v-model="password"
@@ -13,7 +19,11 @@
 
       <v-row dense>
         <v-col align="end">
-          <VBtnPrimary :loading="loading" type="submit" class="bg-teal-700">
+          <VBtnPrimary
+            :loading="loading"
+            type="submit"
+            class="bg-teal-700"
+          >
             Reset
           </VBtnPrimary>
         </v-col>

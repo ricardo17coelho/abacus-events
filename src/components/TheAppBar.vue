@@ -1,10 +1,17 @@
 <template>
-  <v-app-bar flat class="px-1">
+  <v-app-bar
+    flat
+    class="px-1"
+  >
     <v-container class="d-flex align-center py-0 app-container">
       <router-link to="/">
-        <v-img src="/logos/abacus.svg" max-width="200" width="150"> </v-img>
+        <v-img
+          src="/logos/abacus.svg"
+          max-width="200"
+          width="150"
+        />
       </router-link>
-      <v-spacer></v-spacer>
+      <v-spacer />
       <div
         class="d-flex"
         :class="{
@@ -19,8 +26,7 @@
           slim
           size="small"
           variant="text"
-        >
-        </v-btn>
+        />
         <MenuLanguage
           v-model="locale"
           :available-locales="availableLocalesFiltered"
@@ -33,8 +39,7 @@
           :size="$vuetify.display.xs ? 'small' : undefined"
           :text="$vuetify.display.smAndUp ? $t('labels.logout') : undefined"
           @click="logout"
-        >
-        </VBtnPrimary>
+        />
       </div>
     </v-container>
   </v-app-bar>

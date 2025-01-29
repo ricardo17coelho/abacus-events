@@ -1,5 +1,10 @@
 <template>
-  <v-card v-if="parkingLot" width="100%" border flat>
+  <v-card
+    v-if="parkingLot"
+    width="100%"
+    border
+    flat
+  >
     <v-card-item :title="showDefaultTranslationOrEmpty(parkingLot.name)">
       <template #subtitle>
         <v-chip
@@ -11,9 +16,9 @@
         </v-chip>
       </template>
       <template #append>
-        <slot name="actions"></slot>
-        <v-chip :color="getStatusColor(parkingLot)"
-          >{{ getParkingLotStatusText(parkingLot) }}
+        <slot name="actions" />
+        <v-chip :color="getStatusColor(parkingLot)">
+          {{ getParkingLotStatusText(parkingLot) }}
         </v-chip>
       </template>
     </v-card-item>
@@ -38,9 +43,9 @@
           calculatePercentage(parkingLot.filled_slots, parkingLot.total_slots)
         "
         rounded="pill"
-      ></v-progress-linear>
+      />
     </v-card-text>
-    <slot></slot>
+    <slot />
   </v-card>
 </template>
 

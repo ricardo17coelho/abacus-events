@@ -8,9 +8,14 @@
         }"
         align="center"
       >
-        <v-col v-for="image in images" :key="image" cols="3" align="center">
+        <v-col
+          v-for="image in images"
+          :key="image"
+          cols="3"
+          align="center"
+        >
           <v-hover>
-            <template v-slot:default="{ isHovering, props: hoverProps }">
+            <template #default="{ isHovering, props: hoverProps }">
               <v-img
                 v-bind="{ ...activatorProps, ...hoverProps }"
                 :src="image"
@@ -19,7 +24,7 @@
                 :class="{ 'elevation-10': isHovering }"
                 max-width="150"
               >
-                <template v-slot:placeholder>
+                <template #placeholder>
                   <v-row
                     align="center"
                     class="fill-height ma-0"
@@ -28,7 +33,7 @@
                     <v-progress-circular
                       color="grey-lighten-5"
                       indeterminate
-                    ></v-progress-circular>
+                    />
                   </v-row>
                 </template>
               </v-img>

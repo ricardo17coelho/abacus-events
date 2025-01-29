@@ -5,7 +5,10 @@
     @submit.prevent="emailAuth"
   >
     <v-row dense>
-      <v-col cols="12" sm="6">
+      <v-col
+        cols="12"
+        sm="6"
+      >
         <v-text-field
           v-model="credentials.data.firstname"
           required
@@ -18,7 +21,10 @@
           ]"
         />
       </v-col>
-      <v-col cols="12" sm="6">
+      <v-col
+        cols="12"
+        sm="6"
+      >
         <v-text-field
           v-model="credentials.data.lastname"
           required
@@ -44,7 +50,8 @@
           type="email"
           placeholder="Enter your email"
           :rules="[rulesValidation.ruleRequired, rulesValidation.ruleEmail]"
-      /></v-col>
+        />
+      </v-col>
       <v-col cols="12">
         <FieldPassword
           v-model="credentials.password"
@@ -54,11 +61,16 @@
           name="password"
           label="Password"
           placeholder="Choose a password"
-      /></v-col>
+        />
+      </v-col>
     </v-row>
 
     <v-row dense>
-      <v-col v-if="isDevEnv()" cols="12" sm="6">
+      <v-col
+        v-if="isDevEnv()"
+        cols="12"
+        sm="6"
+      >
         <VBtnDev
           prepend-icon="mdi-bug"
           :block="isDisplayXs"
@@ -67,7 +79,11 @@
           Auto DEV Sign Up
         </VBtnDev>
       </v-col>
-      <v-col cols="12" :sm="isDevEnv() ? 6 : undefined" align="end">
+      <v-col
+        cols="12"
+        :sm="isDevEnv() ? 6 : undefined"
+        align="end"
+      >
         <VBtnPrimary
           :loading="emailLoading"
           :disabled="loading"

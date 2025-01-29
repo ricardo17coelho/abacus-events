@@ -6,7 +6,10 @@
       :text="$t('not_found.text')"
     >
       <template #actions>
-        <VBtnPrimary :to="{ path: '/' }" class="self-center">
+        <VBtnPrimary
+          :to="{ path: '/' }"
+          class="self-center"
+        >
           Go home
         </VBtnPrimary>
       </template>

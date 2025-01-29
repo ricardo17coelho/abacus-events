@@ -2,10 +2,18 @@
   <v-container>
     <v-row>
       <v-col align="center">
-        <AppTitle :title="$t('title.parking')" show-go-home-button />
+        <AppTitle
+          :title="$t('title.parking')"
+          show-go-home-button
+        />
       </v-col>
     </v-row>
-    <v-alert class="my-6" border="start" rounded="lg" density="compact">
+    <v-alert
+      class="my-6"
+      border="start"
+      rounded="lg"
+      density="compact"
+    >
       <v-icon>mdi-information-variant-circle-outline</v-icon>
       {{ $t('views.parking.alert_01') }}
     </v-alert>
@@ -16,7 +24,7 @@
         cols="12"
         lg="6"
       >
-        <ParkingLotCard :parking-lot="parkingLot"> </ParkingLotCard>
+        <ParkingLotCard :parking-lot="parkingLot" />
       </v-col>
     </v-row>
   </v-container>

@@ -1,6 +1,9 @@
 <template>
   <router-view />
-  <Toaster rich-colors position="top-right" />
+  <Toaster
+    rich-colors
+    position="top-right"
+  />
 </template>
 <script lang="ts" setup>
 import { Toaster } from 'vue-sonner';

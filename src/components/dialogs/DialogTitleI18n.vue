@@ -1,7 +1,14 @@
 <template>
-  <AppDialog v-model="model" :title="title" width="500">
+  <AppDialog
+    v-model="model"
+    :title="title"
+    width="500"
+  >
     <template #activator="activatorProps">
-      <slot name="activator" v-bind="activatorProps"></slot>
+      <slot
+        name="activator"
+        v-bind="activatorProps"
+      />
     </template>
     <template #content>
       <v-form ref="formRef">
@@ -9,7 +16,10 @@
       </v-form>
     </template>
     <template #actions>
-      <VBtnPrimary :loading="loading" @click="onSave">
+      <VBtnPrimary
+        :loading="loading"
+        @click="onSave"
+      >
         {{ $t('buttons.save') }}
       </VBtnPrimary>
     </template>

@@ -2,7 +2,10 @@
   <v-container class="align-center pa-0">
     <v-row>
       <v-col align="center">
-        <AppTitle :title="$t('title.program')" show-go-home-button />
+        <AppTitle
+          :title="$t('title.program')"
+          show-go-home-button
+        />
       </v-col>
     </v-row>
     <AppLoader v-if="isLoading" />
@@ -25,11 +28,14 @@
             variant="outlined"
             filter
             centered
-          ></v-chip>
+          />
         </v-chip-group>
       </div>
 
-      <ContainerCentered v-if="images.length > 0" class="my-5">
+      <ContainerCentered
+        v-if="images.length > 0"
+        class="my-5"
+      >
         <AppImagesView :images="images">
           <template #activator="activatorProps">
             <v-btn
@@ -62,7 +68,10 @@
         </v-col>
       </v-row>
       <AppTimeline :items="sortedItems">
-        <template v-if="isCurrentUserAdmin" #actions="{ item }">
+        <template
+          v-if="isCurrentUserAdmin"
+          #actions="{ item }"
+        >
           <ProgramTimelineDialog
             v-if="isCurrentUserAdmin"
             :program-timetable-id="item.id"
@@ -70,8 +79,11 @@
             @success="mutateById($event.id, $event)"
           >
             <template #activator="{ props: activatorProps }">
-              <v-btn v-bind="activatorProps" variant="text" icon="mdi-pencil">
-              </v-btn>
+              <v-btn
+                v-bind="activatorProps"
+                variant="text"
+                icon="mdi-pencil"
+              />
             </template>
           </ProgramTimelineDialog>
           <v-btn
@@ -79,8 +91,7 @@
             variant="text"
             icon="mdi-delete"
             @click="onDeleteItem(item)"
-          >
-          </v-btn>
+          />
         </template>
       </AppTimeline>
     </template>

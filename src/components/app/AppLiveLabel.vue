@@ -1,7 +1,12 @@
 <template>
   <v-chip density="compact">
     <template #prepend>
-      <v-icon start class="flash" size="18" color="red">
+      <v-icon
+        start
+        class="flash"
+        size="18"
+        color="red"
+      >
         mdi-radiobox-marked
       </v-icon>
     </template>

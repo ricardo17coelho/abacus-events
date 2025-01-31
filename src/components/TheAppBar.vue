@@ -43,7 +43,7 @@
           v-if="currentUser"
           :icon="$vuetify.display.xs ? 'mdi-logout' : undefined"
           :size="$vuetify.display.xs ? 'small' : undefined"
-          :text="$vuetify.display.smAndUp ? $t('labels.logout') : undefined"
+          :text="$vuetify.display.smAndUp ? t('labels.logout') : undefined"
           @click="logout"
         />
       </div>
@@ -60,7 +60,7 @@ import { useI18n } from 'vue-i18n';
 const { currentUser, isCurrentUserAdminOrHelper } = useAuthStore();
 const { logout } = useAuthUser();
 
-const { locale, availableLocales } = useI18n();
+const { locale, availableLocales, t } = useI18n();
 
 const lsLocale = useLocalStorage('locale', locale.value);
 

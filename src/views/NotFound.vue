@@ -1,9 +1,9 @@
 <template>
   <ContainerCentered>
     <v-empty-state
-      :headline="$t('not_found.headline')"
-      :title="$t('not_found.title')"
-      :text="$t('not_found.text')"
+      :headline="t('not_found.headline')"
+      :title="t('not_found.title')"
+      :text="t('not_found.text')"
     >
       <template #actions>
         <VBtnPrimary
@@ -18,4 +18,7 @@
 </template>
 <script lang="ts" setup>
 import ContainerCentered from '@/components/containers/ContainerCentered.vue';
+import { useI18n } from 'vue-i18n';
+
+const { t } = useI18n();
 </script>

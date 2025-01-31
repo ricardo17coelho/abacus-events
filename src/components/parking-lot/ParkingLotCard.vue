@@ -28,7 +28,7 @@
     <v-card-text class="text-medium-emphasis pa-6">
       <div class="text-h6 mb-6">
         <v-icon>mdi-car</v-icon>
-        {{ $t('labels.n_of_parking_spaces') }}
+        {{ t('labels.n_of_parking_spaces') }}
       </div>
       <div class="text-h4 font-weight-black mb-4">
         {{ parkingLot.filled_slots }} / {{ parkingLot.total_slots }}
@@ -53,6 +53,7 @@
 import useParkingLot from '@/composables/parking-lot';
 import { type ParkingLot } from '@/api/types/ParkingLot';
 import { showDefaultTranslationOrEmpty } from '@/utils/showDefaultTranslationOrEmpty';
+import { useI18n } from 'vue-i18n';
 
 defineProps({
   parkingLot: {
@@ -68,6 +69,8 @@ defineProps({
     default: false
   }
 });
+
+const { t } = useI18n();
 
 const { calculatePercentage, getStatusColor, getParkingLotStatusText } =
   useParkingLot();

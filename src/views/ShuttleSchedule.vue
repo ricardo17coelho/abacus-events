@@ -3,7 +3,7 @@
     <v-row>
       <v-col align="center">
         <AppTitle
-          :title="$t('title.shuttle_schedule')"
+          :title="t('title.shuttle_schedule')"
           show-go-home-button
         />
       </v-col>
@@ -23,7 +23,7 @@
           density="compact"
         >
           <div>
-            {{ $t('views.shuttle_schedule.info_01') }}
+            {{ t('views.shuttle_schedule.info_01') }}
           </div>
           <i18n-t
             keypath="views.shuttle_schedule.info_02"
@@ -44,7 +44,7 @@
           density="compact"
         >
           <v-icon>mdi-information-variant-circle-outline</v-icon>
-          {{ $t('views.shuttle_schedule.alert_01') }}
+          {{ t('views.shuttle_schedule.alert_01') }}
         </v-alert>
         <v-card class="my-6">
           <template #title>
@@ -54,11 +54,11 @@
             >
               mdi-bus-clock
             </v-icon>
-            {{ $t('labels.outward_journey') }}
+            {{ t('labels.outward_journey') }}
           </template>
           <template #subtitle>
             <div class="text-wrap">
-              {{ $t('views.shuttle_schedule.outward_journey.info') }}
+              {{ t('views.shuttle_schedule.outward_journey.info') }}
             </div>
           </template>
           <v-card-item>
@@ -99,11 +99,11 @@
             >
               mdi-bus-clock
             </v-icon>
-            {{ $t('labels.return_journey') }}
+            {{ t('labels.return_journey') }}
           </template>
           <template #subtitle>
             <div class="text-wrap">
-              {{ $t('views.shuttle_schedule.return_journey.info') }}
+              {{ t('views.shuttle_schedule.return_journey.info') }}
             </div>
           </template>
 

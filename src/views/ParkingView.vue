@@ -3,7 +3,7 @@
     <v-row>
       <v-col align="center">
         <AppTitle
-          :title="$t('title.parking')"
+          :title="t('title.parking')"
           show-go-home-button
         />
       </v-col>
@@ -15,7 +15,7 @@
       density="compact"
     >
       <v-icon>mdi-information-variant-circle-outline</v-icon>
-      {{ $t('views.parking.alert_01') }}
+      {{ t('views.parking.alert_01') }}
     </v-alert>
     <v-row>
       <v-col

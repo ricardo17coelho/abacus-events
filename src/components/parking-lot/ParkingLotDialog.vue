@@ -1,7 +1,7 @@
 <template>
   <AppDialog
     v-model="model"
-    :title="$t('labels.parking_lot')"
+    :title="t('labels.parking_lot')"
     max-width="600"
   >
     <template #activator="activatorProps">
@@ -21,7 +21,7 @@
         :loading="isLoading"
         @click="onSave"
       >
-        {{ $t('buttons.save') }}
+        {{ t('buttons.save') }}
       </VBtnPrimary>
     </template>
   </AppDialog>

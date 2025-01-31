@@ -7,7 +7,7 @@
       <v-icon start>
         mdi-plus
       </v-icon>
-      {{ btnAdd || $t('buttons.add') }}
+      {{ btnAdd || t('buttons.add') }}
     </VBtnSecondary>
     <template v-else>
       <v-row
@@ -20,7 +20,7 @@
             :model-value="modelKey"
             :items="getLangItemsByLang(modelKey)"
             :label="
-              fieldKeyLabel || $t('fields.multi_language_text.field_key_label')
+              fieldKeyLabel || t('fields.multi_language_text.field_key_label')
             "
             :name="`field-multi-language-key-${modelKey}`"
             @update:model-value="onModelKeyInput($event, modelKey)"
@@ -44,8 +44,9 @@
             v-model="model[modelKey]"
             :label="
               fieldValueLabel ||
-                $t('fields.multi_language_text.field_value_label')
+                t('fields.multi_language_text.field_value_label')
             "
+            autocomplete="off"
             clearable
             autofocus
             :name="`field-multi-language-value-${modelKey}`"
@@ -75,7 +76,7 @@
             <v-icon start>
               mdi-plus
             </v-icon>
-            {{ btnAdd || $t('buttons.add') }}
+            {{ btnAdd || t('buttons.add') }}
           </v-btn>
         </v-col>
       </v-row>
@@ -104,10 +105,10 @@ defineProps({
 
 const model = defineModel({ type: Object, default: () => ({}) });
 
-const i18n = useI18n();
+const { t, availableLocales } = useI18n();
 
 const computedAvailableLanguages = computed(() =>
-  i18n.availableLocales.map((l) => l.split('-')[0])
+  availableLocales.map((l) => l.split('-')[0])
 );
 
 const sortedAvailableLanguages = computed((): string[] => {

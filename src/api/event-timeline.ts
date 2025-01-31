@@ -25,16 +25,20 @@ export default function useApiEventTimeline() {
     );
   }
 
-  function getEventTimelinesByCategory(
-    category: EventTimelineCategory,
+  function getEventTimelinesByCategoryId(
+    eventId: string,
+    category: string,
     range = [0, 100]
   ) {
-    const filters: FindFilter[] = [['category', 'eq', category]];
+    const filters: FindFilter[] = [
+      ['event_id', 'eq', eventId],
+      ['category', 'eq', category]
+    ];
     return getEventTimelines('*', filters, range);
   }
 
-  function getEventTimelineById(EventTimelineId: string) {
-    return findById<EventTimeline>('event_timeline', EventTimelineId, '*');
+  function getEventTimelineById(id: string) {
+    return findById<EventTimeline>('event_timeline', id, '*');
   }
 
   // eslint-disable-next-line  @typescript-eslint/no-explicit-any
@@ -54,12 +58,58 @@ export default function useApiEventTimeline() {
     return remove('event_timeline', id);
   }
 
+  // EventTimelineCategory
+
+  function getEventTimelineCategories(
+    select = '*',
+    filters: FindFilter[] = [],
+    range = [0, 100]
+  ) {
+    return find<EventTimelineCategory>(
+      'event_timeline_category',
+      filters,
+      select,
+      range,
+      [],
+      {
+        count: 'exact'
+      }
+    );
+  }
+
+  function getEventTimelineCategoryById(id: string) {
+    return findById<EventTimelineCategory>('event_timeline_category', id, '*');
+  }
+
+  // eslint-disable-next-line  @typescript-eslint/no-explicit-any
+  function createEventTimelineCategory(form: Record<string, any>) {
+    return create<EventTimelineCategory>('event_timeline_category', form);
+  }
+
+  // eslint-disable-next-line  @typescript-eslint/no-explicit-any
+  function updateEventTimelineCategory(id: string, form: Record<string, any>) {
+    return update<EventTimelineCategory>('event_timeline_category', {
+      id,
+      ...form
+    });
+  }
+
+  function removeEventTimelineCategory(id: string) {
+    return remove('event_timeline_category', id);
+  }
+
   return {
     getEventTimelines,
     getEventTimelineById,
     createEventTimeline,
     updateEventTimeline,
     removeEventTimeline,
-    getEventTimelinesByCategory
+    getEventTimelinesByCategoryId,
+    // EventTimelineCategory
+    getEventTimelineCategories,
+    getEventTimelineCategoryById,
+    createEventTimelineCategory,
+    updateEventTimelineCategory,
+    removeEventTimelineCategory
   };
 }

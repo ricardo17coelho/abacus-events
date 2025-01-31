@@ -9,11 +9,11 @@
       :key="`${idx}-title-${showDefaultTranslationOrEmpty(item.title)}`"
       dot-color="primary"
       :icon="item.icon"
-      :size="$vuetify.display.mdAndUp ? 'x-large' : undefined"
+      :size="mdAndUp ? 'x-large' : undefined"
     >
       <div
         class="d-flex"
-        :class="{ 'flex-column': $vuetify.display.xs }"
+        :class="{ 'flex-column': xs }"
       >
         <span class="me-4">{{ `${item.time_start}-${item.time_end}` }}</span>
         <div>
@@ -64,6 +64,7 @@ import type { EventTimeline } from '@/api/types/EventTimeline.ts';
 import { isValidHttpUrl } from '@/utils/isValidUrl';
 import { showDefaultTranslationOrEmpty } from '@/utils/showDefaultTranslationOrEmpty';
 import type { PropType } from 'vue';
+import { useDisplay } from 'vuetify';
 
 defineProps({
   items: {
@@ -75,4 +76,6 @@ defineProps({
     default: false
   }
 });
+
+const { xs, mdAndUp } = useDisplay();
 </script>

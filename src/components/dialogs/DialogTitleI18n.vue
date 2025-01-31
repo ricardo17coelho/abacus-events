@@ -20,7 +20,7 @@
         :loading="loading"
         @click="onSave"
       >
-        {{ $t('buttons.save') }}
+        {{ t('buttons.save') }}
       </VBtnPrimary>
     </template>
   </AppDialog>

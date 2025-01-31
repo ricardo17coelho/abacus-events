@@ -9,7 +9,7 @@
           <template #activator="{ props: activatorProps }">
             <v-text-field
               :model-value="modelValueTitleI18n"
-              :label="$t('labels.name')"
+              :label="t('labels.name')"
               :rules="[rulesValidation.ruleRequired]"
               readonly
               v-bind="activatorProps"
@@ -25,7 +25,7 @@
           <template #activator="{ props: activatorProps }">
             <v-text-field
               :model-value="modelValueNoteI18n"
-              :label="$t('labels.note')"
+              :label="t('labels.note')"
               readonly
               v-bind="activatorProps"
             />
@@ -35,11 +35,11 @@
     </v-row>
     <v-row dense>
       <v-col>
-        <v-select
+        <EventTimelineCategoriesField
           v-model="model.category"
-          :items="categories"
-          :label="$t('labels.category')"
+          :label="t('labels.category')"
           name="field-category"
+          chips
           :rules="[rulesValidation.ruleRequired]"
         />
       </v-col>
@@ -52,7 +52,7 @@
       >
         <v-text-field
           v-model="model.locations[idx]"
-          :label="`${$t('labels.location')} ${idx + 1}`"
+          :label="`${t('labels.location')} ${idx + 1}`"
         >
           <template #append>
             <v-btn
@@ -85,7 +85,7 @@
       >
         <v-text-field
           v-model="model.time_start"
-          :label="$t('labels.time_start')"
+          :label="t('labels.time_start')"
           hint="Format NN:NN ex: 18:00"
         />
       </v-col>
@@ -95,7 +95,7 @@
       >
         <v-text-field
           v-model="model.time_end"
-          :label="$t('labels.time_end')"
+          :label="t('labels.time_end')"
           hint="Format NN:NN ex: 18:00"
         />
       </v-col>
@@ -107,7 +107,7 @@
       >
         <v-text-field
           v-model="model.icon"
-          :label="$t('labels.icon')"
+          :label="t('labels.icon')"
           hint="An icon from MDI"
         />
       </v-col>
@@ -117,23 +117,17 @@
 
 <script lang="ts" setup>
 // utils
-import { EVENT_TIMELINE_CATEGORY } from '@/api/types/EventTimeline.ts';
 import { showDefaultTranslationOrEmpty } from '@/utils/showDefaultTranslationOrEmpty';
 import rulesValidation from '@/utils/validations';
 import DialogTitleI18n from '../../dialogs/DialogTitleI18n.vue';
+import EventTimelineCategoriesField from '@/components/event/event-timeline/EventTimelineCategoriesField.vue';
+import { useI18n } from 'vue-i18n';
 
 const model = defineModel({ type: Object, default: () => ({}) });
 
-const formRef = ref();
+const { t } = useI18n();
 
-const categories = computed(() =>
-  Object.values(EVENT_TIMELINE_CATEGORY).map((i) => {
-    return {
-      value: i,
-      title: i
-    };
-  })
-);
+const formRef = ref();
 
 const modelValueTitleI18n = computed(() =>
   showDefaultTranslationOrEmpty(model.value?.title)

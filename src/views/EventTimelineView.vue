@@ -3,7 +3,7 @@
     <v-row>
       <v-col align="center">
         <AppTitle
-          :title="$t('title.program')"
+          :title="t('title.program')"
           show-go-home-button
         />
       </v-col>
@@ -21,9 +21,9 @@
         >
           <v-chip
             v-for="category in categories"
-            :key="category.title"
-            :text="category.title"
-            :value="category.value"
+            :key="category.id"
+            :text="showDefaultTranslationOrEmpty(category.title)"
+            :value="category.id"
             :prepend-icon="category.icon"
             variant="outlined"
             filter
@@ -32,68 +32,66 @@
         </v-chip-group>
       </div>
 
-      <ContainerCentered
-        v-if="images.length > 0"
-        class="my-5"
-      >
-        <AppImagesView :images="images">
-          <template #activator="activatorProps">
-            <v-btn
-              v-bind="activatorProps"
-              color="primary"
-              :prepend-icon="imagesBtn.icon"
-            >
-              {{ imagesBtn.text }}
-            </v-btn>
-          </template>
-        </AppImagesView>
-      </ContainerCentered>
-
-      <v-row v-if="isCurrentUserAdmin">
-        <v-col align="end">
-          <EventTimelineDialog
-            category="ADULTS"
-            @success="mutateById($event.id, $event)"
-          >
-            <template #activator="{ props: activatorProps }">
+      <template v-if="currentCategoryFilter">
+        <ContainerCentered
+          v-if="images.length > 0"
+          class="my-5"
+        >
+          <AppImagesView :images="images">
+            <template #activator="activatorProps">
               <v-btn
                 v-bind="activatorProps"
-                variant="text"
-                prepend-icon="mdi-plus"
+                color="primary"
+                :prepend-icon="imagesBtn.icon"
               >
-                {{ $t('buttons.add') }}
+                {{ imagesBtn.text }}
               </v-btn>
             </template>
-          </EventTimelineDialog>
-        </v-col>
-      </v-row>
-      <AppTimeline :items="sortedItems">
-        <template
-          v-if="isCurrentUserAdmin"
-          #actions="{ item }"
-        >
-          <EventTimelineDialog
+          </AppImagesView>
+        </ContainerCentered>
+
+        <v-row v-if="isCurrentUserAdmin">
+          <v-col align="end">
+            <EventTimelineDialog @success="mutateById($event.id, $event)">
+              <template #activator="{ props: activatorProps }">
+                <v-btn
+                  v-bind="activatorProps"
+                  variant="text"
+                  prepend-icon="mdi-plus"
+                >
+                  {{ t('buttons.add') }}
+                </v-btn>
+              </template>
+            </EventTimelineDialog>
+          </v-col>
+        </v-row>
+        <AppTimeline :items="sortedItems">
+          <template
             v-if="isCurrentUserAdmin"
-            :program-timetable-id="item.id"
-            category="ADULTS"
-            @success="mutateById($event.id, $event)"
+            #actions="{ item }"
           >
-            <template #activator="{ props: activatorProps }">
-              <v-btn
-                v-bind="activatorProps"
-                variant="text"
-                icon="mdi-pencil"
-              />
-            </template>
-          </EventTimelineDialog>
-          <v-btn
-            color="error"
-            variant="text"
-            icon="mdi-delete"
-            @click="onDeleteItem(item)"
-          />
-        </template>
-      </AppTimeline>
+            <EventTimelineDialog
+              v-if="isCurrentUserAdmin"
+              :event-timetable-id="item.id"
+              @success="mutateById($event.id, $event)"
+            >
+              <template #activator="{ props: activatorProps }">
+                <v-btn
+                  v-bind="activatorProps"
+                  variant="text"
+                  icon="mdi-pencil"
+                />
+              </template>
+            </EventTimelineDialog>
+            <v-btn
+              color="error"
+              variant="text"
+              icon="mdi-delete"
+              @click="onDeleteItem(item)"
+            />
+          </template>
+        </AppTimeline>
+      </template>
     </template>
   </v-container>
 </template>
@@ -106,28 +104,36 @@ import EventTimelineDialog from '@/components/event/event-timeline/EventTimeline
 import { toast } from 'vue-sonner';
 import useApiProgramTimeline from '@/api/event-timeline.ts';
 import {
-  EVENT_TIMELINE_CATEGORY,
-  type EventTimeline
+  type EventTimeline,
+  type EventTimelineCategory
 } from '@/api/types/EventTimeline.ts';
 import { useI18n } from 'vue-i18n';
 import AppLoader from '@/components/app/AppLoader.vue';
-import useProgramCategories from '@/composables/event-categories.ts';
 import ContainerCentered from '@/components/containers/ContainerCentered.vue';
 import AppImagesView from '@/components/app/AppImagesView.vue';
+import useApiEventTimeline from '@/api/event-timeline.ts';
+import { showDefaultTranslationOrEmpty } from '@/utils/showDefaultTranslationOrEmpty.ts';
+import { requireInjection } from '@/utils/injection.ts';
+import { CURRENT_EVENT_KEY } from '@/types/injectionKeys.ts';
 
 const { isCurrentUserAdmin } = useAuthStore();
 
+const currentEvent = requireInjection(CURRENT_EVENT_KEY);
+
 const currentCategoryFilter = ref();
 
-const { removeEventTimeline, getEventTimelines } = useApiProgramTimeline();
+const { removeEventTimeline, getEventTimelinesByCategoryId } =
+  useApiProgramTimeline();
 
 const items = ref<EventTimeline[]>([]);
 
 const sortedItems = computed(() => {
   return items.value.slice().sort((a, b) => {
+    if (!a || !a.time_start || !b || !b.time_start) return;
     const aStart = parseFloat(a.time_start.replace('.', '')) / 100;
     const bStart = parseFloat(b.time_start.replace('.', '')) / 100;
     if (aStart !== bStart) return aStart - bStart;
+    if (!a || !a.time_end || !b || !b.time_end) return;
     const aEnd = parseFloat(a.time_end.replace('.', '')) / 100;
     const bEnd = parseFloat(b.time_end.replace('.', '')) / 100;
     return aEnd - bEnd;
@@ -137,7 +143,11 @@ const sortedItems = computed(() => {
 function mutateById(id: string, payload: EventTimeline) {
   const idx = items.value.findIndex((i) => i.id === id);
   if (idx > -1) {
-    Object.assign(items.value[idx], payload);
+    if (payload.category === currentCategoryFilter.value) {
+      Object.assign(items.value[idx], payload);
+    } else {
+      items.value = items.value.slice(1, idx);
+    }
   } else {
     if (payload.category === currentCategoryFilter.value) {
       items.value.push(payload);
@@ -147,10 +157,33 @@ function mutateById(id: string, payload: EventTimeline) {
 
 const { t } = useI18n();
 
+const categories = ref<EventTimelineCategory[]>([]);
+
+const { getEventTimelineCategories } = useApiEventTimeline();
+
+async function initialFetch() {
+  const { data, error } = await getEventTimelineCategories();
+
+  if (error) return;
+  if (data) {
+    categories.value = data;
+    if (categories.value.length > 0) {
+      currentCategoryFilter.value = categories.value[0].id;
+    }
+  }
+}
+
+initialFetch();
+
 const isLoading = ref(false);
 const fetchData = async () => {
+  if (!currentEvent.value) return;
+  items.value = [];
   isLoading.value = true;
-  const { data, error } = await getEventTimelines();
+  const { data, error } = await getEventTimelinesByCategoryId(
+    currentEvent.value.id,
+    currentCategoryFilter.value
+  );
   if (error) {
     toast.error(t('errors.error_occurred'));
     return;
@@ -160,8 +193,6 @@ const fetchData = async () => {
   }
   isLoading.value = false;
 };
-
-fetchData();
 
 async function onDeleteItem(item: EventTimeline) {
   const { error } = await removeEventTimeline(item.id);
@@ -176,31 +207,30 @@ async function onDeleteItem(item: EventTimeline) {
   }
 }
 
-const { categories } = useProgramCategories();
-
 watch(
   () => currentCategoryFilter.value,
   async (newValue) => {
     if (newValue) {
-      fetchData();
+      void fetchData();
     }
   }
 );
 
 const images = computed(() => {
-  if (currentCategoryFilter.value === EVENT_TIMELINE_CATEGORY.BEVERAGE) {
-    return [
-      '/images/summer-part-2024/drinks.png',
-      '/images/summer-part-2024/cocktails.png'
-    ];
-  }
-  return ['/images/summer-part-2024/plan.png'];
+  // if (currentCategoryFilter.value === EVENT_TIMELINE_CATEGORY.BEVERAGE) {
+  //   return [
+  //     '/images/summer-part-2024/drinks.png',
+  //     '/images/summer-part-2024/cocktails.png'
+  //   ];
+  // }
+  // return ['/images/summer-part-2024/plan.png'];
+  return [];
 });
 
 const imagesBtn = computed(() => {
-  if (currentCategoryFilter.value === EVENT_TIMELINE_CATEGORY.BEVERAGE) {
-    return { text: t('labels.drinks'), icon: 'mdi-glass-cocktail' };
-  }
+  // if (currentCategoryFilter.value === EVENT_TIMELINE_CATEGORY.BEVERAGE) {
+  //   return { text: t('labels.drinks'), icon: 'mdi-glass-cocktail' };
+  // }
 
   return { text: t('labels.plan'), icon: 'mdi-map' };
 });

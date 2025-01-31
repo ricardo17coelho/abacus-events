@@ -9,7 +9,7 @@
           <template #activator="{ props: activatorProps }">
             <v-text-field
               :model-value="modelValueNameI18n"
-              :label="$t('labels.name')"
+              :label="t('labels.name')"
               :rules="[rulesValidation.ruleRequired]"
               readonly
               v-bind="activatorProps"
@@ -30,7 +30,7 @@
       <v-col>
         <v-text-field
           v-model="model.location_url"
-          :label="$t('labels.location_url')"
+          :label="t('labels.location_url')"
         />
       </v-col>
     </v-row>
@@ -41,7 +41,7 @@
       >
         <v-number-input
           v-model="model.total_slots"
-          :label="$t('labels.slots_total')"
+          :label="t('labels.slots_total')"
           :rules="[rulesValidation.ruleRequired]"
           control-variant="stacked"
           variant="outlined"
@@ -56,7 +56,7 @@
         <v-number-input
           v-model="model.filled_slots"
           type="number"
-          :label="$t('labels.slots_filled')"
+          :label="t('labels.slots_filled')"
           control-variant="stacked"
           variant="outlined"
           :min="0"
@@ -72,8 +72,11 @@
 import { showDefaultTranslationOrEmpty } from '@/utils/showDefaultTranslationOrEmpty';
 import rulesValidation from '@/utils/validations';
 import DialogTitleI18n from '../dialogs/DialogTitleI18n.vue';
+import { useI18n } from 'vue-i18n';
 
 const model = defineModel({ type: Object, default: () => ({}) });
+
+const { t } = useI18n();
 
 const formRef = ref();
 

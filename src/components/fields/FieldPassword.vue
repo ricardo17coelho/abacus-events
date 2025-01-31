@@ -7,8 +7,8 @@
     ]"
     :type="show ? 'text' : 'password'"
     name="field-password"
-    :label="$t('fields.password.label')"
-    :hint="$t('fields.password.hint')"
+    :label="t('fields.password.label')"
+    :hint="t('fields.password.hint')"
     v-bind="$attrs"
     @click:append-inner="show = !show"
   />
@@ -16,6 +16,9 @@
 
 <script setup lang="ts">
 import rulesValidation from '@/utils/validations';
+import { useI18n } from 'vue-i18n';
+
+const { t } = useI18n();
 
 const show = ref(false);
 </script>

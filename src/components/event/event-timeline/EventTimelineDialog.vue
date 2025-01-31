@@ -1,7 +1,7 @@
 <template>
   <AppDialog
     v-model="model"
-    :title="$t('labels.program_timeline')"
+    :title="t('labels.program_timeline')"
     max-width="600"
   >
     <template #activator="activatorProps">
@@ -21,7 +21,7 @@
         :loading="isLoading"
         @click="onSave"
       >
-        {{ $t('buttons.save') }}
+        {{ t('buttons.save') }}
       </VBtnPrimary>
     </template>
   </AppDialog>
@@ -34,28 +34,20 @@ import EventTimelineForm from './EventTimelineForm.vue';
 // apis
 import useApiEventTimeline from '@/api/event-timeline.ts';
 // types & constants
-import type {
-  EventTimeline,
-  EventTimelineCategory
-} from '@/api/types/EventTimeline.ts';
+import type { EventTimeline } from '@/api/types/EventTimeline.ts';
 // composables
 import { toast } from 'vue-sonner';
 import { useI18n } from 'vue-i18n';
 // utils
 import { merge2ObjectsIfKeysExists } from '@/utils/merge';
-import type { PropType } from 'vue';
 import { clone } from '@/utils/clone';
 import { CURRENT_EVENT_KEY } from '@/types/injectionKeys.ts';
 import { requireInjection } from '@/utils/injection.ts';
 
 const props = defineProps({
-  programTimetableId: {
+  eventTimetableId: {
     type: String,
     default: undefined
-  },
-  category: {
-    type: String as PropType<EventTimelineCategory>,
-    required: true
   }
 });
 
@@ -74,8 +66,8 @@ const DEFAULT_FORM = {
   note: {
     [locale.value]: ''
   },
-  category: '',
-  locations: [''],
+  category: undefined,
+  locations: [],
   time_start: '',
   time_end: '',
   icon: ''
@@ -95,11 +87,11 @@ async function onSave() {
   const { valid } = await formRef.value.formRef.validate();
   if (valid) {
     isLoading.value = true;
-    if (props.programTimetableId) {
+    if (props.eventTimetableId) {
       // edit
       const { error, data } = await updateEventTimeline(
-        props.programTimetableId,
-        form.value
+        props.eventTimetableId,
+        { ...form.value, event_id: currentEvent.value?.id }
       );
 
       if (error) {
@@ -111,7 +103,8 @@ async function onSave() {
           emit('success', data);
           form.value = { ...DEFAULT_FORM };
           isLoading.value = false;
-          toast.success('Program timetable updated!');
+          toast.success('Event timetable updated!');
+          model.value = false;
         }
       }
     } else {
@@ -129,12 +122,12 @@ async function onSave() {
         if (data) {
           emit('success', data);
           form.value = clone(DEFAULT_FORM);
-          toast.success('Program timetable created!');
+          toast.success('Event timetable created!');
+          model.value = false;
         }
       }
     }
     isLoading.value = false;
-    model.value = false;
   } else {
     toast.error(t('errors.validation.invalid'));
     isLoading.value = false;
@@ -164,8 +157,8 @@ async function onGetDataById(id: string) {
 watch(
   () => model.value,
   async (newValue) => {
-    if (newValue && props.programTimetableId) {
-      onGetDataById(props.programTimetableId);
+    if (newValue && props.eventTimetableId) {
+      onGetDataById(props.eventTimetableId);
     }
   }
 );

@@ -117,7 +117,7 @@
 
 <script lang="ts" setup>
 // utils
-import { PROGRAM_TIMELINE_CATEGORY } from '@/api/types/ProgramTimeline';
+import { EVENT_TIMELINE_CATEGORY } from '@/api/types/EventTimeline.ts';
 import { showDefaultTranslationOrEmpty } from '@/utils/showDefaultTranslationOrEmpty';
 import rulesValidation from '@/utils/validations';
 import DialogTitleI18n from '../../dialogs/DialogTitleI18n.vue';
@@ -127,7 +127,7 @@ const model = defineModel({ type: Object, default: () => ({}) });
 const formRef = ref();
 
 const categories = computed(() =>
-  Object.values(PROGRAM_TIMELINE_CATEGORY).map((i) => {
+  Object.values(EVENT_TIMELINE_CATEGORY).map((i) => {
     return {
       value: i,
       title: i

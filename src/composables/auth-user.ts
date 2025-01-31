@@ -19,7 +19,7 @@ export default function useAuthUser() {
     email: string;
     password: string;
   }) => {
-    const { data, error } = await supabase().auth.signInWithPassword({
+    const { data, error } = await supabase.auth.signInWithPassword({
       email,
       password
     });
@@ -33,7 +33,7 @@ export default function useAuthUser() {
     provider: Provider,
     redirectTo: string
   ) => {
-    const { data, error } = await supabase().auth.signInWithOAuth({
+    const { data, error } = await supabase.auth.signInWithOAuth({
       provider,
       options: { redirectTo }
     });
@@ -44,7 +44,7 @@ export default function useAuthUser() {
    * Logout
    */
   const logout = async () => {
-    return await supabase().auth.signOut();
+    return await supabase.auth.signOut();
   };
 
   /**
@@ -67,7 +67,7 @@ export default function useAuthUser() {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     options: any;
   }) => {
-    const { data, error } = await supabase().auth.signUp({
+    const { data, error } = await supabase.auth.signUp({
       email,
       password,
       // arbitrary meta data is passed as the second argument under a data key
@@ -87,7 +87,7 @@ export default function useAuthUser() {
    * Update user email, password, or meta data
    */
   const updateUser = async (payload: UserAttributes) => {
-    return await supabase().auth.updateUser(payload);
+    return await supabase.auth.updateUser(payload);
   };
 
   /**
@@ -101,7 +101,7 @@ export default function useAuthUser() {
       captchaToken?: string;
     } = {}
   ) => {
-    const { data, error } = await supabase().auth.resetPasswordForEmail(
+    const { data, error } = await supabase.auth.resetPasswordForEmail(
       email,
       options
     );
@@ -109,13 +109,13 @@ export default function useAuthUser() {
   };
 
   const resetPassword = async (newPassword: string) => {
-    return await supabase().auth.updateUser({
+    return await supabase.auth.updateUser({
       password: newPassword
     });
   };
 
   const fetchUser = async () => {
-    const { data, error } = await supabase().auth.getUser();
+    const { data, error } = await supabase.auth.getUser();
     if (data?.user) {
       user.value = data.user;
     }
@@ -123,7 +123,7 @@ export default function useAuthUser() {
   };
 
   const refreshSession = async () => {
-    return await supabase().auth.refreshSession();
+    return await supabase.auth.refreshSession();
   };
 
   return {

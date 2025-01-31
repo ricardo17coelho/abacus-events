@@ -60,8 +60,8 @@ const DEFAULT_FORM = {
   },
   location: '',
   location_url: '',
-  total_slots: '',
-  filled_slots: ''
+  total_slots: 0,
+  filled_slots: 0
 };
 
 const form = ref({

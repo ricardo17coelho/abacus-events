@@ -60,14 +60,14 @@
 </template>
 
 <script setup lang="ts">
-import type { ProgramTimeline } from '@/api/types/ProgramTimeline';
+import type { EventTimeline } from '@/api/types/EventTimeline.ts';
 import { isValidHttpUrl } from '@/utils/isValidUrl';
 import { showDefaultTranslationOrEmpty } from '@/utils/showDefaultTranslationOrEmpty';
 import type { PropType } from 'vue';
 
 defineProps({
   items: {
-    type: Array as PropType<ProgramTimeline[]>,
+    type: Array as PropType<EventTimeline[]>,
     default: () => []
   },
   editable: {

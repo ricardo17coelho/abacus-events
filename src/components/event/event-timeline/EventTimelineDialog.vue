@@ -11,7 +11,7 @@
       />
     </template>
     <template #content>
-      <ProgramTimelineForm
+      <EventTimelineForm
         ref="formRef"
         v-model="form"
       />
@@ -30,14 +30,14 @@
 <script setup lang="ts">
 // components
 import AppDialog from '@/components/app/AppDialog.vue';
-import ProgramTimelineForm from './ProgramTimelineForm.vue';
-// api's
-import useApiProgramTimeline from '@/api/program-timeline';
+import EventTimelineForm from './EventTimelineForm.vue';
+// apis
+import useApiEventTimeline from '@/api/event-timeline.ts';
 // types & constants
 import type {
-  ProgramTimeline,
-  ProgramTimelineCategory
-} from '@/api/types/ProgramTimeline';
+  EventTimeline,
+  EventTimelineCategory
+} from '@/api/types/EventTimeline.ts';
 // composables
 import { toast } from 'vue-sonner';
 import { useI18n } from 'vue-i18n';
@@ -45,6 +45,8 @@ import { useI18n } from 'vue-i18n';
 import { merge2ObjectsIfKeysExists } from '@/utils/merge';
 import type { PropType } from 'vue';
 import { clone } from '@/utils/clone';
+import { CURRENT_EVENT_KEY } from '@/types/injectionKeys.ts';
+import { requireInjection } from '@/utils/injection.ts';
 
 const props = defineProps({
   programTimetableId: {
@@ -52,7 +54,7 @@ const props = defineProps({
     default: undefined
   },
   category: {
-    type: String as PropType<ProgramTimelineCategory>,
+    type: String as PropType<EventTimelineCategory>,
     required: true
   }
 });
@@ -60,6 +62,8 @@ const props = defineProps({
 const model = defineModel({ type: Boolean, default: false });
 
 const emit = defineEmits(['success']);
+
+const currentEvent = requireInjection(CURRENT_EVENT_KEY);
 
 const { t, locale } = useI18n();
 
@@ -81,8 +85,8 @@ const form = ref({
   ...DEFAULT_FORM
 });
 
-const { createProgramTimeline, updateProgramTimeline, getProgramTimelineById } =
-  useApiProgramTimeline();
+const { createEventTimeline, updateEventTimeline, getEventTimelineById } =
+  useApiEventTimeline();
 
 const isLoading = ref(false);
 const formRef = ref();
@@ -93,7 +97,7 @@ async function onSave() {
     isLoading.value = true;
     if (props.programTimetableId) {
       // edit
-      const { error, data } = await updateProgramTimeline(
+      const { error, data } = await updateEventTimeline(
         props.programTimetableId,
         form.value
       );
@@ -112,7 +116,10 @@ async function onSave() {
       }
     } else {
       // add
-      const { error, data } = await createProgramTimeline(form.value);
+      const { error, data } = await createEventTimeline({
+        ...form.value,
+        event_id: currentEvent.value?.id
+      });
 
       if (error) {
         if (error.message) {
@@ -134,12 +141,12 @@ async function onSave() {
   }
 }
 
-const programTimetable = ref<ProgramTimeline>();
+const programTimetable = ref<EventTimeline>();
 const isLoadingInitial = ref(false);
 
 async function onGetDataById(id: string) {
   isLoadingInitial.value = true;
-  const { error, data } = await getProgramTimelineById(id);
+  const { error, data } = await getEventTimelineById(id);
 
   if (error) {
     if (error.message) {

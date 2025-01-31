@@ -51,7 +51,7 @@
 
       <v-row v-if="isCurrentUserAdmin">
         <v-col align="end">
-          <ProgramTimelineDialog
+          <EventTimelineDialog
             category="ADULTS"
             @success="mutateById($event.id, $event)"
           >
@@ -64,7 +64,7 @@
                 {{ $t('buttons.add') }}
               </v-btn>
             </template>
-          </ProgramTimelineDialog>
+          </EventTimelineDialog>
         </v-col>
       </v-row>
       <AppTimeline :items="sortedItems">
@@ -72,7 +72,7 @@
           v-if="isCurrentUserAdmin"
           #actions="{ item }"
         >
-          <ProgramTimelineDialog
+          <EventTimelineDialog
             v-if="isCurrentUserAdmin"
             :program-timetable-id="item.id"
             category="ADULTS"
@@ -85,7 +85,7 @@
                 icon="mdi-pencil"
               />
             </template>
-          </ProgramTimelineDialog>
+          </EventTimelineDialog>
           <v-btn
             color="error"
             variant="text"
@@ -102,16 +102,16 @@
 import AppTitle from '@/components/app/AppTitle.vue';
 import AppTimeline from '@/components/app/AppTimeline.vue';
 import { useAuthStore } from '@/stores/auth';
-import ProgramTimelineDialog from '@/components/program/program-timetable/ProgramTimelineDialog.vue';
+import EventTimelineDialog from '@/components/event/event-timeline/EventTimelineDialog.vue';
 import { toast } from 'vue-sonner';
-import useApiProgramTimeline from '@/api/program-timeline';
+import useApiProgramTimeline from '@/api/event-timeline.ts';
 import {
-  PROGRAM_TIMELINE_CATEGORY,
-  type ProgramTimeline
-} from '@/api/types/ProgramTimeline';
+  EVENT_TIMELINE_CATEGORY,
+  type EventTimeline
+} from '@/api/types/EventTimeline.ts';
 import { useI18n } from 'vue-i18n';
 import AppLoader from '@/components/app/AppLoader.vue';
-import useProgramCategories from '@/composables/program-categories';
+import useProgramCategories from '@/composables/event-categories.ts';
 import ContainerCentered from '@/components/containers/ContainerCentered.vue';
 import AppImagesView from '@/components/app/AppImagesView.vue';
 
@@ -119,9 +119,9 @@ const { isCurrentUserAdmin } = useAuthStore();
 
 const currentCategoryFilter = ref();
 
-const { removeProgramTimeline, getProgramTimelines } = useApiProgramTimeline();
+const { removeEventTimeline, getEventTimelines } = useApiProgramTimeline();
 
-const items = ref<ProgramTimeline[]>([]);
+const items = ref<EventTimeline[]>([]);
 
 const sortedItems = computed(() => {
   return items.value.slice().sort((a, b) => {
@@ -134,7 +134,7 @@ const sortedItems = computed(() => {
   });
 });
 
-function mutateById(id: string, payload: ProgramTimeline) {
+function mutateById(id: string, payload: EventTimeline) {
   const idx = items.value.findIndex((i) => i.id === id);
   if (idx > -1) {
     Object.assign(items.value[idx], payload);
@@ -150,7 +150,7 @@ const { t } = useI18n();
 const isLoading = ref(false);
 const fetchData = async () => {
   isLoading.value = true;
-  const { data, error } = await getProgramTimelines();
+  const { data, error } = await getEventTimelines();
   if (error) {
     toast.error(t('errors.error_occurred'));
     return;
@@ -163,8 +163,8 @@ const fetchData = async () => {
 
 fetchData();
 
-async function onDeleteItem(item: ProgramTimeline) {
-  const { error } = await removeProgramTimeline(item.id);
+async function onDeleteItem(item: EventTimeline) {
+  const { error } = await removeEventTimeline(item.id);
   if (error) {
     toast.error(t('errors.error_occurred'));
     return;
@@ -188,14 +188,17 @@ watch(
 );
 
 const images = computed(() => {
-  if (currentCategoryFilter.value === PROGRAM_TIMELINE_CATEGORY.BEVERAGE) {
-    return ['/images/drinks.png', '/images/cocktails.png'];
+  if (currentCategoryFilter.value === EVENT_TIMELINE_CATEGORY.BEVERAGE) {
+    return [
+      '/images/summer-part-2024/drinks.png',
+      '/images/summer-part-2024/cocktails.png'
+    ];
   }
-  return ['/images/plan.png'];
+  return ['/images/summer-part-2024/plan.png'];
 });
 
 const imagesBtn = computed(() => {
-  if (currentCategoryFilter.value === PROGRAM_TIMELINE_CATEGORY.BEVERAGE) {
+  if (currentCategoryFilter.value === EVENT_TIMELINE_CATEGORY.BEVERAGE) {
     return { text: t('labels.drinks'), icon: 'mdi-glass-cocktail' };
   }
 

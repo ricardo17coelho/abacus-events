@@ -65,7 +65,7 @@ const fetchData = async () => {
 };
 
 const subscribeToChanges = () => {
-  const channel = supabase()
+  const channel = supabase
     .channel('parking_lots')
     .on(
       'postgres_changes',
@@ -86,7 +86,7 @@ onMounted(() => {
   fetchData();
   const subscription = subscribeToChanges();
   onUnmounted(() => {
-    supabase().removeChannel(subscription);
+    supabase.removeChannel(subscription);
   });
 });
 </script>

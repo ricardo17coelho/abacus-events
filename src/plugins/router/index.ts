@@ -1,8 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import { supabase } from '@/services/supabase';
+import { supabase } from '@/services/supabase.ts';
 import type { AuthChangeEvent } from '@supabase/supabase-js';
-import { useAuthStore } from '@/stores/auth';
-import useAuthUser from '@/composables/auth-user';
+import { useAuthStore } from '@/stores/auth.ts';
+import useAuthUser from '@/composables/auth-user.ts';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -50,7 +50,7 @@ const router = createRouter({
             if (!to.hash.includes('type=recovery')) {
               const {
                 data: { user }
-              } = await supabase().auth.getUser();
+              } = await supabase.auth.getUser();
               if (user) return '/';
               return '/signin';
             }
@@ -107,19 +107,30 @@ const router = createRouter({
           component: () => import('@/views/HomeView.vue')
         },
         {
-          path: '/program',
-          name: 'program',
-          component: () => import('@/views/ProgramView.vue')
-        },
-        {
-          path: '/parking',
-          name: 'parking',
-          component: () => import('@/views/ParkingView.vue')
-        },
-        {
-          path: '/shuttle-schedule',
-          name: 'shuttle-schedule',
-          component: () => import('@/views/ShuttleSchedule.vue')
+          path: '/:eventId',
+          component: () => import('@/plugins/router/guards/GuardEvent.vue'),
+          children: [
+            {
+              path: '',
+              name: 'event',
+              component: () => import('@/views/EventView.vue')
+            },
+            {
+              path: 'program',
+              name: 'event-program',
+              component: () => import('@/views/EventTimelineView.vue')
+            },
+            {
+              path: 'parking',
+              name: 'event-parking',
+              component: () => import('@/views/ParkingView.vue')
+            },
+            {
+              path: 'shuttle-schedule',
+              name: 'shuttle-schedule',
+              component: () => import('@/views/ShuttleSchedule.vue')
+            }
+          ]
         }
       ]
     },
@@ -137,7 +148,7 @@ const router = createRouter({
   ]
 });
 
-supabase().auth.onAuthStateChange((event: AuthChangeEvent) => {
+supabase.auth.onAuthStateChange((event: AuthChangeEvent) => {
   console.log(event);
   if (!event) return;
   if (event === 'SIGNED_OUT') {
@@ -164,7 +175,7 @@ router.beforeEach(async (to) => {
 
   const {
     data: { session }
-  } = await supabase().auth.getSession();
+  } = await supabase.auth.getSession();
   if (!requiresNoAuth) {
     if (session?.user) {
       setCurrentUser(session.user);

@@ -11,6 +11,12 @@
           width="150"
         />
       </router-link>
+      <v-btn
+        v-if="isCurrentUserAdminOrHelper"
+        class="ml-2"
+        icon="mdi-view-dashboard"
+        :to="{ name: 'dashboard' }"
+      />
       <v-spacer />
       <div
         class="d-flex"
@@ -51,7 +57,7 @@ import { useAuthStore } from '@/stores/auth';
 import MenuLanguage from './MenuLanguage.vue';
 import { useI18n } from 'vue-i18n';
 
-const { currentUser } = useAuthStore();
+const { currentUser, isCurrentUserAdminOrHelper } = useAuthStore();
 const { logout } = useAuthUser();
 
 const { locale, availableLocales } = useI18n();

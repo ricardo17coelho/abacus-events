@@ -1,13 +1,13 @@
 import {
-  PROGRAM_TIMELINE_CATEGORY,
-  type ProgramTimelineCategory
-} from '@/api/types/ProgramTimeline';
+  EVENT_TIMELINE_CATEGORY,
+  type EventTimelineCategory
+} from '@/api/types/EventTimeline.ts';
 import { useI18n } from 'vue-i18n';
 
 export default function useProgramCategories() {
   const { t } = useI18n();
 
-  function getIconByCategory(category: ProgramTimelineCategory) {
+  function getIconByCategory(category: EventTimelineCategory) {
     switch (category) {
       case 'KIDS':
         return 'mdi-balloon';
@@ -23,7 +23,7 @@ export default function useProgramCategories() {
   }
 
   const categories = computed(() =>
-    Object.values(PROGRAM_TIMELINE_CATEGORY).map((i) => {
+    Object.values(EVENT_TIMELINE_CATEGORY).map((i) => {
       return {
         value: i,
         title: t(`categories.${i}`),

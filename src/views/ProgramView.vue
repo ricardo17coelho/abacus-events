@@ -107,8 +107,7 @@ import { toast } from 'vue-sonner';
 import useApiProgramTimeline from '@/api/program-timeline';
 import {
   PROGRAM_TIMELINE_CATEGORY,
-  type ProgramTimeline,
-  type ProgramTimelineCategory
+  type ProgramTimeline
 } from '@/api/types/ProgramTimeline';
 import { useI18n } from 'vue-i18n';
 import AppLoader from '@/components/app/AppLoader.vue';
@@ -118,12 +117,9 @@ import AppImagesView from '@/components/app/AppImagesView.vue';
 
 const { isCurrentUserAdmin } = useAuthStore();
 
-const currentCategoryFilter = ref<ProgramTimelineCategory>(
-  PROGRAM_TIMELINE_CATEGORY.ADULTS
-);
+const currentCategoryFilter = ref();
 
-const { getProgramTimelinesByCategory, removeProgramTimeline } =
-  useApiProgramTimeline();
+const { removeProgramTimeline, getProgramTimelines } = useApiProgramTimeline();
 
 const items = ref<ProgramTimeline[]>([]);
 
@@ -154,9 +150,7 @@ const { t } = useI18n();
 const isLoading = ref(false);
 const fetchData = async () => {
   isLoading.value = true;
-  const { data, error } = await getProgramTimelinesByCategory(
-    currentCategoryFilter.value
-  );
+  const { data, error } = await getProgramTimelines();
   if (error) {
     toast.error(t('errors.error_occurred'));
     return;

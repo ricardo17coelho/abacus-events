@@ -60,11 +60,10 @@ export default function useApiEventTimeline() {
 
   // EventTimelineCategory
 
-  function getEventTimelineCategories(
-    select = '*',
-    filters: FindFilter[] = [],
-    range = [0, 100]
-  ) {
+  function getEventTimelineCategories(eventId: string, range = [0, 100]) {
+    const filters: FindFilter[] = [['event_id', 'eq', eventId]];
+    const select = '*';
+
     return find<EventTimelineCategory>(
       'event_timeline_category',
       filters,

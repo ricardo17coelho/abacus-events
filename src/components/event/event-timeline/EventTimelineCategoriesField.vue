@@ -67,7 +67,8 @@
 import { showDefaultTranslationOrEmpty } from '@/utils/showDefaultTranslationOrEmpty';
 import useApiEventTimeline from '@/api/event-timeline.ts';
 import type { EventTimelineCategory } from '@/api/types/EventTimeline.ts';
-defineProps({
+
+const props = defineProps({
   loading: {
     type: Boolean,
     default: false
@@ -75,6 +76,10 @@ defineProps({
   name: {
     type: String,
     default: 'field-event-timeline-categories'
+  },
+  eventId: {
+    type: String,
+    required: true
   }
 });
 
@@ -91,7 +96,7 @@ const items = ref<EventTimelineCategoryItem[]>([]);
 const { getEventTimelineCategories } = useApiEventTimeline();
 
 async function initialFetch() {
-  const { data, error } = await getEventTimelineCategories();
+  const { data, error } = await getEventTimelineCategories(props.eventId);
 
   if (error) return;
   if (data) {

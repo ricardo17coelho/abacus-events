@@ -49,49 +49,53 @@
             </template>
           </AppImagesView>
         </ContainerCentered>
-
-        <v-row v-if="isCurrentUserAdmin">
-          <v-col align="end">
-            <EventTimelineDialog @success="mutateById($event.id, $event)">
-              <template #activator="{ props: activatorProps }">
-                <v-btn
-                  v-bind="activatorProps"
-                  variant="text"
-                  prepend-icon="mdi-plus"
-                >
-                  {{ t('buttons.add') }}
-                </v-btn>
-              </template>
-            </EventTimelineDialog>
-          </v-col>
-        </v-row>
-        <AppTimeline :items="sortedItems">
-          <template
-            v-if="isCurrentUserAdmin"
-            #actions="{ item }"
-          >
-            <EventTimelineDialog
-              v-if="isCurrentUserAdmin"
-              :event-timetable-id="item.id"
-              @success="mutateById($event.id, $event)"
-            >
-              <template #activator="{ props: activatorProps }">
-                <v-btn
-                  v-bind="activatorProps"
-                  variant="text"
-                  icon="mdi-pencil"
-                />
-              </template>
-            </EventTimelineDialog>
-            <v-btn
-              color="error"
-              variant="text"
-              icon="mdi-delete"
-              @click="onDeleteItem(item)"
-            />
-          </template>
-        </AppTimeline>
       </template>
+
+      <v-row v-if="isCurrentUserAdmin">
+        <v-col align="end">
+          <EventTimelineDialog @success="mutateById($event.id, $event)">
+            <template #activator="{ props: activatorProps }">
+              <v-btn
+                v-bind="activatorProps"
+                variant="text"
+                prepend-icon="mdi-plus"
+              >
+                {{ t('buttons.add') }}
+              </v-btn>
+            </template>
+          </EventTimelineDialog>
+        </v-col>
+      </v-row>
+
+      <AppTimeline
+        v-if="currentCategoryFilter"
+        :items="sortedItems"
+      >
+        <template
+          v-if="isCurrentUserAdmin"
+          #actions="{ item }"
+        >
+          <EventTimelineDialog
+            v-if="isCurrentUserAdmin"
+            :event-timetable-id="item.id"
+            @success="mutateById($event.id, $event)"
+          >
+            <template #activator="{ props: activatorProps }">
+              <v-btn
+                v-bind="activatorProps"
+                variant="text"
+                icon="mdi-pencil"
+              />
+            </template>
+          </EventTimelineDialog>
+          <v-btn
+            color="error"
+            variant="text"
+            icon="mdi-delete"
+            @click="onDeleteItem(item)"
+          />
+        </template>
+      </AppTimeline>
     </template>
   </v-container>
 </template>
@@ -162,7 +166,10 @@ const categories = ref<EventTimelineCategory[]>([]);
 const { getEventTimelineCategories } = useApiEventTimeline();
 
 async function initialFetch() {
-  const { data, error } = await getEventTimelineCategories();
+  if (!currentEvent.value) return;
+  const { data, error } = await getEventTimelineCategories(
+    currentEvent.value?.id
+  );
 
   if (error) return;
   if (data) {

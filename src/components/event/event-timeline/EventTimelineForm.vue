@@ -38,6 +38,7 @@
         <EventTimelineCategoriesField
           v-model="model.category"
           :label="t('labels.category')"
+          :event-id="eventId"
           name="field-category"
           chips
           :rules="[rulesValidation.ruleRequired]"
@@ -122,6 +123,13 @@ import rulesValidation from '@/utils/validations';
 import DialogTitleI18n from '../../dialogs/DialogTitleI18n.vue';
 import EventTimelineCategoriesField from '@/components/event/event-timeline/EventTimelineCategoriesField.vue';
 import { useI18n } from 'vue-i18n';
+
+defineProps({
+  eventId: {
+    type: String,
+    required: true
+  }
+});
 
 const model = defineModel({ type: Object, default: () => ({}) });
 

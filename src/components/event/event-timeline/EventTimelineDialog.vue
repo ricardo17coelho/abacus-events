@@ -12,8 +12,10 @@
     </template>
     <template #content>
       <EventTimelineForm
+        v-if="currentEvent"
         ref="formRef"
         v-model="form"
+        :event-id="currentEvent?.id"
       />
     </template>
     <template #actions>

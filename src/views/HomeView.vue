@@ -26,14 +26,14 @@
           />
 
           <v-card-title
-            v-if="event.name"
+            v-if="event.title"
             class="text-body-1 text-sm-h6"
           >
-            {{ showDefaultTranslationOrEmpty(event.name) }}
+            {{ showDefaultTranslationOrEmpty(event.title) }}
           </v-card-title>
 
           <v-card-subtitle
-            v-if="event.name"
+            v-if="event.title"
             class="text-wrap"
           >
             {{ showDefaultTranslationOrEmpty(event.description) }}

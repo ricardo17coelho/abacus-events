@@ -3,7 +3,7 @@
     v-if="currentEvent"
     class="align-center"
   >
-    <AppTitle :title="showDefaultTranslationOrEmpty(currentEvent.name)" />
+    <AppTitle :title="showDefaultTranslationOrEmpty(currentEvent.title)" />
     <AppImagesView :images="[currentEvent.banner]">
       <template #activator="activatorProps">
         <v-img

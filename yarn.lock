@@ -4820,15 +4820,15 @@ vue@^3.4, vue@^3.4.31, vue@^3.5.13:
     "@vue/server-renderer" "3.5.13"
     "@vue/shared" "3.5.13"
 
+vuetify@^3.7.12:
+  version "3.7.12"
+  resolved "https://registry.yarnpkg.com/vuetify/-/vuetify-3.7.12.tgz#17fa7e7a88ba8495d7162ad64916ea91e63875cf"
+  integrity sha512-cBxWXKPNl3vWc10/EEpfK4RBrCZERAHEUZCWmrJPd6v+JU0sbm4sEgIpy8IU5d1BzA1kIhknpbgYy2IqiZponA==
+
 vuetify@^3.7.4:
   version "3.7.8"
   resolved "https://registry.yarnpkg.com/vuetify/-/vuetify-3.7.8.tgz#fa07f07650e0fb1fd14af0c080bd4e82c0039fc4"
   integrity sha512-67p7Ton7EikHKhzauAmpsV1HT/zA2DmG8hjcHmQrktGl1eBrRaQVE+idWLtbhO51jqpTsrKQK9+HuG0KRwIGYQ==
-
-vuetify@^3.7.9:
-  version "3.7.9"
-  resolved "https://registry.yarnpkg.com/vuetify/-/vuetify-3.7.9.tgz#a06c7d79fe1ee592ce620729d988c868f4e653eb"
-  integrity sha512-9pHu6ESdg/lYYCrdXb2uoLZGbw2bysWLaqMu2bzQPMTrMj1GfgcL0k/siTGkUa+o0cVWzvlP/cnjOFGMTxH3og==
 
 w3c-xmlserializer@^5.0.0:
   version "5.0.0"

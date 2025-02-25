@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container v-if="currentEvent">
     <v-row>
       <v-col align="center">
         <AppTitle
@@ -19,7 +19,7 @@
     </v-alert>
     <v-row>
       <v-col
-        v-for="parkingLot in parkingLots"
+        v-for="parkingLot in currentEvent.parking_lots"
         :key="parkingLot.id"
         cols="12"
         lg="6"
@@ -34,22 +34,24 @@
 import useApiParkingLot from '@/api/parking-lots';
 import ParkingLotCard from '@/components/parking-lot/ParkingLotCard.vue';
 import AppTitle from '@/components/app/AppTitle.vue';
-import { type ParkingLot } from '@/api/types/ParkingLot';
 import { useI18n } from 'vue-i18n';
 import { toast } from 'vue-sonner';
 import { supabase } from '@/services/supabase';
+import { requireInjection } from '@/utils/injection.ts';
+import { CURRENT_EVENT_KEY } from '@/types/injectionKeys.ts';
 
 const { t } = useI18n();
 
-const parkingLots = ref<ParkingLot[]>([]);
+const currentEvent = requireInjection(CURRENT_EVENT_KEY);
 
 const { getParkingLots } = useApiParkingLot();
 
 // eslint-disable-next-line  @typescript-eslint/no-explicit-any
 function mutateParkingLotById(id: string, payload: Record<any, any>) {
-  const idx = parkingLots.value.findIndex((i) => i.id === id);
+  if (!currentEvent.value) return;
+  const idx = currentEvent.value.parking_lots.findIndex((i) => i.id === id);
   if (idx > -1) {
-    Object.assign(parkingLots.value[idx], payload);
+    Object.assign(currentEvent.value?.parking_lots[idx], payload);
   }
 }
 
@@ -59,8 +61,8 @@ const fetchData = async () => {
     toast.error(t('errors.error_occurred'));
     return;
   }
-  if (data) {
-    parkingLots.value = data;
+  if (data && currentEvent.value) {
+    currentEvent.value.parking_lots = data;
   }
 };
 
@@ -83,7 +85,6 @@ const subscribeToChanges = () => {
 };
 
 onMounted(() => {
-  fetchData();
   const subscription = subscribeToChanges();
   onUnmounted(() => {
     supabase.removeChannel(subscription);

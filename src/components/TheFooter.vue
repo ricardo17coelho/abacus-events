@@ -14,8 +14,15 @@
         | C2
         <span class="mx-1">
           |
+          <VBtnPrimary
+            v-if="isLoggedIn"
+            size="x-small"
+            :text="t('labels.logout')"
+            variant="text"
+            @click="logout"
+          />
           <RouterLink
-            v-if="!isLoggedIn"
+            v-else
             :to="{ name: 'auth-sign-in' }"
             class="link-external"
           >
@@ -28,6 +35,8 @@
 </template>
 <script lang="ts" setup>
 import useAuthUser from '@/composables/auth-user.ts';
+import { useI18n } from 'vue-i18n';
 
-const { isLoggedIn } = useAuthUser();
+const { isLoggedIn, logout } = useAuthUser();
+const { t } = useI18n();
 </script>

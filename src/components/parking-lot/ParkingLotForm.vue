@@ -3,8 +3,8 @@
     <v-row dense>
       <v-col>
         <DialogTitleI18n
-          :i18n="model.name"
-          @save="model.name = $event"
+          :i18n="model.title"
+          @save="model.title = $event"
         >
           <template #activator="{ props: activatorProps }">
             <v-text-field
@@ -22,7 +22,7 @@
       <v-col>
         <v-text-field
           v-model="model.location"
-          :label="$t('labels.location')"
+          :label="t('labels.location')"
         />
       </v-col>
     </v-row>
@@ -81,7 +81,7 @@ const { t } = useI18n();
 const formRef = ref();
 
 const modelValueNameI18n = computed(() =>
-  showDefaultTranslationOrEmpty(model.value?.name)
+  showDefaultTranslationOrEmpty(model.value?.title)
 );
 
 defineExpose({ formRef });

@@ -5,16 +5,21 @@ import { validate as isValidUUID } from 'uuid';
 export default function useApiEvents() {
   const { find, findById, create, update, remove } = useApi();
 
+  const baseSelect = `
+    *,
+    parking_lots:parking_lots(*)
+  `;
+
   function getEvents(range = [0, 10]) {
-    return find<Event>('events', [], '*', range);
+    return find<Event>('events', [], baseSelect, range);
   }
 
   function getEventById(eventId: string) {
-    return findById<Event>('events', eventId, '*');
+    return findById<Event>('events', eventId, baseSelect);
   }
 
   function getEventBySlug(slug: string) {
-    return findById<Event>('events', slug, '*', 'slug');
+    return findById<Event>('events', slug, baseSelect, 'slug');
   }
 
   function getEventByIdOrSlug(id: string) {

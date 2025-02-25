@@ -1,4 +1,5 @@
 import type { TitleI18n } from '@/types/TitleI18n';
+import type { ParkingLot } from '@/api/types/ParkingLot.ts';
 
 export type Event = {
   id: string;
@@ -8,4 +9,5 @@ export type Event = {
   date: string;
   banner: string;
   slug: string;
+  parking_lots: ParkingLot[];
 };

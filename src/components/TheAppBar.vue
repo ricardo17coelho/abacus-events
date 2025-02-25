@@ -39,14 +39,6 @@
           :available-locales="availableLocalesFiltered"
           hide-full-text
         />
-
-        <VBtnPrimary
-          v-if="isLoggedIn"
-          :icon="xs ? 'mdi-logout' : undefined"
-          :size="xs ? 'small' : undefined"
-          :text="smAndUp ? t('labels.logout') : undefined"
-          @click="logout"
-        />
       </div>
     </v-container>
   </v-app-bar>
@@ -58,9 +50,9 @@ import MenuLanguage from './MenuLanguage.vue';
 import { useI18n } from 'vue-i18n';
 import { useDisplay } from 'vuetify';
 
-const { logout, isLoggedIn, isCurrentUserAdminOrHelper } = useAuthUser();
+const { isCurrentUserAdminOrHelper } = useAuthUser();
 
-const { locale, availableLocales, t } = useI18n();
+const { locale } = useI18n();
 const { xs, smAndUp } = useDisplay();
 
 const lsLocale = useLocalStorage('locale', locale.value);

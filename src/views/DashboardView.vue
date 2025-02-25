@@ -38,6 +38,13 @@
                 />
               </template>
             </ParkingLotDialog>
+            <v-btn
+              v-if="isCurrentUserAdmin"
+              variant="text"
+              icon="mdi-delete"
+              color="error"
+              @click="onRemoveParkingLot(parkingLot.id)"
+            />
           </template>
           <v-card-actions v-if="isCurrentUserAdminOrHelper">
             <v-number-input
@@ -70,7 +77,8 @@ const { t } = useI18n();
 
 const parkingLots = ref<ParkingLot[]>([]);
 
-const { getParkingLots, updateParkingLot } = useApiParkingLot();
+const { getParkingLots, updateParkingLot, removeParkingLot } =
+  useApiParkingLot();
 const { isCurrentUserAdminOrHelper, isCurrentUserAdmin } = useAuthUser();
 
 const fetchData = async () => {
@@ -88,11 +96,12 @@ onMounted(() => {
   fetchData();
 });
 
-// eslint-disable-next-line  @typescript-eslint/no-explicit-any
-function mutateParkingLotById(id: string, payload: Record<any, any>) {
+function mutateParkingLotById(id: string, payload: ParkingLot) {
   const idx = parkingLots.value.findIndex((i) => i.id === id);
   if (idx > -1) {
     Object.assign(parkingLots.value[idx], payload);
+  } else {
+    parkingLots.value.push(payload);
   }
 }
 
@@ -112,5 +121,18 @@ async function onUpdateFilledSlot(value: number, id: string) {
 
 function onSuccessUpdate(parkingLot: ParkingLot) {
   mutateParkingLotById(parkingLot.id, parkingLot);
+}
+
+async function onRemoveParkingLot(id: string) {
+  const { error } = await removeParkingLot(id);
+  if (error) {
+    toast.error(t('errors.error_occurred'));
+    return;
+  }
+  const idx = parkingLots.value.findIndex((i) => i.id === id);
+  if (idx > -1) {
+    parkingLots.value.splice(idx, 1);
+  }
+  toast.error('Deleted');
 }
 </script>

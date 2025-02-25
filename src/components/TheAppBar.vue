@@ -21,8 +21,8 @@
       <div
         class="d-flex"
         :class="{
-          'ga-1': $vuetify.display.xs,
-          'ga-5': $vuetify.display.smAndUp
+          'ga-1': xs,
+          'ga-5': smAndUp
         }"
       >
         <v-btn
@@ -41,9 +41,9 @@
 
         <VBtnPrimary
           v-if="currentUser"
-          :icon="$vuetify.display.xs ? 'mdi-logout' : undefined"
-          :size="$vuetify.display.xs ? 'small' : undefined"
-          :text="$vuetify.display.smAndUp ? t('labels.logout') : undefined"
+          :icon="xs ? 'mdi-logout' : undefined"
+          :size="xs ? 'small' : undefined"
+          :text="smAndUp ? t('labels.logout') : undefined"
           @click="logout"
         />
       </div>
@@ -56,11 +56,13 @@ import useAuthUser from '@/composables/auth-user';
 import { useAuthStore } from '@/stores/auth';
 import MenuLanguage from './MenuLanguage.vue';
 import { useI18n } from 'vue-i18n';
+import { useDisplay } from 'vuetify';
 
 const { currentUser, isCurrentUserAdminOrHelper } = useAuthStore();
 const { logout } = useAuthUser();
 
 const { locale, availableLocales, t } = useI18n();
+const { xs, smAndUp } = useDisplay();
 
 const lsLocale = useLocalStorage('locale', locale.value);
 

@@ -28,13 +28,13 @@
             <template #item="{ props: ItemProps, item }">
               <v-list-item v-bind="ItemProps">
                 <template #title>
-                  <span v-if="$vuetify.display.xs">{{ item.value }}</span>
+                  <span v-if="xs">{{ item.value }}</span>
                   <span v-else>{{ item.title }}</span>
                 </template>
               </v-list-item>
             </template>
             <template #selection="{ item }">
-              <span v-if="$vuetify.display.xs">{{ item.value }}</span>
+              <span v-if="xs">{{ item.value }}</span>
               <span v-else>{{ item.title }}</span>
             </template>
           </v-select>
@@ -87,6 +87,7 @@
 <script lang="ts" setup>
 import { useI18n } from 'vue-i18n';
 import validationsRules from '@/utils/validations/';
+import { useDisplay } from 'vuetify';
 
 defineProps({
   btnAdd: {
@@ -106,6 +107,7 @@ defineProps({
 const model = defineModel({ type: Object, default: () => ({}) });
 
 const { t, availableLocales } = useI18n();
+const { xs } = useDisplay();
 
 const computedAvailableLanguages = computed(() =>
   availableLocales.map((l) => l.split('-')[0])

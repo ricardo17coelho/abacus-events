@@ -6,8 +6,8 @@
     <template #activator="{ props: ActivatorProps }">
       <v-btn
         v-bind="ActivatorProps"
-        :icon="$vuetify.display.xs ? 'mdi-logout' : undefined"
-        :size="$vuetify.display.xs ? 'small' : undefined"
+        :icon="xs ? 'mdi-logout' : undefined"
+        :size="xs ? 'small' : undefined"
       >
         <span
           v-if="hideFullText"
@@ -39,6 +39,7 @@
 
 <script lang="ts" setup>
 import { type PropType } from 'vue';
+import { useDisplay } from 'vuetify';
 
 defineProps({
   availableLocales: {
@@ -56,6 +57,8 @@ defineProps({
 });
 
 const model = defineModel({ type: String, required: true });
+
+const { xs } = useDisplay();
 
 function getLanguageTextByIsoCode(isoCode: string) {
   switch (isoCode) {

@@ -4,7 +4,7 @@ import type { User } from '@supabase/supabase-js';
 import { defineStore, acceptHMRUpdate } from 'pinia';
 
 export const useAuthStore = defineStore('authStore', () => {
-  const currentUser = ref<undefined | User>();
+  const currentUser = ref<User>();
 
   const currentUserMetadata = computed(() => currentUser.value?.user_metadata);
 

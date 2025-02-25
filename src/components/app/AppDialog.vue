@@ -4,10 +4,10 @@
     transition="dialog-bottom-transition"
     scrollable
     :fullscreen="fullscreen"
-    :height="fullscreen || $vuetify.display.xs ? '100%' : height"
-    :width="fullscreen || $vuetify.display.xs ? '100%' : height"
-    :max-height="fullscreen || $vuetify.display.xs ? '100%' : maxHeight"
-    :max-width="fullscreen || $vuetify.display.xs ? '100%' : maxWidth"
+    :height="fullscreen || xs ? '100%' : height"
+    :width="fullscreen || xs ? '100%' : height"
+    :max-height="fullscreen || xs ? '100%' : maxHeight"
+    :max-width="fullscreen || xs ? '100%' : maxWidth"
     v-bind="$attrs"
   >
     <template #activator="activatorProps">
@@ -67,6 +67,7 @@
 
 <script setup lang="ts">
 import AppLoader from './AppLoader.vue';
+import { useDisplay } from 'vuetify';
 
 defineProps({
   title: {
@@ -112,6 +113,8 @@ const model = defineModel({
   default: false
 });
 const fullscreen = defineModel('fullscreen', { type: Boolean, default: false });
+
+const { xs } = useDisplay();
 </script>
 
 <style scoped>

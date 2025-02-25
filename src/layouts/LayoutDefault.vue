@@ -6,7 +6,7 @@
       <v-container
         class="main-container overflow-auto app-container pt-0"
         :class="{
-          'main-container-with-footer': $vuetify.display.smAndUp && isRouteRoot
+          'main-container-with-footer': smAndUp && isRouteRoot
         }"
       >
         <RouterView />
@@ -15,7 +15,7 @@
 
     <TheFooter
       v-if="isRouteRoot"
-      :app="$vuetify.display.smAndUp"
+      :app="smAndUp"
     />
   </v-app>
 </template>
@@ -23,8 +23,11 @@
 <script lang="ts" setup>
 import TheAppBar from '@/components/TheAppBar.vue';
 import TheFooter from '@/components/TheFooter.vue';
+import { useDisplay } from 'vuetify';
 
 const route = useRoute();
+const { smAndUp } = useDisplay();
+
 const isRouteRoot = computed(() => route.path === '/');
 </script>
 <style scoped>

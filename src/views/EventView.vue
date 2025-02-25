@@ -30,7 +30,7 @@
           color="primary"
           :to="link.to"
           height="100%"
-          :density="$vuetify.display.xs ? 'compact' : 'default'"
+          :density="xs ? 'compact' : 'default'"
           @click="
             link.action && Object.keys(link).includes('action')
               ? link.action()
@@ -79,8 +79,10 @@ import AppTitle from '@/components/app/AppTitle.vue';
 import { showDefaultTranslationOrEmpty } from '@/utils/showDefaultTranslationOrEmpty.ts';
 import { requireInjection } from '@/utils/injection.ts';
 import { CURRENT_EVENT_KEY } from '@/types/injectionKeys.ts';
+import { useDisplay } from 'vuetify';
 
 const { t } = useI18n();
+const { xs } = useDisplay();
 
 const currentEvent = requireInjection(CURRENT_EVENT_KEY);
 

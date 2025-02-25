@@ -1,6 +1,6 @@
 <template>
   <ContainerCentered>
-    <v-card :width="$vuetify.display.xs ? undefined : '500'">
+    <v-card :width="xs ? undefined : '500'">
       <template #prepend>
         <v-btn
           icon="mdi-arrow-left"
@@ -23,4 +23,7 @@
 </template>
 <script lang="ts" setup>
 import ContainerCentered from '@/components/containers/ContainerCentered.vue';
+import { useDisplay } from 'vuetify';
+
+const { xs } = useDisplay();
 </script>

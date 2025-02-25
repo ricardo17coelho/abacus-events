@@ -11,7 +11,7 @@
       <template #title>
         <v-card-title>
           <h1 class="mx-auto text-h4 font-bold">
-            Aba Summer Party
+            Abacus Events
           </h1>
         </v-card-title>
       </template>

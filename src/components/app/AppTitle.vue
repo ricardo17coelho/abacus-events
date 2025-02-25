@@ -13,7 +13,7 @@
             {{ title }}
           </span>
           <span v-else>
-            Abacus Summer Party
+            Abacus Events
             <span
               class="prevent-select"
               @click="basic"

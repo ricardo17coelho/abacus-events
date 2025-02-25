@@ -55,7 +55,7 @@ const emit = defineEmits(['success']);
 const { t, locale } = useI18n();
 
 const DEFAULT_FORM = {
-  name: {
+  title: {
     [locale.value]: ''
   },
   location: '',

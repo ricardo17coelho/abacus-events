@@ -1,7 +1,7 @@
 <template>
   <header>
     <h1
-      v-if="currentUser"
+      v-if="user"
       class="Title"
     >
       <span>
@@ -30,12 +30,11 @@
 <script setup lang="ts">
 // stores
 import useConfetti from '@/composables/confetti';
-import { useAuthStore } from '@/stores/auth';
+import useAuthUser from '@/composables/auth-user.ts';
 // composables
 import { useI18n } from 'vue-i18n';
 
-const { currentUser, currentUserDisplayName, currentUserRoles } =
-  useAuthStore();
+const { user, currentUserDisplayName, currentUserRoles } = useAuthUser();
 
 const i18n = useI18n();
 const { randomDirection } = useConfetti();

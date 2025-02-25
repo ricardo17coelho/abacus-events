@@ -1,11 +1,9 @@
 import { ref } from 'vue';
 import type { Provider, UserAttributes } from '@supabase/supabase-js';
 import { supabase } from '@/services/supabase';
-// user is set outside of the useAuthUser function
+// user is set outside the useAuthUser function
 // so that it will act as global state and always refer to a single user
 
-// o usuário é definido fora da função useAuthUser para que atue como um estado global
-// e sempre se refira a um único usuário
 const user = ref();
 
 export default function useAuthUser() {
@@ -23,6 +21,9 @@ export default function useAuthUser() {
       email,
       password
     });
+    if (data && data.user) {
+      user.value = data.user;
+    }
     return { data, error };
   };
 
@@ -37,6 +38,7 @@ export default function useAuthUser() {
       provider,
       options: { redirectTo }
     });
+
     return { data, error };
   };
 
@@ -44,15 +46,41 @@ export default function useAuthUser() {
    * Logout
    */
   const logout = async () => {
-    return await supabase.auth.signOut();
+    return await supabase.auth.signOut().then(() => {
+      user.value = null;
+    });
   };
 
   /**
    * Check if the user is logged in or not
    */
-  const isLoggedIn = () => {
-    return !!user.value;
-  };
+  const isLoggedIn = computed(() => !!user.value);
+
+  const currentUserMetadata = computed(() => user.value?.user_metadata);
+
+  const currentUserDisplayName = computed(() => {
+    if (!currentUserMetadata.value?.firstname) return undefined;
+    if (!currentUserMetadata.value?.lastname) {
+      return currentUserMetadata.value?.firstname;
+    }
+    return `${currentUserMetadata.value?.firstname} ${currentUserMetadata.value?.lastname}`;
+  });
+
+  const currentUserRoles = computed(
+    () => user.value?.app_metadata?.userroles || []
+  );
+
+  const isCurrentUserAdmin = computed(() =>
+    currentUserRoles.value.includes('ADMIN')
+  );
+
+  const isCurrentUserHelper = computed(() =>
+    currentUserRoles.value.includes('HELPER')
+  );
+
+  const isCurrentUserAdminOrHelper = computed(
+    () => isCurrentUserAdmin.value || isCurrentUserHelper.value
+  );
 
   /**
    * SignUp
@@ -80,6 +108,9 @@ export default function useAuthUser() {
         ...options
       }
     });
+    if (data && data.user) {
+      user.value = data.user;
+    }
     return { data, error };
   };
 
@@ -87,7 +118,12 @@ export default function useAuthUser() {
    * Update user email, password, or meta data
    */
   const updateUser = async (payload: UserAttributes) => {
-    return await supabase.auth.updateUser(payload);
+    const { data, error } = await supabase.auth.updateUser(payload);
+
+    if (data && data.user) {
+      user.value = data.user;
+    }
+    return { data, error };
   };
 
   /**
@@ -128,6 +164,12 @@ export default function useAuthUser() {
 
   return {
     user,
+    currentUserMetadata,
+    currentUserDisplayName,
+    currentUserRoles,
+    isCurrentUserAdmin,
+    isCurrentUserHelper,
+    isCurrentUserAdminOrHelper,
     login,
     loginWithSocialProvider,
     isLoggedIn,

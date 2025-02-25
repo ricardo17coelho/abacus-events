@@ -15,7 +15,7 @@
         <span class="mx-1">
           |
           <RouterLink
-            v-if="!authStore.currentUser"
+            v-if="!isLoggedIn"
             :to="{ name: 'auth-sign-in' }"
             class="link-external"
           >
@@ -27,7 +27,7 @@
   </v-footer>
 </template>
 <script lang="ts" setup>
-import { useAuthStore } from '@/stores/auth';
+import useAuthUser from '@/composables/auth-user.ts';
 
-const authStore = useAuthStore();
+const { isLoggedIn } = useAuthUser();
 </script>

@@ -61,7 +61,7 @@ import useApiParkingLot from '@/api/parking-lots';
 import ParkingLotCard from '@/components/parking-lot/ParkingLotCard.vue';
 import ParkingLotDialog from '@/components/parking-lot/ParkingLotDialog.vue';
 import UserGreetings from '@/components/UserGreetings.vue';
-import { useAuthStore } from '@/stores/auth';
+import useAuthUser from '@/composables/auth-user.ts';
 import type { ParkingLot } from '@/api/types/ParkingLot';
 import { useI18n } from 'vue-i18n';
 import { toast } from 'vue-sonner';
@@ -71,7 +71,7 @@ const { t } = useI18n();
 const parkingLots = ref<ParkingLot[]>([]);
 
 const { getParkingLots, updateParkingLot } = useApiParkingLot();
-const { isCurrentUserAdminOrHelper, isCurrentUserAdmin } = useAuthStore();
+const { isCurrentUserAdminOrHelper, isCurrentUserAdmin } = useAuthUser();
 
 const fetchData = async () => {
   const { data, error } = await getParkingLots();

@@ -36,7 +36,7 @@
         <v-btn
           variant="plain"
           :to="{ name: 'auth-sign-in' }"
-        >Sign in</v-btn>
+        > Sign in </v-btn>
       </span>
     </template>
   </AuthCard>

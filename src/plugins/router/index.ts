@@ -1,7 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import { supabase } from '@/services/supabase.ts';
 import type { AuthChangeEvent } from '@supabase/supabase-js';
-import { useAuthStore } from '@/stores/auth.ts';
 import useAuthUser from '@/composables/auth-user.ts';
 
 const router = createRouter({
@@ -152,9 +151,9 @@ supabase.auth.onAuthStateChange((event: AuthChangeEvent) => {
   console.log(event);
   if (!event) return;
   if (event === 'SIGNED_OUT') {
-    const authStore = useAuthStore();
-    authStore.currentUser = undefined;
-    router.push('/');
+    const { user } = useAuthUser();
+    user.value = undefined;
+    void router.push('/');
     return;
   } else if (event === 'SIGNED_IN') {
     const routeName = router.currentRoute.value.name;
@@ -169,8 +168,7 @@ supabase.auth.onAuthStateChange((event: AuthChangeEvent) => {
 });
 
 router.beforeEach(async (to) => {
-  const { setCurrentUser, currentUser } = useAuthStore();
-  const { logout } = useAuthUser();
+  const { logout, user } = useAuthUser();
   const requiresNoAuth = to.meta.requiresNoAuth === true;
 
   const {
@@ -178,10 +176,10 @@ router.beforeEach(async (to) => {
   } = await supabase.auth.getSession();
   if (!requiresNoAuth) {
     if (session?.user) {
-      setCurrentUser(session.user);
+      user.value = session.user;
     } else {
-      if (currentUser) {
-        logout();
+      if (user.value) {
+        void logout();
       }
       return {
         name: 'auth-sign-in',
@@ -191,9 +189,9 @@ router.beforeEach(async (to) => {
   } else {
     const isAuthRoute = to.name as string;
     if (session?.user) {
-      setCurrentUser(session.user);
+      user.value = session.user;
     }
-    if (isAuthRoute.startsWith('auth-') && currentUser) {
+    if (isAuthRoute.startsWith('auth-') && user.value) {
       return {
         name: 'dashboard'
       };

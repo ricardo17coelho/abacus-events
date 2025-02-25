@@ -103,7 +103,7 @@
 <script setup lang="ts">
 import AppTitle from '@/components/app/AppTitle.vue';
 import AppTimeline from '@/components/app/AppTimeline.vue';
-import { useAuthStore } from '@/stores/auth';
+import useAuthUser from '@/composables/auth-user.ts';
 import EventTimelineDialog from '@/components/event/event-timeline/EventTimelineDialog.vue';
 import { toast } from 'vue-sonner';
 import useApiProgramTimeline from '@/api/event-timeline.ts';
@@ -120,7 +120,7 @@ import { showDefaultTranslationOrEmpty } from '@/utils/showDefaultTranslationOrE
 import { requireInjection } from '@/utils/injection.ts';
 import { CURRENT_EVENT_KEY } from '@/types/injectionKeys.ts';
 
-const { isCurrentUserAdmin } = useAuthStore();
+const { isCurrentUserAdmin } = useAuthUser();
 
 const currentEvent = requireInjection(CURRENT_EVENT_KEY);
 

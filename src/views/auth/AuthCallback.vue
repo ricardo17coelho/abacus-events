@@ -2,14 +2,14 @@
   <AppLoader />
 </template>
 <script lang="ts" setup>
-import { useAuthStore } from '@/stores/auth';
+import useAuthUser from '@/composables/auth-user.ts';
 import AppLoader from '@/components/app/AppLoader.vue';
 
 const router = useRouter();
-const { currentUser } = useAuthStore();
+const { isLoggedIn } = useAuthUser();
 
 onMounted(() => {
-  if (currentUser) {
+  if (isLoggedIn.value) {
     console.log(
       'arrived on callback page with an existing user, so going home'
     );

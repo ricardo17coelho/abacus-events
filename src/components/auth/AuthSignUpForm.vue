@@ -133,7 +133,7 @@ async function emailAuth() {
     const { data, error } = await signUp(credentials.value);
     if (data.user) {
       const { data, error } = await login(credentials.value);
-      if (data.user) router.push({ name: 'dashboard' });
+      if (data.user) void router.push({ name: 'dashboard' });
       else if (error) {
         toast.error(error.message);
         emailLoading.value = false;

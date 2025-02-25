@@ -30,3 +30,5 @@ circleDep
 *.sw?
 
 .env
+
+supabase/seed.sql

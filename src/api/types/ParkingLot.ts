@@ -3,7 +3,7 @@ import type { TitleI18n } from '@/types/TitleI18n';
 export type ParkingLot = {
   id: string;
   created_at: string;
-  name: TitleI18n;
+  title: TitleI18n;
   location?: string;
   location_url?: string;
   total_slots: number;

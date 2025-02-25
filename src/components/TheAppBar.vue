@@ -11,6 +11,7 @@
           width="150"
         />
       </router-link>
+
       <v-btn
         v-if="isCurrentUserAdminOrHelper"
         class="ml-2"
@@ -25,14 +26,14 @@
           'ga-5': smAndUp
         }"
       >
-        <v-btn
-          color="primary"
-          href="tel:+41 76 414 90 56"
-          icon="mdi-phone"
-          slim
-          size="small"
-          variant="text"
-        />
+        <!--        <v-btn-->
+        <!--          color="primary"-->
+        <!--          href="tel:+41 76 414 90 56"-->
+        <!--          icon="mdi-phone"-->
+        <!--          slim-->
+        <!--          size="small"-->
+        <!--          variant="text"-->
+        <!--        />-->
         <MenuLanguage
           v-model="locale"
           :available-locales="availableLocalesFiltered"
@@ -40,7 +41,7 @@
         />
 
         <VBtnPrimary
-          v-if="currentUser"
+          v-if="isLoggedIn"
           :icon="xs ? 'mdi-logout' : undefined"
           :size="xs ? 'small' : undefined"
           :text="smAndUp ? t('labels.logout') : undefined"
@@ -52,14 +53,12 @@
 </template>
 
 <script setup lang="ts">
-import useAuthUser from '@/composables/auth-user';
-import { useAuthStore } from '@/stores/auth';
+import useAuthUser from '@/composables/auth-user.ts';
 import MenuLanguage from './MenuLanguage.vue';
 import { useI18n } from 'vue-i18n';
 import { useDisplay } from 'vuetify';
 
-const { currentUser, isCurrentUserAdminOrHelper } = useAuthStore();
-const { logout } = useAuthUser();
+const { logout, isLoggedIn, isCurrentUserAdminOrHelper } = useAuthUser();
 
 const { locale, availableLocales, t } = useI18n();
 const { xs, smAndUp } = useDisplay();

@@ -52,7 +52,7 @@ import { useDisplay } from 'vuetify';
 
 const { isCurrentUserAdminOrHelper } = useAuthUser();
 
-const { locale } = useI18n();
+const { locale, availableLocales } = useI18n();
 const { xs, smAndUp } = useDisplay();
 
 const lsLocale = useLocalStorage('locale', locale.value);

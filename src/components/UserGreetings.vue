@@ -4,12 +4,12 @@
       <span>
         {{ i18n.t(greetingMsg) }}
       </span>
-      <span v-if="currentUserDisplayName">
-        {{ currentUserDisplayName }}
+      <span v-if="userDisplayName" class="mx-2 text-grey">
+        {{ userDisplayName }}
       </span>
       <span class="prevent-select" @click="randomDirection"> 🎉 </span>
       <v-chip
-        v-for="currentUserRole in currentUserRoles"
+        v-for="currentUserRole in userRoles"
         :key="currentUserRole"
         class="ml-4"
         color="primary"
@@ -28,7 +28,7 @@ import useAuthUser from '@/composables/auth-user.ts';
 // composables
 import { useI18n } from 'vue-i18n';
 
-const { user, currentUserDisplayName, currentUserRoles } = useAuthUser();
+const { user, userDisplayName, userRoles } = useAuthUser();
 
 const i18n = useI18n();
 const { randomDirection } = useConfetti();

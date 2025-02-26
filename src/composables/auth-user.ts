@@ -1,6 +1,7 @@
 import { ref } from 'vue';
 import type { Provider, UserAttributes } from '@supabase/supabase-js';
 import { supabase } from '@/services/supabase';
+import { getInitials } from '@/utils/initials.ts';
 // user is set outside the useAuthUser function
 // so that it will act as global state and always refer to a single user
 
@@ -56,30 +57,26 @@ export default function useAuthUser() {
    */
   const isLoggedIn = computed(() => !!user.value);
 
-  const currentUserMetadata = computed(() => user.value?.user_metadata);
+  const userMetadata = computed(() => user.value?.user_metadata);
 
-  const currentUserDisplayName = computed(() => {
-    if (!currentUserMetadata.value?.firstname) return undefined;
-    if (!currentUserMetadata.value?.lastname) {
-      return currentUserMetadata.value?.firstname;
+  const userDisplayName = computed(() => {
+    if (!userMetadata.value?.first_name) return undefined;
+    if (!userMetadata.value?.last_name) {
+      return userMetadata.value?.first_name;
     }
-    return `${currentUserMetadata.value?.firstname} ${currentUserMetadata.value?.lastname}`;
+    return `${userMetadata.value?.first_name} ${userMetadata.value?.last_name}`;
   });
 
-  const currentUserRoles = computed(
-    () => user.value?.app_metadata?.userroles || [],
-  );
+  const userInitials = computed(() => getInitials(userDisplayName.value));
 
-  const isCurrentUserAdmin = computed(() =>
-    currentUserRoles.value.includes('ADMIN'),
-  );
+  const userRoles = computed(() => user.value?.app_metadata?.userroles || []);
 
-  const isCurrentUserHelper = computed(() =>
-    currentUserRoles.value.includes('HELPER'),
-  );
+  const isUserAdmin = computed(() => userRoles.value.includes('ADMIN'));
 
-  const isCurrentUserAdminOrHelper = computed(
-    () => isCurrentUserAdmin.value || isCurrentUserHelper.value,
+  const isUserHelper = computed(() => userRoles.value.includes('HELPER'));
+
+  const isUserAdminOrHelper = computed(
+    () => isUserAdmin.value || isUserHelper.value,
   );
 
   /**
@@ -164,12 +161,13 @@ export default function useAuthUser() {
 
   return {
     user,
-    currentUserMetadata,
-    currentUserDisplayName,
-    currentUserRoles,
-    isCurrentUserAdmin,
-    isCurrentUserHelper,
-    isCurrentUserAdminOrHelper,
+    userMetadata,
+    userDisplayName,
+    userInitials,
+    userRoles,
+    isUserAdmin,
+    isUserHelper,
+    isUserAdminOrHelper,
     login,
     loginWithSocialProvider,
     isLoggedIn,

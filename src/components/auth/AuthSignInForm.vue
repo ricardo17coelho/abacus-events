@@ -57,7 +57,7 @@
           prepend-icon="mdi-bug"
           @click="onBtnDevClick"
         >
-          Auto DEV Sign Up
+          Auto DEV Sign In
         </VBtnDev>
       </v-col>
     </v-row>

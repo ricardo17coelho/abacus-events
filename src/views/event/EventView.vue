@@ -58,7 +58,7 @@
 
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n';
-import AppLiveLabel from '../components/app/AppLiveLabel.vue';
+import AppLiveLabel from '../../components/app/AppLiveLabel.vue';
 import AppImagesView from '@/components/app/AppImagesView.vue';
 import AppTitle from '@/components/app/AppTitle.vue';
 import { showDefaultTranslationOrEmpty } from '@/utils/showDefaultTranslationOrEmpty.ts';

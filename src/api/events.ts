@@ -3,7 +3,7 @@ import type { Event } from './types/Event';
 import { validate as isValidUUID } from 'uuid';
 
 export default function useApiEvents() {
-  const { find, findById, create, update, remove } = useApi();
+  const { find, findById, create, update, remove, count } = useApi();
 
   const baseSelect = `
     *,
@@ -46,6 +46,10 @@ export default function useApiEvents() {
     return remove('events', id);
   }
 
+  function getEventsCount() {
+    return count('events');
+  }
+
   return {
     getEvents,
     getEventById,
@@ -54,5 +58,6 @@ export default function useApiEvents() {
     createEvent,
     updateEvent,
     removeEvent,
+    getEventsCount,
   };
 }

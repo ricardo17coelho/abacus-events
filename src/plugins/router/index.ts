@@ -95,11 +95,16 @@ const router = createRouter({
 
     {
       path: '/',
-      component: () => import('@/layouts/LayoutDefault.vue'),
+      component: () => import('@/layouts/event/LayoutEvent.vue'),
       meta: {
         requiresNoAuth: true,
       },
       children: [
+        {
+          path: '/:pathMatch(.*)*',
+          name: 'NotFound',
+          component: () => import('@/views/NotFound.vue'),
+        },
         {
           path: '',
           name: 'home',
@@ -112,35 +117,60 @@ const router = createRouter({
             {
               path: '',
               name: 'event',
-              component: () => import('@/views/EventView.vue'),
+              component: () => import('@/views/event/EventView.vue'),
             },
             {
               path: 'program',
               name: 'event-program',
-              component: () => import('@/views/EventTimelineView.vue'),
+              component: () => import('@/views/event/EventTimelineView.vue'),
             },
             {
               path: 'parking',
               name: 'event-parking',
-              component: () => import('@/views/ParkingView.vue'),
+              component: () => import('@/views/event/EventParkingView.vue'),
             },
             {
               path: 'shuttle-schedule',
               name: 'shuttle-schedule',
-              component: () => import('@/views/ShuttleSchedule.vue'),
+              component: () => import('@/views/event/EventShuttleSchedule.vue'),
             },
           ],
         },
       ],
     },
     {
-      path: '/dashboard',
-      component: () => import('@/layouts/LayoutDefault.vue'),
+      path: '/',
+      component: () => import('@/layouts/default/LayoutDefault.vue'),
       children: [
         {
-          path: '/dashboard',
+          path: '/:pathMatch(.*)*',
+          name: 'NotFound',
+          component: () => import('@/views/NotFound.vue'),
+        },
+        {
+          path: 'dashboard',
           name: 'dashboard',
           component: () => import('@/views/DashboardView.vue'),
+        },
+        {
+          path: 'manage',
+          children: [
+            {
+              path: 'parking-lots',
+              name: 'manage-parking-lots',
+              component: () => import('@/views/manage/ManageParkingLots.vue'),
+            },
+            {
+              path: 'events',
+              name: 'manage-events',
+              component: () => import('@/views/manage/ManageEvents.vue'),
+            },
+            {
+              path: 'users',
+              name: 'manage-users',
+              component: () => import('@/views/manage/ManageUsers.vue'),
+            },
+          ],
         },
       ],
     },

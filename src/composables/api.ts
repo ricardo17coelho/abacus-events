@@ -90,7 +90,7 @@ export default function useApi() {
   //   return query;
   // }
 
-  const count = (table: string, filters: FindFilter[]) => {
+  const count = (table: string, filters: FindFilter[] = []) => {
     // providing the option `head: true` will only return the count, otherwise results too.
     const query = supabase.from(table).select('*', {
       count: 'exact',

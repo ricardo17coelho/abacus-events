@@ -23,12 +23,12 @@
 </template>
 
 <script setup lang="ts">
-import useApiParkingLot from '@/api/parking-lots';
+import useApiParkingLot from '@/api/parking-lots.ts';
 import ParkingLotCard from '@/components/parking-lot/ParkingLotCard.vue';
 import AppTitle from '@/components/app/AppTitle.vue';
 import { useI18n } from 'vue-i18n';
 import { toast } from 'vue-sonner';
-import { supabase } from '@/services/supabase';
+import { supabase } from '@/services/supabase.ts';
 import { requireInjection } from '@/utils/injection.ts';
 import { CURRENT_EVENT_KEY } from '@/types/injectionKeys.ts';
 

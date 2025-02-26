@@ -7,10 +7,10 @@
     <v-row dense>
       <v-col cols="12" sm="6">
         <v-text-field
-          v-model="credentials.data.firstname"
+          v-model="credentials.data.first_name"
           :disabled="loading"
           label="Firstname"
-          name="firstname"
+          name="first_name"
           required
           :rules="[
             rulesValidation.ruleRequired,
@@ -20,10 +20,10 @@
       </v-col>
       <v-col cols="12" sm="6">
         <v-text-field
-          v-model="credentials.data.lastname"
+          v-model="credentials.data.last_name"
           :disabled="loading"
           label="Lastname"
-          name="lastname"
+          name="last_name"
           required
           :rules="[
             rulesValidation.ruleRequired,
@@ -102,8 +102,8 @@ const credentials = ref({
   email: '',
   password: '',
   data: {
-    firstname: '',
-    lastname: '',
+    first_name: '',
+    last_name: '',
   },
 });
 
@@ -140,8 +140,8 @@ function onBtnDevClick() {
     email: import.meta.env.VITE_DEV_USER_EMAIL,
     password: import.meta.env.VITE_DEV_USER_PW,
     data: {
-      firstname: 'Joe',
-      lastname: 'Doe',
+      first_name: 'Joe',
+      last_name: 'Doe',
     },
   };
   nextTick(() => emailAuth());

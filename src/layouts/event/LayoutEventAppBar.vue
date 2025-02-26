@@ -6,7 +6,7 @@
       </router-link>
 
       <v-btn
-        v-if="isCurrentUserAdminOrHelper"
+        v-if="isUserAdminOrHelper"
         class="ml-2"
         icon="mdi-view-dashboard"
         :to="{ name: 'dashboard' }"
@@ -39,11 +39,11 @@
 
 <script setup lang="ts">
 import useAuthUser from '@/composables/auth-user.ts';
-import MenuLanguage from './MenuLanguage.vue';
+import MenuLanguage from '../../components/MenuLanguage.vue';
 import { useI18n } from 'vue-i18n';
 import { useDisplay } from 'vuetify';
 
-const { isCurrentUserAdminOrHelper } = useAuthUser();
+const { isUserAdminOrHelper } = useAuthUser();
 
 const { locale, availableLocales } = useI18n();
 const { xs, smAndUp } = useDisplay();

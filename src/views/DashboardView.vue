@@ -1,138 +1,98 @@
 <template>
-  <UserGreetings />
-  <v-container>
-    <v-row v-if="isCurrentUserAdmin">
-      <v-col align="end">
-        <ParkingLotDialog @success="onSuccessUpdate">
-          <template #activator="{ props: activatorProps }">
-            <v-btn
-              v-bind="activatorProps"
-              prepend-icon="mdi-plus"
-              variant="text"
-            >
-              {{ t('labels.add') }}
-            </v-btn>
-          </template>
-        </ParkingLotDialog>
+  <v-container fluid>
+    <div class="d-flex justify-space-between align-center flex-wrap ga-4 mb-4">
+      <div class="d-flex align-start align-md-center ga-4">
+        <UserGreetings />
+      </div>
+    </div>
+
+    <v-row>
+      <v-col v-for="(item, i) in items" :key="i" cols="12" md="3" sm="6">
+        <v-card class="pa-2" exact :to="item.to">
+          <v-card-item class="pt-4" height="64">
+            <v-card-subtitle class="py-0">{{ item.subtitle }}</v-card-subtitle>
+
+            <v-card-title class="text-h5 py-0">{{ item.title }}</v-card-title>
+
+            <template #append>
+              <v-icon
+                class="opacity-20"
+                :color="item.color"
+                :icon="item.icon"
+                size="48"
+              />
+            </template>
+          </v-card-item>
+        </v-card>
       </v-col>
     </v-row>
+
     <v-row>
-      <v-col
-        v-for="parkingLot in parkingLots"
-        :key="parkingLot.id"
-        cols="12"
-        lg="6"
-      >
-        <ParkingLotCard :parking-lot="parkingLot">
-          <template #actions>
-            <ParkingLotDialog
-              v-if="isCurrentUserAdmin"
-              :parking-lot-id="parkingLot.id"
-              @success="onSuccessUpdate"
-            >
-              <template #activator="{ props: activatorProps }">
-                <v-btn
-                  v-bind="activatorProps"
-                  icon="mdi-pencil"
-                  variant="text"
-                />
-              </template>
-            </ParkingLotDialog>
-            <v-btn
-              v-if="isCurrentUserAdmin"
-              color="error"
-              icon="mdi-delete"
-              variant="text"
-              @click="onRemoveParkingLot(parkingLot.id)"
-            />
-          </template>
-          <v-card-actions v-if="isCurrentUserAdminOrHelper">
-            <v-number-input
-              bg-color="primary"
-              color="primary"
-              control-variant="split"
-              :max="parkingLot.total_slots"
-              :min="0"
-              :model-value="parkingLot.filled_slots"
-              @update:model-value="onUpdateFilledSlot($event, parkingLot.id)"
-            />
-          </v-card-actions>
-        </ParkingLotCard>
+      <v-col cols="12" md="6">
+        <WidgetEvents />
       </v-col>
     </v-row>
   </v-container>
 </template>
 
-<script setup lang="ts">
-import useApiParkingLot from '@/api/parking-lots';
-import ParkingLotCard from '@/components/parking-lot/ParkingLotCard.vue';
-import ParkingLotDialog from '@/components/parking-lot/ParkingLotDialog.vue';
+<script lang="ts" setup>
+import WidgetEvents from '@/components/manage/widgets/WidgetEvents.vue';
 import UserGreetings from '@/components/UserGreetings.vue';
-import useAuthUser from '@/composables/auth-user.ts';
-import type { ParkingLot } from '@/api/types/ParkingLot';
-import { useI18n } from 'vue-i18n';
-import { toast } from 'vue-sonner';
-
-const { t } = useI18n();
-
-const parkingLots = ref<ParkingLot[]>([]);
-
-const { getParkingLots, updateParkingLot, removeParkingLot } =
-  useApiParkingLot();
-const { isCurrentUserAdminOrHelper, isCurrentUserAdmin } = useAuthUser();
-
-const fetchData = async () => {
-  const { data, error } = await getParkingLots();
-  if (error) {
-    toast.error(t('errors.error_occurred'));
-    return;
-  }
-  if (data) {
-    parkingLots.value = data;
-  }
-};
-
-onMounted(() => {
-  fetchData();
+import useApiEvents from '@/api/events.ts';
+import useApiParkingLot from '@/api/parking-lots.ts';
+import useApiProfiles from '@/api/profiles.ts';
+const counts = ref({
+  events: 0,
+  users: 0,
+  parkingLots: 0,
 });
 
-function mutateParkingLotById(id: string, payload: ParkingLot) {
-  const idx = parkingLots.value.findIndex((i) => i.id === id);
-  if (idx > -1) {
-    Object.assign(parkingLots.value[idx], payload);
-  } else {
-    parkingLots.value.push(payload);
-  }
-}
+const items = computed(() => [
+  {
+    subtitle: 'Total events',
+    title: counts.value.events,
+    icon: 'mdi-calendar',
+    color: 'success',
+    to: {
+      name: 'manage-events',
+    },
+  },
+  {
+    subtitle: 'Total users',
+    title: counts.value.users,
+    icon: 'mdi-account-group-outline',
+    color: 'primary',
+    to: {
+      name: 'manage-users',
+    },
+  },
 
-async function onUpdateFilledSlot(value: number, id: string) {
-  const payload = {
-    filled_slots: value,
+  {
+    subtitle: 'Total parking lots',
+    title: counts.value.parkingLots,
+    icon: 'mdi-car',
+    color: 'info',
+    to: {
+      name: 'manage-parking-lots',
+    },
+  },
+]);
+
+const { getEventsCount } = useApiEvents();
+const { getProfilesCount } = useApiProfiles();
+const { getParkingLotsCount } = useApiParkingLot();
+
+async function fetchData() {
+  const apis = [getEventsCount(), getProfilesCount(), getParkingLotsCount()];
+
+  const results = await Promise.allSettled(apis);
+
+  counts.value = {
+    events: results[0].status === 'fulfilled' ? results[0].value.count || 0 : 0,
+    users: results[1].status === 'fulfilled' ? results[1].value.count || 0 : 0,
+    parkingLots:
+      results[2].status === 'fulfilled' ? results[2].value.count || 0 : 0,
   };
-  const { data, error } = await updateParkingLot(id, payload);
-  if (error) {
-    toast.error(t('errors.error_occurred'));
-    return;
-  }
-  if (data) {
-    mutateParkingLotById(id, data);
-  }
 }
-
-function onSuccessUpdate(parkingLot: ParkingLot) {
-  mutateParkingLotById(parkingLot.id, parkingLot);
-}
-
-async function onRemoveParkingLot(id: string) {
-  const { error } = await removeParkingLot(id);
-  if (error) {
-    toast.error(t('errors.error_occurred'));
-    return;
-  }
-  const idx = parkingLots.value.findIndex((i) => i.id === id);
-  if (idx > -1) {
-    parkingLots.value.splice(idx, 1);
-  }
-  toast.error('Deleted');
-}
+fetchData();
 </script>

@@ -45,7 +45,7 @@
         </ContainerCentered>
       </template>
 
-      <v-row v-if="isCurrentUserAdmin">
+      <v-row v-if="isUserAdmin">
         <v-col align="end">
           <EventTimelineDialog @success="mutateById($event.id, $event)">
             <template #activator="{ props: activatorProps }">
@@ -62,9 +62,9 @@
       </v-row>
 
       <AppTimeline v-if="currentCategoryFilter" :items="sortedItems">
-        <template v-if="isCurrentUserAdmin" #actions="{ item }">
+        <template v-if="isUserAdmin" #actions="{ item }">
           <EventTimelineDialog
-            v-if="isCurrentUserAdmin"
+            v-if="isUserAdmin"
             :event-timetable-id="item.id"
             @success="mutateById($event.id, $event)"
           >
@@ -104,7 +104,7 @@ import { showDefaultTranslationOrEmpty } from '@/utils/showDefaultTranslationOrE
 import { requireInjection } from '@/utils/injection.ts';
 import { CURRENT_EVENT_KEY } from '@/types/injectionKeys.ts';
 
-const { isCurrentUserAdmin } = useAuthUser();
+const { isUserAdmin } = useAuthUser();
 
 const currentEvent = requireInjection(CURRENT_EVENT_KEY);
 

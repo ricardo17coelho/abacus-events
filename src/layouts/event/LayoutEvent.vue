@@ -1,6 +1,6 @@
 <template>
   <v-app full-height>
-    <TheAppBar />
+    <LayoutEventAppBar />
 
     <v-main class="overflow-auto">
       <v-container
@@ -13,13 +13,13 @@
       </v-container>
     </v-main>
 
-    <TheFooter v-if="isRouteRoot" :app="smAndUp" />
+    <LayoutEventFooter v-if="isRouteRoot" :app="smAndUp" />
   </v-app>
 </template>
 
 <script lang="ts" setup>
-import TheAppBar from '@/components/TheAppBar.vue';
-import TheFooter from '@/components/TheFooter.vue';
+import LayoutEventAppBar from '@/layouts/event/LayoutEventAppBar.vue';
+import LayoutEventFooter from '@/layouts/event/LayoutEventFooter.vue';
 import { useDisplay } from 'vuetify';
 
 const route = useRoute();

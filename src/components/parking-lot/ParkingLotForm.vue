@@ -2,16 +2,13 @@
   <v-form ref="formRef">
     <v-row dense>
       <v-col>
-        <DialogTitleI18n
-          :i18n="model.title"
-          @save="model.title = $event"
-        >
+        <DialogTitleI18n :i18n="model.title" @save="model.title = $event">
           <template #activator="{ props: activatorProps }">
             <v-text-field
-              :model-value="modelValueNameI18n"
               :label="t('labels.name')"
-              :rules="[rulesValidation.ruleRequired]"
+              :model-value="modelValueNameI18n"
               readonly
+              :rules="[rulesValidation.ruleRequired]"
               v-bind="activatorProps"
             />
           </template>
@@ -20,10 +17,7 @@
     </v-row>
     <v-row dense>
       <v-col>
-        <v-text-field
-          v-model="model.location"
-          :label="t('labels.location')"
-        />
+        <v-text-field v-model="model.location" :label="t('labels.location')" />
       </v-col>
     </v-row>
     <v-row dense>
@@ -35,32 +29,26 @@
       </v-col>
     </v-row>
     <v-row dense>
-      <v-col
-        cols="12"
-        sm="6"
-      >
+      <v-col cols="12" sm="6">
         <v-number-input
           v-model="model.total_slots"
-          :label="t('labels.slots_total')"
-          :rules="[rulesValidation.ruleRequired]"
           control-variant="stacked"
-          variant="outlined"
-          :min="0"
           inset
+          :label="t('labels.slots_total')"
+          :min="0"
+          :rules="[rulesValidation.ruleRequired]"
+          variant="outlined"
         />
       </v-col>
-      <v-col
-        cols="12"
-        sm="6"
-      >
+      <v-col cols="12" sm="6">
         <v-number-input
           v-model="model.filled_slots"
-          type="number"
-          :label="t('labels.slots_filled')"
           control-variant="stacked"
-          variant="outlined"
-          :min="0"
           inset
+          :label="t('labels.slots_filled')"
+          :min="0"
+          type="number"
+          variant="outlined"
         />
       </v-col>
     </v-row>
@@ -81,7 +69,7 @@ const { t } = useI18n();
 const formRef = ref();
 
 const modelValueNameI18n = computed(() =>
-  showDefaultTranslationOrEmpty(model.value?.title)
+  showDefaultTranslationOrEmpty(model.value?.title),
 );
 
 defineExpose({ formRef });

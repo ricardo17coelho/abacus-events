@@ -1,29 +1,19 @@
 <template>
-  <AuthCard
-    title="Reset Password"
-    subtitle="Choose a new password below"
-  >
-    <v-form
-      class="flex w-full flex-col items-start"
-      @submit.prevent="onSubmit"
-    >
+  <AuthCard subtitle="Choose a new password below" title="Reset Password">
+    <v-form class="flex w-full flex-col items-start" @submit.prevent="onSubmit">
       <FieldPassword
         id="password"
         v-model="password"
-        :disabled="loading"
         class="mb-4 w-full"
-        name="password"
+        :disabled="loading"
         label="Password"
+        name="password"
         placeholder="Choose your password"
       />
 
       <v-row dense>
         <v-col align="end">
-          <VBtnPrimary
-            :loading="loading"
-            type="submit"
-            class="bg-teal-700"
-          >
+          <VBtnPrimary class="bg-teal-700" :loading="loading" type="submit">
             Reset
           </VBtnPrimary>
         </v-col>
@@ -47,7 +37,7 @@ const { updateUser } = useAuthUser();
 async function onSubmit() {
   loading.value = true;
   const { error, data } = await updateUser({
-    password: password.value
+    password: password.value,
   });
   console.log(error, data);
 

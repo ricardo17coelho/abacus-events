@@ -11,7 +11,7 @@ const { isLoggedIn } = useAuthUser();
 onMounted(() => {
   if (isLoggedIn.value) {
     console.log(
-      'arrived on callback page with an existing user, so going home'
+      'arrived on callback page with an existing user, so going home',
     );
     setTimeout(() => {
       router.push({ name: 'dashboard' });

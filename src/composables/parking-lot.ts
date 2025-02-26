@@ -23,7 +23,7 @@ export default function useParkingLot() {
   function getParkingLotStatus(parkingLot: ParkingLot) {
     const i = calculatePercentage(
       parkingLot.filled_slots,
-      parkingLot.total_slots
+      parkingLot.total_slots,
     );
     if (i >= 100) {
       return PARKING_LOT_STATUS.FULL;
@@ -49,6 +49,6 @@ export default function useParkingLot() {
     calculatePercentage,
     getStatusColor,
     getParkingLotStatus,
-    getParkingLotStatusText
+    getParkingLotStatusText,
   };
 }

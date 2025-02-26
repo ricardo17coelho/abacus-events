@@ -12,14 +12,14 @@ export default function useAuthUser() {
    */
   const login = async ({
     email,
-    password
+    password,
   }: {
     email: string;
     password: string;
   }) => {
     const { data, error } = await supabase.auth.signInWithPassword({
       email,
-      password
+      password,
     });
     if (data && data.user) {
       user.value = data.user;
@@ -32,11 +32,11 @@ export default function useAuthUser() {
    */
   const loginWithSocialProvider = async (
     provider: Provider,
-    redirectTo: string
+    redirectTo: string,
   ) => {
     const { data, error } = await supabase.auth.signInWithOAuth({
       provider,
-      options: { redirectTo }
+      options: { redirectTo },
     });
 
     return { data, error };
@@ -46,7 +46,7 @@ export default function useAuthUser() {
    * Logout
    */
   const logout = async () => {
-    return await supabase.auth.signOut().then(() => {
+    return supabase.auth.signOut().then(() => {
       user.value = null;
     });
   };
@@ -67,19 +67,19 @@ export default function useAuthUser() {
   });
 
   const currentUserRoles = computed(
-    () => user.value?.app_metadata?.userroles || []
+    () => user.value?.app_metadata?.userroles || [],
   );
 
   const isCurrentUserAdmin = computed(() =>
-    currentUserRoles.value.includes('ADMIN')
+    currentUserRoles.value.includes('ADMIN'),
   );
 
   const isCurrentUserHelper = computed(() =>
-    currentUserRoles.value.includes('HELPER')
+    currentUserRoles.value.includes('HELPER'),
   );
 
   const isCurrentUserAdminOrHelper = computed(
-    () => isCurrentUserAdmin.value || isCurrentUserHelper.value
+    () => isCurrentUserAdmin.value || isCurrentUserHelper.value,
   );
 
   /**
@@ -105,8 +105,8 @@ export default function useAuthUser() {
         // window.location wouldn't be available if we were rendering server side
         // but since we're all on the client it will work fine
         emailRedirectTo: `${window.location.origin}/me?fromEmail=registrationConfirmation"`,
-        ...options
-      }
+        ...options,
+      },
     });
     if (data && data.user) {
       user.value = data.user;
@@ -135,18 +135,18 @@ export default function useAuthUser() {
     options: {
       redirectTo?: string;
       captchaToken?: string;
-    } = {}
+    } = {},
   ) => {
     const { data, error } = await supabase.auth.resetPasswordForEmail(
       email,
-      options
+      options,
     );
     return { data, error };
   };
 
   const resetPassword = async (newPassword: string) => {
-    return await supabase.auth.updateUser({
-      password: newPassword
+    return supabase.auth.updateUser({
+      password: newPassword,
     });
   };
 
@@ -159,7 +159,7 @@ export default function useAuthUser() {
   };
 
   const refreshSession = async () => {
-    return await supabase.auth.refreshSession();
+    return supabase.auth.refreshSession();
   };
 
   return {
@@ -179,6 +179,6 @@ export default function useAuthUser() {
     sendPasswordRestEmail,
     resetPassword,
     fetchUser,
-    refreshSession
+    refreshSession,
   };
 }

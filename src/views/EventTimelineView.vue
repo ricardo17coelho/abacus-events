@@ -2,10 +2,7 @@
   <v-container class="align-center pa-0">
     <v-row>
       <v-col align="center">
-        <AppTitle
-          :title="t('title.program')"
-          show-go-home-button
-        />
+        <AppTitle show-go-home-button :title="t('title.program')" />
       </v-col>
     </v-row>
     <AppLoader v-if="isLoading" />
@@ -15,28 +12,25 @@
           v-model="currentCategoryFilter"
           class="categories-chip-group"
           color="primary"
+          column
           mandatory
           mobile
-          column
         >
           <v-chip
             v-for="category in categories"
             :key="category.id"
+            centered
+            filter
+            :prepend-icon="category.icon"
             :text="showDefaultTranslationOrEmpty(category.title)"
             :value="category.id"
-            :prepend-icon="category.icon"
             variant="outlined"
-            filter
-            centered
           />
         </v-chip-group>
       </div>
 
       <template v-if="currentCategoryFilter">
-        <ContainerCentered
-          v-if="images.length > 0"
-          class="my-5"
-        >
+        <ContainerCentered v-if="images.length > 0" class="my-5">
           <AppImagesView :images="images">
             <template #activator="activatorProps">
               <v-btn
@@ -57,8 +51,8 @@
             <template #activator="{ props: activatorProps }">
               <v-btn
                 v-bind="activatorProps"
-                variant="text"
                 prepend-icon="mdi-plus"
+                variant="text"
               >
                 {{ t('buttons.add') }}
               </v-btn>
@@ -67,31 +61,21 @@
         </v-col>
       </v-row>
 
-      <AppTimeline
-        v-if="currentCategoryFilter"
-        :items="sortedItems"
-      >
-        <template
-          v-if="isCurrentUserAdmin"
-          #actions="{ item }"
-        >
+      <AppTimeline v-if="currentCategoryFilter" :items="sortedItems">
+        <template v-if="isCurrentUserAdmin" #actions="{ item }">
           <EventTimelineDialog
             v-if="isCurrentUserAdmin"
             :event-timetable-id="item.id"
             @success="mutateById($event.id, $event)"
           >
             <template #activator="{ props: activatorProps }">
-              <v-btn
-                v-bind="activatorProps"
-                variant="text"
-                icon="mdi-pencil"
-              />
+              <v-btn v-bind="activatorProps" icon="mdi-pencil" variant="text" />
             </template>
           </EventTimelineDialog>
           <v-btn
             color="error"
-            variant="text"
             icon="mdi-delete"
+            variant="text"
             @click="onDeleteItem(item)"
           />
         </template>
@@ -109,7 +93,7 @@ import { toast } from 'vue-sonner';
 import useApiProgramTimeline from '@/api/event-timeline.ts';
 import {
   type EventTimeline,
-  type EventTimelineCategory
+  type EventTimelineCategory,
 } from '@/api/types/EventTimeline.ts';
 import { useI18n } from 'vue-i18n';
 import AppLoader from '@/components/app/AppLoader.vue';
@@ -168,7 +152,7 @@ const { getEventTimelineCategories } = useApiEventTimeline();
 async function initialFetch() {
   if (!currentEvent.value) return;
   const { data, error } = await getEventTimelineCategories(
-    currentEvent.value?.id
+    currentEvent.value?.id,
   );
 
   if (error) return;
@@ -189,7 +173,7 @@ const fetchData = async () => {
   isLoading.value = true;
   const { data, error } = await getEventTimelinesByCategoryId(
     currentEvent.value.id,
-    currentCategoryFilter.value
+    currentCategoryFilter.value,
   );
   if (error) {
     toast.error(t('errors.error_occurred'));
@@ -220,7 +204,7 @@ watch(
     if (newValue) {
       void fetchData();
     }
-  }
+  },
 );
 
 const images = computed(() => {

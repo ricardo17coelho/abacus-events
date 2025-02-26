@@ -1,16 +1,13 @@
 <template>
   <AuthCard
-    title="Good to have you"
     subtitle="We just need some details from you"
+    title="Good to have you"
   >
     <AuthSignUpForm />
     <template #actions>
       <span class="text-sm">
         Already registered?
-        <v-btn
-          :to="{ name: 'auth-sign-in' }"
-          variant="plain"
-        >
+        <v-btn :to="{ name: 'auth-sign-in' }" variant="plain">
           Sign in here!
         </v-btn>
       </span>

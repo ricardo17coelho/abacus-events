@@ -1,26 +1,13 @@
 <template>
-  <AppDialog
-    v-model="model"
-    :title="t('labels.parking_lot')"
-    max-width="600"
-  >
+  <AppDialog v-model="model" max-width="600" :title="t('labels.parking_lot')">
     <template #activator="activatorProps">
-      <slot
-        name="activator"
-        v-bind="activatorProps"
-      />
+      <slot name="activator" v-bind="activatorProps" />
     </template>
     <template #content>
-      <ParkingLotForm
-        ref="formRef"
-        v-model="form"
-      />
+      <ParkingLotForm ref="formRef" v-model="form" />
     </template>
     <template #actions>
-      <VBtnPrimary
-        :loading="isLoading"
-        @click="onSave"
-      >
+      <VBtnPrimary :loading="isLoading" @click="onSave">
         {{ t('buttons.save') }}
       </VBtnPrimary>
     </template>
@@ -44,8 +31,8 @@ import { merge2ObjectsIfKeysExists } from '@/utils/merge';
 const props = defineProps({
   parkingLotId: {
     type: String,
-    default: undefined
-  }
+    default: undefined,
+  },
 });
 
 const model = defineModel({ type: Boolean, default: false });
@@ -56,16 +43,16 @@ const { t, locale } = useI18n();
 
 const DEFAULT_FORM = {
   title: {
-    [locale.value]: ''
+    [locale.value]: '',
   },
   location: '',
   location_url: '',
   total_slots: 0,
-  filled_slots: 0
+  filled_slots: 0,
 };
 
 const form = ref({
-  ...DEFAULT_FORM
+  ...DEFAULT_FORM,
 });
 
 const { createParkingLot, updateParkingLot, getParkingLotById } =
@@ -82,7 +69,7 @@ async function onSave() {
       // edit
       const { error, data } = await updateParkingLot(
         props.parkingLotId,
-        form.value
+        form.value,
       );
 
       if (error) {
@@ -147,6 +134,6 @@ watch(
     if (newValue && props.parkingLotId) {
       onGetCompanyBlogPostById(props.parkingLotId);
     }
-  }
+  },
 );
 </script>

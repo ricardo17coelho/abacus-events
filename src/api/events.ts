@@ -38,7 +38,7 @@ export default function useApiEvents() {
   function updateEvent(id: string, form: Record<string, any>) {
     return update<Event>('events', {
       id,
-      ...form
+      ...form,
     });
   }
 
@@ -53,6 +53,6 @@ export default function useApiEvents() {
     getEventByIdOrSlug,
     createEvent,
     updateEvent,
-    removeEvent
+    removeEvent,
   };
 }

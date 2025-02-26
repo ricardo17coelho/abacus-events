@@ -3,7 +3,7 @@
     <AppLoadingIcon
       class="mx-auto"
       :style="{
-        width: `${width}px`
+        width: `${width}px`,
       }"
     />
   </ContainerCentered>
@@ -16,7 +16,7 @@ import ContainerCentered from '../containers/ContainerCentered.vue';
 defineProps({
   width: {
     type: Number,
-    default: 48
-  }
+    default: 48,
+  },
 });
 </script>

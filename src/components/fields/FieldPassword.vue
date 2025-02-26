@@ -1,14 +1,14 @@
 <template>
   <v-text-field
     :append-inner-icon="show ? 'mdi-eye' : 'mdi-eye-off'"
+    :hint="t('fields.password.hint')"
+    :label="t('fields.password.label')"
+    name="field-password"
     :rules="[
       rulesValidation.ruleRequired,
-      (v) => rulesValidation.ruleMinLength(v, { length: 8 })
+      (v) => rulesValidation.ruleMinLength(v, { length: 8 }),
     ]"
     :type="show ? 'text' : 'password'"
-    name="field-password"
-    :label="t('fields.password.label')"
-    :hint="t('fields.password.hint')"
     v-bind="$attrs"
     @click:append-inner="show = !show"
   />

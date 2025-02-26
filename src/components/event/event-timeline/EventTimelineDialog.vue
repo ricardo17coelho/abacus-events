@@ -1,14 +1,11 @@
 <template>
   <AppDialog
     v-model="model"
-    :title="t('labels.program_timeline')"
     max-width="600"
+    :title="t('labels.program_timeline')"
   >
     <template #activator="activatorProps">
-      <slot
-        name="activator"
-        v-bind="activatorProps"
-      />
+      <slot name="activator" v-bind="activatorProps" />
     </template>
     <template #content>
       <EventTimelineForm
@@ -19,10 +16,7 @@
       />
     </template>
     <template #actions>
-      <VBtnPrimary
-        :loading="isLoading"
-        @click="onSave"
-      >
+      <VBtnPrimary :loading="isLoading" @click="onSave">
         {{ t('buttons.save') }}
       </VBtnPrimary>
     </template>
@@ -49,8 +43,8 @@ import { requireInjection } from '@/utils/injection.ts';
 const props = defineProps({
   eventTimetableId: {
     type: String,
-    default: undefined
-  }
+    default: undefined,
+  },
 });
 
 const model = defineModel({ type: Boolean, default: false });
@@ -63,20 +57,20 @@ const { t, locale } = useI18n();
 
 const DEFAULT_FORM = {
   title: {
-    [locale.value]: ''
+    [locale.value]: '',
   },
   note: {
-    [locale.value]: ''
+    [locale.value]: '',
   },
   category: undefined,
   locations: [],
   time_start: '',
   time_end: '',
-  icon: ''
+  icon: '',
 };
 
 const form = ref({
-  ...DEFAULT_FORM
+  ...DEFAULT_FORM,
 });
 
 const { createEventTimeline, updateEventTimeline, getEventTimelineById } =
@@ -93,7 +87,7 @@ async function onSave() {
       // edit
       const { error, data } = await updateEventTimeline(
         props.eventTimetableId,
-        { ...form.value, event_id: currentEvent.value?.id }
+        { ...form.value, event_id: currentEvent.value?.id },
       );
 
       if (error) {
@@ -113,7 +107,7 @@ async function onSave() {
       // add
       const { error, data } = await createEventTimeline({
         ...form.value,
-        event_id: currentEvent.value?.id
+        event_id: currentEvent.value?.id,
       });
 
       if (error) {
@@ -162,6 +156,6 @@ watch(
     if (newValue && props.eventTimetableId) {
       onGetDataById(props.eventTimetableId);
     }
-  }
+  },
 );
 </script>

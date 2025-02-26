@@ -10,15 +10,8 @@
     @update:menu="initialFetch"
   >
     <template #item="{ props: ItemProps, item }">
-      <v-list-item
-        v-bind="ItemProps"
-        :title="item.title"
-        slim
-      >
-        <template
-          v-if="item.raw.item"
-          #prepend
-        >
+      <v-list-item v-bind="ItemProps" slim :title="item.title">
+        <template v-if="item.raw.item" #prepend>
           <v-avatar>
             <v-icon :color="item.raw.item?.color">
               {{ item.raw.item.icon }}
@@ -51,14 +44,8 @@
       Dynamically inherit slots from parent
       & make all slots from component reusable from parent
     -->
-    <template
-      v-for="(_, slotName) in $slots"
-      #[slotName]="slotData"
-    >
-      <slot
-        :name="slotName"
-        v-bind="slotData"
-      />
+    <template v-for="(_, slotName) in $slots" #[slotName]="slotData">
+      <slot :name="slotName" v-bind="slotData" />
     </template>
   </v-autocomplete>
 </template>
@@ -71,16 +58,16 @@ import type { EventTimelineCategory } from '@/api/types/EventTimeline.ts';
 const props = defineProps({
   loading: {
     type: Boolean,
-    default: false
+    default: false,
   },
   name: {
     type: String,
-    default: 'field-event-timeline-categories'
+    default: 'field-event-timeline-categories',
   },
   eventId: {
     type: String,
-    required: true
-  }
+    required: true,
+  },
 });
 
 const model = defineModel({ type: [String, Array], default: undefined });
@@ -104,7 +91,7 @@ async function initialFetch() {
       return {
         title: showDefaultTranslationOrEmpty(category.title) || '',
         value: category.id,
-        item: category
+        item: category,
       };
     });
   }

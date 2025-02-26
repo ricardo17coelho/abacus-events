@@ -5,9 +5,7 @@
     text="The page you were looking for does not exist"
   >
     <template #title>
-      <div class="text-primary">
-        Page not found
-      </div>
+      <div class="text-primary">Page not found</div>
     </template>
   </v-empty-state>
 </template>

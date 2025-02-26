@@ -1,36 +1,27 @@
 <template>
-  <v-container
-    v-if="currentEvent"
-    class="align-center"
-  >
+  <v-container v-if="currentEvent" class="align-center">
     <AppTitle :title="showDefaultTranslationOrEmpty(currentEvent.title)" />
     <AppImagesView :images="[currentEvent.banner]">
       <template #activator="activatorProps">
         <v-img
           v-bind="activatorProps"
           class="rounded-lg"
-          :src="currentEvent.banner"
-          max-height="400"
           cover
+          max-height="400"
+          :src="currentEvent.banner"
         />
       </template>
     </AppImagesView>
   </v-container>
   <v-container class="align-center">
     <v-row>
-      <v-col
-        v-for="link in sortedLinks"
-        :key="link.id"
-        cols="12"
-        sm="6"
-        lg="3"
-      >
+      <v-col v-for="link in sortedLinks" :key="link.id" cols="12" lg="3" sm="6">
         <v-card
-          variant="tonal"
           color="primary"
-          :to="link.to"
-          height="100%"
           :density="xs ? 'compact' : 'default'"
+          height="100%"
+          :to="link.to"
+          variant="tonal"
           @click="
             link.action && Object.keys(link).includes('action')
               ? link.action()
@@ -49,14 +40,8 @@
             </v-card-subtitle>
           </template>
           <template #append>
-            <v-avatar
-              rounded="0"
-              size="40"
-            >
-              <v-icon
-                size="40"
-                color="primary"
-              >
+            <v-avatar rounded="0" size="40">
+              <v-icon color="primary" size="40">
                 {{ link.icon }}
               </v-icon>
             </v-avatar>
@@ -93,7 +78,7 @@ const links = computed(() => [
     description: t('home.links.program.description'),
     icon: 'mdi-clipboard-text',
     show: () => true,
-    to: { name: 'event-program' }
+    to: { name: 'event-program' },
   },
   {
     id: 'parking',
@@ -101,7 +86,7 @@ const links = computed(() => [
     description: t('home.links.parking.description'),
     icon: 'mdi-car',
     show: () => true,
-    to: { name: 'event-parking' }
+    to: { name: 'event-parking' },
   },
   {
     id: 'shuttle-schedule',
@@ -109,7 +94,7 @@ const links = computed(() => [
     description: t('home.links.shuttle_schedule.description'),
     icon: 'mdi-bus',
     show: () => true,
-    to: { name: 'shuttle-schedule' }
+    to: { name: 'shuttle-schedule' },
   },
   {
     id: 'plan',
@@ -119,8 +104,8 @@ const links = computed(() => [
     show: () => true,
     action: () => {
       showGallery.value = true;
-    }
-  }
+    },
+  },
 ]);
 
 const sortedLinks = computed(() => links.value.filter((l) => l.show()));

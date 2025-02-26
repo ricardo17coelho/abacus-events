@@ -2,58 +2,35 @@
   <v-container class="align-center">
     <v-row>
       <v-col align="center">
-        <AppTitle
-          :title="t('title.shuttle_schedule')"
-          show-go-home-button
-        />
+        <AppTitle show-go-home-button :title="t('title.shuttle_schedule')" />
       </v-col>
     </v-row>
     <ContainerCentered class="px-0">
-      <v-card
-        flat
-        max-width="500"
-        class="px-2"
-      >
+      <v-card class="px-2" flat max-width="500">
         <v-alert
+          border="start"
           class="my-6"
+          density="compact"
+          rounded="lg"
           type="warning"
           variant="tonal"
-          border="start"
-          rounded="lg"
-          density="compact"
         >
           <div>
             {{ t('views.shuttle_schedule.info_01') }}
           </div>
-          <i18n-t
-            keypath="views.shuttle_schedule.info_02"
-            tag="div"
-          >
+          <i18n-t keypath="views.shuttle_schedule.info_02" tag="div">
             <template #link>
-              <a
-                class="link-external"
-                href="https://www.sbb.ch/"
-              > SBB </a>
+              <a class="link-external" href="https://www.sbb.ch/"> SBB </a>
             </template>
           </i18n-t>
         </v-alert>
-        <v-alert
-          class="my-6"
-          border="start"
-          rounded="lg"
-          density="compact"
-        >
+        <v-alert border="start" class="my-6" density="compact" rounded="lg">
           <v-icon>mdi-information-variant-circle-outline</v-icon>
           {{ t('views.shuttle_schedule.alert_01') }}
         </v-alert>
         <v-card class="my-6">
           <template #title>
-            <v-icon
-              color="primary"
-              size="x-small"
-            >
-              mdi-bus-clock
-            </v-icon>
+            <v-icon color="primary" size="x-small"> mdi-bus-clock </v-icon>
             {{ t('labels.outward_journey') }}
           </template>
           <template #subtitle>
@@ -64,11 +41,11 @@
           <v-card-item>
             <v-timeline
               align="start"
-              size="x-small"
-              side="end"
-              truncate-line="both"
-              dot-color="primary"
               density="compact"
+              dot-color="primary"
+              side="end"
+              size="x-small"
+              truncate-line="both"
             >
               <v-timeline-item
                 v-for="(item, idx) in itemsOutward"
@@ -77,11 +54,7 @@
               >
                 <div>
                   <div>
-                    <a
-                      class="link-external"
-                      :href="item.link"
-                      target="_blank"
-                    >
+                    <a class="link-external" :href="item.link" target="_blank">
                       {{ item.text }}
                     </a>
                   </div>
@@ -93,12 +66,7 @@
 
         <v-card class="my-6">
           <template #title>
-            <v-icon
-              color="primary"
-              size="x-small"
-            >
-              mdi-bus-clock
-            </v-icon>
+            <v-icon color="primary" size="x-small"> mdi-bus-clock </v-icon>
             {{ t('labels.return_journey') }}
           </template>
           <template #subtitle>
@@ -110,11 +78,11 @@
           <v-card-item>
             <v-timeline
               align="start"
-              size="x-small"
-              side="end"
-              truncate-line="both"
-              dot-color="primary"
               density="compact"
+              dot-color="primary"
+              side="end"
+              size="x-small"
+              truncate-line="both"
             >
               <v-timeline-item
                 v-for="(item, idx) in itemsReturn"
@@ -123,11 +91,7 @@
               >
                 <div>
                   <div>
-                    <a
-                      class="link-external"
-                      :href="item.link"
-                      target="_blank"
-                    >
+                    <a class="link-external" :href="item.link" target="_blank">
                       {{ item.text }}
                     </a>
                   </div>
@@ -151,34 +115,34 @@ const { t } = useI18n();
 const itemsOutward = computed(() => [
   {
     text: 'Hauptbahnhof St. Gallen- Lagerstrasse, 9000 St. Gallen',
-    link: 'https://maps.app.goo.gl/uWM6UuKsAZzeYGnJA'
+    link: 'https://maps.app.goo.gl/uWM6UuKsAZzeYGnJA',
   },
   {
     text: 'Hodlertrasse, 9008 St. Gallen (St. Fiden PP)',
-    link: 'https://maps.app.goo.gl/E7ad57eY74PiDWRj8'
+    link: 'https://maps.app.goo.gl/E7ad57eY74PiDWRj8',
   },
   {
     text: 'Abacus, Wittenbach',
-    link: 'https://maps.app.goo.gl/132fBr3KKb8cczPWA'
-  }
+    link: 'https://maps.app.goo.gl/132fBr3KKb8cczPWA',
+  },
 ]);
 
 const itemsReturn = computed(() => [
   {
     text: 'Abacus, Wittenbach',
-    link: 'https://maps.app.goo.gl/132fBr3KKb8cczPWA'
+    link: 'https://maps.app.goo.gl/132fBr3KKb8cczPWA',
   },
   {
     text: 'Hodlertrasse, 9008 St. Gallen (St. Fiden PP)',
-    link: 'https://maps.app.goo.gl/E7ad57eY74PiDWRj8'
+    link: 'https://maps.app.goo.gl/E7ad57eY74PiDWRj8',
   },
   {
     text: `Radisson (${t('labels.stop_on_request')})`,
-    link: 'https://maps.app.goo.gl/DorgNiRHPizxKwnU7'
+    link: 'https://maps.app.goo.gl/DorgNiRHPizxKwnU7',
   },
   {
     text: 'Hauptbahnhof St. Gallen- Lagerstrasse, 9000 St. Gallen',
-    link: 'https://maps.app.goo.gl/uWM6UuKsAZzeYGnJA'
-  }
+    link: 'https://maps.app.goo.gl/uWM6UuKsAZzeYGnJA',
+  },
 ]);
 </script>

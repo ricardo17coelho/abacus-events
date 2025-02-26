@@ -5,7 +5,7 @@ function basic() {
     particleCount: 100,
     spread: 70,
     origin: { y: 0.6 },
-    zIndex: 900
+    zIndex: 900,
   });
 }
 
@@ -15,7 +15,7 @@ function randomDirection() {
     spread: randomInRange(50, 70),
     particleCount: randomInRange(50, 100),
     origin: { y: 0.6 },
-    zIndex: 900
+    zIndex: 900,
   });
 }
 
@@ -31,16 +31,16 @@ function makeItRain() {
       angle: 60,
       spread: 55,
       origin: { x: 0 },
-      colors: colors,
-      zIndex: 900
+      colors,
+      zIndex: 900,
     });
     confetti({
       particleCount: 2,
       angle: 120,
       spread: 55,
       origin: { x: 1 },
-      colors: colors,
-      zIndex: 900
+      colors,
+      zIndex: 900,
     });
 
     if (Date.now() < end) {
@@ -71,12 +71,12 @@ function fireworks() {
     confetti({
       ...defaults,
       particleCount,
-      origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 }
+      origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 },
     });
     confetti({
       ...defaults,
       particleCount,
-      origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 }
+      origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 },
     });
   }, 250);
 }

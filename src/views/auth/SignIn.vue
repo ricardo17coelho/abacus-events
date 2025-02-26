@@ -1,19 +1,10 @@
 <template>
-  <AuthCard
-    title="Welcome back"
-    subtitle="Please enter your details"
-  >
+  <AuthCard subtitle="Please enter your details" title="Welcome back">
     <AuthSignInForm />
-    <template
-      v-if="isAuthSignUpEnabled"
-      #actions
-    >
+    <template v-if="isAuthSignUpEnabled" #actions>
       <span class="text-sm">
         Don't have an account?
-        <v-btn
-          :to="{ name: 'auth-sign-up' }"
-          variant="plain"
-        >
+        <v-btn :to="{ name: 'auth-sign-up' }" variant="plain">
           Sign up here!
         </v-btn>
       </span>

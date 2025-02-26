@@ -1,14 +1,7 @@
 <template>
-  <AppDialog
-    v-model="model"
-    :title="title"
-    width="500"
-  >
+  <AppDialog v-model="model" :title="title" width="500">
     <template #activator="activatorProps">
-      <slot
-        name="activator"
-        v-bind="activatorProps"
-      />
+      <slot name="activator" v-bind="activatorProps" />
     </template>
     <template #content>
       <v-form ref="formRef">
@@ -16,10 +9,7 @@
       </v-form>
     </template>
     <template #actions>
-      <VBtnPrimary
-        :loading="loading"
-        @click="onSave"
-      >
+      <VBtnPrimary :loading="loading" @click="onSave">
         {{ t('buttons.save') }}
       </VBtnPrimary>
     </template>
@@ -37,16 +27,16 @@ const model = defineModel({ type: Boolean, default: false });
 const props = defineProps({
   title: {
     type: String,
-    default: undefined
+    default: undefined,
   },
   i18n: {
     type: Object,
-    default: () => ({})
+    default: () => ({}),
   },
   loading: {
     type: Boolean,
-    default: false
-  }
+    default: false,
+  },
 });
 
 const emit = defineEmits(['save']);
@@ -73,6 +63,6 @@ watch(
       form.value = { ...props.i18n };
     }
   },
-  { immediate: true }
+  { immediate: true },
 );
 </script>

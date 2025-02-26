@@ -14,8 +14,8 @@ const i18n = createI18n({
     de,
     en,
     it,
-    fr
-  }
+    fr,
+  },
 });
 
 export type AppLocales = 'de' | 'en' | 'fr' | 'it';

@@ -5,35 +5,29 @@
     @submit.prevent="emailAuth"
   >
     <v-row dense>
-      <v-col
-        cols="12"
-        sm="6"
-      >
+      <v-col cols="12" sm="6">
         <v-text-field
           v-model="credentials.data.firstname"
-          required
           :disabled="loading"
           label="Firstname"
           name="firstname"
+          required
           :rules="[
             rulesValidation.ruleRequired,
-            (v) => rulesValidation.ruleMinLength(v, { length: 2 })
+            (v) => rulesValidation.ruleMinLength(v, { length: 2 }),
           ]"
         />
       </v-col>
-      <v-col
-        cols="12"
-        sm="6"
-      >
+      <v-col cols="12" sm="6">
         <v-text-field
           v-model="credentials.data.lastname"
-          required
           :disabled="loading"
           label="Lastname"
           name="lastname"
+          required
           :rules="[
             rulesValidation.ruleRequired,
-            (v) => rulesValidation.ruleMinLength(v, { length: 2 })
+            (v) => rulesValidation.ruleMinLength(v, { length: 2 }),
           ]"
         />
       </v-col>
@@ -43,52 +37,44 @@
       <v-col cols="12">
         <v-text-field
           v-model="credentials.email"
-          required
           :disabled="loading"
           label="Email"
           name="email"
-          type="email"
           placeholder="Enter your email"
+          required
           :rules="[rulesValidation.ruleRequired, rulesValidation.ruleEmail]"
+          type="email"
         />
       </v-col>
       <v-col cols="12">
         <FieldPassword
           v-model="credentials.password"
-          :disabled="loading"
-          required
           class="mb-4 w-full"
-          name="password"
+          :disabled="loading"
           label="Password"
+          name="password"
           placeholder="Choose a password"
+          required
         />
       </v-col>
     </v-row>
 
     <v-row dense>
-      <v-col
-        v-if="isDevEnv()"
-        cols="12"
-        sm="6"
-      >
+      <v-col v-if="isDevEnv()" cols="12" sm="6">
         <VBtnDev
-          prepend-icon="mdi-bug"
           :block="isDisplayXs"
+          prepend-icon="mdi-bug"
           @click="onBtnDevClick"
         >
           Auto DEV Sign Up
         </VBtnDev>
       </v-col>
-      <v-col
-        cols="12"
-        :sm="isDevEnv() ? 6 : undefined"
-        align="end"
-      >
+      <v-col align="end" cols="12" :sm="isDevEnv() ? 6 : undefined">
         <VBtnPrimary
-          :loading="emailLoading"
-          :disabled="loading"
-          type="submit"
           :block="isDisplayXs"
+          :disabled="loading"
+          :loading="emailLoading"
+          type="submit"
         >
           {{ 'Sign Up' }}
         </VBtnPrimary>
@@ -117,8 +103,8 @@ const credentials = ref({
   password: '',
   data: {
     firstname: '',
-    lastname: ''
-  }
+    lastname: '',
+  },
 });
 
 const emailLoading = ref(false);
@@ -155,8 +141,8 @@ function onBtnDevClick() {
     password: import.meta.env.VITE_DEV_USER_PW,
     data: {
       firstname: 'Joe',
-      lastname: 'Doe'
-    }
+      lastname: 'Doe',
+    },
   };
   nextTick(() => emailAuth());
 }

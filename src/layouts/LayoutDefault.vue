@@ -6,17 +6,14 @@
       <v-container
         class="main-container overflow-auto app-container pt-0"
         :class="{
-          'main-container-with-footer': smAndUp && isRouteRoot
+          'main-container-with-footer': smAndUp && isRouteRoot,
         }"
       >
         <RouterView />
       </v-container>
     </v-main>
 
-    <TheFooter
-      v-if="isRouteRoot"
-      :app="smAndUp"
-    />
+    <TheFooter v-if="isRouteRoot" :app="smAndUp" />
   </v-app>
 </template>
 

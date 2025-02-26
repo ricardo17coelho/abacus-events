@@ -2,14 +2,11 @@
   <ContainerCentered>
     <v-empty-state
       :headline="t('not_found.headline')"
-      :title="t('not_found.title')"
       :text="t('not_found.text')"
+      :title="t('not_found.title')"
     >
       <template #actions>
-        <VBtnPrimary
-          :to="{ path: '/' }"
-          class="self-center"
-        >
+        <VBtnPrimary class="self-center" :to="{ path: '/' }">
           Go home
         </VBtnPrimary>
       </template>

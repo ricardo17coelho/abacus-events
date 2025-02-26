@@ -7,8 +7,8 @@
           <template #activator="{ props: activatorProps }">
             <v-btn
               v-bind="activatorProps"
-              variant="text"
               prepend-icon="mdi-plus"
+              variant="text"
             >
               {{ t('labels.add') }}
             </v-btn>
@@ -33,27 +33,27 @@
               <template #activator="{ props: activatorProps }">
                 <v-btn
                   v-bind="activatorProps"
-                  variant="text"
                   icon="mdi-pencil"
+                  variant="text"
                 />
               </template>
             </ParkingLotDialog>
             <v-btn
               v-if="isCurrentUserAdmin"
-              variant="text"
-              icon="mdi-delete"
               color="error"
+              icon="mdi-delete"
+              variant="text"
               @click="onRemoveParkingLot(parkingLot.id)"
             />
           </template>
           <v-card-actions v-if="isCurrentUserAdminOrHelper">
             <v-number-input
-              :model-value="parkingLot.filled_slots"
-              color="primary"
               bg-color="primary"
+              color="primary"
               control-variant="split"
-              :min="0"
               :max="parkingLot.total_slots"
+              :min="0"
+              :model-value="parkingLot.filled_slots"
               @update:model-value="onUpdateFilledSlot($event, parkingLot.id)"
             />
           </v-card-actions>
@@ -107,7 +107,7 @@ function mutateParkingLotById(id: string, payload: ParkingLot) {
 
 async function onUpdateFilledSlot(value: number, id: string) {
   const payload = {
-    filled_slots: value
+    filled_slots: value,
   };
   const { data, error } = await updateParkingLot(id, payload);
   if (error) {

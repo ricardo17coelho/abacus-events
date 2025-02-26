@@ -49,6 +49,6 @@ watch(
       fetchData(newValue);
     }
   },
-  { immediate: true }
+  { immediate: true },
 );
 </script>

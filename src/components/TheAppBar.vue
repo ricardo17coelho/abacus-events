@@ -1,15 +1,8 @@
 <template>
-  <v-app-bar
-    flat
-    class="px-1"
-  >
+  <v-app-bar class="px-1" flat>
     <v-container class="d-flex align-center py-0 app-container">
       <router-link to="/">
-        <v-img
-          src="/logos/abacus.svg"
-          max-width="200"
-          width="150"
-        />
+        <v-img max-width="200" src="/logos/abacus.svg" width="150" />
       </router-link>
 
       <v-btn
@@ -23,7 +16,7 @@
         class="d-flex"
         :class="{
           'ga-1': xs,
-          'ga-5': smAndUp
+          'ga-5': smAndUp,
         }"
       >
         <!--        <v-btn-->
@@ -62,19 +55,19 @@ watch(
   (newValue) => {
     locale.value = newValue;
   },
-  { immediate: true }
+  { immediate: true },
 );
 
 watch(
   () => locale.value,
   (newValue) => {
     lsLocale.value = newValue;
-  }
+  },
 );
 
 const availableLocalesFiltered = computed(() =>
   availableLocales.filter(
-    (availableLocale: string) => availableLocale !== locale.value
-  )
+    (availableLocale: string) => availableLocale !== locale.value,
+  ),
 );
 </script>

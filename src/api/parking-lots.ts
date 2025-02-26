@@ -21,7 +21,7 @@ export default function useApiParkingLot() {
   function updateParkingLot(id: string, form: Record<string, any>) {
     return update<ParkingLot>('parking_lots', {
       id,
-      ...form
+      ...form,
     });
   }
 
@@ -34,6 +34,6 @@ export default function useApiParkingLot() {
     getParkingLotById,
     createParkingLot,
     updateParkingLot,
-    removeParkingLot
+    removeParkingLot,
   };
 }

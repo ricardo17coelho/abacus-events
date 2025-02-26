@@ -7,5 +7,5 @@ export default {
   ruleEmail,
   ruleMaxLength,
   ruleMinLength,
-  ruleRequired
+  ruleRequired,
 };

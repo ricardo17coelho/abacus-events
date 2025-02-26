@@ -1,9 +1,5 @@
 <template>
-  <v-timeline
-    align="start"
-    side="end"
-    truncate-line="both"
-  >
+  <v-timeline align="start" side="end" truncate-line="both">
     <v-timeline-item
       v-for="(item, idx) in items"
       :key="`${idx}-title-${showDefaultTranslationOrEmpty(item.title)}`"
@@ -11,10 +7,7 @@
       :icon="item.icon"
       :size="mdAndUp ? 'x-large' : undefined"
     >
-      <div
-        class="d-flex"
-        :class="{ 'flex-column': xs }"
-      >
+      <div class="d-flex" :class="{ 'flex-column': xs }">
         <span class="me-4">{{ `${item.time_start}-${item.time_end}` }}</span>
         <div>
           <div>
@@ -40,21 +33,18 @@
             <v-chip
               v-for="location in item.locations"
               :key="`${item.title}-${location}`"
-              size="small"
               class="mr-1"
               color="primary"
-              variant="tonal"
               prepend-icon="mdi-home-map-marker"
+              size="small"
+              variant="tonal"
             >
               {{ location }}
             </v-chip>
           </div>
         </div>
       </div>
-      <slot
-        name="actions"
-        :item="item"
-      />
+      <slot :item="item" name="actions" />
     </v-timeline-item>
   </v-timeline>
 </template>
@@ -69,12 +59,12 @@ import { useDisplay } from 'vuetify';
 defineProps({
   items: {
     type: Array as PropType<EventTimeline[]>,
-    default: () => []
+    default: () => [],
   },
   editable: {
     type: Boolean,
-    default: false
-  }
+    default: false,
+  },
 });
 
 const { xs, mdAndUp } = useDisplay();

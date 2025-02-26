@@ -2,17 +2,11 @@
   <ContainerCentered>
     <v-card :width="xs ? undefined : '500'">
       <template #prepend>
-        <v-btn
-          icon="mdi-arrow-left"
-          slim
-          to="/"
-        />
+        <v-btn icon="mdi-arrow-left" slim to="/" />
       </template>
       <template #title>
         <v-card-title>
-          <h1 class="mx-auto text-h4 font-bold">
-            Abacus Events
-          </h1>
+          <h1 class="mx-auto text-h4 font-bold">Abacus Events</h1>
         </v-card-title>
       </template>
       <v-card-text>

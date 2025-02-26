@@ -25,7 +25,7 @@ export type FilterOperator =
 export type FindFilter = [
   column: string,
   op: FilterOperator,
-  value: string | number | boolean | null
+  value: string | number | boolean | null,
 ];
 
 export type FindOrder = [column: string, ascending?: boolean];

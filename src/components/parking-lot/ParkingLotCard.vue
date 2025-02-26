@@ -1,16 +1,11 @@
 <template>
-  <v-card
-    v-if="parkingLot"
-    width="100%"
-    border
-    flat
-  >
+  <v-card v-if="parkingLot" border flat width="100%">
     <v-card-item :title="showDefaultTranslationOrEmpty(parkingLot.name)">
       <template #subtitle>
         <v-chip
+          :href="parkingLot.location_url || undefined"
           prepend-icon="mdi-home-map-marker"
           size="small"
-          :href="parkingLot.location_url || undefined"
         >
           {{ parkingLot.location }}
         </v-chip>
@@ -36,8 +31,8 @@
 
       <v-progress-linear
         bg-color="surface-variant"
-        :color="getStatusColor(parkingLot)"
         class="mb-6"
+        :color="getStatusColor(parkingLot)"
         height="10"
         :model-value="
           calculatePercentage(parkingLot.filled_slots, parkingLot.total_slots)
@@ -58,16 +53,16 @@ import { useI18n } from 'vue-i18n';
 defineProps({
   parkingLot: {
     type: Object as PropType<ParkingLot>,
-    default: () => ({})
+    default: () => ({}),
   },
   hideIcon: {
     type: Boolean,
-    default: false
+    default: false,
   },
   hideFullText: {
     type: Boolean,
-    default: false
-  }
+    default: false,
+  },
 });
 
 const { t } = useI18n();

@@ -2,18 +2,10 @@
   <v-container v-if="currentEvent">
     <v-row>
       <v-col align="center">
-        <AppTitle
-          :title="t('title.parking')"
-          show-go-home-button
-        />
+        <AppTitle show-go-home-button :title="t('title.parking')" />
       </v-col>
     </v-row>
-    <v-alert
-      class="my-6"
-      border="start"
-      rounded="lg"
-      density="compact"
-    >
+    <v-alert border="start" class="my-6" density="compact" rounded="lg">
       <v-icon>mdi-information-variant-circle-outline</v-icon>
       {{ t('views.parking.alert_01') }}
     </v-alert>
@@ -77,7 +69,7 @@ const subscribeToChanges = () => {
         if (payload.new) {
           mutateParkingLotById(payload.new.id, payload.new);
         }
-      }
+      },
     )
     .subscribe();
 

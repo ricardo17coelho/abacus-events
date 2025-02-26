@@ -9,7 +9,7 @@ export default function useApi() {
     select = '*',
     idKey = 'id',
     filters: FindFilter[] = [],
-    orders: FindOrder[] = []
+    orders: FindOrder[] = [],
   ) {
     const query = supabase.from(table).select(select);
 
@@ -38,7 +38,7 @@ export default function useApi() {
     select = '*',
     range = [0, 100],
     orders: FindOrder[] = [],
-    count: FindSelect = {}
+    count: FindSelect = {},
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   ): Promise<{ data: T[] | null; error: any }> {
     const query = supabase.from(table).select(select, count);
@@ -94,7 +94,7 @@ export default function useApi() {
     // providing the option `head: true` will only return the count, otherwise results too.
     const query = supabase.from(table).select('*', {
       count: 'exact',
-      head: true
+      head: true,
     });
 
     if (filters) {
@@ -131,7 +131,7 @@ export default function useApi() {
     table: string,
     column: string,
     search: string,
-    select: string = '*'
+    select: string = '*',
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   ): Promise<{ data: T[] | null; error: any }> {
     const { data, error } = await supabase
@@ -150,7 +150,7 @@ export default function useApi() {
     table: string,
     column: string,
     search: string,
-    select: string = '*'
+    select: string = '*',
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   ): Promise<{ data: T[] | null; error: any }> {
     const { data, error } = await supabase
@@ -176,7 +176,7 @@ export default function useApi() {
     file: File | Blob,
     bucket: string,
     folder = '',
-    fileName = uuidv4()
+    fileName = uuidv4(),
   ) => {
     let path = '';
     if (folder) {
@@ -185,7 +185,7 @@ export default function useApi() {
     path += fileName;
     const { error } = await supabase.storage.from(bucket).upload(path, file, {
       cacheControl: '3600',
-      upsert: false
+      upsert: false,
     });
     if (error) throw error;
     const publicUrl = await getUrlPublic(bucket, path);
@@ -204,7 +204,7 @@ export default function useApi() {
   const imgExists = async (bucket: string, path: string, fileName: string) => {
     const { data, error } = await supabase.storage.from(bucket).list(path, {
       search: fileName,
-      limit: 1
+      limit: 1,
     });
     if (error) {
       return false;
@@ -216,7 +216,7 @@ export default function useApi() {
     file: File | Blob,
     bucket: string,
     folder = '',
-    fileName = uuidv4()
+    fileName = uuidv4(),
   ) => {
     const existingImgUrl = await imgExists(bucket, folder, fileName);
 
@@ -248,6 +248,6 @@ export default function useApi() {
     imgExists,
     removeImg,
     // realtime
-    removeSubscription
+    removeSubscription,
   };
 }

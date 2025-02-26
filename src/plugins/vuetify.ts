@@ -22,108 +22,108 @@ export const themes: Record<string, ThemeDefinition> = {
     dark: false,
     colors: {
       primary: '#386867',
-      secondary: '#F0E8D9'
-    }
-  }
+      secondary: '#F0E8D9',
+    },
+  },
 };
 
 const opts = {
   directives,
   components: {
     ...components,
-    ...labsComponents
+    ...labsComponents,
   },
   lang: {
     locales: { en, pt },
-    current: 'en'
+    current: 'en',
   },
   theme: {
     defaultTheme: 'light',
     variations: {
       colors: ['primary', 'secondary'],
       lighten: 4,
-      darken: 5
+      darken: 5,
     },
-    themes
+    themes,
   },
   treeShake: true,
   aliases: {
     VBtnPrimary: VBtn,
     VBtnSecondary: VBtn,
     VBtnDev: VBtn,
-    VBtnDelete: VBtn
+    VBtnDelete: VBtn,
   },
   defaults: {
     VBtn: {
       variant: 'flat',
       style: 'text-transform: none;',
-      color: undefined
+      color: undefined,
     },
     VBtnPrimary: {
       color: 'primary',
-      variant: 'flat'
+      variant: 'flat',
     },
     VBtnSecondary: {
       variant: 'outlined',
-      color: 'primary'
+      color: 'primary',
     },
     VBtnDev: {
       variant: 'tonal',
       color: 'warning',
-      prependIcon: 'mdi-bug'
+      prependIcon: 'mdi-bug',
     },
     VBtnDelete: {
       variant: 'tonal',
       color: 'error',
-      prependIcon: 'mdi-delete'
+      prependIcon: 'mdi-delete',
     },
     VIcon: {
-      size: 'small'
+      size: 'small',
     },
     VMenu: {
       VCard: {
-        class: 'rounded-xl'
+        class: 'rounded-xl',
       },
       VList: {
-        rounded: 'xl'
-      }
+        rounded: 'xl',
+      },
     },
     VTextField: {
       variant: 'outlined',
       density: 'comfortable',
-      color: 'primary'
+      color: 'primary',
     },
     VTextarea: {
       variant: 'outlined',
       density: 'comfortable',
-      color: 'primary'
+      color: 'primary',
     },
     VSelect: {
       variant: 'outlined',
       density: 'comfortable',
-      color: 'primary'
+      color: 'primary',
     },
     VAutocomplete: {
       variant: 'outlined',
       density: 'comfortable',
-      color: 'primary'
+      color: 'primary',
     },
     VDateInput: {
       variant: 'outlined',
       density: 'comfortable',
       color: 'primary',
       prependIcon: '',
-      prependInnerIcon: '$calendar'
+      prependInnerIcon: '$calendar',
     },
     VCheckbox: {
-      color: 'primary'
+      color: 'primary',
     },
     VCheckboxBtn: {
-      color: 'primary'
+      color: 'primary',
     },
     VSwitch: {
-      color: 'primary'
-    }
-  }
+      color: 'primary',
+    },
+  },
 };
 export default createVuetify(opts);

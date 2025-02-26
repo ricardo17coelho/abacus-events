@@ -1,13 +1,7 @@
 <template>
-  <AppDialog
-    max-width="1000"
-    fullscreen
-  >
+  <AppDialog fullscreen max-width="1000">
     <template #activator="{ props: activatorProps }">
-      <slot
-        name="activator"
-        :props="activatorProps"
-      />
+      <slot name="activator" :props="activatorProps" />
     </template>
 
     <template #content>
@@ -23,16 +17,16 @@
       <v-spacer />
       <div class="d-flex justify-space-between align-center ga-3">
         <v-btn
-          variant="flat"
           color="primary"
+          variant="flat"
           @click="scale = scale > 0.25 ? scale - 0.25 : scale"
         >
           -
         </v-btn>
         <span>{{ scale * 100 }}%</span>
         <v-btn
-          variant="flat"
           color="primary"
+          variant="flat"
           @click="scale = scale < 2 ? scale + 0.25 : scale"
         >
           +
@@ -45,15 +39,15 @@
 </template>
 
 <script setup lang="ts">
-import { VuePDF, usePDF } from '@tato30/vue-pdf';
+import { usePDF, VuePDF } from '@tato30/vue-pdf';
 import AppDialog from '@/components/app/AppDialog.vue';
 import AppLoadingIcon from '@/components/app/AppLoadingIcon.vue';
 
 const props = defineProps({
   pdfUrl: {
     type: String,
-    default: undefined
-  }
+    default: undefined,
+  },
 });
 
 const scale = ref(0.25);

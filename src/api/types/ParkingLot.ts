@@ -13,7 +13,7 @@ export type ParkingLot = {
 export const PARKING_LOT_STATUS = {
   FREE: 'FREE',
   ALMOST_FULL: 'ALMOST_FULL',
-  FULL: 'FULL'
+  FULL: 'FULL',
 } as const;
 
 export type ParkingLotStatus =

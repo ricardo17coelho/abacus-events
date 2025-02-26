@@ -34,14 +34,14 @@ export function useGoogleAnalytics(trackingId: string) {
 
     // Track initial page load
     window.gtag('event', 'page_view', {
-      page_path: route.path
+      page_path: route.path,
     });
   });
 
   watch(route, (to) => {
     // Track route changes
     window.gtag('event', 'page_view', {
-      page_path: to.path
+      page_path: to.path,
     });
   });
 }

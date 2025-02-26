@@ -1,25 +1,19 @@
 <template>
   <header>
-    <h1
-      v-if="user"
-      class="Title"
-    >
+    <h1 v-if="user" class="Title">
       <span>
         {{ i18n.t(greetingMsg) }}
       </span>
       <span v-if="currentUserDisplayName">
         {{ currentUserDisplayName }}
       </span>
-      <span
-        class="prevent-select"
-        @click="randomDirection"
-      > 🎉 </span>
+      <span class="prevent-select" @click="randomDirection"> 🎉 </span>
       <v-chip
         v-for="currentUserRole in currentUserRoles"
         :key="currentUserRole"
+        class="ml-4"
         color="primary"
         density="compact"
-        class="ml-4"
       >
         {{ currentUserRole }}
       </v-chip>

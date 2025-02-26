@@ -1,27 +1,24 @@
 <template>
   <v-dialog
     v-model="model"
-    transition="dialog-bottom-transition"
-    scrollable
     :fullscreen="fullscreen"
     :height="fullscreen || xs ? '100%' : height"
-    :width="fullscreen || xs ? '100%' : height"
     :max-height="fullscreen || xs ? '100%' : maxHeight"
     :max-width="fullscreen || xs ? '100%' : maxWidth"
+    scrollable
+    transition="dialog-bottom-transition"
+    :width="fullscreen || xs ? '100%' : height"
     v-bind="$attrs"
   >
     <template #activator="activatorProps">
-      <slot
-        name="activator"
-        v-bind="activatorProps"
-      />
+      <slot name="activator" v-bind="activatorProps" />
     </template>
     <v-card
-      flat
       class="mx-auto"
-      width="100%"
-      :title="title"
+      flat
       :prepend-icon="icon"
+      :title="title"
+      width="100%"
     >
       <template #append>
         <v-btn
@@ -31,18 +28,11 @@
           @click="fullscreen = !fullscreen"
         />
         <v-spacer />
-        <v-btn
-          icon="$close"
-          size="small"
-          @click="model = false"
-        />
+        <v-btn icon="$close" size="small" @click="model = false" />
       </template>
 
       <v-card-text>
-        <slot
-          v-if="loading"
-          name="loading"
-        >
+        <slot v-if="loading" name="loading">
           <div class="text-center">
             <div>
               <AppLoader />
@@ -52,10 +42,7 @@
             </div>
           </div>
         </slot>
-        <slot
-          v-else
-          name="content"
-        />
+        <slot v-else name="content" />
       </v-card-text>
 
       <v-card-actions v-if="!loading">
@@ -72,45 +59,45 @@ import { useDisplay } from 'vuetify';
 defineProps({
   title: {
     type: String,
-    default: undefined
+    default: undefined,
   },
   icon: {
     type: String,
-    default: undefined
+    default: undefined,
   },
   height: {
     type: [Number, String],
-    default: undefined
+    default: undefined,
   },
   maxHeight: {
     type: [Number, String],
-    default: undefined
+    default: undefined,
   },
   minHeight: {
     type: [Number, String],
-    default: undefined
+    default: undefined,
   },
   maxWidth: {
     type: [Number, String],
-    default: undefined
+    default: undefined,
   },
   showFullscreen: {
     type: Boolean,
-    default: false
+    default: false,
   },
   loading: {
     type: Boolean,
-    default: false
+    default: false,
   },
   loadingText: {
     type: String,
-    default: undefined
-  }
+    default: undefined,
+  },
 });
 
 const model = defineModel({
   type: Boolean,
-  default: false
+  default: false,
 });
 const fullscreen = defineModel('fullscreen', { type: Boolean, default: false });
 

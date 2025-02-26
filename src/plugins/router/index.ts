@@ -10,13 +10,13 @@ const router = createRouter({
       path: '/signin',
       component: () => import('@/layouts/LayoutAuth.vue'),
       meta: {
-        requiresNoAuth: true
+        requiresNoAuth: true,
       },
       children: [
         {
           path: '/signin',
           name: 'auth-sign-in',
-          component: () => import('@/views/auth/SignIn.vue')
+          component: () => import('@/views/auth/SignIn.vue'),
         },
         {
           path: '/signup',
@@ -25,14 +25,14 @@ const router = createRouter({
           beforeEnter: () => {
             if (import.meta.env.VITE_AUTH_SIGN_UP_ENABLED !== 'true')
               return '/404';
-          }
+          },
         },
         {
           path: '/forgotPassword',
           name: 'auth-forgot-password',
-          component: () => import('@/views/auth/ForgotPassword.vue')
-        }
-      ]
+          component: () => import('@/views/auth/ForgotPassword.vue'),
+        },
+      ],
     },
     {
       path: '/resetpassword',
@@ -48,12 +48,12 @@ const router = createRouter({
             // which provides the type=recovery hash key
             if (!to.hash.includes('type=recovery')) {
               const {
-                data: { user }
+                data: { user },
               } = await supabase.auth.getUser();
               if (user) return '/';
               return '/signin';
             }
-          }
+          },
         },
         {
           path: '/callback',
@@ -79,31 +79,31 @@ const router = createRouter({
                 'expires_in',
                 'provider_token',
                 'refresh_token',
-                'token_type'
+                'token_type',
               ].some((key) => !(key in hashDictionary))
             )
               return '/';
-          }
+          },
         },
         {
           path: '/:pathMatch(.*)*',
           name: 'NotFound',
-          component: () => import('@/views/NotFound.vue')
-        }
-      ]
+          component: () => import('@/views/NotFound.vue'),
+        },
+      ],
     },
 
     {
       path: '/',
       component: () => import('@/layouts/LayoutDefault.vue'),
       meta: {
-        requiresNoAuth: true
+        requiresNoAuth: true,
       },
       children: [
         {
           path: '',
           name: 'home',
-          component: () => import('@/views/HomeView.vue')
+          component: () => import('@/views/HomeView.vue'),
         },
         {
           path: '/:eventId',
@@ -112,26 +112,26 @@ const router = createRouter({
             {
               path: '',
               name: 'event',
-              component: () => import('@/views/EventView.vue')
+              component: () => import('@/views/EventView.vue'),
             },
             {
               path: 'program',
               name: 'event-program',
-              component: () => import('@/views/EventTimelineView.vue')
+              component: () => import('@/views/EventTimelineView.vue'),
             },
             {
               path: 'parking',
               name: 'event-parking',
-              component: () => import('@/views/ParkingView.vue')
+              component: () => import('@/views/ParkingView.vue'),
             },
             {
               path: 'shuttle-schedule',
               name: 'shuttle-schedule',
-              component: () => import('@/views/ShuttleSchedule.vue')
-            }
-          ]
-        }
-      ]
+              component: () => import('@/views/ShuttleSchedule.vue'),
+            },
+          ],
+        },
+      ],
     },
     {
       path: '/dashboard',
@@ -140,11 +140,11 @@ const router = createRouter({
         {
           path: '/dashboard',
           name: 'dashboard',
-          component: () => import('@/views/DashboardView.vue')
-        }
-      ]
-    }
-  ]
+          component: () => import('@/views/DashboardView.vue'),
+        },
+      ],
+    },
+  ],
 });
 
 supabase.auth.onAuthStateChange((event: AuthChangeEvent) => {
@@ -172,7 +172,7 @@ router.beforeEach(async (to) => {
   const requiresNoAuth = to.meta.requiresNoAuth === true;
 
   const {
-    data: { session }
+    data: { session },
   } = await supabase.auth.getSession();
   if (!requiresNoAuth) {
     if (session?.user) {
@@ -183,7 +183,7 @@ router.beforeEach(async (to) => {
       }
       return {
         name: 'auth-sign-in',
-        query: { redirect: to.path }
+        query: { redirect: to.path },
       };
     }
   } else {
@@ -193,7 +193,7 @@ router.beforeEach(async (to) => {
     }
     if (isAuthRoute.startsWith('auth-') && user.value) {
       return {
-        name: 'dashboard'
+        name: 'dashboard',
       };
     }
   }

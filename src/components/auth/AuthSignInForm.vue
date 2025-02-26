@@ -9,62 +9,52 @@
         <v-text-field
           id="email"
           v-model="credentials.email"
-          required
           :disabled="loading"
           label="Email"
           name="email"
-          type="email"
           placeholder="Enter your email"
+          required
           :rules="[rulesValidation.ruleRequired, rulesValidation.ruleEmail]"
+          type="email"
         />
       </v-col>
       <v-col cols="12">
         <FieldPassword
           id="password"
           v-model="credentials.password"
-          :disabled="loading"
           class="mb-4 w-full"
-          name="password"
+          :disabled="loading"
           label="Password"
+          name="password"
           placeholder="Enter your password"
         />
       </v-col>
     </v-row>
 
     <v-row dense>
-      <v-col
-        cols="12"
-        sm="6"
-      >
+      <v-col cols="12" sm="6">
         <v-btn
+          :block="isDisplayXs"
           :to="{ name: 'auth-forgot-password' }"
           variant="text"
-          :block="isDisplayXs"
         >
           Forgot your password?
         </v-btn>
       </v-col>
-      <v-col
-        cols="12"
-        sm="6"
-        align="end"
-      >
+      <v-col align="end" cols="12" sm="6">
         <VBtnPrimary
-          :loading="emailLoading"
-          :disabled="loading"
-          type="submit"
           :block="isDisplayXs"
+          :disabled="loading"
+          :loading="emailLoading"
+          type="submit"
         >
           {{ 'Sign In' }}
         </VBtnPrimary>
       </v-col>
-      <v-col
-        v-if="isDevEnv()"
-        cols="12"
-      >
+      <v-col v-if="isDevEnv()" cols="12">
         <VBtnDev
-          prepend-icon="mdi-bug"
           :block="isDisplayXs"
+          prepend-icon="mdi-bug"
           @click="onBtnDevClick"
         >
           Auto DEV Sign Up
@@ -91,7 +81,7 @@ const isDisplayXs = computed(() => display.xs.value);
 
 const credentials = ref({
   email: '',
-  password: ''
+  password: '',
 });
 
 const emailLoading = ref(false);
@@ -119,7 +109,7 @@ const loading = computed(() => emailLoading.value);
 function onBtnDevClick() {
   credentials.value = {
     email: import.meta.env.VITE_DEV_USER_EMAIL,
-    password: import.meta.env.VITE_DEV_USER_PW
+    password: import.meta.env.VITE_DEV_USER_PW,
   };
   nextTick(() => emailAuth());
 }

@@ -1,13 +1,10 @@
 <template>
-  <slot
-    name="activator"
-    :on-click="show"
-  />
+  <slot name="activator" :on-click="show" />
 
   <vue-easy-lightbox
-    :visible="visibleRef"
     :imgs="imgsRef"
     :index="indexRef"
+    :visible="visibleRef"
     @hide="onEasyLightBoxHide"
   />
 </template>
@@ -18,8 +15,8 @@ import VueEasyLightbox, { useEasyLightbox } from 'vue-easy-lightbox';
 const props = defineProps({
   images: {
     type: Array as PropType<string[]>,
-    default: () => []
-  }
+    default: () => [],
+  },
 });
 
 const model = defineModel({ type: Boolean, default: false });
@@ -31,12 +28,12 @@ const {
   // refs
   visibleRef,
   indexRef,
-  imgsRef
+  imgsRef,
 } = useEasyLightbox({
   // src / src[]
   imgs: props.images,
   // initial index
-  initIndex: 0
+  initIndex: 0,
 });
 
 function onEasyLightBoxHide() {
@@ -50,6 +47,6 @@ watch(
     if (newValue) {
       show();
     }
-  }
+  },
 );
 </script>

@@ -1,18 +1,12 @@
 <template>
-  <v-menu
-    location="bottom"
-    color="primary"
-  >
+  <v-menu color="primary" location="bottom">
     <template #activator="{ props: ActivatorProps }">
       <v-btn
         v-bind="ActivatorProps"
         :icon="xs ? 'mdi-logout' : undefined"
         :size="xs ? 'small' : undefined"
       >
-        <span
-          v-if="hideFullText"
-          class="text-uppercase"
-        >
+        <span v-if="hideFullText" class="text-uppercase">
           {{ model ? model.slice(0, 2) : '' }}
         </span>
         <span v-else>
@@ -25,8 +19,8 @@
       <v-list-item
         v-for="item in availableLocales"
         :key="item"
-        link
         color="primary"
+        link
         @click="model = item"
       >
         <v-list-item-title>
@@ -44,16 +38,16 @@ import { useDisplay } from 'vuetify';
 defineProps({
   availableLocales: {
     type: Array as PropType<string[]>,
-    default: () => []
+    default: () => [],
   },
   hideIcon: {
     type: Boolean,
-    default: false
+    default: false,
   },
   hideFullText: {
     type: Boolean,
-    default: false
-  }
+    default: false,
+  },
 });
 
 const model = defineModel({ type: String, required: true });

@@ -1,19 +1,13 @@
 <template>
   <v-container class="align-center">
     <v-row>
-      <v-col
-        v-for="event in events"
-        :key="event.id"
-        cols="12"
-        sm="6"
-        lg="3"
-      >
+      <v-col v-for="event in events" :key="event.id" cols="12" lg="3" sm="6">
         <v-card
-          height="100%"
           :density="xs ? 'compact' : 'default'"
+          height="100%"
           :to="{
             name: 'event',
-            params: { eventId: event.slug || event.id }
+            params: { eventId: event.slug || event.id },
           }"
         >
           <v-img
@@ -25,25 +19,15 @@
             :src="event.banner"
           />
 
-          <v-card-title
-            v-if="event.title"
-            class="text-body-1 text-sm-h6"
-          >
+          <v-card-title v-if="event.title" class="text-body-1 text-sm-h6">
             {{ showDefaultTranslationOrEmpty(event.title) }}
           </v-card-title>
 
-          <v-card-subtitle
-            v-if="event.title"
-            class="text-wrap"
-          >
+          <v-card-subtitle v-if="event.title" class="text-wrap">
             {{ showDefaultTranslationOrEmpty(event.description) }}
           </v-card-subtitle>
 
-          <v-chip
-            v-if="event.date"
-            density="compact"
-            class="ma-4"
-          >
+          <v-chip v-if="event.date" class="ma-4" density="compact">
             {{ event.date }}
           </v-chip>
         </v-card>

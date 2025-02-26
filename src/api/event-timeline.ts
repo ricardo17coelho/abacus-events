@@ -1,7 +1,7 @@
 import useApi from '@/composables/api';
 import {
   type EventTimeline,
-  type EventTimelineCategory
+  type EventTimelineCategory,
 } from './types/EventTimeline';
 import type { FindFilter } from './types/QueryTypes';
 
@@ -11,7 +11,7 @@ export default function useApiEventTimeline() {
   function getEventTimelines(
     select = '*',
     filters: FindFilter[] = [],
-    range = [0, 100]
+    range = [0, 100],
   ) {
     return find<EventTimeline>(
       'event_timeline',
@@ -20,19 +20,19 @@ export default function useApiEventTimeline() {
       range,
       [['time_start', true]],
       {
-        count: 'exact'
-      }
+        count: 'exact',
+      },
     );
   }
 
   function getEventTimelinesByCategoryId(
     eventId: string,
     category: string,
-    range = [0, 100]
+    range = [0, 100],
   ) {
     const filters: FindFilter[] = [
       ['event_id', 'eq', eventId],
-      ['category', 'eq', category]
+      ['category', 'eq', category],
     ];
     return getEventTimelines('*', filters, range);
   }
@@ -50,7 +50,7 @@ export default function useApiEventTimeline() {
   function updateEventTimeline(id: string, form: Record<string, any>) {
     return update<EventTimeline>('event_timeline', {
       id,
-      ...form
+      ...form,
     });
   }
 
@@ -71,8 +71,8 @@ export default function useApiEventTimeline() {
       range,
       [],
       {
-        count: 'exact'
-      }
+        count: 'exact',
+      },
     );
   }
 
@@ -89,7 +89,7 @@ export default function useApiEventTimeline() {
   function updateEventTimelineCategory(id: string, form: Record<string, any>) {
     return update<EventTimelineCategory>('event_timeline_category', {
       id,
-      ...form
+      ...form,
     });
   }
 
@@ -109,6 +109,6 @@ export default function useApiEventTimeline() {
     getEventTimelineCategoryById,
     createEventTimelineCategory,
     updateEventTimelineCategory,
-    removeEventTimelineCategory
+    removeEventTimelineCategory,
   };
 }

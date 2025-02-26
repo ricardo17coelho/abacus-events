@@ -4,24 +4,18 @@
       v-if="Object.keys(model).length === 0"
       @click="onAddLanguageField"
     >
-      <v-icon start>
-        mdi-plus
-      </v-icon>
+      <v-icon start> mdi-plus </v-icon>
       {{ btnAdd || t('buttons.add') }}
     </VBtnSecondary>
     <template v-else>
-      <v-row
-        v-for="(_, modelKey) in model"
-        :key="modelKey"
-        dense
-      >
+      <v-row v-for="(_, modelKey) in model" :key="modelKey" dense>
         <v-col cols="4">
           <v-select
-            :model-value="modelKey"
             :items="getLangItemsByLang(modelKey)"
             :label="
               fieldKeyLabel || t('fields.multi_language_text.field_key_label')
             "
+            :model-value="modelKey"
             :name="`field-multi-language-key-${modelKey}`"
             @update:model-value="onModelKeyInput($event, modelKey)"
           >
@@ -42,40 +36,35 @@
         <v-col>
           <v-text-field
             v-model="model[modelKey]"
+            autocomplete="off"
+            autofocus
+            clearable
             :label="
               fieldValueLabel ||
-                t('fields.multi_language_text.field_value_label')
+              t('fields.multi_language_text.field_value_label')
             "
-            autocomplete="off"
-            clearable
-            autofocus
             :name="`field-multi-language-value-${modelKey}`"
             :rules="[validationsRules.ruleRequired]"
           >
             <template #append>
               <v-btn
+                class="mt-1"
+                color="error"
                 icon="mdi-delete"
                 size="small"
-                color="error"
                 variant="text"
-                class="mt-1"
                 @click="onRemoveLanguageFieldByLangKey(modelKey)"
               />
             </template>
           </v-text-field>
         </v-col>
-        <v-col
-          cols="12"
-          align-self="start"
-        >
+        <v-col align-self="start" cols="12">
           <v-btn
             v-if="showBtnAddByIndex(modelKey)"
             class="mt-1"
             @click="onAddLanguageField"
           >
-            <v-icon start>
-              mdi-plus
-            </v-icon>
+            <v-icon start> mdi-plus </v-icon>
             {{ btnAdd || t('buttons.add') }}
           </v-btn>
         </v-col>
@@ -92,16 +81,16 @@ import { useDisplay } from 'vuetify';
 defineProps({
   btnAdd: {
     type: String,
-    default: undefined
+    default: undefined,
   },
   fieldKeyLabel: {
     type: String,
-    default: undefined
+    default: undefined,
   },
   fieldValueLabel: {
     type: String,
-    default: undefined
-  }
+    default: undefined,
+  },
 });
 
 const model = defineModel({ type: Object, default: () => ({}) });
@@ -110,7 +99,7 @@ const { t, availableLocales } = useI18n();
 const { xs } = useDisplay();
 
 const computedAvailableLanguages = computed(() =>
-  availableLocales.map((l) => l.split('-')[0])
+  availableLocales.map((l) => l.split('-')[0]),
 );
 
 const sortedAvailableLanguages = computed((): string[] => {
@@ -118,7 +107,7 @@ const sortedAvailableLanguages = computed((): string[] => {
   // remove null or undefined
   usedLanguages.filter((lang: string) => lang);
   return [...computedAvailableLanguages.value].filter(
-    (lang: string) => !usedLanguages.includes(lang)
+    (lang: string) => !usedLanguages.includes(lang),
   );
 });
 
@@ -140,7 +129,7 @@ function showBtnAddByIndex(langKey: string) {
 function onAddLanguageField() {
   model.value = {
     ...model.value,
-    [sortedAvailableLanguages.value[0]]: null
+    [sortedAvailableLanguages.value[0]]: null,
   };
 }
 
@@ -164,7 +153,7 @@ function getLangItemsByLang(langKey: string) {
     .map((lang) => {
       return {
         title: lang,
-        value: lang
+        value: lang,
       };
     });
 }

@@ -313,6 +313,7 @@
     "useModel": true,
     "usePreferredReducedTransparency": true,
     "useSSRWidth": true,
-    "useTemplateRef": true
+    "useTemplateRef": true,
+    "createRef": true
   }
 }

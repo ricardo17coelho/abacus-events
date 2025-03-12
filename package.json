@@ -20,7 +20,7 @@
     "@tato30/vue-pdf": "^1.11.3",
     "@typescript-eslint/eslint-plugin": "^8.26.1",
     "@vitest/eslint-plugin": "^1.1.37",
-    "@vueuse/core": "^12.7.0",
+    "@vueuse/core": "^13.0.0",
     "canvas-confetti": "^1.9.3",
     "lodash": "^4.17.21",
     "pinia": "^3.0.1",

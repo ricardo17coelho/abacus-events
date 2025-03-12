@@ -7,6 +7,7 @@ export default function useApiEvents() {
 
   const baseSelect = `
     *,
+    brand:event_brand(*),
     parking_lots:parking_lots(*)
   `;
 

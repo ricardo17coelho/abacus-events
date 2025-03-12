@@ -5,7 +5,7 @@
       @click="onAddLanguageField"
     >
       <v-icon start> mdi-plus </v-icon>
-      {{ btnAdd || t('buttons.add') }}
+      {{ btnAdd || t('actions.add') }}
     </VBtnSecondary>
     <template v-else>
       <v-row v-for="(_, modelKey) in model" :key="modelKey" dense>
@@ -65,7 +65,7 @@
             @click="onAddLanguageField"
           >
             <v-icon start> mdi-plus </v-icon>
-            {{ btnAdd || t('buttons.add') }}
+            {{ btnAdd || t('actions.add') }}
           </v-btn>
         </v-col>
       </v-row>

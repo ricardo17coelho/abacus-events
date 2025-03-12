@@ -10,7 +10,7 @@
     </template>
     <template #actions>
       <VBtnPrimary :loading="loading" @click="onSave">
-        {{ t('buttons.save') }}
+        {{ t('actions.save') }}
       </VBtnPrimary>
     </template>
   </AppDialog>

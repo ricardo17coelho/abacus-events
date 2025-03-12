@@ -1,9 +1,17 @@
 {
+  "actions": {
+    "add": "Add",
+    "delete": "Delete",
+    "edit": "Edit",
+    "open": "Open",
+    "save": "Save",
+    "view": "View"
+  },
   "categories": {
-    "KIDS": "Kids",
     "ADULTS": "Adults",
+    "BEVERAGE": "Beverage",
     "FOOD": "Food",
-    "BEVERAGE": "Beverage"
+    "KIDS": "Kids"
   },
   "errors": {
     "error_occurred": "An error has occurred",
@@ -11,34 +19,70 @@
       "invalid": "Please check your input"
     }
   },
-  "labels": {
-    "parking_lot": "Car Park",
-    "parking_lot_status": {
-      "full": "Full",
-      "almost_full": "Almost Full",
-      "free": "Free"
+  "fields": {
+    "multi_language_text": {
+      "field_key_label": "Language",
+      "field_value_label": "Value"
     },
-    "programm": "Program",
-    "logout": "Logout",
-    "login": "Login",
-    "n_of_parking_spaces": "Number of Parking Spaces",
-    "name": "Name",
+    "password": {
+      "hint": "At least 8 characters",
+      "label": "Password"
+    }
+  },
+  "home": {
+    "links": {
+      "parking": {
+        "description": "Live availability of parking spaces & locations",
+        "title": "Parking"
+      },
+      "program": {
+        "description": "LineUp, F&B, general info",
+        "title": "Program"
+      },
+      "shuttle_schedule": {
+        "description": "Timetable and stops",
+        "title": "Shuttle Schedule"
+      }
+    }
+  },
+  "labels": {
+    "add": "Add",
+    "category": "Category",
+    "drinks": "drinks menu",
+    "icon": "Icon",
     "location": "Location Name",
     "location_url": "Location URL",
-    "stop_on_request": "Stop on request",
-    "slots_total": "Max. Spaces",
-    "slots_filled": "Occupied Spaces",
-    "time_start": "Start Time",
-    "time_end": "End Time",
-    "icon": "Icon",
+    "login": "Login",
+    "logout": "Logout",
+    "n_of_parking_spaces": "Number of Parking Spaces",
+    "name": "Name",
     "note": "Note",
-    "program_timeline": "Program Timeline",
-    "category": "Category",
-    "add": "Add",
     "outward_journey": "Outbound Journey",
-    "return_journey": "Return Journey",
+    "parking_lot": "Car Park",
+    "parking_lot_status": {
+      "almost_full": "Almost Full",
+      "free": "Free",
+      "full": "Full"
+    },
     "plan": "Site plan",
-    "drinks": "drinks menu"
+    "program_timeline": "Program Timeline",
+    "programm": "Program",
+    "return_journey": "Return Journey",
+    "slots_filled": "Occupied Spaces",
+    "slots_total": "Max. Spaces",
+    "stop_on_request": "Stop on request",
+    "time_end": "End Time",
+    "time_start": "Start Time"
+  },
+  "not_found": {
+    "headline": "Whoops, 404",
+    "text": "The page you were looking for does not exist",
+    "title": "Page not found"
+  },
+  "title": {
+    "parking": "Parking",
+    "program": "Information",
+    "shuttle_schedule": "Shuttle Schedule"
   },
   "validation": {
     "email": "The email field must contain a valid email address.",
@@ -46,60 +90,20 @@
     "min": "The field must contain more than 1 character | The field must contain more than {n} characters",
     "required": "Field required"
   },
-  "buttons": {
-    "save": "Save",
-    "add": "Add"
-  },
-  "title": {
-    "parking": "Parking",
-    "program": "Information",
-    "shuttle_schedule": "Shuttle Schedule"
-  },
-  "fields": {
-    "password": {
-      "label": "Password",
-      "hint": "At least 8 characters"
-    },
-    "multi_language_text": {
-      "field_value_label": "Value",
-      "field_key_label": "Language"
-    }
-  },
-  "not_found": {
-    "headline": "Whoops, 404",
-    "title": "Page not found",
-    "text": "The page you were looking for does not exist"
-  },
-  "home": {
-    "links": {
-      "program": {
-        "title": "Program",
-        "description": "LineUp, F&B, general info"
-      },
-      "parking": {
-        "title": "Parking",
-        "description": "Live availability of parking spaces & locations"
-      },
-      "shuttle_schedule": {
-        "title": "Shuttle Schedule",
-        "description": "Timetable and stops"
-      }
-    }
-  },
   "views": {
+    "parking": {
+      "alert_01": "If you have a fixed PP in AbaHome II, please use it. Thank you 😇"
+    },
     "shuttle_schedule": {
+      "alert_01": "VBSG bus is labelled with EXTRA TRIP",
       "info_01": "Between 19:00 - 21:30 there is NO shuttle bus",
       "info_02": "please use public transport ({link} - Sonnrainweg stop)!",
-      "alert_01": "VBSG bus is labelled with EXTRA TRIP",
       "outward_journey": {
         "info": "13:30-19:00 (every 30 minutes)"
       },
       "return_journey": {
         "info": "21:30-01:30 (every 30 minutes)"
       }
-    },
-    "parking": {
-      "alert_01": "If you have a fixed PP in AbaHome II, please use it. Thank you 😇"
     }
   }
 }

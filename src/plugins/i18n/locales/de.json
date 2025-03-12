@@ -1,9 +1,17 @@
 {
+  "actions": {
+    "add": "Hinzufügen",
+    "delete": "Löschen",
+    "edit": "Bearbeiten",
+    "open": "Öffnen",
+    "save": "Speichern",
+    "view": "Anschauen"
+  },
   "categories": {
-    "KIDS": "Kinder",
     "ADULTS": "Erwachsene",
+    "BEVERAGE": "Getränk",
     "FOOD": "Essen",
-    "BEVERAGE": "Getränk"
+    "KIDS": "Kinder"
   },
   "errors": {
     "error_occurred": "Ein Fehler ist aufgetreten",
@@ -11,34 +19,70 @@
       "invalid": "Bitte überprüfen Sie Ihre Eingabe"
     }
   },
-  "labels": {
-    "parking_lot": "Parkplatz",
-    "parking_lot_status": {
-      "full": "Voll",
-      "almost_full": "Fast voll",
-      "free": "Frei"
+  "fields": {
+    "multi_language_text": {
+      "field_key_label": "Sprache",
+      "field_value_label": "Wert"
     },
-    "programm": "Programm",
-    "logout": "Abmelden",
-    "login": "Anmelden",
-    "n_of_parking_spaces": "Anzahl der Parkplätze",
-    "name": "Name",
+    "password": {
+      "hint": "Mindestens 8 Zeichen",
+      "label": "Passwort"
+    }
+  },
+  "home": {
+    "links": {
+      "parking": {
+        "description": "Live Verfügbarkeit PP & Standorte",
+        "title": "Parking"
+      },
+      "program": {
+        "description": "LineUp, F&B, allgemeine Info`s",
+        "title": "Programm"
+      },
+      "shuttle_schedule": {
+        "description": "Timetable und Stop`s",
+        "title": "Shuttle-Fahrplan"
+      }
+    }
+  },
+  "labels": {
+    "add": "Hinzufügen",
+    "category": "Kategorie",
+    "drinks": "Getränkkarte",
+    "icon": "Symbol",
     "location": "Standortname",
     "location_url": "Standort-URL",
-    "stop_on_request": "Halt auf Verlangen",
-    "slots_total": "Max. Plätze",
-    "slots_filled": "Belegte Plätze",
-    "time_start": "Startzeit",
-    "time_end": "Endzeit",
-    "icon": "Symbol",
+    "login": "Anmelden",
+    "logout": "Abmelden",
+    "n_of_parking_spaces": "Anzahl der Parkplätze",
+    "name": "Name",
     "note": "Notiz",
-    "program_timeline": "Programmablauf",
-    "category": "Kategorie",
-    "add": "Hinzufügen",
     "outward_journey": "Hinfahrt",
-    "return_journey": "Rückfahrt",
+    "parking_lot": "Parkplatz",
+    "parking_lot_status": {
+      "almost_full": "Fast voll",
+      "free": "Frei",
+      "full": "Voll"
+    },
     "plan": "Geländeplan",
-    "drinks": "Getränkkarte"
+    "program_timeline": "Programmablauf",
+    "programm": "Programm",
+    "return_journey": "Rückfahrt",
+    "slots_filled": "Belegte Plätze",
+    "slots_total": "Max. Plätze",
+    "stop_on_request": "Halt auf Verlangen",
+    "time_end": "Endzeit",
+    "time_start": "Startzeit"
+  },
+  "not_found": {
+    "headline": "Hoppla, 404",
+    "text": "Die gesuchte Seite existiert nicht",
+    "title": "Seite nicht gefunden"
+  },
+  "title": {
+    "parking": "Parken",
+    "program": "Informationen",
+    "shuttle_schedule": "Shuttle-Fahrplan"
   },
   "validation": {
     "email": "Das E-Mail-Feld muss eine gültige E-Mail-Adresse enthalten.",
@@ -46,60 +90,20 @@
     "min": "Das Feld muss mehr als 1 Zeichen enthalten | Das Feld muss mehr als {n} Zeichen enthalten",
     "required": "Feld erforderlich"
   },
-  "buttons": {
-    "save": "Speichern",
-    "add": "Hinzufügen"
-  },
-  "title": {
-    "parking": "Parken",
-    "program": "Informationen",
-    "shuttle_schedule": "Shuttle-Fahrplan"
-  },
-  "fields": {
-    "password": {
-      "label": "Passwort",
-      "hint": "Mindestens 8 Zeichen"
-    },
-    "multi_language_text": {
-      "field_value_label": "Wert",
-      "field_key_label": "Sprache"
-    }
-  },
-  "not_found": {
-    "headline": "Hoppla, 404",
-    "title": "Seite nicht gefunden",
-    "text": "Die gesuchte Seite existiert nicht"
-  },
-  "home": {
-    "links": {
-      "program": {
-        "title": "Programm",
-        "description": "LineUp, F&B, allgemeine Info`s"
-      },
-      "parking": {
-        "title": "Parking",
-        "description": "Live Verfügbarkeit PP & Standorte"
-      },
-      "shuttle_schedule": {
-        "title": "Shuttle-Fahrplan",
-        "description": "Timetable und Stop`s"
-      }
-    }
-  },
   "views": {
+    "parking": {
+      "alert_01": "Wenn du einen fixen PP im AbaHome II hast, nutze diesen bitte. Danke 😇"
+    },
     "shuttle_schedule": {
+      "alert_01": "VBSG-Bus ist mit EXTRAFAHRT beschriftet",
       "info_01": "Zwischen 19.00 - 21.30 Uhr verkehrt KEIN Shuttlebus",
       "info_02": "bitte auf ÖV ({link} - Haltestelle Sonnrainweg) ausweichen!",
-      "alert_01": "VBSG-Bus ist mit EXTRAFAHRT beschriftet",
       "outward_journey": {
         "info": "13:30-19:00 Uhr (im 30min Takt)"
       },
       "return_journey": {
         "info": "21:30-01:30 Uhr (im 30min Takt)"
       }
-    },
-    "parking": {
-      "alert_01": "Wenn du einen fixen PP im AbaHome II hast, nutze diesen bitte. Danke 😇"
     }
   }
 }

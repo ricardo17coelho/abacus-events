@@ -16,7 +16,7 @@
             cover
             height="240"
             rounded="lg"
-            :src="event.banner"
+            :src="event.brand?.logo"
           />
 
           <v-card-title v-if="event.title" class="text-body-1 text-sm-h6">

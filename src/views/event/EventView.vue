@@ -1,14 +1,14 @@
 <template>
   <v-container v-if="currentEvent" class="align-center">
     <AppTitle :title="showDefaultTranslationOrEmpty(currentEvent.title)" />
-    <AppImagesView :images="[currentEvent.banner]">
+    <AppImagesView :images="[currentEvent.brand?.banner]">
       <template #activator="activatorProps">
         <v-img
           v-bind="activatorProps"
           class="rounded-lg"
           cover
           max-height="400"
-          :src="currentEvent.banner"
+          :src="currentEvent.brand?.banner"
         />
       </template>
     </AppImagesView>

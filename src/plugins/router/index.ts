@@ -162,8 +162,54 @@ const router = createRouter({
             },
             {
               path: 'events',
-              name: 'manage-events',
-              component: () => import('@/views/manage/ManageEvents.vue'),
+              children: [
+                {
+                  path: '',
+                  name: 'manage-events',
+                  component: () =>
+                    import('@/views/manage/events/ManageEvents.vue'),
+                },
+                {
+                  path: ':eventId',
+                  component: () =>
+                    import('@/plugins/router/guards/GuardEvent.vue'),
+                  children: [
+                    {
+                      path: '',
+                      name: 'manage-events-id',
+                      component: () =>
+                        import('@/views/manage/events/ManageEvent.vue'),
+                      redirect: { name: 'manage-events-id-settings' },
+                      children: [
+                        {
+                          path: 'brand',
+                          name: 'manage-events-id-brand',
+                          component: () =>
+                            import(
+                              '@/views/manage/events/ManageEventBrand.vue'
+                            ),
+                        },
+                        {
+                          path: 'settings',
+                          name: 'manage-events-id-settings',
+                          component: () =>
+                            import(
+                              '@/views/manage/events/ManageEventSettings.vue'
+                            ),
+                        },
+                        {
+                          path: 'users',
+                          name: 'manage-events-id-users',
+                          component: () =>
+                            import(
+                              '@/views/manage/events/ManageEventUsers.vue'
+                            ),
+                        },
+                      ],
+                    },
+                  ],
+                },
+              ],
             },
             {
               path: 'users',

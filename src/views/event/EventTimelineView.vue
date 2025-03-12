@@ -54,7 +54,7 @@
                 prepend-icon="mdi-plus"
                 variant="text"
               >
-                {{ t('buttons.add') }}
+                {{ t('actions.add') }}
               </v-btn>
             </template>
           </EventTimelineDialog>

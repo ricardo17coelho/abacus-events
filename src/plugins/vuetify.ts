@@ -15,7 +15,7 @@ import * as labsComponents from 'vuetify/labs/components';
 // Translations provided by Vuetify
 import { en, pt } from 'vuetify/locale';
 
-import { VBtn } from 'vuetify/components';
+import { VBtn, VCard } from 'vuetify/components';
 
 export const themes: Record<string, ThemeDefinition> = {
   light: {
@@ -52,6 +52,7 @@ const opts = {
     VBtnSecondary: VBtn,
     VBtnDev: VBtn,
     VBtnDelete: VBtn,
+    VCardSettings: VCard,
   },
   defaults: {
     VBtn: {
@@ -76,6 +77,10 @@ const opts = {
       variant: 'tonal',
       color: 'error',
       prependIcon: 'mdi-delete',
+    },
+    VCardSettings: {
+      variant: 'elevated',
+      rounded: 'lg',
     },
     VIcon: {
       size: 'small',

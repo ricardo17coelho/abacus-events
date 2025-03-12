@@ -1,9 +1,17 @@
 {
+  "actions": {
+    "add": "Ajouter",
+    "delete": "",
+    "edit": "",
+    "open": "",
+    "save": "Enregistrer",
+    "view": ""
+  },
   "categories": {
-    "KIDS": "Enfants",
     "ADULTS": "Adultes",
+    "BEVERAGE": "Boisson",
     "FOOD": "Nourriture",
-    "BEVERAGE": "Boisson"
+    "KIDS": "Enfants"
   },
   "errors": {
     "error_occurred": "Une erreur s'est produite",
@@ -11,34 +19,70 @@
       "invalid": "Veuillez vérifier votre saisie"
     }
   },
-  "labels": {
-    "parking_lot": "Parking",
-    "parking_lot_status": {
-      "full": "Complet",
-      "almost_full": "Presque complet",
-      "free": "Libre"
+  "fields": {
+    "multi_language_text": {
+      "field_key_label": "Langue",
+      "field_value_label": "Valeur"
     },
-    "programm": "Programme",
-    "logout": "Déconnexion",
-    "login": "Connexion",
-    "n_of_parking_spaces": "Nombre de places de parking",
-    "name": "Nom",
+    "password": {
+      "hint": "Au moins 8 caractères",
+      "label": "Mot de passe"
+    }
+  },
+  "home": {
+    "links": {
+      "parking": {
+        "description": "Disponibilité des places de parking en direct & emplacements",
+        "title": "Parking"
+      },
+      "program": {
+        "description": "LineUp, F&B, infos générales",
+        "title": "Programme"
+      },
+      "shuttle_schedule": {
+        "description": "Horaires et arrêts",
+        "title": "Horaires de la navette"
+      }
+    }
+  },
+  "labels": {
+    "add": "Ajouter",
+    "category": "Catégorie",
+    "drinks": "carte des boissons",
+    "icon": "Icône",
     "location": "Nom du lieu",
     "location_url": "URL du lieu",
-    "stop_on_request": "Arrêt sur demande",
-    "slots_total": "Nb max. de places",
-    "slots_filled": "Places occupées",
-    "time_start": "Heure de début",
-    "time_end": "Heure de fin",
-    "icon": "Icône",
+    "login": "Connexion",
+    "logout": "Déconnexion",
+    "n_of_parking_spaces": "Nombre de places de parking",
+    "name": "Nom",
     "note": "Note",
-    "program_timeline": "Chronologie du programme",
-    "category": "Catégorie",
-    "add": "Ajouter",
     "outward_journey": "Aller",
-    "return_journey": "Retour",
+    "parking_lot": "Parking",
+    "parking_lot_status": {
+      "almost_full": "Presque complet",
+      "free": "Libre",
+      "full": "Complet"
+    },
     "plan": "Plan du site",
-    "drinks": "carte des boissons"
+    "program_timeline": "Chronologie du programme",
+    "programm": "Programme",
+    "return_journey": "Retour",
+    "slots_filled": "Places occupées",
+    "slots_total": "Nb max. de places",
+    "stop_on_request": "Arrêt sur demande",
+    "time_end": "Heure de fin",
+    "time_start": "Heure de début"
+  },
+  "not_found": {
+    "headline": "Oups, 404",
+    "text": "La page que vous cherchez n'existe pas",
+    "title": "Page non trouvée"
+  },
+  "title": {
+    "parking": "Parking",
+    "program": "Informations",
+    "shuttle_schedule": "Horaires de la navette"
   },
   "validation": {
     "email": "Le champ email doit contenir une adresse email valide.",
@@ -46,60 +90,20 @@
     "min": "Le champ doit contenir plus de 1 caractère | Le champ doit contenir plus de {n} caractères",
     "required": "Champ requis"
   },
-  "buttons": {
-    "save": "Enregistrer",
-    "add": "Ajouter"
-  },
-  "title": {
-    "parking": "Parking",
-    "program": "Informations",
-    "shuttle_schedule": "Horaires de la navette"
-  },
-  "fields": {
-    "password": {
-      "label": "Mot de passe",
-      "hint": "Au moins 8 caractères"
-    },
-    "multi_language_text": {
-      "field_value_label": "Valeur",
-      "field_key_label": "Langue"
-    }
-  },
-  "not_found": {
-    "headline": "Oups, 404",
-    "title": "Page non trouvée",
-    "text": "La page que vous cherchez n'existe pas"
-  },
-  "home": {
-    "links": {
-      "program": {
-        "title": "Programme",
-        "description": "LineUp, F&B, infos générales"
-      },
-      "parking": {
-        "title": "Parking",
-        "description": "Disponibilité des places de parking en direct & emplacements"
-      },
-      "shuttle_schedule": {
-        "title": "Horaires de la navette",
-        "description": "Horaires et arrêts"
-      }
-    }
-  },
   "views": {
+    "parking": {
+      "alert_01": "Si tu as un PP fixe dans AbaHome II, merci de l'utiliser. Merci 😇"
+    },
     "shuttle_schedule": {
+      "alert_01": "Le bus VBSG est marqué EXTRA COURSE",
       "info_01": "Entre 19:00 et 21:30, il n'y a PAS de navette",
       "info_02": "veuillez utiliser les transports publics ({link} - arrêt Sonnrainweg) !",
-      "alert_01": "Le bus VBSG est marqué EXTRA COURSE",
       "outward_journey": {
         "info": "13:30-19:00 (toutes les 30 minutes)"
       },
       "return_journey": {
         "info": "21:30-01:30 (toutes les 30 minutes)"
       }
-    },
-    "parking": {
-      "alert_01": "Si tu as un PP fixe dans AbaHome II, merci de l'utiliser. Merci 😇"
     }
   }
 }

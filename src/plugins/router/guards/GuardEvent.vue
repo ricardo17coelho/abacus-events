@@ -18,6 +18,7 @@ import { useI18n } from 'vue-i18n';
 import type { Event } from '@/api/types/Event';
 import ErrorNotFound from '@/components/errors/ErrorNotFound.vue';
 import { CURRENT_EVENT_KEY } from '@/types/injectionKeys';
+import useBrand from '@/composables/brand.ts';
 
 const { t } = useI18n();
 
@@ -42,13 +43,37 @@ const fetchData = async (id: string) => {
   isLoading.value = false;
 };
 
+const { setBrand, clearBrand } = useBrand();
+
+const currentCompanyBrand = computed(() => currentEvent.value?.brand);
+
+watch(
+  () => currentCompanyBrand.value,
+  (newValue) => {
+    if (newValue && (newValue.color_primary || newValue.color_secondary)) {
+      setBrand(newValue.color_primary, newValue?.color_secondary);
+    } else {
+      clearBrand();
+    }
+  },
+);
+
+function clear() {
+  currentEvent.value = undefined;
+  clearBrand();
+}
+
 watch(
   () => params.value.eventId,
   (newValue) => {
     if (newValue) {
       fetchData(newValue);
+    } else {
+      clear();
     }
   },
   { immediate: true },
 );
+
+onUnmounted(() => clear());
 </script>

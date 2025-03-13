@@ -69,7 +69,10 @@ import { computed, type PropType, ref } from 'vue';
 // vuetify components
 import { VCard, VChip, VDataTable } from 'vuetify/components';
 // UI components
-import { type MenuItem, UiAvatar, UiForwardSlots, UiMenu } from './index';
+
+import { UiAvatar } from './avatar';
+import { UiForwardSlots } from './UiForwardSlots';
+import { type MenuItem, UiMenu } from './menu';
 // types
 import type { ExtractProps } from '../types/utils.ts';
 // utilities

@@ -67,5 +67,12 @@ const navItems = [
       name: 'manage-parking-lots',
     },
   },
+  {
+    title: 'Roles',
+    icon: 'mdi-car',
+    to: {
+      name: 'manage-roles',
+    },
+  },
 ];
 </script>

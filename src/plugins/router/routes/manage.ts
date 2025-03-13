@@ -1,0 +1,91 @@
+export default [
+  {
+    path: 'manage',
+    children: [
+      {
+        path: 'parking-lots',
+        name: 'manage-parking-lots',
+        component: () => import('@/views/manage/ManageParkingLots.vue'),
+      },
+      {
+        path: 'events',
+        children: [
+          {
+            path: '',
+            name: 'manage-events',
+            component: () => import('@/views/manage/events/ManageEvents.vue'),
+          },
+          {
+            path: ':eventId',
+            component: () => import('@/plugins/router/guards/GuardEvent.vue'),
+            children: [
+              {
+                path: '',
+                name: 'manage-events-id',
+                component: () =>
+                  import('@/views/manage/events/ManageEvent.vue'),
+                redirect: { name: 'manage-events-id-settings' },
+                children: [
+                  {
+                    path: 'brand',
+                    name: 'manage-events-id-brand',
+                    component: () =>
+                      import('@/views/manage/events/ManageEventBrand.vue'),
+                  },
+                  {
+                    path: 'settings',
+                    name: 'manage-events-id-settings',
+                    component: () =>
+                      import('@/views/manage/events/ManageEventSettings.vue'),
+                  },
+                  {
+                    path: 'users',
+                    name: 'manage-events-id-users',
+                    component: () =>
+                      import('@/views/manage/events/ManageEventUsers.vue'),
+                  },
+                  {
+                    path: 'guest-list',
+                    name: 'manage-events-id-guest-list',
+                    component: () =>
+                      import('@/views/manage/events/ManageEventGuestList.vue'),
+                  },
+                  {
+                    path: 'contacts',
+                    name: 'manage-events-id-contacts',
+                    component: () =>
+                      import('@/views/manage/events/ManageEventContacts.vue'),
+                  },
+                  {
+                    path: 'parking-lots',
+                    name: 'manage-events-id-parking-lots',
+                    component: () =>
+                      import(
+                        '@/views/manage/events/ManageEventParkingLots.vue'
+                      ),
+                  },
+                  {
+                    path: 'shuttle-bus',
+                    name: 'manage-events-id-shuttle-bus',
+                    component: () =>
+                      import('@/views/manage/events/ManageEventShuttleBus.vue'),
+                  },
+                ],
+              },
+            ],
+          },
+        ],
+      },
+      {
+        path: 'users',
+        name: 'manage-users',
+        component: () => import('@/views/manage/ManageUsers.vue'),
+      },
+      {
+        path: 'roles',
+        name: 'manage-roles',
+        component: () => import('@/views/manage/ManageRoles.vue'),
+      },
+    ],
+  },
+];

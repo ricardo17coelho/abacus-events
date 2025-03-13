@@ -1,114 +1,126 @@
 <template>
   <v-container v-if="currentEvent" class="align-center">
     <AppTitle :title="showDefaultTranslationOrEmpty(currentEvent.title)" />
-    <AppImagesView :images="[currentEvent.brand?.banner]">
+    <AppImagesView
+      v-if="currentEventBrandBannersUrls.length > 0"
+      :images="currentEventBrandBannersUrls"
+      :init-index="carouselModel"
+    >
       <template #activator="activatorProps">
-        <v-img
-          v-bind="activatorProps"
-          class="rounded-lg"
-          cover
-          max-height="400"
-          :src="currentEvent.brand?.banner"
-        />
+        <v-carousel
+          v-model="carouselModel"
+          cycle
+          height="400"
+          hide-delimiter-background
+          show-arrows="hover"
+        >
+          <v-carousel-item
+            v-for="bannerUrl in currentEventBrandBannersUrls"
+            v-bind="activatorProps"
+            :key="bannerUrl"
+            :src="bannerUrl"
+          >
+          </v-carousel-item>
+        </v-carousel>
       </template>
     </AppImagesView>
   </v-container>
   <v-container class="align-center">
     <v-row>
-      <v-col v-for="link in sortedLinks" :key="link.id" cols="12" lg="3" sm="6">
-        <v-card
-          color="primary"
-          :density="xs ? 'compact' : 'default'"
-          height="100%"
-          :to="link.to"
-          variant="tonal"
+      <v-col
+        v-for="feature in eventFeatures"
+        :key="feature.id"
+        cols="12"
+        lg="3"
+        sm="6"
+      >
+        <EventFeatureCard
+          :feature="feature"
+          :to="feature.to"
           @click="
-            link.action && Object.keys(link).includes('action')
-              ? link.action()
+            feature.action && Object.keys(feature).includes('action')
+              ? feature.action()
               : undefined
           "
         >
-          <template #title>
-            <v-card-title class="text-h6 text-sm-h5">
-              {{ link.title }}
-              <AppLiveLabel v-if="link.id === 'parking'" />
-            </v-card-title>
-          </template>
-          <template #subtitle>
-            <v-card-subtitle class="text-wrap">
-              {{ link.description }}
-            </v-card-subtitle>
-          </template>
-          <template #append>
-            <v-avatar rounded="0" size="40">
-              <v-icon color="primary" size="40">
-                {{ link.icon }}
-              </v-icon>
-            </v-avatar>
-          </template>
-        </v-card>
+        </EventFeatureCard>
       </v-col>
     </v-row>
     <AppImagesView
+      v-if="!!eventAttachments.length"
       v-model="showGallery"
-      :images="['/images/summer-part-2024/plan.png']"
+      :images="eventAttachments"
     />
   </v-container>
 </template>
 
 <script setup lang="ts">
-import { useI18n } from 'vue-i18n';
-import AppLiveLabel from '../../components/app/AppLiveLabel.vue';
 import AppImagesView from '@/components/app/AppImagesView.vue';
 import AppTitle from '@/components/app/AppTitle.vue';
 import { showDefaultTranslationOrEmpty } from '@/utils/showDefaultTranslationOrEmpty.ts';
 import { requireInjection } from '@/utils/injection.ts';
 import { CURRENT_EVENT_KEY } from '@/types/injectionKeys.ts';
-import { useDisplay } from 'vuetify';
-
-const { t } = useI18n();
-const { xs } = useDisplay();
+import EventFeatureCard from '@/components/event/event-feature/EventFeatureCard.vue';
+import { type EventFeatureTypes } from '@/api/types/EventFeature.ts';
+import useApiEvents from '@/api/events.ts';
 
 const currentEvent = requireInjection(CURRENT_EVENT_KEY);
 
-const links = computed(() => [
-  {
-    id: 'program',
-    title: t('home.links.program.title'),
-    description: t('home.links.program.description'),
-    icon: 'mdi-clipboard-text',
-    show: () => true,
-    to: { name: 'event-program' },
-  },
-  {
-    id: 'parking',
-    title: t('home.links.parking.title'),
-    description: t('home.links.parking.description'),
-    icon: 'mdi-car',
-    show: () => true,
-    to: { name: 'event-parking' },
-  },
-  {
-    id: 'shuttle-schedule',
-    title: t('home.links.shuttle_schedule.title'),
-    description: t('home.links.shuttle_schedule.description'),
-    icon: 'mdi-bus',
-    show: () => true,
-    to: { name: 'shuttle-schedule' },
-  },
-  {
-    id: 'plan',
-    title: t('labels.plan'),
-    description: undefined,
-    icon: 'mdi-map',
-    show: () => true,
-    action: () => {
-      showGallery.value = true;
-    },
-  },
-]);
+const currentEventBrandBannersUrls = computed(
+  () => currentEvent.value?.brand?.banners.map((i) => i.url) || [],
+);
 
-const sortedLinks = computed(() => links.value.filter((l) => l.show()));
+const carouselModel = ref(0);
+
+function getEventFeatureLinkOrAction(feature: EventFeatureTypes) {
+  switch (feature) {
+    case 'PROGRAM':
+      return {
+        to: {
+          name: 'event-program',
+        },
+      };
+    case 'PARKING':
+      return {
+        to: {
+          name: 'event-parking',
+        },
+      };
+    case 'SHUTTLE_PLAN':
+      return { to: { name: 'event-schedule' } };
+    case 'ATTACHMENTS':
+      return {
+        action: () => {
+          showGallery.value = true;
+        },
+      };
+    // no default
+  }
+}
+
+const eventFeatures = computed(() =>
+  currentEvent.value?.features
+    .filter((f) => f.enabled === true)
+    .map((i) => {
+      return {
+        ...i,
+        ...getEventFeatureLinkOrAction(i.feature_id),
+      };
+    }),
+);
 
 const showGallery = ref(false);
+
+const { getEventById } = useApiEvents();
+const eventAttachments = computedAsync<string[]>(async () => {
+  if (
+    currentEvent.value?.features
+      .map((i) => i.feature_id)
+      .includes('ATTACHMENTS')
+  ) {
+    // TODO: fetch event attachments
+    await getEventById(currentEvent.value?.id);
+    return ['/images/summer-part-2024/plan.png'];
+  }
+}, []);
 </script>

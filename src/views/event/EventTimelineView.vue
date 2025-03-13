@@ -134,7 +134,7 @@ function mutateById(id: string, payload: EventTimeline) {
     if (payload.category === currentCategoryFilter.value) {
       Object.assign(items.value[idx], payload);
     } else {
-      items.value = items.value.slice(1, idx);
+      items.value.splice(idx, 1);
     }
   } else {
     if (payload.category === currentCategoryFilter.value) {
@@ -194,7 +194,7 @@ async function onDeleteItem(item: EventTimeline) {
   const idx = items.value.findIndex((i) => i.id === item.id);
   console.warn(idx);
   if (idx > -1) {
-    items.value = items.value.slice(1, idx);
+    items.value.splice(idx, 1);
   }
 }
 

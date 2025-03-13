@@ -28,7 +28,7 @@ defineProps({
   },
   showGoHomeButton: {
     type: Boolean,
-    default: true,
+    default: false,
   },
 });
 

@@ -19,14 +19,6 @@
           'ga-5': smAndUp,
         }"
       >
-        <!--        <v-btn-->
-        <!--          color="primary"-->
-        <!--          href="tel:+41 76 414 90 56"-->
-        <!--          icon="mdi-phone"-->
-        <!--          slim-->
-        <!--          size="small"-->
-        <!--          variant="text"-->
-        <!--        />-->
         <MenuLanguage
           v-model="locale"
           :available-locales="availableLocalesFiltered"

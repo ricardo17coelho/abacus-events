@@ -1,6 +1,5 @@
 <template>
   <slot name="activator" :on-click="show" />
-
   <vue-easy-lightbox
     :imgs="imgsRef"
     :index="indexRef"
@@ -16,6 +15,10 @@ const props = defineProps({
   images: {
     type: Array as PropType<string[]>,
     default: () => [],
+  },
+  initIndex: {
+    type: Number,
+    default: 0,
   },
 });
 
@@ -33,8 +36,18 @@ const {
   // src / src[]
   imgs: props.images,
   // initial index
-  initIndex: 0,
+  initIndex: props.initIndex,
 });
+
+watch(
+  () => props.initIndex,
+  (newValue) => {
+    if (newValue && !model.value) {
+      indexRef.value = newValue;
+    }
+  },
+  { immediate: true },
+);
 
 function onEasyLightBoxHide() {
   onHide();

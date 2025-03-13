@@ -51,7 +51,7 @@
 </template>
 
 <script lang="ts" setup>
-import { showDefaultTranslationOrEmpty } from '@/utils/showDefaultTranslationOrEmpty';
+import { showDefaultTranslationOrEmpty } from '@/utils/showDefaultTranslationOrEmpty.ts';
 import useApiEventTimeline from '@/api/event-timeline.ts';
 import type { EventTimelineCategory } from '@/api/types/EventTimeline.ts';
 

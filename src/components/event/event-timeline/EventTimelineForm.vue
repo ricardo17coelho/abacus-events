@@ -105,7 +105,7 @@
 // utils
 import { showDefaultTranslationOrEmpty } from '@/utils/showDefaultTranslationOrEmpty';
 import rulesValidation from '@/utils/validations';
-import DialogTitleI18n from '../../dialogs/DialogTitleI18n.vue';
+import DialogTitleI18n from '@/components/dialogs/DialogTitleI18n.vue';
 import EventTimelineCategoriesField from '@/components/event/event-timeline/EventTimelineCategoriesField.vue';
 import { useI18n } from 'vue-i18n';
 

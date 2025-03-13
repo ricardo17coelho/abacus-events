@@ -1,6 +1,6 @@
 <template>
   <v-app-bar border="b" class="ps-4" flat>
-    <v-app-bar-nav-icon v-if="smAndDown" @click="model = !model" />
+    <v-app-bar-nav-icon v-if="mobile" @click="model = !model" />
 
     <v-app-bar-title>Abacus Events</v-app-bar-title>
 
@@ -31,7 +31,7 @@ import useAuthUser from '@/composables/auth-user.ts';
 
 const model = defineModel({ type: Boolean, default: false });
 
-const { smAndDown } = useDisplay();
+const { mobile } = useDisplay();
 
 const { userInitials, logout } = useAuthUser();
 </script>

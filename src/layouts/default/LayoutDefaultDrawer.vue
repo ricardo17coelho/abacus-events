@@ -69,7 +69,7 @@ const navItems = [
   },
   {
     title: 'Roles',
-    icon: 'mdi-car',
+    icon: 'mdi-account-key-outline',
     to: {
       name: 'manage-roles',
     },

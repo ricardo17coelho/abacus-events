@@ -9,7 +9,7 @@ export default function useApiParkingLot() {
   }
 
   function getParkingLotById(ParkingLotId: string) {
-    return findById('parking_lots', ParkingLotId, '*');
+    return findById<ParkingLot>('parking_lots', ParkingLotId, '*');
   }
 
   // eslint-disable-next-line  @typescript-eslint/no-explicit-any

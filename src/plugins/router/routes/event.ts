@@ -36,9 +36,9 @@ export default [
             component: () => import('@/views/event/EventParkingView.vue'),
           },
           {
-            path: 'shuttle-schedule',
-            name: 'shuttle-schedule',
-            component: () => import('@/views/event/EventShuttleSchedule.vue'),
+            path: 'event-shuttle-plan',
+            name: 'event-shuttle-plan',
+            component: () => import('@/views/event/EventShuttlePlan.vue'),
           },
         ],
       },

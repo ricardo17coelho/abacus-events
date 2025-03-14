@@ -108,12 +108,12 @@ const tabs = computed(() =>
         currentEvent.value && hasEventFeature(currentEvent.value, 'PARKING'),
     },
     {
-      value: 'manage-events-id-shuttle-bus',
+      value: 'manage-events-id-shuttle-plan',
       text: 'Shuttle Bus',
       to: {
-        name: 'manage-events-id-shuttle-bus',
+        name: 'manage-events-id-shuttle-plan',
       },
-      matchRouteName: 'manage-events-id-shuttle-bus',
+      matchRouteName: 'manage-events-id-shuttle-plan',
       show: () =>
         currentEvent.value &&
         hasEventFeature(currentEvent.value, 'SHUTTLE_PLAN'),

@@ -65,10 +65,12 @@ export default [
                       ),
                   },
                   {
-                    path: 'shuttle-bus',
-                    name: 'manage-events-id-shuttle-bus',
+                    path: 'shuttle-plan',
+                    name: 'manage-events-id-shuttle-plan',
                     component: () =>
-                      import('@/views/manage/events/ManageEventShuttleBus.vue'),
+                      import(
+                        '@/views/manage/events/ManageEventShuttlePlan.vue'
+                      ),
                   },
                 ],
               },

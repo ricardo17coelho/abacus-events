@@ -3,7 +3,7 @@
 </template>
 
 <script setup lang="ts">
-import { defineEmits, defineProps, onBeforeUnmount, ref } from 'vue';
+import { onBeforeUnmount, ref } from 'vue';
 import { Dashboard } from '@uppy/vue';
 import Uppy from '@uppy/core';
 import useApi from '@/composables/api.js';

@@ -47,7 +47,7 @@
       </v-col>
     </v-row>
     <AppImagesView
-      v-if="!!eventAttachments.length"
+      v-if="eventAttachments && !!eventAttachments.length"
       v-model="showGallery"
       :images="eventAttachments"
     />
@@ -87,7 +87,7 @@ function getEventFeatureLinkOrAction(feature: EventFeatureTypes) {
         },
       };
     case 'SHUTTLE_PLAN':
-      return { to: { name: 'event-schedule' } };
+      return { to: { name: 'event-shuttle-plan' } };
     case 'ATTACHMENTS':
       return {
         action: () => {
@@ -114,9 +114,8 @@ const showGallery = ref(false);
 const { getEventById } = useApiEvents();
 const eventAttachments = computedAsync<string[]>(async () => {
   if (
-    currentEvent.value?.features
-      .map((i) => i.feature_id)
-      .includes('ATTACHMENTS')
+    currentEvent.value?.features &&
+    currentEvent.value.features.map((i) => i.feature_id).includes('ATTACHMENTS')
   ) {
     // TODO: fetch event attachments
     await getEventById(currentEvent.value?.id);

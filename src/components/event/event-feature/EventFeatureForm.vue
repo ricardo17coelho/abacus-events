@@ -43,11 +43,7 @@
     </v-row>
     <v-row dense>
       <v-col cols="12" sm="6">
-        <v-text-field
-          v-model="model.icon"
-          hint="An icon from MDI"
-          :label="t('labels.icon')"
-        />
+        <FieldIconMdi v-model="model.icon" />
       </v-col>
     </v-row>
     <v-row dense>
@@ -65,6 +61,7 @@ import rulesValidation from '@/utils/validations';
 import DialogTitleI18n from '@/components/dialogs/DialogTitleI18n.vue';
 import EventFeatureTypeField from '@/components/event/event-feature/EventFeatureTypeField.vue';
 import { useI18n } from 'vue-i18n';
+import FieldIconMdi from '@/components/fields/FieldIconMdi.vue';
 
 const model = defineModel({ type: Object, default: () => ({}) });
 

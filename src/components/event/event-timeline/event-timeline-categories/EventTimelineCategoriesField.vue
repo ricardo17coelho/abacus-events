@@ -40,6 +40,17 @@
       />
     </template>
 
+    <template #append>
+      <UiDialog v-model="dialog" max-width="600">
+        <template #activator="{ props: ActivatorProps }">
+          <v-btn v-bind="ActivatorProps" icon="mdi-plus"> </v-btn>
+        </template>
+        <template #content>
+          <EventTimelineCategoriesTable />
+        </template>
+      </UiDialog>
+    </template>
+
     <!--
       Dynamically inherit slots from parent
       & make all slots from component reusable from parent
@@ -54,6 +65,9 @@
 import { showDefaultTranslationOrEmpty } from '@/utils/showDefaultTranslationOrEmpty.ts';
 import useApiEventTimeline from '@/api/event-timeline.ts';
 import type { EventTimelineCategory } from '@/api/types/EventTimeline.ts';
+import { UiDialog } from '@lib/ui';
+import EventTimelineCategoriesTable from '@/components/event/event-timeline/event-timeline-categories/EventTimelineCategoriesTable.vue';
+import { watch } from 'vue';
 
 const props = defineProps({
   loading: {
@@ -100,4 +114,15 @@ async function initialFetch() {
 }
 
 initialFetch();
+
+const dialog = ref(false);
+
+watch(
+  () => dialog.value,
+  (newValue) => {
+    if (!newValue) {
+      initialFetch();
+    }
+  },
+);
 </script>

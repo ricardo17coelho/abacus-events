@@ -1,5 +1,5 @@
 <template>
-  <v-form ref="formRef">
+  <v-form v-if="model" ref="formRef">
     <v-row dense>
       <v-col>
         <DialogTitleI18n :i18n="model.title" @save="model.title = $event">
@@ -75,27 +75,24 @@
     </v-row>
     <v-row dense>
       <v-col cols="12" sm="6">
-        <v-text-field
+        <FieldTimePicker
           v-model="model.time_start"
           hint="Format NN:NN ex: 18:00"
           :label="t('labels.time_start')"
         />
       </v-col>
       <v-col cols="12" sm="6">
-        <v-text-field
+        <FieldTimePicker
           v-model="model.time_end"
           hint="Format NN:NN ex: 18:00"
           :label="t('labels.time_end')"
+          :rules="rulesTimeEnd"
         />
       </v-col>
     </v-row>
     <v-row dense>
       <v-col cols="12" sm="6">
-        <v-text-field
-          v-model="model.icon"
-          hint="An icon from MDI"
-          :label="t('labels.icon')"
-        />
+        <FieldIconMdi v-model="model.icon" />
       </v-col>
     </v-row>
   </v-form>
@@ -106,8 +103,11 @@
 import { showDefaultTranslationOrEmpty } from '@/utils/showDefaultTranslationOrEmpty';
 import rulesValidation from '@/utils/validations';
 import DialogTitleI18n from '@/components/dialogs/DialogTitleI18n.vue';
-import EventTimelineCategoriesField from '@/components/event/event-timeline/EventTimelineCategoriesField.vue';
+import EventTimelineCategoriesField from '@/components/event/event-timeline/event-timeline-categories/EventTimelineCategoriesField.vue';
 import { useI18n } from 'vue-i18n';
+import FieldIconMdi from '@/components/fields/FieldIconMdi.vue';
+import FieldTimePicker from '@/components/fields/FieldTimePicker.vue';
+import { isEndTimeGreaterThenStartTime } from '@/utils/time.ts';
 
 defineProps({
   eventId: {
@@ -129,6 +129,13 @@ const modelValueTitleI18n = computed(() =>
 const modelValueNoteI18n = computed(() =>
   showDefaultTranslationOrEmpty(model.value?.note),
 );
+
+const rulesTimeEnd = [
+  (v: string) => {
+    if (isEndTimeGreaterThenStartTime(model.value.time_start, v)) return true;
+    return 'End time need to be greater than start time';
+  },
+];
 
 defineExpose({ formRef });
 </script>

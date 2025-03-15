@@ -20,6 +20,10 @@
     }
   },
   "fields": {
+    "color": {
+      "hint": "Choisir une couleur",
+      "label": "Couleur"
+    },
     "multi_language_text": {
       "field_key_label": "Langue",
       "field_value_label": "Valeur"

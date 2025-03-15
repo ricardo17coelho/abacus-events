@@ -38,6 +38,8 @@
 import type { EventTimeline } from '@/api/types/EventTimeline.ts';
 import { showDefaultTranslationOrEmpty } from '@/utils/showDefaultTranslationOrEmpty.ts';
 import AppLiveLabel from '@/components/app/AppLiveLabel.vue';
+import { isDateToday } from '@/utils/date.ts';
+import { isStartEndCurrentTime } from '@/utils/time.ts';
 
 const props = defineProps({
   items: {
@@ -50,45 +52,12 @@ const props = defineProps({
   },
 });
 
-function isDateValid(date: string) {
-  const today = new Date();
-  const d = new Date(date);
-
-  return today.getDate() === d.getDate();
-}
-
-//TODO: also check is current date and event date matches
-function isCurrentTime(time_start: string, time_end: string) {
-  if (!time_start || !time_end) return;
-  const dt = new Date();
-
-  const s = time_start.split(':');
-  const dt1 = new Date(
-    dt.getFullYear(),
-    dt.getMonth(),
-    dt.getDate(),
-    parseInt(s[0]),
-    parseInt(s[1]),
-  );
-
-  const e = time_end.split(':');
-  const dt2 = new Date(
-    dt.getFullYear(),
-    dt.getMonth(),
-    dt.getDate(),
-    parseInt(e[0]),
-    parseInt(e[1]),
-  );
-
-  return dt >= dt1 && dt <= dt2;
-}
-
 function isCurrentTimeValid(item: EventTimeline) {
   return (
-    (!props.date || (props.date && isDateValid(props.date))) &&
+    (!props.date || (props.date && isDateToday(props.date))) &&
     item.time_start &&
     item.time_end &&
-    isCurrentTime(item.time_start, item.time_end)
+    isStartEndCurrentTime(item.time_start, item.time_end)
   );
 }
 </script>

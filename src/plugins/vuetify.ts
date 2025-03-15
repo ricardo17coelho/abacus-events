@@ -9,7 +9,6 @@ import 'vuetify/styles';
 import { createVuetify, type ThemeDefinition } from 'vuetify';
 
 import * as components from 'vuetify/components';
-import * as directives from 'vuetify/directives';
 import * as labsComponents from 'vuetify/labs/components';
 
 // Translations provided by Vuetify
@@ -28,7 +27,6 @@ export const themes: Record<string, ThemeDefinition> = {
 };
 
 const opts = {
-  directives,
   components: {
     ...components,
     ...labsComponents,

@@ -2,6 +2,7 @@
 import {
   UiAvatar,
   UiAvatarUser,
+  UiBtnScrollToTop,
   UiDialog,
   UiFileInput,
   UiForwardSlots,
@@ -24,6 +25,7 @@ export {
   // components
   UiAvatar,
   UiAvatarUser,
+  UiBtnScrollToTop,
   UiDialog,
   UiFileInput,
   UiForwardSlots,

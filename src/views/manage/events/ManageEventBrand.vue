@@ -104,7 +104,7 @@
         </UiDialog>
       </template>
       <v-card-text>
-        <div class="d-flex align-start ga-3">
+        <div v-if="currentEvent.brand?.banners" class="d-flex align-start ga-3">
           <v-card
             v-for="banner in currentEvent.brand.banners"
             :key="banner.url"
@@ -122,6 +122,19 @@
         </div>
       </v-card-text>
     </VCardSettings>
+
+    <VCardSettings height="100%" title="Layout">
+      <v-card-text>
+        <v-row>
+          <v-col cols="12" sm="4">
+            <EventLayoutField
+              :model-value="currentEvent.brand.layout"
+              @update:model-value="onUpdateEventLayout"
+            />
+          </v-col>
+        </v-row>
+      </v-card-text>
+    </VCardSettings>
   </v-container>
 </template>
 <script lang="ts" setup>
@@ -132,6 +145,8 @@ import useApi from '@/composables/api.ts';
 import { toast } from 'vue-sonner';
 import { UiDialog, UiFileInput } from '@lib/ui';
 import AppFileUpload from '@/components/app/AppFileUpload.vue';
+import EventLayoutField from '@/components/event/EventLayoutField.vue';
+import type { EventLayout } from '@/api/types/EventLayout.ts';
 
 const currentEvent = requireInjection(CURRENT_EVENT_KEY);
 
@@ -194,13 +209,15 @@ const onLogoChange = async (file: File) => {
         ...currentEvent.value.brand,
         logo: data.publicUrl,
       };
+      toast.success('Brand updated!');
     }
   }
 };
 
 const onBannersSave = async (banners: EventBrandBanner[] = []) => {
   if (currentEvent.value) {
-    const eventBanners = [...currentEvent.value.brand.banners, ...banners];
+    const b = currentEvent.value.brand?.banners ?? [];
+    const eventBanners = [...b, ...banners];
     await addOrUpdate('event_brand', {
       banners: eventBanners,
       event_id: currentEvent.value?.id,
@@ -210,6 +227,7 @@ const onBannersSave = async (banners: EventBrandBanner[] = []) => {
       ...currentEvent.value.brand,
       banners: eventBanners,
     };
+    toast.success('Brand updated!');
   }
 };
 
@@ -239,10 +257,26 @@ async function onClickBannerDelete(path: string) {
           ...currentEvent.value.brand,
           banners,
         };
+        toast.success('Brand updated!');
       }
     }
   } catch (e) {
     console.log(e);
+  }
+}
+
+async function onUpdateEventLayout(layout: EventLayout) {
+  if (currentEvent.value) {
+    await addOrUpdate('event_brand', {
+      event_id: currentEvent.value?.id,
+      layout,
+    });
+
+    currentEvent.value.brand = {
+      ...currentEvent.value.brand,
+      layout,
+    };
+    toast.success('Brand updated!');
   }
 }
 </script>

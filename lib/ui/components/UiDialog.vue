@@ -195,7 +195,7 @@ import UiLoaderAnimation from './loader/UiLoaderAnimation.vue';
 // composables
 import { useDisplay } from 'vuetify';
 import { useI18n } from 'vue-i18n';
-import { ExtractProps } from '../types';
+import { type ExtractProps } from '../types';
 
 const props = defineProps({
   title: {

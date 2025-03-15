@@ -1,38 +1,23 @@
 <template>
-  <v-app full-height>
-    <LayoutEventAppBar />
-
-    <v-main class="overflow-auto">
-      <v-container
-        class="main-container overflow-auto app-container pt-0"
-        :class="{
-          'main-container-with-footer': smAndUp && isRouteRoot,
-        }"
-      >
-        <RouterView />
-      </v-container>
-    </v-main>
-
-    <LayoutEventFooter v-if="isRouteRoot" :app="smAndUp" />
-  </v-app>
+  <component :is="currentEventLayout" />
 </template>
 
 <script lang="ts" setup>
-import LayoutEventAppBar from '@/layouts/event/LayoutEventAppBar.vue';
-import LayoutEventFooter from '@/layouts/event/LayoutEventFooter.vue';
-import { useDisplay } from 'vuetify';
+import LayoutEvent01 from '@/layouts/event/LayoutEvent01/LayoutEvent01.vue';
+import LayoutEvent02 from '@/layouts/event/LayoutEvent02/LayoutEvent02.vue';
+import { requireInjection } from '@/utils/injection.ts';
+import { CURRENT_EVENT_KEY } from '@/types/injectionKeys.ts';
 
-const route = useRoute();
-const { smAndUp } = useDisplay();
+const currentEvent = requireInjection(CURRENT_EVENT_KEY);
 
-const isRouteRoot = computed(() => route.path === '/');
+const currentEventLayout = computed(() => {
+  switch (currentEvent.value?.brand?.layout) {
+    case 'EVENT_LAYOUT_01':
+      return LayoutEvent01;
+    case 'EVENT_LAYOUT_02':
+      return LayoutEvent02;
+    default:
+      return LayoutEvent01;
+  }
+});
 </script>
-<style scoped>
-.main-container {
-  height: calc(100svh - 64px);
-}
-
-.main-container-with-footer {
-  height: calc(100svh - 64px - 52px);
-}
-</style>

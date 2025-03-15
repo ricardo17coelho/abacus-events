@@ -1,29 +1,7 @@
 <template>
   <v-container v-if="currentEvent" class="align-center">
     <AppTitle :title="showDefaultTranslationOrEmpty(currentEvent.title)" />
-    <AppImagesView
-      v-if="currentEventBrandBannersUrls.length > 0"
-      :images="currentEventBrandBannersUrls"
-      :init-index="carouselModel"
-    >
-      <template #activator="activatorProps">
-        <v-carousel
-          v-model="carouselModel"
-          cycle
-          height="400"
-          hide-delimiter-background
-          show-arrows="hover"
-        >
-          <v-carousel-item
-            v-for="bannerUrl in currentEventBrandBannersUrls"
-            v-bind="activatorProps"
-            :key="bannerUrl"
-            :src="bannerUrl"
-          >
-          </v-carousel-item>
-        </v-carousel>
-      </template>
-    </AppImagesView>
+    <EventCarousel :images="currentEventBrandBannersUrls" />
   </v-container>
   <v-container class="align-center">
     <v-row>
@@ -63,14 +41,13 @@ import { CURRENT_EVENT_KEY } from '@/types/injectionKeys.ts';
 import EventFeatureCard from '@/components/event/event-feature/EventFeatureCard.vue';
 import { type EventFeatureTypes } from '@/api/types/EventFeature.ts';
 import useApiEvents from '@/api/events.ts';
+import EventCarousel from '@/components/event/event/EventCarousel.vue';
 
 const currentEvent = requireInjection(CURRENT_EVENT_KEY);
 
 const currentEventBrandBannersUrls = computed(
   () => currentEvent.value?.brand?.banners.map((i) => i.url) || [],
 );
-
-const carouselModel = ref(0);
 
 function getEventFeatureLinkOrAction(feature: EventFeatureTypes) {
   switch (feature) {

@@ -1,6 +1,7 @@
 import type { TitleI18n } from '@/types/TitleI18n';
 import type { ParkingLot } from '@/api/types/ParkingLot.ts';
 import type { EventFeature } from '@/api/types/EventFeature.ts';
+import type { EventLayout } from '@/api/types/EventLayout.ts';
 
 export type EventBrandBanner = {
   path: string;
@@ -14,6 +15,7 @@ export type EventBrand = {
   color_secondary: string;
   banners: EventBrandBanner[];
   logo: string;
+  layout: EventLayout;
 };
 
 export type Event = {

@@ -91,42 +91,20 @@ import useAuthUser from '@/composables/auth-user.ts';
 import EventTimelineDialog from '@/components/event/event-timeline/EventTimelineDialog.vue';
 import { toast } from 'vue-sonner';
 import useApiProgramTimeline from '@/api/event-timeline.ts';
-import {
-  type EventTimeline,
-  type EventTimelineCategory,
-} from '@/api/types/EventTimeline.ts';
+import { type EventTimeline } from '@/api/types/EventTimeline.ts';
 import { useI18n } from 'vue-i18n';
 import AppLoader from '@/components/app/AppLoader.vue';
 import ContainerCentered from '@/components/containers/ContainerCentered.vue';
 import AppImagesView from '@/components/app/AppImagesView.vue';
-import useApiEventTimeline from '@/api/event-timeline.ts';
 import { showDefaultTranslationOrEmpty } from '@/utils/showDefaultTranslationOrEmpty.ts';
-import { requireInjection } from '@/utils/injection.ts';
-import { CURRENT_EVENT_KEY } from '@/types/injectionKeys.ts';
+import useEventProgram from '@/composables/event-program.ts';
 
 const { isUserAdmin } = useAuthUser();
 
-const currentEvent = requireInjection(CURRENT_EVENT_KEY);
+const { removeEventTimeline } = useApiProgramTimeline();
 
-const currentCategoryFilter = ref();
-
-const { removeEventTimeline, getEventTimelinesByCategoryId } =
-  useApiProgramTimeline();
-
-const items = ref<EventTimeline[]>([]);
-
-const sortedItems = computed(() => {
-  return items.value.slice().sort((a, b) => {
-    if (!a || !a.time_start || !b || !b.time_start) return;
-    const aStart = parseFloat(a.time_start.replace('.', '')) / 100;
-    const bStart = parseFloat(b.time_start.replace('.', '')) / 100;
-    if (aStart !== bStart) return aStart - bStart;
-    if (!a || !a.time_end || !b || !b.time_end) return;
-    const aEnd = parseFloat(a.time_end.replace('.', '')) / 100;
-    const bEnd = parseFloat(b.time_end.replace('.', '')) / 100;
-    return aEnd - bEnd;
-  });
-});
+const { items, sortedItems, currentCategoryFilter, categories, isLoading } =
+  useEventProgram();
 
 function mutateById(id: string, payload: EventTimeline) {
   const idx = items.value.findIndex((i) => i.id === id);
@@ -145,46 +123,6 @@ function mutateById(id: string, payload: EventTimeline) {
 
 const { t } = useI18n();
 
-const categories = ref<EventTimelineCategory[]>([]);
-
-const { getEventTimelineCategories } = useApiEventTimeline();
-
-async function initialFetch() {
-  if (!currentEvent.value) return;
-  const { data, error } = await getEventTimelineCategories(
-    currentEvent.value?.id,
-  );
-
-  if (error) return;
-  if (data) {
-    categories.value = data;
-    if (categories.value.length > 0) {
-      currentCategoryFilter.value = categories.value[0].id;
-    }
-  }
-}
-
-initialFetch();
-
-const isLoading = ref(false);
-const fetchData = async () => {
-  if (!currentEvent.value) return;
-  items.value = [];
-  isLoading.value = true;
-  const { data, error } = await getEventTimelinesByCategoryId(
-    currentEvent.value.id,
-    currentCategoryFilter.value,
-  );
-  if (error) {
-    toast.error(t('errors.error_occurred'));
-    return;
-  }
-  if (data) {
-    items.value = data;
-  }
-  isLoading.value = false;
-};
-
 async function onDeleteItem(item: EventTimeline) {
   const { error } = await removeEventTimeline(item.id);
   if (error) {
@@ -197,15 +135,6 @@ async function onDeleteItem(item: EventTimeline) {
     items.value.splice(idx, 1);
   }
 }
-
-watch(
-  () => currentCategoryFilter.value,
-  async (newValue) => {
-    if (newValue) {
-      void fetchData();
-    }
-  },
-);
 
 const images = computed(() => {
   // if (currentCategoryFilter.value === EVENT_TIMELINE_CATEGORY.BEVERAGE) {

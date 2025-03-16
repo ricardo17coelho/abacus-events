@@ -52,7 +52,10 @@
   "labels": {
     "add": "Aggiungi",
     "category": "Categoria",
+    "date": "Data",
+    "description": "Descrizione",
     "drinks": "menu bevande",
+    "event": "Evento",
     "icon": "Icona",
     "location": "Nome della posizione",
     "location_url": "URL della posizione",
@@ -74,6 +77,7 @@
     "return_journey": "Ritorno",
     "slots_filled": "Posti occupati",
     "slots_total": "Posti massimi",
+    "slug": "Slug",
     "stop_on_request": "Arresto su richiesta",
     "time_end": "Ora di fine",
     "time_start": "Ora di inizio"

@@ -52,7 +52,10 @@
   "labels": {
     "add": "Hinzufügen",
     "category": "Kategorie",
+    "date": "Datum",
+    "description": "Beschreibung",
     "drinks": "Getränkkarte",
+    "event": "Veranstaltung",
     "icon": "Symbol",
     "location": "Standortname",
     "location_url": "Standort-URL",
@@ -74,6 +77,7 @@
     "return_journey": "Rückfahrt",
     "slots_filled": "Belegte Plätze",
     "slots_total": "Max. Plätze",
+    "slug": "Slug",
     "stop_on_request": "Halt auf Verlangen",
     "time_end": "Endzeit",
     "time_start": "Startzeit"

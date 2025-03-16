@@ -189,7 +189,7 @@ export default function useApi() {
     });
     if (error) throw error;
     const publicUrl = await getUrlPublic(bucket, path);
-    return { data: { path, publicUrl }, error: null };
+    return { data: { path, publicUrl, fileName }, error: null };
   };
 
   const getUrlPublic = async (bucket: string, fileName: string) => {

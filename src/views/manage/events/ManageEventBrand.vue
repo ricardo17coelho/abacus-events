@@ -5,7 +5,7 @@
     fluid
   >
     <v-row>
-      <v-col>
+      <v-col cols="12" md="6">
         <VCardSettings height="100%" title="Colors">
           <v-card-item>
             <v-menu :close-on-content-click="false" z-index="2501">
@@ -47,7 +47,7 @@
           </v-card-item>
         </VCardSettings>
       </v-col>
-      <v-col>
+      <v-col cols="12" md="6">
         <VCardSettings height="100%" title="Logo">
           <v-card-item>
             <v-img
@@ -114,7 +114,7 @@
               <v-img :aspect-ratio="16 / 9" :src="banner.url"></v-img>
             </v-card-item>
             <v-card-actions>
-              <v-btn color="error" @click="onClickBannerDelete(banner.path)">
+              <v-btn color="error" @click="onClickBannerDelete(banner)">
                 Delete
               </v-btn>
             </v-card-actions>
@@ -140,13 +140,17 @@
 <script lang="ts" setup>
 import { requireInjection } from '@/utils/injection.ts';
 import { CURRENT_EVENT_KEY } from '@/types/injectionKeys.ts';
-import type { EventBrand, EventBrandBanner } from '@/api/types/Event.ts';
+import type { EventBrand, EventBrandBanner } from '@/api/types/EventBrand.ts';
 import useApi from '@/composables/api.ts';
 import { toast } from 'vue-sonner';
 import { UiDialog, UiFileInput } from '@lib/ui';
-import AppFileUpload from '@/components/app/AppFileUpload.vue';
+import AppFileUpload, {
+  type UploadedAttachment,
+} from '@/components/app/AppFileUpload.vue';
 import EventLayoutField from '@/components/event/EventLayoutField.vue';
 import type { EventLayout } from '@/api/types/EventLayout.ts';
+import useApiEventAttachment from '@/api/event-attachments.ts';
+import useApiEventBrand from '@/api/event-brand.ts';
 
 const currentEvent = requireInjection(CURRENT_EVENT_KEY);
 
@@ -214,19 +218,43 @@ const onLogoChange = async (file: File) => {
   }
 };
 
-const onBannersSave = async (banners: EventBrandBanner[] = []) => {
-  if (currentEvent.value) {
-    const b = currentEvent.value.brand?.banners ?? [];
-    const eventBanners = [...b, ...banners];
-    await addOrUpdate('event_brand', {
-      banners: eventBanners,
-      event_id: currentEvent.value?.id,
-    });
+const { createEventAttachment, removeEventAttachment } =
+  useApiEventAttachment();
+const { createEventBrandBanner, getEventBrandByEventId } = useApiEventBrand();
 
-    currentEvent.value.brand = {
-      ...currentEvent.value.brand,
-      banners: eventBanners,
-    };
+const onBannersSave = async (attachments: UploadedAttachment[] = []) => {
+  if (currentEvent.value) {
+    // 1. add to `event_attachments`
+    for (const attachment of attachments) {
+      const { data: eventAttachment, error } = await createEventAttachment({
+        ...attachment,
+        event_id: currentEvent.value?.id,
+      });
+      if (error) {
+        toast.error(error.message);
+        return;
+      }
+
+      // 2. add to `event_brand_banners`
+      if (eventAttachment) {
+        const { error } = await createEventBrandBanner({
+          event_attachment_id: eventAttachment.id,
+          // event_brand_id === event_id
+          event_brand_id: currentEvent.value?.id,
+        });
+        if (error) {
+          toast.error(error.message);
+          return;
+        }
+      }
+    }
+
+    // refresh branding
+    const { data } = await getEventBrandByEventId(currentEvent.value.id);
+
+    if (data) {
+      currentEvent.value.brand = data;
+    }
     toast.success('Brand updated!');
   }
 };
@@ -237,21 +265,24 @@ function onUploadSuccess() {
   toast.success('Upload successfully!');
 }
 
-async function onClickBannerDelete(path: string) {
+async function onClickBannerDelete(banner: EventBrandBanner) {
   try {
-    await removeImg('events', path);
+    await removeImg('events', banner.path);
     if (currentEvent.value?.brand) {
+      // remove event brand banner ( id is attachment id )
+      const { error } = await removeEventAttachment(banner.id);
+
+      if (error) {
+        toast.error(error.message);
+        return;
+      }
+
       const idx = currentEvent.value.brand.banners.findIndex(
-        (item) => item.path === path,
+        (item) => item.id === banner.id,
       );
       if (idx !== -1) {
         const banners = currentEvent.value.brand.banners;
         banners.splice(idx, 1);
-
-        await addOrUpdate('event_brand', {
-          banners,
-          event_id: currentEvent.value?.id,
-        });
 
         currentEvent.value.brand = {
           ...currentEvent.value.brand,

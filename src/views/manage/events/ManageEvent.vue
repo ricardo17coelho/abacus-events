@@ -1,6 +1,18 @@
 <template>
   <Page v-if="currentEvent">
-    <PageHeading :title="showDefaultTranslationOrEmpty(currentEvent.title)" />
+    <PageHeading :title="showDefaultTranslationOrEmpty(currentEvent.title)">
+      <template #actions>
+        <EventDialog v-if="isUserAdmin" :event-id="currentEvent.id">
+          <template #activator="{ props: activatorProps }">
+            <VBtnPrimary
+              v-bind="activatorProps"
+              icon="mdi-pencil"
+              variant="text"
+            />
+          </template>
+        </EventDialog>
+      </template>
+    </PageHeading>
     <PageContent>
       <v-toolbar color="white" density="compact">
         <v-tabs
@@ -33,10 +45,14 @@ import { showDefaultTranslationOrEmpty } from '@/utils/showDefaultTranslationOrE
 import { requireInjection } from '@/utils/injection.ts';
 import { CURRENT_EVENT_KEY } from '@/types/injectionKeys.ts';
 import { hasEventFeature } from '@/utils/event-features.ts';
+import EventDialog from '@/components/event/event/EventDialog.vue';
+import useAuthUser from '@/composables/auth-user.ts';
 
 const currentEvent = requireInjection(CURRENT_EVENT_KEY);
 
 const route = useRoute();
+
+const { isUserAdmin } = useAuthUser();
 
 // Determine the active tab based on the current route
 const activeTab = computed(() => {

@@ -50,10 +50,10 @@ const { xs } = useDisplay();
 
 const events = ref<Event[]>([]);
 
-const { getEvents } = useApiEvents();
+const { getEventsPublic } = useApiEvents();
 
 const fetchData = async () => {
-  const { data, error } = await getEvents();
+  const { data, error } = await getEventsPublic();
   if (error) {
     toast.error(t('errors.error_occurred'));
     return;

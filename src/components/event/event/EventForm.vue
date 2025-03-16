@@ -40,6 +40,11 @@
         <v-text-field v-model="model.date" :label="t('labels.date')" />
       </v-col>
     </v-row>
+    <v-row dense>
+      <v-col>
+        <v-switch v-model="model.public" :label="t('labels.public')" />
+      </v-col>
+    </v-row>
   </v-form>
 </template>
 

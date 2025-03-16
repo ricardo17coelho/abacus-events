@@ -52,6 +52,7 @@ const DEFAULT_FORM = {
   date: '',
   banner: '',
   slug: '',
+  public: false,
 };
 
 const form = ref({

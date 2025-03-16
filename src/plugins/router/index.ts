@@ -3,33 +3,14 @@ import { supabase } from '@/services/supabase.ts';
 import type { AuthChangeEvent } from '@supabase/supabase-js';
 import useAuthUser from '@/composables/auth-user.ts';
 
+// routes
 import routesManage from './routes/manage';
 import routesAuth from './routes/auth';
 import routesEvent from './routes/event';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
-  routes: [
-    ...routesAuth,
-    ...routesEvent,
-    {
-      path: '/',
-      component: () => import('@/layouts/default/LayoutDefault.vue'),
-      children: [
-        {
-          path: '/:pathMatch(.*)*',
-          name: 'NotFound',
-          component: () => import('@/views/NotFound.vue'),
-        },
-        {
-          path: 'dashboard',
-          name: 'dashboard',
-          component: () => import('@/views/DashboardView.vue'),
-        },
-        ...routesManage,
-      ],
-    },
-  ],
+  routes: [...routesAuth, ...routesEvent, ...routesManage],
 });
 
 supabase.auth.onAuthStateChange((event: AuthChangeEvent) => {

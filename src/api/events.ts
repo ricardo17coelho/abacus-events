@@ -1,6 +1,7 @@
 import useApi from '@/composables/api';
 import type { Event } from './types/Event';
 import { validate as isValidUUID } from 'uuid';
+import type { FindFilter } from '@/api/types/QueryTypes.ts';
 
 export default function useApiEvents() {
   const { find, findById, create, update, remove, count } = useApi();
@@ -8,12 +9,26 @@ export default function useApiEvents() {
   const baseSelect = `
     *,
     features:event_features(*),
-    brand:event_brand(*),
+    brand:event_brand(
+      *,
+      banners:event_brand_banners(
+       ...event_attachments(*)
+      )
+    ),
     parking_lots:parking_lots(*)
   `;
 
-  function getEvents(range = [0, 10]) {
-    return find<Event>('events', [], baseSelect, range);
+  function getEvents(
+    select = baseSelect,
+    filters: FindFilter[] = [],
+    range = [0, 100],
+  ) {
+    return find<Event>('events', filters, select, range);
+  }
+
+  function getEventsPublic(range = [0, 100]) {
+    const filters: FindFilter[] = [['public', 'eq', true]];
+    return getEvents(baseSelect, filters, range);
   }
 
   function getEventById(eventId: string) {
@@ -54,6 +69,7 @@ export default function useApiEvents() {
 
   return {
     getEvents,
+    getEventsPublic,
     getEventById,
     getEventBySlug,
     getEventByIdOrSlug,

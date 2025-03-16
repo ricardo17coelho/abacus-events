@@ -1,8 +1,6 @@
 <template>
   <v-layout>
-    <LayoutDefaultDrawer v-model="drawer" />
-
-    <LayoutDefaultAppBar v-model="drawer" />
+    <TheAppBar />
 
     <v-main class="overflow-auto">
       <v-container fluid>
@@ -13,9 +11,5 @@
 </template>
 
 <script lang="ts" setup>
-import { shallowRef } from 'vue';
-import LayoutDefaultDrawer from '@/layouts/default/LayoutDefaultDrawer.vue';
-import LayoutDefaultAppBar from '@/layouts/default/LayoutDefaultAppBar.vue';
-
-const drawer = shallowRef(true);
+import TheAppBar from '@/layouts/components/TheAppBar.vue';
 </script>

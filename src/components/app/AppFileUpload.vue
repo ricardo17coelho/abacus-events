@@ -12,12 +12,26 @@ import useApi from '@/composables/api.js';
 import '@uppy/core/dist/style.css';
 import '@uppy/dashboard/dist/style.css';
 
+export type UploadedAttachment = {
+  display_name: string;
+  path: string;
+  mime_ype: string;
+  size: number;
+  name: string;
+  url: string;
+  extension: string;
+};
+
 const uploading = ref(false);
 
 const props = defineProps({
   bucket: { type: String, required: true }, // Supabase Storage bucket name
   folderPath: { type: String, required: true }, // Folder path inside the bucket
   maxFiles: { type: Number, default: 5 }, // Max files to upload
+  allowedFileTypes: {
+    type: Array as PropType<string>[],
+    default: () => ['image/*'],
+  }, // Max files to upload
   onSave: { type: Function, default: undefined }, // Event ID (if saving to DB)
 });
 
@@ -26,7 +40,7 @@ const emit = defineEmits(['upload:success', 'upload:error']);
 const uppyInstance = new Uppy({
   restrictions: {
     maxNumberOfFiles: props.maxFiles,
-    allowedFileTypes: ['image/*'],
+    allowedFileTypes: props.allowedFileTypes,
   },
   autoProceed: false,
 });
@@ -34,10 +48,9 @@ const uppyInstance = new Uppy({
 const { uploadImg } = useApi();
 
 const startUpload = async () => {
-  console.warn('startUpload');
   uploading.value = true;
   const files = uppyInstance.getFiles();
-  const uploadedImages = [];
+  const uploadedAttachments: Partial<UploadedAttachment[]> = [];
 
   for (const file of files) {
     // Upload to Supabase Storage
@@ -53,19 +66,24 @@ const startUpload = async () => {
       continue;
     }
 
-    uploadedImages.push({
+    uploadedAttachments.push({
       path: data.path,
       url: data.publicUrl,
+      display_name: file.name ?? '',
+      mime_ype: file.type ?? '',
+      size: file.size ?? 0,
+      name: data.fileName ?? '',
+      extension: file.extension ?? '',
     });
   }
 
   // Save to database if enabled
   if (props.onSave !== undefined) {
-    await props.onSave(uploadedImages);
+    await props.onSave(uploadedAttachments);
   }
 
   // Emit success event
-  emit('upload:success', uploadedImages);
+  emit('upload:success', uploadedAttachments);
 
   uploading.value = false;
   uppyInstance.clear();

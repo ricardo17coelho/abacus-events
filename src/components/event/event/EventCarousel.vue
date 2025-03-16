@@ -21,7 +21,13 @@
         >
         </v-carousel-item>
       </v-carousel>
-      <v-img v-else-if="images.length === 1" :src="images[0]"> </v-img>
+      <v-img
+        v-else-if="images.length === 1"
+        aspect-ratio="16/9"
+        max-height="300"
+        :src="images[0]"
+      >
+      </v-img>
     </template>
   </AppImagesView>
 </template>

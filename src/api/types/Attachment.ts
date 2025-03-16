@@ -6,10 +6,12 @@ export type AttachmentMimeType =
 
 export type Attachment = {
   id: string;
-  created_at: string;
+  uploaded_at: string;
   display_name: string;
   path: string;
+  url: string;
   mime_ype: AttachmentMimeType;
   size: number;
   name: string;
+  extension: string;
 };

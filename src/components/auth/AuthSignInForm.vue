@@ -94,7 +94,7 @@ async function emailAuth() {
   if (valid) {
     emailLoading.value = true;
     const { data, error } = await login(credentials.value);
-    if (data.user) void router.push({ name: 'dashboard' });
+    if (data.user) void router.push({ name: 'manage' });
     else if (error) {
       toast.error(error.message);
       emailLoading.value = false;

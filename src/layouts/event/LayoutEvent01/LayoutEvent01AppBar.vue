@@ -9,7 +9,7 @@
         v-if="isUserAdminOrHelper"
         class="ml-2"
         icon="mdi-view-dashboard"
-        :to="{ name: 'dashboard' }"
+        :to="{ name: 'manage' }"
       />
       <v-spacer />
       <div

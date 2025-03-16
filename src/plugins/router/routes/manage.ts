@@ -11,13 +11,13 @@ export default [
         component: () => import('@/views/NotFound.vue'),
       },
       {
-        path: 'dashboard',
-        name: 'dashboard',
-        component: () => import('@/views/DashboardView.vue'),
-      },
-      {
         path: 'manage',
         children: [
+          {
+            path: '',
+            name: 'manage',
+            component: () => import('@/views/DashboardView.vue'),
+          },
           {
             path: 'parking-lots',
             name: 'manage-parking-lots',

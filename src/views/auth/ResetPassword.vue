@@ -45,7 +45,7 @@ async function onSubmit() {
     toast.error(error.message);
   } else {
     toast.success('successfully reset password.');
-    router.push({ name: 'dashboard' });
+    router.push({ name: 'manage' });
   }
   loading.value = false;
 }

@@ -43,7 +43,7 @@ const navItems = [
     title: 'Dashboard',
     icon: 'mdi-view-dashboard-outline',
     to: {
-      name: 'dashboard',
+      name: 'manage',
     },
   },
   {

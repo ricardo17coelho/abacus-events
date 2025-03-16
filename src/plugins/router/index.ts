@@ -59,7 +59,7 @@ router.beforeEach(async (to) => {
     }
     if (isAuthRoute.startsWith('auth-') && user.value) {
       return {
-        name: 'dashboard',
+        name: 'manage',
       };
     }
   }

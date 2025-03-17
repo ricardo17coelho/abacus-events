@@ -50,13 +50,13 @@
     }
   },
   "labels": {
-    "add": "Add",
     "category": "Category",
     "date": "Date",
     "description": "Description",
     "drinks": "drinks menu",
     "event": "Event",
     "icon": "Icon",
+    "layout": "Layout",
     "location": "Location Name",
     "location_url": "Location URL",
     "login": "Login",

@@ -128,7 +128,7 @@
         <v-row>
           <v-col cols="12" sm="4">
             <EventLayoutField
-              :model-value="currentEvent.brand.layout"
+              :model-value="currentEvent.brand?.layout"
               @update:model-value="onUpdateEventLayout"
             />
           </v-col>

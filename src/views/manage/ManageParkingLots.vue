@@ -9,7 +9,7 @@
               prepend-icon="mdi-plus"
               variant="text"
             >
-              {{ t('labels.add') }}
+              {{ t('actions.add') }}
             </v-btn>
           </template>
         </ParkingLotDialog>

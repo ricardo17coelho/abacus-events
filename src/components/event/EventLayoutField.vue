@@ -1,7 +1,7 @@
 <template>
   <v-select
     :items="items"
-    :label="t('event.layout')"
+    :label="t('labels.layout')"
     name="field-event-layout"
     v-bind="$attrs"
   />

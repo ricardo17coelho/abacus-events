@@ -14,7 +14,7 @@
           <EventDialog v-if="isUserAdmin" @success="onSave">
             <template #activator="{ props: activatorProps }">
               <VBtnPrimary v-bind="activatorProps" prepend-icon="mdi-plus">
-                {{ t('labels.add') }}
+                {{ t('actions.add') }}
               </VBtnPrimary>
             </template>
           </EventDialog>

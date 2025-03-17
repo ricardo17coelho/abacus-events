@@ -50,13 +50,13 @@
     }
   },
   "labels": {
-    "add": "Aggiungi",
     "category": "Categoria",
     "date": "Data",
     "description": "Descrizione",
     "drinks": "menu bevande",
     "event": "Evento",
     "icon": "Icona",
+    "layout": "Layout",
     "location": "Nome della posizione",
     "location_url": "URL della posizione",
     "login": "Accedere",

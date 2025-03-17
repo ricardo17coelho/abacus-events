@@ -50,13 +50,13 @@
     }
   },
   "labels": {
-    "add": "Hinzufügen",
     "category": "Kategorie",
     "date": "Datum",
     "description": "Beschreibung",
     "drinks": "Getränkkarte",
     "event": "Veranstaltung",
     "icon": "Symbol",
+    "layout": "Layout",
     "location": "Standortname",
     "location_url": "Standort-URL",
     "login": "Anmelden",

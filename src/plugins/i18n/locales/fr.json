@@ -5,6 +5,7 @@
     "edit": "",
     "open": "",
     "save": "Enregistrer",
+    "send": "",
     "view": ""
   },
   "categories": {
@@ -54,6 +55,7 @@
     "date": "Date",
     "description": "Description",
     "drinks": "carte des boissons",
+    "email": "Email",
     "event": "Événement",
     "icon": "Icône",
     "layout": "Layout",
@@ -61,6 +63,7 @@
     "location_url": "URL du lieu",
     "login": "Connexion",
     "logout": "Déconnexion",
+    "message": "",
     "n_of_parking_spaces": "Nombre de places de parking",
     "name": "Nom",
     "note": "Note",
@@ -76,6 +79,7 @@
     "programm": "Programme",
     "public": "Public",
     "return_journey": "Retour",
+    "role": "",
     "slots_filled": "Places occupées",
     "slots_total": "Nb max. de places",
     "slug": "Slug",
@@ -87,6 +91,12 @@
     "headline": "Oups, 404",
     "text": "La page que vous cherchez n'existe pas",
     "title": "Page non trouvée"
+  },
+  "text": {
+    "soon": {
+      "text": "Cette fonctionnalité est en cours de développement et ne fonctionne peut-être pas comme prévu.",
+      "title": "Bientôt"
+    }
   },
   "title": {
     "parking": "Parking",

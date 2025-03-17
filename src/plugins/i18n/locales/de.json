@@ -5,6 +5,7 @@
     "edit": "Bearbeiten",
     "open": "Öffnen",
     "save": "Speichern",
+    "send": "Senden",
     "view": "Anschauen"
   },
   "categories": {
@@ -54,6 +55,7 @@
     "date": "Datum",
     "description": "Beschreibung",
     "drinks": "Getränkkarte",
+    "email": "E-Mail",
     "event": "Veranstaltung",
     "icon": "Symbol",
     "layout": "Layout",
@@ -61,6 +63,7 @@
     "location_url": "Standort-URL",
     "login": "Anmelden",
     "logout": "Abmelden",
+    "message": "Nachricht",
     "n_of_parking_spaces": "Anzahl der Parkplätze",
     "name": "Name",
     "note": "Notiz",
@@ -76,6 +79,7 @@
     "programm": "Programm",
     "public": "Öffentlich",
     "return_journey": "Rückfahrt",
+    "role": "Role",
     "slots_filled": "Belegte Plätze",
     "slots_total": "Max. Plätze",
     "slug": "Slug",
@@ -87,6 +91,12 @@
     "headline": "Hoppla, 404",
     "text": "Die gesuchte Seite existiert nicht",
     "title": "Seite nicht gefunden"
+  },
+  "text": {
+    "soon": {
+      "text": "Diese Funktion befindet sich in der Entwicklung und funktioniert möglicherweise nicht wie erwartet.",
+      "title": "Bald"
+    }
   },
   "title": {
     "parking": "Parken",

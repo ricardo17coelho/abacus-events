@@ -5,6 +5,7 @@
     "edit": "",
     "open": "",
     "save": "Salva",
+    "send": "",
     "view": ""
   },
   "categories": {
@@ -54,6 +55,7 @@
     "date": "Data",
     "description": "Descrizione",
     "drinks": "menu bevande",
+    "email": "Email",
     "event": "Evento",
     "icon": "Icona",
     "layout": "Layout",
@@ -61,6 +63,7 @@
     "location_url": "URL della posizione",
     "login": "Accedere",
     "logout": "Disconnettersi",
+    "message": "",
     "n_of_parking_spaces": "Numero di posti auto",
     "name": "Nome",
     "note": "Nota",
@@ -76,6 +79,7 @@
     "programm": "Programma",
     "public": "Pubblico",
     "return_journey": "Ritorno",
+    "role": "",
     "slots_filled": "Posti occupati",
     "slots_total": "Posti massimi",
     "slug": "Slug",
@@ -87,6 +91,12 @@
     "headline": "Ops, 404",
     "text": "La pagina che stavi cercando non esiste",
     "title": "Pagina non trovata"
+  },
+  "text": {
+    "soon": {
+      "text": "Questa funzione è in fase di sviluppo e forse non funziona come previsto.",
+      "title": "Presto"
+    }
   },
   "title": {
     "parking": "Parcheggio",

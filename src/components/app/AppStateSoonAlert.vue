@@ -1,13 +1,12 @@
 <template>
-  <v-empty-state
+  <v-alert
     icon="mdi-timer-sand-complete"
     :text="t('text.soon.text')"
     :title="t('text.soon.title')"
+    type="warning"
+    variant="tonal"
   >
-    <template #media>
-      <v-icon color="surface-light" size="128" />
-    </template>
-  </v-empty-state>
+  </v-alert>
 </template>
 
 <script setup lang="ts">

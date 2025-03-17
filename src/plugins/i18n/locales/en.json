@@ -5,6 +5,7 @@
     "edit": "Edit",
     "open": "Open",
     "save": "Save",
+    "send": "Send",
     "view": "View"
   },
   "categories": {
@@ -54,6 +55,7 @@
     "date": "Date",
     "description": "Description",
     "drinks": "drinks menu",
+    "email": "Email",
     "event": "Event",
     "icon": "Icon",
     "layout": "Layout",
@@ -61,6 +63,7 @@
     "location_url": "Location URL",
     "login": "Login",
     "logout": "Logout",
+    "message": "Message",
     "n_of_parking_spaces": "Number of Parking Spaces",
     "name": "Name",
     "note": "Note",
@@ -76,6 +79,7 @@
     "programm": "Program",
     "public": "Public",
     "return_journey": "Return Journey",
+    "role": "Role",
     "slots_filled": "Occupied Spaces",
     "slots_total": "Max. Spaces",
     "slug": "Slug",
@@ -87,6 +91,12 @@
     "headline": "Whoops, 404",
     "text": "The page you were looking for does not exist",
     "title": "Page not found"
+  },
+  "text": {
+    "soon": {
+      "text": "This feature is under development & maybe is not working as expected",
+      "title": "Soon"
+    }
   },
   "title": {
     "parking": "Parking",

@@ -13,10 +13,10 @@
 import type { Role } from '@/api/types/Role.ts';
 import { useI18n } from 'vue-i18n';
 import { toast } from 'vue-sonner';
-import type { TitleI18n } from '@/types/TitleI18n.ts';
 import useApiRole from '@/api/roles.ts';
+import { showDefaultTranslationOrEmpty } from '@/utils/showDefaultTranslationOrEmpty.ts';
 
-const { locale, fallbackLocale, t } = useI18n();
+const { t } = useI18n();
 
 const roles = ref<Role[]>([]);
 
@@ -37,19 +37,11 @@ async function onGetRoles() {
 }
 onGetRoles();
 
-function roleI18nHasLocale(role: TitleI18n, localeValue: string) {
-  return role?.i18n && Object.keys(role.i18n).includes(localeValue);
-}
-
 const rolesItems = computed(() =>
   roles.value.map((role) => {
     return {
       value: role.id,
-      title: roleI18nHasLocale(role, locale.value)
-        ? role.i18n[locale.value]
-        : roleI18nHasLocale(role, fallbackLocale.value as string)
-          ? role.i18n[fallbackLocale.value as string]
-          : '',
+      title: showDefaultTranslationOrEmpty(role.title),
     };
   }),
 );

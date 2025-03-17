@@ -134,6 +134,16 @@ const tabs = computed(() =>
         currentEvent.value &&
         hasEventFeature(currentEvent.value, 'SHUTTLE_PLAN'),
     },
+    {
+      value: 'manage-events-id-files',
+      text: 'Files',
+      to: {
+        name: 'manage-events-id-files',
+      },
+      matchRouteName: 'manage-events-id-files',
+      show: () =>
+        currentEvent.value && hasEventFeature(currentEvent.value, 'FILES'),
+    },
   ].filter((i) => (i.show ? i.show() : true)),
 );
 </script>

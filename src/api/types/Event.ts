@@ -2,6 +2,7 @@ import type { TitleI18n } from '@/types/TitleI18n';
 import type { ParkingLot } from '@/api/types/ParkingLot.ts';
 import type { EventFeature } from '@/api/types/EventFeature.ts';
 import type { EventBrand } from './EventBrand.ts';
+import type { EventFile } from './EventFile.ts';
 
 export type Event = {
   id: string;
@@ -14,4 +15,5 @@ export type Event = {
   parking_lots: ParkingLot[];
   features: EventFeature[];
   public: boolean;
+  files: EventFile[];
 };

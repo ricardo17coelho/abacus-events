@@ -126,11 +126,11 @@
           <AppStateSoon />
         </v-container>
         <v-container
-          v-if="hasEventFeature(currentEvent, 'ATTACHMENTS')"
-          :id="`feature-${getEventFeatureIfExists(currentEvent, 'ATTACHMENTS')?.id}`"
+          v-if="hasEventFeature(currentEvent, 'FILES')"
+          :id="`feature-${getEventFeatureIfExists(currentEvent, 'FILES')?.id}`"
           fluid
         >
-          <div class="text-h4">ATTACHMENTS</div>
+          <div class="text-h4">FILES</div>
           <AppStateSoon />
         </v-container>
         <UiBtnScrollToTop :scroll-container="`#${layoutMainContainerId}`" />

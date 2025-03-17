@@ -15,7 +15,7 @@ import '@uppy/dashboard/dist/style.css';
 export type UploadedAttachment = {
   display_name: string;
   path: string;
-  mime_ype: string;
+  mime_type: string;
   size: number;
   name: string;
   url: string;
@@ -29,7 +29,7 @@ const props = defineProps({
   folderPath: { type: String, required: true }, // Folder path inside the bucket
   maxFiles: { type: Number, default: 5 }, // Max files to upload
   allowedFileTypes: {
-    type: Array as PropType<string>[],
+    type: Array as PropType<string[]>,
     default: () => ['image/*'],
   }, // Max files to upload
   onSave: { type: Function, default: undefined }, // Event ID (if saving to DB)
@@ -70,7 +70,7 @@ const startUpload = async () => {
       path: data.path,
       url: data.publicUrl,
       display_name: file.name ?? '',
-      mime_ype: file.type ?? '',
+      mime_type: file.type ?? '',
       size: file.size ?? 0,
       name: data.fileName ?? '',
       extension: file.extension ?? '',

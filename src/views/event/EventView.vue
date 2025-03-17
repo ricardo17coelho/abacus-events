@@ -25,9 +25,9 @@
       </v-col>
     </v-row>
     <AppImagesView
-      v-if="eventAttachments && !!eventAttachments.length"
+      v-if="eventFiles && !!eventFiles.length"
       v-model="showGallery"
-      :images="eventAttachments"
+      :images="eventFiles"
     />
   </v-container>
 </template>
@@ -40,8 +40,8 @@ import { requireInjection } from '@/utils/injection.ts';
 import { CURRENT_EVENT_KEY } from '@/types/injectionKeys.ts';
 import EventFeatureCard from '@/components/event/event-feature/EventFeatureCard.vue';
 import { type EventFeatureTypes } from '@/api/types/EventFeature.ts';
-import useApiEvents from '@/api/events.ts';
 import EventCarousel from '@/components/event/event/EventCarousel.vue';
+import useApiEventFile from '@/api/event-file.ts';
 
 const currentEvent = requireInjection(CURRENT_EVENT_KEY);
 
@@ -65,7 +65,7 @@ function getEventFeatureLinkOrAction(feature: EventFeatureTypes) {
       };
     case 'SHUTTLE_PLAN':
       return { to: { name: 'event-shuttle-plan' } };
-    case 'ATTACHMENTS':
+    case 'FILES':
       return {
         action: () => {
           showGallery.value = true;
@@ -88,15 +88,17 @@ const eventFeatures = computed(() =>
 
 const showGallery = ref(false);
 
-const { getEventById } = useApiEvents();
-const eventAttachments = computedAsync<string[]>(async () => {
+const { getEventFilesByEventId } = useApiEventFile();
+const eventFiles = computedAsync<string[]>(async () => {
   if (
     currentEvent.value?.features &&
-    currentEvent.value.features.map((i) => i.feature_id).includes('ATTACHMENTS')
+    currentEvent.value.features.map((i) => i.feature_id).includes('FILES')
   ) {
     // TODO: fetch event attachments
-    await getEventById(currentEvent.value?.id);
-    return ['/images/summer-part-2024/plan.png'];
+    const { data } = await getEventFilesByEventId(currentEvent.value?.id);
+    if (data) {
+      return data.map((item) => item.url);
+    }
   }
 }, []);
 </script>

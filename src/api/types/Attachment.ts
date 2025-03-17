@@ -10,7 +10,7 @@ export type Attachment = {
   display_name: string;
   path: string;
   url: string;
-  mime_ype: AttachmentMimeType;
+  mime_type: AttachmentMimeType;
   size: number;
   name: string;
   extension: string;

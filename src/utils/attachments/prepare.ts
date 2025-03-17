@@ -13,7 +13,7 @@ export function stripSpecialCharacters(inputString: string) {
 
 export type AttachmentPrepared = {
   content: Buffer | ArrayBuffer;
-  mime_ype: AttachmentMimeType;
+  mime_type: AttachmentMimeType;
   size: number;
   name: string;
   display_name: string;
@@ -34,7 +34,7 @@ export async function prepareDocument(
     case 'application/pdf': {
       return {
         content: buffer,
-        mime_ype: 'application/pdf',
+        mime_type: 'application/pdf',
         size: file.size,
         display_name: fileName,
         name: `${sanitizedName}.pdf`,
@@ -55,7 +55,7 @@ export async function prepareDocument(
 
       return {
         content: image,
-        mime_ype: 'image/jpeg',
+        mime_type: 'image/jpeg',
         size: image.byteLength,
         display_name: fileName,
         name: `${sanitizedName}.jpg`,
@@ -70,7 +70,7 @@ export async function prepareDocument(
 
       return {
         content: image,
-        mime_ype: 'image/jpeg',
+        mime_type: 'image/jpeg',
         size: image.byteLength,
         display_name: fileName,
         name: `${sanitizedName}.jpg`,

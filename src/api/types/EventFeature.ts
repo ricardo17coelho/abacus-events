@@ -6,7 +6,7 @@ export const EVENT_FEATURE_TYPE = {
   GUEST_LIST: 'GUEST_LIST',
   SHUTTLE_PLAN: 'SHUTTLE_PLAN',
   CONTACTS: 'CONTACTS',
-  ATTACHMENTS: 'ATTACHMENTS',
+  FILES: 'FILES',
 } as const;
 
 export type EventFeatureTypes =

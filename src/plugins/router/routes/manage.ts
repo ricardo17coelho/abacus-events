@@ -96,6 +96,12 @@ export default [
                             '@/views/manage/events/ManageEventShuttlePlan.vue'
                           ),
                       },
+                      {
+                        path: 'files',
+                        name: 'manage-events-id-files',
+                        component: () =>
+                          import('@/views/manage/events/ManageEventFiles.vue'),
+                      },
                     ],
                   },
                 ],

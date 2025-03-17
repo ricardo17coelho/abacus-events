@@ -2,7 +2,7 @@ import type { EventLayout } from '@/api/types/EventLayout.ts';
 import type { Attachment } from '@/api/types/Attachment.ts';
 
 export interface EventBrandBanner extends Attachment {
-  order: 0;
+  order: number;
 }
 
 export type EventBrand = {

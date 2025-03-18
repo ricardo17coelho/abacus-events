@@ -99,7 +99,7 @@
               variant="outlined"
             />
           </v-chip-group>
-          <EventTimeline01 date="2025-03-15" :items="sortedItems" />
+          <EventTimeline01 :date="currentEvent.date" :items="sortedItems" />
         </v-container>
         <v-container
           v-if="hasEventFeature(currentEvent, 'GUEST_LIST')"

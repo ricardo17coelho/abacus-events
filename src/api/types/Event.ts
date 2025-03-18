@@ -3,6 +3,7 @@ import type { ParkingLot } from '@/api/types/ParkingLot.ts';
 import type { EventFeature } from '@/api/types/EventFeature.ts';
 import type { EventBrand } from './EventBrand.ts';
 import type { EventFile } from './EventFile.ts';
+import type { EventContact } from '@/api/types/EventContact.ts';
 
 export type Event = {
   id: string;
@@ -16,4 +17,5 @@ export type Event = {
   features: EventFeature[];
   public: boolean;
   files: EventFile[];
+  contacts: EventContact[];
 };

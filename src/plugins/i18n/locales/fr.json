@@ -6,6 +6,7 @@
     "open": "Ouvrir",
     "save": "Enregistrer",
     "send": "Envoyer",
+    "upload": "",
     "view": "Voir"
   },
   "categories": {
@@ -37,6 +38,7 @@
   "labels": {
     "brand": "",
     "category": "Catégorie",
+    "contact": "",
     "date": "Date",
     "description": "Description",
     "drinks": "carte des boissons",
@@ -83,7 +85,8 @@
     "stop_on_request": "Arrêt sur demande",
     "time_end": "Heure de fin",
     "time_start": "Heure de début",
-    "users": ""
+    "users": "",
+    "value": ""
   },
   "not_found": {
     "headline": "Oups, 404",

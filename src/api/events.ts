@@ -18,7 +18,11 @@ export default function useApiEvents() {
     files:event_files(
       ...event_attachments(*)
     ),
-    parking_lots:parking_lots(*)
+    parking_lots:event_parking_lots(
+      *,
+      ...parking_lots(*)
+    ),
+    contacts:event_contacts(*)
   `;
 
   function getEvents(

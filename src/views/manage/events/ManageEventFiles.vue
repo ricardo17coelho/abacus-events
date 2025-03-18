@@ -8,13 +8,13 @@
       :actions="actions"
       :headers="headers"
       :items="currentEvent.files"
-      title="Files"
+      :title="t('labels.features.FILES')"
     >
       <template #toolbar-actions>
         <UiDialog v-model="dialogUpload" max-width="600">
           <template #activator="{ props: ActivatorProps }">
             <VBtnPrimary v-bind="ActivatorProps" append-icon="mdi-plus">
-              Upload
+              {{ t('actions.upload') }}
             </VBtnPrimary>
           </template>
           <template #content>
@@ -58,8 +58,11 @@ import useApi from '@/composables/api.ts';
 import type { EventFile } from '@/api/types/EventFile.ts';
 import useApiEventAttachment from '@/api/event-attachments.ts';
 import AttachmentMimeTypeIcon from '@/components/attachments/AttachmentMimeTypeIcon.vue';
+import { useI18n } from 'vue-i18n';
 
 const currentEvent = requireInjection(CURRENT_EVENT_KEY);
+
+const { t } = useI18n();
 
 const headers = ref([
   { title: '', key: 'mime_type' },

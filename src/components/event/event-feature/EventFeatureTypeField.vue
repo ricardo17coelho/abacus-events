@@ -22,6 +22,7 @@ const items = computed(() =>
       value: i,
       title: t(`labels.features.${i}`),
       props: {
+        disabled: i === 'GUEST_LIST',
         slim: true,
         prependIcon: getIcon(i),
         color: 'primary',

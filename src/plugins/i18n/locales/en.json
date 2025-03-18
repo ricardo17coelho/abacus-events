@@ -34,29 +34,25 @@
       "label": "Password"
     }
   },
-  "home": {
-    "links": {
-      "parking": {
-        "description": "Live availability of parking spaces & locations",
-        "title": "Parking"
-      },
-      "program": {
-        "description": "LineUp, F&B, general info",
-        "title": "Program"
-      },
-      "shuttle_schedule": {
-        "description": "Timetable and stops",
-        "title": "Shuttle Schedule"
-      }
-    }
-  },
   "labels": {
+    "brand": "Brand",
     "category": "Category",
     "date": "Date",
     "description": "Description",
     "drinks": "drinks menu",
     "email": "Email",
+    "enabled": "Enabled",
     "event": "Event",
+    "event_feature": "Event feature",
+    "feature": "Feature",
+    "features": {
+      "CONTACTS": "Contacts",
+      "FILES": "Files",
+      "GUEST_LIST": "Guest list",
+      "PARKING": "Parking",
+      "PROGRAM": "Program",
+      "SHUTTLE_PLAN": "Shuttle plan"
+    },
     "icon": "Icon",
     "layout": "Layout",
     "location": "Location Name",
@@ -80,12 +76,14 @@
     "public": "Public",
     "return_journey": "Return Journey",
     "role": "Role",
+    "settings": "Settings",
     "slots_filled": "Occupied Spaces",
     "slots_total": "Max. Spaces",
     "slug": "Slug",
     "stop_on_request": "Stop on request",
     "time_end": "End Time",
-    "time_start": "Start Time"
+    "time_start": "Start Time",
+    "users": "Users"
   },
   "not_found": {
     "headline": "Whoops, 404",

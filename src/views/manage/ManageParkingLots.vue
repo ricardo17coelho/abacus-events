@@ -4,13 +4,9 @@
       <template #actions>
         <ParkingLotDialog v-if="isUserAdmin" @success="onSuccessUpdate">
           <template #activator="{ props: activatorProps }">
-            <v-btn
-              v-bind="activatorProps"
-              prepend-icon="mdi-plus"
-              variant="text"
-            >
+            <VBtnPrimary v-bind="activatorProps" prepend-icon="mdi-plus">
               {{ t('actions.add') }}
-            </v-btn>
+            </VBtnPrimary>
           </template>
         </ParkingLotDialog>
       </template>

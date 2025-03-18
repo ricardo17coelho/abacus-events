@@ -49,13 +49,9 @@
         <v-col align="end">
           <EventTimelineDialog @success="mutateById($event.id, $event)">
             <template #activator="{ props: activatorProps }">
-              <v-btn
-                v-bind="activatorProps"
-                prepend-icon="mdi-plus"
-                variant="text"
-              >
+              <VBtnPrimary v-bind="activatorProps" prepend-icon="mdi-plus">
                 {{ t('actions.add') }}
-              </v-btn>
+              </VBtnPrimary>
             </template>
           </EventTimelineDialog>
         </v-col>

@@ -1,12 +1,12 @@
 {
   "actions": {
     "add": "Ajouter",
-    "delete": "",
-    "edit": "",
-    "open": "",
+    "delete": "Supprimer",
+    "edit": "Editer",
+    "open": "Ouvrir",
     "save": "Enregistrer",
-    "send": "",
-    "view": ""
+    "send": "Envoyer",
+    "view": "Voir"
   },
   "categories": {
     "ADULTS": "Adultes",
@@ -34,36 +34,32 @@
       "label": "Mot de passe"
     }
   },
-  "home": {
-    "links": {
-      "parking": {
-        "description": "Disponibilité des places de parking en direct & emplacements",
-        "title": "Parking"
-      },
-      "program": {
-        "description": "LineUp, F&B, infos générales",
-        "title": "Programme"
-      },
-      "shuttle_schedule": {
-        "description": "Horaires et arrêts",
-        "title": "Horaires de la navette"
-      }
-    }
-  },
   "labels": {
+    "brand": "",
     "category": "Catégorie",
     "date": "Date",
     "description": "Description",
     "drinks": "carte des boissons",
     "email": "Email",
+    "enabled": "Activée",
     "event": "Événement",
+    "event_feature": "Caractéristiques de l'événement",
+    "feature": "Caractéristique",
+    "features": {
+      "CONTACTS": "Contacts",
+      "FILES": "Dossiers",
+      "GUEST_LIST": "Liste des invités",
+      "PARKING": "Parking",
+      "PROGRAM": "Programme",
+      "SHUTTLE_PLAN": "Plan de navette"
+    },
     "icon": "Icône",
     "layout": "Layout",
     "location": "Nom du lieu",
     "location_url": "URL du lieu",
     "login": "Connexion",
     "logout": "Déconnexion",
-    "message": "",
+    "message": "Message",
     "n_of_parking_spaces": "Nombre de places de parking",
     "name": "Nom",
     "note": "Note",
@@ -79,13 +75,15 @@
     "programm": "Programme",
     "public": "Public",
     "return_journey": "Retour",
-    "role": "",
+    "role": "Rôle",
+    "settings": "",
     "slots_filled": "Places occupées",
     "slots_total": "Nb max. de places",
     "slug": "Slug",
     "stop_on_request": "Arrêt sur demande",
     "time_end": "Heure de fin",
-    "time_start": "Heure de début"
+    "time_start": "Heure de début",
+    "users": ""
   },
   "not_found": {
     "headline": "Oups, 404",

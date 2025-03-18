@@ -65,19 +65,25 @@ export default [
                           import('@/views/manage/events/ManageEventUsers.vue'),
                       },
                       {
-                        path: 'guest-list',
-                        name: 'manage-events-id-guest-list',
-                        component: () =>
-                          import(
-                            '@/views/manage/events/ManageEventGuestList.vue'
-                          ),
-                      },
-                      {
                         path: 'contacts',
                         name: 'manage-events-id-contacts',
                         component: () =>
                           import(
                             '@/views/manage/events/ManageEventContacts.vue'
+                          ),
+                      },
+                      {
+                        path: 'files',
+                        name: 'manage-events-id-files',
+                        component: () =>
+                          import('@/views/manage/events/ManageEventFiles.vue'),
+                      },
+                      {
+                        path: 'guest-list',
+                        name: 'manage-events-id-guest-list',
+                        component: () =>
+                          import(
+                            '@/views/manage/events/ManageEventGuestList.vue'
                           ),
                       },
                       {
@@ -97,10 +103,12 @@ export default [
                           ),
                       },
                       {
-                        path: 'files',
-                        name: 'manage-events-id-files',
+                        path: 'program',
+                        name: 'manage-events-id-program',
                         component: () =>
-                          import('@/views/manage/events/ManageEventFiles.vue'),
+                          import(
+                            '@/views/manage/events/ManageEventProgram.vue'
+                          ),
                       },
                     ],
                   },

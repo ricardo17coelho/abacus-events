@@ -1,12 +1,12 @@
 import type { TitleI18n } from '@/types/TitleI18n';
 
 export const EVENT_FEATURE_TYPE = {
-  PARKING: 'PARKING',
-  PROGRAM: 'PROGRAM',
-  GUEST_LIST: 'GUEST_LIST',
-  SHUTTLE_PLAN: 'SHUTTLE_PLAN',
   CONTACTS: 'CONTACTS',
   FILES: 'FILES',
+  GUEST_LIST: 'GUEST_LIST',
+  PARKING: 'PARKING',
+  PROGRAM: 'PROGRAM',
+  SHUTTLE_PLAN: 'SHUTTLE_PLAN',
 } as const;
 
 export type EventFeatureTypes =

@@ -47,10 +47,12 @@ import { CURRENT_EVENT_KEY } from '@/types/injectionKeys.ts';
 import { hasEventFeature } from '@/utils/event-features.ts';
 import EventDialog from '@/components/event/event/EventDialog.vue';
 import useAuthUser from '@/composables/auth-user.ts';
+import { useI18n } from 'vue-i18n';
 
 const currentEvent = requireInjection(CURRENT_EVENT_KEY);
 
 const route = useRoute();
+const { t } = useI18n();
 
 const { isUserAdmin } = useAuthUser();
 
@@ -71,7 +73,7 @@ const tabs = computed(() =>
   [
     {
       value: 'manage-events-id-settings',
-      text: 'Settings',
+      text: t('labels.settings'),
       to: {
         name: 'manage-events-id-settings',
       },
@@ -79,7 +81,7 @@ const tabs = computed(() =>
     },
     {
       value: 'manage-events-id-brand',
-      text: 'Brand',
+      text: t('labels.brand'),
       to: {
         name: 'manage-events-id-brand',
       },
@@ -87,25 +89,16 @@ const tabs = computed(() =>
     },
     {
       value: 'manage-events-id-users',
-      text: 'Users',
+      text: t('labels.users'),
       to: {
         name: 'manage-events-id-users',
       },
       matchRouteName: 'manage-events-id-users',
     },
-    {
-      value: 'manage-events-id-guest-list',
-      text: 'Guest List',
-      to: {
-        name: 'manage-events-id-guest-list',
-      },
-      matchRouteName: 'manage-events-id-guest-list',
-      show: () =>
-        currentEvent.value && hasEventFeature(currentEvent.value, 'GUEST_LIST'),
-    },
+    // Features
     {
       value: 'manage-events-id-contacts',
-      text: 'Contacts',
+      text: t('labels.features.CONTACTS'),
       to: {
         name: 'manage-events-id-contacts',
       },
@@ -114,8 +107,28 @@ const tabs = computed(() =>
         currentEvent.value && hasEventFeature(currentEvent.value, 'CONTACTS'),
     },
     {
+      value: 'manage-events-id-files',
+      text: t('labels.features.FILES'),
+      to: {
+        name: 'manage-events-id-files',
+      },
+      matchRouteName: 'manage-events-id-files',
+      show: () =>
+        currentEvent.value && hasEventFeature(currentEvent.value, 'FILES'),
+    },
+    {
+      value: 'manage-events-id-guest-list',
+      text: t('labels.features.GUEST_LIST'),
+      to: {
+        name: 'manage-events-id-guest-list',
+      },
+      matchRouteName: 'manage-events-id-guest-list',
+      show: () =>
+        currentEvent.value && hasEventFeature(currentEvent.value, 'GUEST_LIST'),
+    },
+    {
       value: 'manage-events-id-parking-lots',
-      text: 'Parking Lots',
+      text: t('labels.features.PARKING'),
       to: {
         name: 'manage-events-id-parking-lots',
       },
@@ -124,8 +137,18 @@ const tabs = computed(() =>
         currentEvent.value && hasEventFeature(currentEvent.value, 'PARKING'),
     },
     {
+      value: 'manage-events-id-program',
+      text: t('labels.features.PROGRAM'),
+      to: {
+        name: 'manage-events-id-program',
+      },
+      matchRouteName: 'manage-events-id-program',
+      show: () =>
+        currentEvent.value && hasEventFeature(currentEvent.value, 'PROGRAM'),
+    },
+    {
       value: 'manage-events-id-shuttle-plan',
-      text: 'Shuttle Bus',
+      text: t('labels.features.SHUTTLE_PLAN'),
       to: {
         name: 'manage-events-id-shuttle-plan',
       },
@@ -133,16 +156,6 @@ const tabs = computed(() =>
       show: () =>
         currentEvent.value &&
         hasEventFeature(currentEvent.value, 'SHUTTLE_PLAN'),
-    },
-    {
-      value: 'manage-events-id-files',
-      text: 'Files',
-      to: {
-        name: 'manage-events-id-files',
-      },
-      matchRouteName: 'manage-events-id-files',
-      show: () =>
-        currentEvent.value && hasEventFeature(currentEvent.value, 'FILES'),
     },
   ].filter((i) => (i.show ? i.show() : true)),
 );

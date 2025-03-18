@@ -34,29 +34,25 @@
       "label": "Passwort"
     }
   },
-  "home": {
-    "links": {
-      "parking": {
-        "description": "Live Verfügbarkeit PP & Standorte",
-        "title": "Parking"
-      },
-      "program": {
-        "description": "LineUp, F&B, allgemeine Info`s",
-        "title": "Programm"
-      },
-      "shuttle_schedule": {
-        "description": "Timetable und Stop`s",
-        "title": "Shuttle-Fahrplan"
-      }
-    }
-  },
   "labels": {
+    "brand": "Brand",
     "category": "Kategorie",
     "date": "Datum",
     "description": "Beschreibung",
     "drinks": "Getränkkarte",
     "email": "E-Mail",
+    "enabled": "Aktiv",
     "event": "Veranstaltung",
+    "event_feature": "Veranstaltungsfeatures",
+    "feature": "Veranstaltungsfeatures",
+    "features": {
+      "CONTACTS": "Kontakte",
+      "FILES": "Dateien",
+      "GUEST_LIST": "Gästeliste",
+      "PARKING": "Parkplatz",
+      "PROGRAM": "Programm",
+      "SHUTTLE_PLAN": "Shuttle-Plan"
+    },
     "icon": "Symbol",
     "layout": "Layout",
     "location": "Standortname",
@@ -80,12 +76,14 @@
     "public": "Öffentlich",
     "return_journey": "Rückfahrt",
     "role": "Role",
+    "settings": "Einstellungen",
     "slots_filled": "Belegte Plätze",
     "slots_total": "Max. Plätze",
     "slug": "Slug",
     "stop_on_request": "Halt auf Verlangen",
     "time_end": "Endzeit",
-    "time_start": "Startzeit"
+    "time_start": "Startzeit",
+    "users": "Benutzer"
   },
   "not_found": {
     "headline": "Hoppla, 404",

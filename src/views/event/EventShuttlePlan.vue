@@ -39,28 +39,7 @@
             </div>
           </template>
           <v-card-item>
-            <v-timeline
-              align="start"
-              density="compact"
-              dot-color="primary"
-              side="end"
-              size="x-small"
-              truncate-line="both"
-            >
-              <v-timeline-item
-                v-for="(item, idx) in itemsOutward"
-                :key="`${idx}-outward`"
-                icon="mdi-arrow-down"
-              >
-                <div>
-                  <div>
-                    <a class="link-external" :href="item.link" target="_blank">
-                      {{ item.text }}
-                    </a>
-                  </div>
-                </div>
-              </v-timeline-item>
-            </v-timeline>
+            <EventShuttlePlanTimeline :items="itemsOutward" />
           </v-card-item>
         </v-card>
 
@@ -76,28 +55,7 @@
           </template>
 
           <v-card-item>
-            <v-timeline
-              align="start"
-              density="compact"
-              dot-color="primary"
-              side="end"
-              size="x-small"
-              truncate-line="both"
-            >
-              <v-timeline-item
-                v-for="(item, idx) in itemsReturn"
-                :key="`${idx}-return`"
-                icon="mdi-arrow-down"
-              >
-                <div>
-                  <div>
-                    <a class="link-external" :href="item.link" target="_blank">
-                      {{ item.text }}
-                    </a>
-                  </div>
-                </div>
-              </v-timeline-item>
-            </v-timeline>
+            <EventShuttlePlanTimeline :items="itemsReturn" />
           </v-card-item>
         </v-card>
       </v-card>
@@ -109,6 +67,7 @@
 import AppTitle from '@/components/app/AppTitle.vue';
 import ContainerCentered from '@/components/containers/ContainerCentered.vue';
 import { useI18n } from 'vue-i18n';
+import EventShuttlePlanTimeline from '@/components/event/event-shuttle-plan/EventShuttlePlanTimeline.vue';
 
 const { t } = useI18n();
 

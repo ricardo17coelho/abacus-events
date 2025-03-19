@@ -43,7 +43,6 @@ export default function useBrand() {
   };
 
   const clearBrand = () => {
-    console.warn('clearBrand');
     resetColorPrimary();
     resetColorSecondary();
   };

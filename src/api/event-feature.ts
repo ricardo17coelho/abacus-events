@@ -26,7 +26,6 @@ export default function useApiEventFeature() {
   }
 
   function removeEventFeature(id: string) {
-    console.warn('removeEventFeature', id);
     return remove('event_features', id);
   }
 

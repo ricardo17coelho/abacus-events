@@ -126,7 +126,6 @@ async function onDeleteItem(item: EventTimeline) {
     return;
   }
   const idx = items.value.findIndex((i) => i.id === item.id);
-  console.warn(idx);
   if (idx > -1) {
     items.value.splice(idx, 1);
   }

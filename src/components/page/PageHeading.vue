@@ -1,7 +1,9 @@
 <template>
   <v-container fluid>
     <div class="d-flex justify-space-between">
-      <h1 class="text-h4">{{ title }}</h1>
+      <slot name="title">
+        <h1 class="text-h4">{{ title }}</h1>
+      </slot>
 
       <div class="d-flex ga-2">
         <slot name="actions"></slot>

@@ -3,7 +3,7 @@
     chips
     :items="rolesItems"
     :label="t('labels.role')"
-    name="field-ole"
+    name="field-role"
     v-bind="$attrs"
   >
   </v-select>

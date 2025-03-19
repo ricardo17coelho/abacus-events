@@ -3,13 +3,14 @@
     <TheAppBar />
 
     <v-main class="overflow-auto">
-      <v-container fluid>
+      <TheLayoutContainer>
         <RouterView />
-      </v-container>
+      </TheLayoutContainer>
     </v-main>
   </v-layout>
 </template>
 
 <script lang="ts" setup>
 import TheAppBar from '@/layouts/components/TheAppBar.vue';
+import TheLayoutContainer from '@/layouts/components/TheLayoutContainer.vue';
 </script>

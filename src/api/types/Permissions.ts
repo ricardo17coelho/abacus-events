@@ -63,6 +63,4 @@ export const PERMISSIONS = {
   EVENT_FILES_DELETE: 'EVENT_FILES_DELETE',
 } as const;
 
-console.warn(Object.keys(PERMISSIONS));
-
 export type Permissions = ValueOf<typeof PERMISSIONS>;

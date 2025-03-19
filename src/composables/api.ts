@@ -172,6 +172,10 @@ export default function useApi() {
       .match({ [key]: id });
   }
 
+  function removeByMatchQuery(table: string, match = {}) {
+    return supabase.from(table).delete().match(match);
+  }
+
   const uploadImg = async (
     file: File | Blob,
     bucket: string,
@@ -240,6 +244,7 @@ export default function useApi() {
     create,
     update,
     remove,
+    removeByMatchQuery,
     addOrUpdate,
     search,
     searchFullText,

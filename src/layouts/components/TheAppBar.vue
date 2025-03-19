@@ -1,6 +1,6 @@
 <template>
   <v-app-bar class="px-1" flat>
-    <v-container class="d-flex align-center py-0 app-container">
+    <TheLayoutContainer>
       <router-link to="/">
         <v-img max-width="200" src="/logos/abacus.svg" width="150" />
       </router-link>
@@ -25,7 +25,7 @@
           hide-full-text
         />
       </div>
-    </v-container>
+    </TheLayoutContainer>
   </v-app-bar>
 </template>
 
@@ -34,6 +34,7 @@ import useAuthUser from '@/composables/auth-user.ts';
 import MenuLanguage from '../../components/MenuLanguage.vue';
 import { useI18n } from 'vue-i18n';
 import { useDisplay } from 'vuetify';
+import TheLayoutContainer from '@/layouts/components/TheLayoutContainer.vue';
 
 const { isUserAdminOrHelper } = useAuthUser();
 

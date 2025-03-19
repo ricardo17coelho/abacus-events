@@ -3,7 +3,8 @@ import type { EventBrand, EventBrandBanner } from '@/api/types/EventBrand';
 import type { FindFilter } from '@/api/types/QueryTypes.ts';
 
 export default function useApiEventBrand() {
-  const { find, findById, create, update, remove } = useApi();
+  const { find, findById, create, update, remove, removeByMatchQuery } =
+    useApi();
 
   const eventBrandSelect = `
       *,
@@ -55,7 +56,6 @@ export default function useApiEventBrand() {
   }
 
   // Banners
-
   async function getEventBrandBanners(
     select = '*',
     filters: FindFilter[] = [],
@@ -102,8 +102,14 @@ export default function useApiEventBrand() {
     return remove('event_brand_banners', id);
   }
 
-  async function removeEventBrandBannerByEventAttachmentId(id: string) {
-    return remove('event_brand_banners', id, 'event_attachment_id');
+  function removeEventBrandBannerByEventAttachmentId(
+    eventId: string,
+    eventAttachmentId: string,
+  ) {
+    return removeByMatchQuery('event_brand_banners', {
+      ['event_id']: eventId,
+      ['event_attachment_id']: eventAttachmentId,
+    });
   }
 
   return {

@@ -50,7 +50,6 @@ const DEFAULT_FORM = {
     [locale.value]: '',
   },
   date: '',
-  banner: '',
   slug: '',
   public: false,
 };

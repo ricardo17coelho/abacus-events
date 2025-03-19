@@ -42,7 +42,12 @@ import { Page, PageContent, PageHeading } from '@/components/page';
 import EventDialog from '@/components/event/event/EventDialog.vue';
 import useAuthUser from '@/composables/auth-user.ts';
 import { useI18n } from 'vue-i18n';
-import { formatDateByFormat, type MenuItem, UiTable } from '@lib/ui';
+import {
+  formatDateByFormat,
+  type MenuItem,
+  UiTable,
+  useMenuActions,
+} from '@lib/ui';
 import { showDefaultTranslationOrEmpty } from '@/utils/showDefaultTranslationOrEmpty.ts';
 import type { Event } from '@/api/types/Event.ts';
 import useApiEvents from '@/api/events.ts';
@@ -93,39 +98,20 @@ function onGoToEvent(item: Event) {
 
 const currentEventId = ref();
 
+const { menuGlobalActions } = useMenuActions();
 const actions = computed<MenuItem[]>(() => [
   {
-    key: 'view',
-    title: t('actions.view'),
-    prepend: {
-      icon: {
-        icon: 'mdi-eye',
-      },
-    },
+    ...menuGlobalActions.value.view,
     action: onGoToEvent,
   },
   {
-    key: 'edit',
-    title: t('actions.edit'),
-    prepend: {
-      icon: {
-        icon: 'mdi-pencil',
-      },
-    },
+    ...menuGlobalActions.value.edit,
     action: (item: Event) => {
       currentEventId.value = item.id;
     },
   },
   {
-    key: 'delete',
-    title: t('actions.delete'),
-    prepend: {
-      icon: {
-        icon: 'mdi-delete',
-        color: 'error',
-      },
-    },
-    show: () => true,
+    ...menuGlobalActions.value.delete,
     action: (item: Event) => {
       console.warn('#TODO: delete', item);
     },

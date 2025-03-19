@@ -73,35 +73,35 @@ const { t } = useI18n();
 
 const itemsOutward = computed(() => [
   {
-    text: 'Hauptbahnhof St. Gallen- Lagerstrasse, 9000 St. Gallen',
-    link: 'https://maps.app.goo.gl/uWM6UuKsAZzeYGnJA',
+    location: 'Hauptbahnhof St. Gallen- Lagerstrasse, 9000 St. Gallen',
+    location_link: 'https://maps.app.goo.gl/uWM6UuKsAZzeYGnJA',
   },
   {
-    text: 'Hodlertrasse, 9008 St. Gallen (St. Fiden PP)',
-    link: 'https://maps.app.goo.gl/E7ad57eY74PiDWRj8',
+    location: 'Hodlertrasse, 9008 St. Gallen (St. Fiden PP)',
+    location_link: 'https://maps.app.goo.gl/E7ad57eY74PiDWRj8',
   },
   {
-    text: 'Abacus, Wittenbach',
-    link: 'https://maps.app.goo.gl/132fBr3KKb8cczPWA',
+    location: 'Abacus, Wittenbach',
+    location_link: 'https://maps.app.goo.gl/132fBr3KKb8cczPWA',
   },
 ]);
 
 const itemsReturn = computed(() => [
   {
-    text: 'Abacus, Wittenbach',
-    link: 'https://maps.app.goo.gl/132fBr3KKb8cczPWA',
+    location: 'Abacus, Wittenbach',
+    location_link: 'https://maps.app.goo.gl/132fBr3KKb8cczPWA',
   },
   {
-    text: 'Hodlertrasse, 9008 St. Gallen (St. Fiden PP)',
-    link: 'https://maps.app.goo.gl/E7ad57eY74PiDWRj8',
+    location: 'Hodlertrasse, 9008 St. Gallen (St. Fiden PP)',
+    location_link: 'https://maps.app.goo.gl/E7ad57eY74PiDWRj8',
   },
   {
-    text: `Radisson (${t('labels.stop_on_request')})`,
-    link: 'https://maps.app.goo.gl/DorgNiRHPizxKwnU7',
+    location: `Radisson (${t('labels.stop_on_request')})`,
+    location_link: 'https://maps.app.goo.gl/DorgNiRHPizxKwnU7',
   },
   {
-    text: 'Hauptbahnhof St. Gallen- Lagerstrasse, 9000 St. Gallen',
-    link: 'https://maps.app.goo.gl/uWM6UuKsAZzeYGnJA',
+    location: 'Hauptbahnhof St. Gallen- Lagerstrasse, 9000 St. Gallen',
+    location_link: 'https://maps.app.goo.gl/uWM6UuKsAZzeYGnJA',
   },
 ]);
 </script>

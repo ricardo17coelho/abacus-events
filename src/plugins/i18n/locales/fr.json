@@ -1,6 +1,8 @@
 {
   "actions": {
     "add": "Ajouter",
+    "add_alert": "",
+    "add_ride": "",
     "delete": "Supprimer",
     "edit": "Editer",
     "open": "Ouvrir",
@@ -36,6 +38,7 @@
     }
   },
   "labels": {
+    "alert_hint": "",
     "brand": "",
     "category": "Catégorie",
     "contact": "",
@@ -58,6 +61,7 @@
     "icon": "Icône",
     "layout": "Layout",
     "location": "Nom du lieu",
+    "location_link": "",
     "location_url": "URL du lieu",
     "login": "Connexion",
     "logout": "Déconnexion",
@@ -79,6 +83,10 @@
     "return_journey": "Retour",
     "role": "Rôle",
     "settings": "",
+    "shuttle_plan_direction": {
+      "outward": "",
+      "return": ""
+    },
     "slots_filled": "Places occupées",
     "slots_total": "Nb max. de places",
     "slug": "Slug",

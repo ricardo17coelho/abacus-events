@@ -1,6 +1,8 @@
 {
   "actions": {
     "add": "Hinzufügen",
+    "add_alert": "Alert hinzufügen",
+    "add_ride": "Fahrt hinzufügen",
     "delete": "Löschen",
     "edit": "Bearbeiten",
     "open": "Öffnen",
@@ -36,6 +38,7 @@
     }
   },
   "labels": {
+    "alert_hint": "Warnhinweis",
     "brand": "Brand",
     "category": "Kategorie",
     "contact": "Kontakt",
@@ -58,6 +61,7 @@
     "icon": "Symbol",
     "layout": "Layout",
     "location": "Standortname",
+    "location_link": "Standortlink",
     "location_url": "Standort-URL",
     "login": "Anmelden",
     "logout": "Abmelden",
@@ -79,6 +83,10 @@
     "return_journey": "Rückfahrt",
     "role": "Role",
     "settings": "Einstellungen",
+    "shuttle_plan_direction": {
+      "outward": "Hinfahrt",
+      "return": "Rückfahrt"
+    },
     "slots_filled": "Belegte Plätze",
     "slots_total": "Max. Plätze",
     "slug": "Slug",

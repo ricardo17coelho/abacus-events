@@ -39,13 +39,13 @@ import { toast } from 'vue-sonner';
 // types & constants
 import { useI18n } from 'vue-i18n';
 import type { EventUser } from '@/api/types/EventUser.ts';
-import { type MenuItem, UiTable } from '@lib/ui';
+import { type MenuItem, UiTable, useMenuActions } from '@lib/ui';
 import { requireInjection } from '@/utils/injection.ts';
 import { CURRENT_EVENT_KEY } from '@/types/injectionKeys.ts';
 
 const currentEvent = requireInjection(CURRENT_EVENT_KEY);
 
-const { locale, t } = useI18n();
+const { locale } = useI18n();
 
 const showDialog = ref(false);
 
@@ -58,16 +58,10 @@ const headers = ref([
   { title: 'Role', key: 'role' },
 ]);
 
+const { menuGlobalActions } = useMenuActions();
 const actions = computed<MenuItem[]>(() => [
   {
-    key: 'delete',
-    title: t('actions.delete'),
-    prepend: {
-      icon: {
-        icon: 'mdi-delete',
-        color: 'error',
-      },
-    },
+    ...menuGlobalActions.value.delete,
     action: (item: EventUser) => onRemoveUser(item.user_id),
   },
 ]);

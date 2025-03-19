@@ -1,6 +1,8 @@
 {
   "actions": {
     "add": "Add",
+    "add_alert": "Add alert",
+    "add_ride": "Add ride",
     "delete": "Delete",
     "edit": "Edit",
     "open": "Open",
@@ -36,6 +38,7 @@
     }
   },
   "labels": {
+    "alert_hint": "Alert hint",
     "brand": "Brand",
     "category": "Category",
     "contact": "Contact",
@@ -58,6 +61,7 @@
     "icon": "Icon",
     "layout": "Layout",
     "location": "Location Name",
+    "location_link": "Location link",
     "location_url": "Location URL",
     "login": "Login",
     "logout": "Logout",
@@ -79,6 +83,10 @@
     "return_journey": "Return Journey",
     "role": "Role",
     "settings": "Settings",
+    "shuttle_plan_direction": {
+      "outward": "Outward",
+      "return": "Return"
+    },
     "slots_filled": "Occupied Spaces",
     "slots_total": "Max. Spaces",
     "slug": "Slug",

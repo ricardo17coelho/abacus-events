@@ -22,7 +22,9 @@ export default function useApiEvents() {
       *,
       ...parking_lots(*)
     ),
-    contacts:event_contacts(*)
+    contacts:event_contacts(*),
+    shuttle_plan:event_shuttle_plan(*),
+    shuttle_plan_alerts:event_shuttle_plan_alerts(*)
   `;
 
   function getEvents(

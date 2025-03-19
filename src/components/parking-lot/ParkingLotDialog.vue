@@ -1,5 +1,5 @@
 <template>
-  <AppDialog v-model="model" max-width="600" :title="t('labels.parking_lot')">
+  <UiDialog v-model="model" max-width="600" :title="t('labels.parking_lot')">
     <template #activator="activatorProps">
       <slot name="activator" v-bind="activatorProps" />
     </template>
@@ -11,14 +11,14 @@
         {{ t('actions.save') }}
       </VBtnPrimary>
     </template>
-  </AppDialog>
+  </UiDialog>
 </template>
 
 <script setup lang="ts">
 // components
-import AppDialog from '@/components/app/AppDialog.vue';
+import { UiDialog } from '@lib/ui';
 import ParkingLotForm from './ParkingLotForm.vue';
-// api's
+// apis
 import useApiParkingLot from '@/api/parking-lots';
 // types & constants
 import type { ParkingLot } from '@/api/types/ParkingLot';

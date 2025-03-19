@@ -1,5 +1,5 @@
 <template>
-  <AppDialog
+  <UiDialog
     v-model="model"
     max-width="600"
     :title="t('labels.program_timeline_category')"
@@ -19,12 +19,12 @@
         {{ t('actions.save') }}
       </VBtnPrimary>
     </template>
-  </AppDialog>
+  </UiDialog>
 </template>
 
 <script setup lang="ts">
 // components
-import AppDialog from '@/components/app/AppDialog.vue';
+import { UiDialog } from '@lib/ui';
 import EventTimelineCategoriesForm from './EventTimelineCategoriesForm.vue';
 // apis
 import useApiEventTimeline from '@/api/event-timeline.ts';

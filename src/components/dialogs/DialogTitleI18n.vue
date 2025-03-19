@@ -1,5 +1,5 @@
 <template>
-  <AppDialog v-model="model" :title="title" width="500">
+  <UiDialog v-model="model" :title="title" width="500">
     <template #activator="activatorProps">
       <slot name="activator" v-bind="activatorProps" />
     </template>
@@ -13,11 +13,11 @@
         {{ t('actions.save') }}
       </VBtnPrimary>
     </template>
-  </AppDialog>
+  </UiDialog>
 </template>
 
 <script setup lang="ts">
-import AppDialog from '@/components/app/AppDialog.vue';
+import { UiDialog } from '@lib/ui';
 import FieldMultiLanguageText from '@/components/fields/FieldMultiLanguageText.vue';
 import { useI18n } from 'vue-i18n';
 import { toast } from 'vue-sonner';

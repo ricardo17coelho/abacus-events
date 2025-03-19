@@ -1,5 +1,5 @@
 <template>
-  <AppDialog v-model="model" max-width="600" :title="t('labels.event_feature')">
+  <UiDialog v-model="model" max-width="600" :title="t('labels.event_feature')">
     <template #activator="activatorProps">
       <slot name="activator" v-bind="activatorProps" />
     </template>
@@ -11,12 +11,12 @@
         {{ t('actions.save') }}
       </VBtnPrimary>
     </template>
-  </AppDialog>
+  </UiDialog>
 </template>
 
 <script setup lang="ts">
 // components
-import AppDialog from '@/components/app/AppDialog.vue';
+import { UiDialog } from '@lib/ui';
 import EventFeatureForm from './EventFeatureForm.vue';
 // apis
 import useApiEventFeature from '@/api/event-feature.ts';

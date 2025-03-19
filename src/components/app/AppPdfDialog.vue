@@ -1,5 +1,5 @@
 <template>
-  <AppDialog fullscreen max-width="1000">
+  <UiDialog height="100%" max-width="1000">
     <template #activator="{ props: activatorProps }">
       <slot name="activator" :props="activatorProps" />
     </template>
@@ -35,12 +35,12 @@
 
       <v-spacer />
     </template>
-  </AppDialog>
+  </UiDialog>
 </template>
 
 <script setup lang="ts">
 import { usePDF, VuePDF } from '@tato30/vue-pdf';
-import AppDialog from '@/components/app/AppDialog.vue';
+import { UiDialog } from '@lib/ui';
 import AppLoadingIcon from '@/components/app/AppLoadingIcon.vue';
 
 const props = defineProps({
@@ -50,7 +50,7 @@ const props = defineProps({
   },
 });
 
-const scale = ref(0.25);
+const scale = ref(1);
 const { pdf } = usePDF(props.pdfUrl);
 
 const pdfLoaded = ref(false);

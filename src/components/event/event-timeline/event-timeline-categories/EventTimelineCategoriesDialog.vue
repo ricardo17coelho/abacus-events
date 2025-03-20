@@ -29,7 +29,7 @@ import EventTimelineCategoriesForm from './EventTimelineCategoriesForm.vue';
 // apis
 import useApiEventTimeline from '@/api/event-timeline.ts';
 // types & constants
-import type { EventTimeline } from '@/api/types/EventTimeline.ts';
+import type { EventTimelineCategory } from '@/api/types/EventTimeline.ts';
 // composables
 import { toast } from 'vue-sonner';
 import { useI18n } from 'vue-i18n';
@@ -58,13 +58,7 @@ const DEFAULT_FORM = {
   title: {
     [locale.value]: '',
   },
-  note: {
-    [locale.value]: '',
-  },
-  category: undefined,
-  locations: [],
-  time_start: '',
-  time_end: '',
+  color: '',
   icon: '',
 };
 
@@ -132,7 +126,7 @@ async function onSave() {
   }
 }
 
-const timelineCategory = ref<EventTimeline>();
+const timelineCategory = ref<EventTimelineCategory>();
 const isLoadingInitial = ref(false);
 
 async function onGetDataById(id: string) {

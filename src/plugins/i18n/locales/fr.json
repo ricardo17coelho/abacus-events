@@ -17,6 +17,12 @@
     "FOOD": "Nourriture",
     "KIDS": "Enfants"
   },
+  "greeting": {
+    "good-morning": "Bonjour",
+    "good-afternoon": "Bon après-midi",
+    "good-evening": "Bonsoir",
+    "hello": "Salut"
+  },
   "errors": {
     "error_occurred": "Une erreur s'est produite",
     "validation": {

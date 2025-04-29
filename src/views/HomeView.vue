@@ -12,6 +12,7 @@
         <EventCard
           :event="event"
           height="100%"
+          show-countdown
           :to="{
             name: 'event',
             params: { eventId: event.slug || event.id },

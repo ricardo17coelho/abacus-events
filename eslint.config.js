@@ -1,14 +1,16 @@
 import pluginVue from 'eslint-plugin-vue';
-import vueTsEslintConfig from '@vue/eslint-config-typescript';
+import {
+  defineConfigWithVueTs,
+  vueTsConfigs,
+} from '@vue/eslint-config-typescript';
 import prettierConfig from 'eslint-plugin-prettier';
 import pluginVitest from '@vitest/eslint-plugin';
 import skipFormatting from '@vue/eslint-config-prettier/skip-formatting';
-import typescriptEslintPlugin from '@typescript-eslint/eslint-plugin';
 
-export default [
+export default defineConfigWithVueTs([
   // Vue and TypeScript Configuration
   ...pluginVue.configs['flat/essential'], // Vue 3 config
-  ...vueTsEslintConfig(), // TypeScript config for Vue
+  vueTsConfigs.recommended, // TypeScript config for Vue
   {
     name: 'app/files-to-lint',
     files: ['**/*.{ts,mts,tsx,vue}'],
@@ -17,7 +19,6 @@ export default [
     },
     plugins: {
       prettier: prettierConfig,
-      '@typescript-eslint': typescriptEslintPlugin,
     },
     rules: {
       'array-bracket-spacing': ['error', 'never'],
@@ -214,4 +215,4 @@ export default [
     files: ['src/**/__tests__/*'],
   },
   skipFormatting, // Prettier skip formatting for conflicts
-];
+]);

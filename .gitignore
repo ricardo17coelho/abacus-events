@@ -29,6 +29,6 @@ circleDep
 *.sln
 *.sw?
 
-.env
+.env.*
 
 supabase/seed.sql

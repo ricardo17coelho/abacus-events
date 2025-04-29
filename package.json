@@ -16,7 +16,7 @@
   },
   "dependencies": {
     "@mdi/font": "^7.4.47",
-    "@supabase/supabase-js": "^2.49.1",
+    "@supabase/supabase-js": "^2.49.4",
     "@tato30/vue-pdf": "^1.11.3",
     "@typescript-eslint/eslint-plugin": "^8.26.1",
     "@uppy/core": "^4.4.2",

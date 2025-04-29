@@ -1,0 +1,10 @@
+# Ignore artifacts:
+**/dist
+**/node_modules
+**/coverage
+
+**/cypress/results
+**/cypress/screenshots
+
+**/__OLD__
+**/auto-imports.d.ts

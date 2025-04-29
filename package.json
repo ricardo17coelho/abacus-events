@@ -50,7 +50,7 @@
     "@commitlint/cli": "^19.8.0",
     "@commitlint/config-conventional": "^19.8.0",
     "@commitlint/types": "^19.8.0",
-    "@tsconfig/node22": "^22.0.0",
+    "@tsconfig/node22": "^22.0.1",
     "@types/autosize": "^4.0.3",
     "@types/heic-convert": "^2.1.0",
     "@types/lodash": "^4.17.16",

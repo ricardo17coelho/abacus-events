@@ -8,7 +8,7 @@
     readonly
   >
     <v-dialog v-model="dialog" activator="parent" width="auto">
-      <v-time-picker v-if="dialog" v-model="time"></v-time-picker>
+      <v-time-picker v-if="dialog" v-model="time" format="24hr" />
     </v-dialog>
   </v-text-field>
 </template>

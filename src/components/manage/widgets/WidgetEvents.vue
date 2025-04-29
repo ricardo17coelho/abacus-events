@@ -9,18 +9,30 @@
       <template v-for="(event, i) in events" :key="event.id">
         <v-divider v-if="i !== 0" />
 
-        <v-list-item link>
+        <v-list-item
+          link
+          :to="{
+            name: 'manage-events-id',
+            params: { eventId: event.slug || event.id },
+          }"
+        >
           <template #prepend>
-            <v-avatar color="surface-light" size="64" tile> #TODO </v-avatar>
+            <v-avatar color="surface-light" size="64" tile>
+              <v-img color="surface-light" cover :src="event.brand?.logo" />
+            </v-avatar>
           </template>
 
-          <v-list-item-subtitle class="text-caption mb-2">
+          <v-list-item-subtitle class="text-caption">
             {{ showDefaultTranslationOrEmpty(event.title) }}
           </v-list-item-subtitle>
 
           <v-list-item-title class="text-subtitle-2 font-weight-bold">
             {{ showDefaultTranslationOrEmpty(event.description) }}
           </v-list-item-title>
+
+          <v-list-item-subtitle class="text-caption">
+            {{ formatDateByFormat(event.date) }}
+          </v-list-item-subtitle>
         </v-list-item>
       </template>
     </v-list>
@@ -33,6 +45,7 @@ import useApiEvents from '@/api/events.ts';
 import { toast } from 'vue-sonner';
 import { showDefaultTranslationOrEmpty } from '@/utils/showDefaultTranslationOrEmpty.ts';
 import { useI18n } from 'vue-i18n';
+import { formatDateByFormat } from '../../../../lib/ui';
 
 const { t } = useI18n();
 

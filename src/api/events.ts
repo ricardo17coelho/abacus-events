@@ -1,7 +1,7 @@
 import useApi from '@/composables/api';
 import type { Event } from './types/Event';
 import { validate as isValidUUID } from 'uuid';
-import type { FindFilter } from '@/api/types/QueryTypes.ts';
+import type { FindFilter, FindOrder } from '@/api/types/QueryTypes.ts';
 
 export default function useApiEvents() {
   const { find, findById, create, update, remove, count } = useApi();
@@ -32,7 +32,9 @@ export default function useApiEvents() {
     filters: FindFilter[] = [],
     range = [0, 100],
   ) {
-    return find<Event>('events', filters, select, range);
+    const orders: FindOrder[] = [['date', { ascending: false }]];
+
+    return find<Event>('events', filters, select, range, orders);
   }
 
   function getEventsPublic(range = [0, 100]) {

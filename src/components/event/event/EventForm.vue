@@ -37,7 +37,12 @@
     </v-row>
     <v-row dense>
       <v-col>
-        <v-text-field v-model="model.date" :label="t('labels.date')" />
+        <v-date-input
+          v-model="model.date"
+          display-format="keyboardDate"
+          :label="t('labels.date')"
+          :min="today"
+        ></v-date-input>
       </v-col>
     </v-row>
     <v-row dense>
@@ -49,15 +54,17 @@
 </template>
 
 <script lang="ts" setup>
+import DialogTitleI18n from '@/components/dialogs/DialogTitleI18n.vue';
 // utils
 import { showDefaultTranslationOrEmpty } from '@/utils/showDefaultTranslationOrEmpty';
 import rulesValidation from '@/utils/validations';
-import DialogTitleI18n from '@/components/dialogs/DialogTitleI18n.vue';
 import { useI18n } from 'vue-i18n';
 
 const model = defineModel({ type: Object, default: () => ({}) });
 
 const { t } = useI18n();
+
+const today = new Date();
 
 const formRef = ref();
 

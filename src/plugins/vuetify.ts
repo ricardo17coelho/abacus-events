@@ -12,7 +12,7 @@ import * as components from 'vuetify/components';
 import * as labsComponents from 'vuetify/labs/components';
 
 // Translations provided by Vuetify
-import { en, pt } from 'vuetify/locale';
+import { de, en, fr, it } from 'vuetify/locale';
 
 import { VBtn, VCard } from 'vuetify/components';
 
@@ -32,7 +32,7 @@ const opts = {
     ...labsComponents,
   },
   lang: {
-    locales: { en, pt },
+    locales: { en, de, fr, it },
     current: 'en',
   },
   theme: {

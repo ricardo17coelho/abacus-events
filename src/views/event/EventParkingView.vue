@@ -2,7 +2,7 @@
   <v-container v-if="currentEvent">
     <v-row>
       <v-col align="center">
-        <AppTitle show-go-home-button :title="t('title.parking')" />
+        <TheAppTitle show-go-home-button :title="t('title.parking')" />
       </v-col>
     </v-row>
     <v-alert border="start" class="my-6" density="compact" rounded="lg">
@@ -25,7 +25,7 @@
 <script setup lang="ts">
 import useApiParkingLot from '@/api/parking-lots.ts';
 import ParkingLotCard from '@/components/parking-lot/ParkingLotCard.vue';
-import AppTitle from '@/components/app/AppTitle.vue';
+import TheAppTitle from '@/components/app/TheAppTitle.vue';
 import { useI18n } from 'vue-i18n';
 import { toast } from 'vue-sonner';
 import { supabase } from '@/services/supabase.ts';

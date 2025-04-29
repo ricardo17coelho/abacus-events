@@ -2,7 +2,7 @@
   <v-container class="align-center pa-0">
     <v-row>
       <v-col align="center">
-        <AppTitle show-go-home-button :title="t('title.program')" />
+        <TheAppTitle show-go-home-button :title="t('title.program')" />
       </v-col>
     </v-row>
     <AppLoader v-if="isLoading" />
@@ -81,7 +81,7 @@
 </template>
 
 <script setup lang="ts">
-import AppTitle from '@/components/app/AppTitle.vue';
+import TheAppTitle from '@/components/app/TheAppTitle.vue';
 import AppTimeline from '@/components/app/AppTimeline.vue';
 import useAuthUser from '@/composables/auth-user.ts';
 import EventTimelineDialog from '@/components/event/event-timeline/EventTimelineDialog.vue';

@@ -2,7 +2,7 @@
   <v-container class="align-center">
     <v-row>
       <v-col align="center">
-        <AppTitle show-go-home-button :title="t('title.shuttle_schedule')" />
+        <TheAppTitle show-go-home-button :title="t('title.shuttle_schedule')" />
       </v-col>
     </v-row>
     <ContainerCentered class="px-0">
@@ -64,7 +64,7 @@
 </template>
 
 <script setup lang="ts">
-import AppTitle from '@/components/app/AppTitle.vue';
+import TheAppTitle from '@/components/app/TheAppTitle.vue';
 import ContainerCentered from '@/components/containers/ContainerCentered.vue';
 import { useI18n } from 'vue-i18n';
 import EventShuttlePlanTimeline from '@/components/event/event-shuttle-plan/EventShuttlePlanTimeline.vue';

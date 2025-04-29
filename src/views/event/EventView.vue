@@ -1,6 +1,6 @@
 <template>
   <v-container v-if="currentEvent" class="align-center">
-    <AppTitle :title="showDefaultTranslationOrEmpty(currentEvent.title)" />
+    <TheAppTitle :title="showDefaultTranslationOrEmpty(currentEvent.title)" />
     <EventCarousel :images="currentEventBrandBannersUrls" />
   </v-container>
   <v-container class="align-center">
@@ -34,7 +34,7 @@
 
 <script setup lang="ts">
 import AppImagesView from '@/components/app/AppImagesView.vue';
-import AppTitle from '@/components/app/AppTitle.vue';
+import TheAppTitle from '@/components/app/TheAppTitle.vue';
 import { showDefaultTranslationOrEmpty } from '@/utils/showDefaultTranslationOrEmpty.ts';
 import { requireInjection } from '@/utils/injection.ts';
 import { CURRENT_EVENT_KEY } from '@/types/injectionKeys.ts';

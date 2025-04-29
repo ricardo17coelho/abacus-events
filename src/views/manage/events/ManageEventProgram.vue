@@ -25,6 +25,18 @@
             :value="category.id"
             variant="outlined"
           />
+          <UiDialog max-width="600">
+            <template #activator="{ props: ActivatorProps }">
+              <v-icon-btn
+                v-bind="ActivatorProps"
+                icon="mdi-pencil"
+                icon-size="small"
+              />
+            </template>
+            <template #content>
+              <EventTimelineCategoriesTable />
+            </template>
+          </UiDialog>
         </v-chip-group>
       </div>
 
@@ -76,6 +88,8 @@ import { type EventTimeline } from '@/api/types/EventTimeline.ts';
 import { useI18n } from 'vue-i18n';
 import { showDefaultTranslationOrEmpty } from '@/utils/showDefaultTranslationOrEmpty.ts';
 import useEventProgram from '@/composables/event-program.ts';
+import EventTimelineCategoriesTable from '@/components/event/event-timeline/event-timeline-categories/EventTimelineCategoriesTable.vue';
+import { UiDialog } from '@lib/ui';
 
 const currentEvent = requireInjection(CURRENT_EVENT_KEY);
 

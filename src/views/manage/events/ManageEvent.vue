@@ -2,6 +2,15 @@
   <Page v-if="currentEvent">
     <PageHeading :title="showDefaultTranslationOrEmpty(currentEvent.title)">
       <template #actions>
+        <DialogEventLayoutView>
+          <template #activator="{ props: activatorProps }">
+            <VBtnPrimary
+              v-bind="activatorProps"
+              icon="mdi-eye"
+              variant="text"
+            />
+          </template>
+        </DialogEventLayoutView>
         <EventDialog v-if="isUserAdmin" :event-id="currentEvent.id">
           <template #activator="{ props: activatorProps }">
             <VBtnPrimary
@@ -48,6 +57,7 @@ import { hasEventFeature } from '@/utils/event-features.ts';
 import EventDialog from '@/components/event/event/EventDialog.vue';
 import useAuthUser from '@/composables/auth-user.ts';
 import { useI18n } from 'vue-i18n';
+import DialogEventLayoutView from '@/components/dialogs/DialogEventLayoutView.vue';
 
 const currentEvent = requireInjection(CURRENT_EVENT_KEY);
 
@@ -87,14 +97,14 @@ const tabs = computed(() =>
       },
       matchRouteName: 'manage-events-id-brand',
     },
-    {
-      value: 'manage-events-id-users',
-      text: t('labels.users'),
-      to: {
-        name: 'manage-events-id-users',
-      },
-      matchRouteName: 'manage-events-id-users',
-    },
+    // {
+    //   value: 'manage-events-id-users',
+    //   text: t('labels.users'),
+    //   to: {
+    //     name: 'manage-events-id-users',
+    //   },
+    //   matchRouteName: 'manage-events-id-users',
+    // },
     // Features
     {
       value: 'manage-events-id-contacts',

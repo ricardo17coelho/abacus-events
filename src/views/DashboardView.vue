@@ -28,7 +28,7 @@
     </v-row>
 
     <v-row>
-      <v-col cols="12" md="6">
+      <v-col align="start" cols="12" md="4">
         <WidgetEvents />
       </v-col>
     </v-row>

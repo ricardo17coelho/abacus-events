@@ -1,5 +1,5 @@
 <template>
-  <v-card class="mx-auto" max-width="650" title="Events">
+  <v-card class="mx-auto" title="Events">
     <template #append>
       <v-btn icon="mdi-eye" :to="{ name: 'manage-events' }"></v-btn>
     </template>

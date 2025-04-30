@@ -22,13 +22,13 @@
             </v-avatar>
           </template>
 
-          <v-list-item-subtitle class="text-caption">
+          <v-list-item-title class="font-weight-bold">
             {{ showDefaultTranslationOrEmpty(event.title) }}
-          </v-list-item-subtitle>
-
-          <v-list-item-title class="text-subtitle-2 font-weight-bold">
-            {{ showDefaultTranslationOrEmpty(event.description) }}
           </v-list-item-title>
+
+          <v-list-item-subtitle>
+            {{ showDefaultTranslationOrEmpty(event.subtitle) }}
+          </v-list-item-subtitle>
 
           <v-list-item-subtitle class="text-caption">
             {{ formatDateByFormat(event.date) }}

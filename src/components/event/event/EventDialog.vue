@@ -46,6 +46,9 @@ const DEFAULT_FORM = {
   title: {
     [locale.value]: '',
   },
+  subtitle: {
+    [locale.value]: '',
+  },
   description: {
     [locale.value]: '',
   },

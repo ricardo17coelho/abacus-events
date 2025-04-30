@@ -1,6 +1,9 @@
 <template>
   <Page v-if="currentEvent">
-    <PageHeading :title="showDefaultTranslationOrEmpty(currentEvent.title)">
+    <PageHeading
+      :subtitle="showDefaultTranslationOrEmpty(currentEvent.subtitle)"
+      :title="showDefaultTranslationOrEmpty(currentEvent.title)"
+    >
       <template #actions>
         <DialogEventLayoutView>
           <template #activator="{ props: activatorProps }">

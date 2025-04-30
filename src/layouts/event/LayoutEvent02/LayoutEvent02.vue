@@ -22,6 +22,11 @@
                     {{ showDefaultTranslationOrEmpty(currentEvent.title) }}
                   </div>
                 </template>
+                <template #subtitle>
+                  <div class="text-md-h5 font-weight-bold mb-2 text-h6">
+                    {{ showDefaultTranslationOrEmpty(currentEvent.subtitle) }}
+                  </div>
+                </template>
                 <v-card-text>
                   <div class="text-body-1 mb-2 text-medium-emphasis">
                     {{

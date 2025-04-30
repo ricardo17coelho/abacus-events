@@ -16,12 +16,21 @@
       </div>
     </v-img>
 
-    <v-card-title v-if="event.title" class="text-body-1 text-sm-h6">
+    <v-card-title v-if="event.title" class="text-sm-h6">
       {{ showDefaultTranslationOrEmpty(event.title) }}
     </v-card-title>
 
-    <v-card-subtitle v-if="event.title" class="text-wrap">
-      {{ showDefaultTranslationOrEmpty(event.description) }}
+    <v-card-subtitle v-if="event.subtitle" class="text-wrap">
+      {{ showDefaultTranslationOrEmpty(event.subtitle) }}
+    </v-card-subtitle>
+
+    <v-card-subtitle v-if="event.description" class="text-wrap">
+      {{
+        showDefaultTranslationOrEmpty(event.description)
+          .split(' ')
+          .slice(0, 25)
+          .join(' ') + '...'
+      }}
     </v-card-subtitle>
 
     <div class="d-flex justify-space-between ma-4">

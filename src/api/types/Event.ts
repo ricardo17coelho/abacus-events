@@ -13,6 +13,7 @@ export type Event = {
   id: string;
   created_at: string;
   title: TitleI18n;
+  subtitle: TitleI18n;
   description: TitleI18n;
   date: string;
   brand: EventBrand;

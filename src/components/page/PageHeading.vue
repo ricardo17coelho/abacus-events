@@ -2,7 +2,10 @@
   <v-container fluid>
     <div class="d-flex justify-space-between">
       <slot name="title">
-        <h1 class="text-h4">{{ title }}</h1>
+        <div>
+          <h4 class="text-h4">{{ title }}</h4>
+          <h6 class="text-h6 text-medium-emphasis">{{ subtitle }}</h6>
+        </div>
       </slot>
 
       <div class="d-flex ga-2">
@@ -15,6 +18,10 @@
 <script setup lang="ts">
 defineProps({
   title: {
+    type: String,
+    default: undefined,
+  },
+  subtitle: {
     type: String,
     default: undefined,
   },

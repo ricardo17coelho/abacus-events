@@ -15,6 +15,19 @@
         </DialogTitleI18n>
       </v-col>
       <v-col cols="12">
+        <DialogTitleI18n :i18n="model.subtitle" @save="model.subtitle = $event">
+          <template #activator="{ props: activatorProps }">
+            <v-text-field
+              :label="t('labels.subtitle')"
+              :model-value="modelValueSubtitleI18n"
+              readonly
+              :rules="[rulesValidation.ruleRequired]"
+              v-bind="activatorProps"
+            />
+          </template>
+        </DialogTitleI18n>
+      </v-col>
+      <v-col cols="12">
         <DialogTitleI18n
           :i18n="model.description"
           @save="model.description = $event"
@@ -70,6 +83,10 @@ const formRef = ref();
 
 const modelValueTitleI18n = computed(() =>
   showDefaultTranslationOrEmpty(model.value?.title),
+);
+
+const modelValueSubtitleI18n = computed(() =>
+  showDefaultTranslationOrEmpty(model.value?.subtitle),
 );
 
 const modelValueDescriptionI18n = computed(() =>

@@ -7,7 +7,6 @@
         v-if="currentEvent"
         :id="layoutMainContainerId"
         class="main-container overflow-auto app-container pt-0"
-        max-height="1200"
       >
         <v-container fluid>
           <v-row>

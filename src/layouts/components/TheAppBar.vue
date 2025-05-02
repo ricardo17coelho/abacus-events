@@ -19,11 +19,7 @@
           'ga-5': smAndUp,
         }"
       >
-        <MenuLanguage
-          v-model="locale"
-          :available-locales="availableLocalesFiltered"
-          hide-full-text
-        />
+        <TheAppMenuLanguage />
       </div>
     </TheLayoutContainer>
   </v-app-bar>
@@ -31,36 +27,11 @@
 
 <script setup lang="ts">
 import useAuthUser from '@/composables/auth-user.ts';
-import MenuLanguage from '../../components/MenuLanguage.vue';
-import { useI18n } from 'vue-i18n';
 import { useDisplay } from 'vuetify';
 import TheLayoutContainer from '@/layouts/components/TheLayoutContainer.vue';
+import TheAppMenuLanguage from '@/components/TheAppMenuLanguage.vue';
 
 const { isUserAdminOrHelper } = useAuthUser();
 
-const { locale, availableLocales } = useI18n();
 const { xs, smAndUp } = useDisplay();
-
-const lsLocale = useLocalStorage('locale', locale.value);
-
-watch(
-  () => lsLocale.value,
-  (newValue) => {
-    locale.value = newValue;
-  },
-  { immediate: true },
-);
-
-watch(
-  () => locale.value,
-  (newValue) => {
-    lsLocale.value = newValue;
-  },
-);
-
-const availableLocalesFiltered = computed(() =>
-  availableLocales.filter(
-    (availableLocale: string) => availableLocale !== locale.value,
-  ),
-);
 </script>

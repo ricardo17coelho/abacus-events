@@ -27,6 +27,7 @@
           </VBtnPrimary>
         </template>
       </div>
+      <TheAppMenuLanguage />
     </v-container>
   </v-app-bar>
 </template>
@@ -38,6 +39,7 @@ import { CURRENT_EVENT_KEY } from '@/types/injectionKeys.ts';
 import { showDefaultTranslationOrEmpty } from '@/utils/showDefaultTranslationOrEmpty.ts';
 import { EVENT_FEATURE_TYPE } from '@/api/types/EventFeature.ts';
 import { type MenuItem, UiMenu } from '@lib/ui';
+import TheAppMenuLanguage from '@/components/TheAppMenuLanguage.vue';
 
 const props = defineProps({
   scrollContainer: {

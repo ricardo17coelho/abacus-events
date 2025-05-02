@@ -5,6 +5,7 @@
     <v-app-bar-title>Abacus Events</v-app-bar-title>
 
     <template #append>
+      <TheAppMenuLanguage />
       <div class="d-flex ga-2 align-center">
         <v-btn class="me-2" height="48" icon>
           <v-avatar color="surface-light" size="32" :text="userInitials" />
@@ -28,6 +29,7 @@
 <script lang="ts" setup>
 import { useDisplay } from 'vuetify';
 import useAuthUser from '@/composables/auth-user.ts';
+import TheAppMenuLanguage from '@/components/TheAppMenuLanguage.vue';
 
 const model = defineModel({ type: Boolean, default: false });
 

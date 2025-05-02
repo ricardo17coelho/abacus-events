@@ -3,8 +3,13 @@
     <div class="d-flex justify-space-between">
       <slot name="title">
         <div>
-          <h4 class="text-h4">{{ title }}</h4>
-          <h6 class="text-h6 text-medium-emphasis">{{ subtitle }}</h6>
+          <h6 v-if="caption" class="text-caption text-medium-emphasis">
+            {{ caption }}
+          </h6>
+          <h4 v-if="title" class="text-h4">{{ title }}</h4>
+          <h6 v-if="subtitle" class="text-h6 text-medium-emphasis">
+            {{ subtitle }}
+          </h6>
         </div>
       </slot>
 
@@ -22,6 +27,10 @@ defineProps({
     default: undefined,
   },
   subtitle: {
+    type: String,
+    default: undefined,
+  },
+  caption: {
     type: String,
     default: undefined,
   },

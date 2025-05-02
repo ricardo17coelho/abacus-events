@@ -1,6 +1,7 @@
 <template>
   <Page v-if="currentEvent">
     <PageHeading
+      :caption="formatDateByFormat(currentEvent.date)"
       :subtitle="showDefaultTranslationOrEmpty(currentEvent.subtitle)"
       :title="showDefaultTranslationOrEmpty(currentEvent.title)"
     >
@@ -14,7 +15,11 @@
             />
           </template>
         </DialogEventLayoutView>
-        <EventDialog v-if="isUserAdmin" :event-id="currentEvent.id">
+        <EventDialog
+          v-if="isUserAdmin"
+          :event-id="currentEvent.id"
+          @success="onEventSave"
+        >
           <template #activator="{ props: activatorProps }">
             <VBtnPrimary
               v-bind="activatorProps"
@@ -61,6 +66,10 @@ import EventDialog from '@/components/event/event/EventDialog.vue';
 import useAuthUser from '@/composables/auth-user.ts';
 import { useI18n } from 'vue-i18n';
 import DialogEventLayoutView from '@/components/dialogs/DialogEventLayoutView.vue';
+import { formatDateByFormat } from '@lib/ui';
+import type { Event } from '@/api/types/Event.ts';
+import { toast } from 'vue-sonner';
+import useApiEvents from '@/api/events.ts';
 
 const currentEvent = requireInjection(CURRENT_EVENT_KEY);
 
@@ -172,4 +181,16 @@ const tabs = computed(() =>
     },
   ].filter((i) => (i.show ? i.show() : true)),
 );
+
+const { getEventByIdOrSlug } = useApiEvents();
+async function onEventSave(payload: Event) {
+  const { data, error } = await getEventByIdOrSlug(payload.id);
+  if (error) {
+    toast.error(t('errors.error_occurred'));
+    return;
+  }
+  if (data) {
+    currentEvent.value = data;
+  }
+}
 </script>

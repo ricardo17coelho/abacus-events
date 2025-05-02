@@ -20,8 +20,6 @@
             <v-text-field
               :label="t('labels.subtitle')"
               :model-value="modelValueSubtitleI18n"
-              readonly
-              :rules="[rulesValidation.ruleRequired]"
               v-bind="activatorProps"
             />
           </template>
@@ -36,7 +34,6 @@
             <v-text-field
               :label="t('labels.description')"
               :model-value="modelValueDescriptionI18n"
-              readonly
               v-bind="activatorProps"
             />
           </template>

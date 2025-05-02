@@ -17,18 +17,51 @@ export default function useEventProgram() {
 
   const items = ref<EventTimeline[]>([]);
 
-  const sortedItems = computed(() => {
-    return items.value.slice().sort((a, b) => {
-      if (!a || !a.time_start || !b || !b.time_start) return;
-      const aStart = parseFloat(a.time_start.replace('.', '')) / 100;
-      const bStart = parseFloat(b.time_start.replace('.', '')) / 100;
-      if (aStart !== bStart) return aStart - bStart;
-      if (!a || !a.time_end || !b || !b.time_end) return;
-      const aEnd = parseFloat(a.time_end.replace('.', '')) / 100;
-      const bEnd = parseFloat(b.time_end.replace('.', '')) / 100;
-      return aEnd - bEnd;
+  function parseTime(time: string): Date {
+    const [hours, minutes] = time.split(':').map(Number);
+    const base = new Date();
+    return new Date(
+      base.getFullYear(),
+      base.getMonth(),
+      base.getDate(),
+      hours,
+      minutes,
+    );
+  }
+
+  function getDurationInMinutes(start: string, end: string): number {
+    const startTime = parseTime(start);
+    const endTime = parseTime(end);
+
+    // Handle "next day" end time (e.g., 01:00 after 22:00)
+    if (endTime <= startTime) {
+      endTime.setDate(endTime.getDate() + 1);
+    }
+
+    return (endTime.getTime() - startTime.getTime()) / 60000; // in minutes
+  }
+
+  function sortTimelinesByStartAndDuration(
+    items: EventTimeline[],
+  ): EventTimeline[] {
+    return [...items].sort((a, b) => {
+      const startA = parseTime(a.time_start);
+      const startB = parseTime(b.time_start);
+
+      if (startA.getTime() !== startB.getTime()) {
+        return startA.getTime() - startB.getTime(); // primary: start time ascending
+      }
+
+      const durationA = getDurationInMinutes(a.time_start, a.time_end);
+      const durationB = getDurationInMinutes(b.time_start, b.time_end);
+
+      return durationA - durationB; // secondary: duration ascending
     });
-  });
+  }
+
+  const sortedItems = computed(() =>
+    sortTimelinesByStartAndDuration(items.value),
+  );
 
   const categories = ref<EventTimelineCategory[]>([]);
 

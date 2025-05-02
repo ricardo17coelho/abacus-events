@@ -32,7 +32,7 @@ export default function useApiEvents() {
     filters: FindFilter[] = [],
     range = [0, 100],
   ) {
-    const orders: FindOrder[] = [['date', { ascending: false }]];
+    const orders: FindOrder[] = [['date', false]];
 
     return find<Event>('events', filters, select, range, orders);
   }

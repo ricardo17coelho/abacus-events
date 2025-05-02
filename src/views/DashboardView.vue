@@ -7,7 +7,7 @@
     </div>
 
     <v-row>
-      <v-col v-for="(item, i) in items" :key="i" cols="12" md="3" sm="6">
+      <v-col v-for="(item, i) in items" :key="i" cols="12" md="4" sm="6">
         <v-card class="pa-2" exact :to="item.to">
           <v-card-item class="pt-4" height="64">
             <v-card-subtitle class="py-0">{{ item.subtitle }}</v-card-subtitle>
@@ -28,7 +28,7 @@
     </v-row>
 
     <v-row>
-      <v-col align="start" cols="12" md="4">
+      <v-col align="start" cols="12" lg="4">
         <WidgetEvents />
       </v-col>
     </v-row>

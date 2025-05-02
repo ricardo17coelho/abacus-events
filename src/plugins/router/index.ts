@@ -8,9 +8,28 @@ import routesManage from './routes/manage';
 import routesAuth from './routes/auth';
 import routesEvent from './routes/event';
 
+// layouts
+import LayoutDefault from '@/layouts/default/LayoutDefault.vue';
+
+const routes = [...routesAuth, ...routesEvent, ...routesManage];
+
+if (import.meta.env.DEV) {
+  routes.push({
+    path: '/',
+    component: LayoutDefault,
+    children: [
+      {
+        path: '/playground',
+        name: 'playground',
+        component: () => import('@/views/PlaygroundView.vue'),
+      },
+    ],
+  });
+}
+
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
-  routes: [...routesAuth, ...routesEvent, ...routesManage],
+  routes,
 });
 
 supabase.auth.onAuthStateChange((event: AuthChangeEvent) => {

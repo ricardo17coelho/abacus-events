@@ -86,7 +86,6 @@
           v-model="model.time_end"
           hint="Format NN:NN ex: 18:00"
           :label="t('labels.time_end')"
-          :rules="rulesTimeEnd"
         />
       </v-col>
     </v-row>
@@ -107,7 +106,6 @@ import EventTimelineCategoriesField from '@/components/event/event-timeline/even
 import { useI18n } from 'vue-i18n';
 import FieldIconMdi from '@/components/fields/FieldIconMdi.vue';
 import FieldTimePicker from '@/components/fields/FieldTimePicker.vue';
-import { isEndTimeGreaterThenStartTime } from '@/utils/time.ts';
 
 defineProps({
   eventId: {
@@ -129,13 +127,6 @@ const modelValueTitleI18n = computed(() =>
 const modelValueNoteI18n = computed(() =>
   showDefaultTranslationOrEmpty(model.value?.note),
 );
-
-const rulesTimeEnd = [
-  (v: string) => {
-    if (isEndTimeGreaterThenStartTime(model.value.time_start, v)) return true;
-    return 'End time need to be greater than start time';
-  },
-];
 
 defineExpose({ formRef });
 </script>

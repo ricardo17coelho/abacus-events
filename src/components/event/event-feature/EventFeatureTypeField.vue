@@ -14,6 +14,13 @@ import {
   type EventFeatureTypes,
 } from '@/api/types/EventFeature.ts';
 
+const props = defineProps({
+  disabledFeaturesTypes: {
+    type: Array as PropType<EventFeatureTypes[]>,
+    default: () => [],
+  },
+});
+
 const { t } = useI18n();
 
 const items = computed(() =>
@@ -22,7 +29,7 @@ const items = computed(() =>
       value: i,
       title: t(`labels.features.${i}`),
       props: {
-        disabled: i === 'GUEST_LIST',
+        disabled: i === 'GUEST_LIST' || props.disabledFeaturesTypes.includes(i),
         slim: true,
         prependIcon: getIcon(i),
         color: 'primary',

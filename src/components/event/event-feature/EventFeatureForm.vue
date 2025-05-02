@@ -35,6 +35,7 @@
         <EventFeatureTypeField
           v-model="model.feature_id"
           chips
+          :disabled-features-types="disabledFeaturesTypes"
           :label="t('labels.feature')"
           name="field-feature"
           :rules="[rulesValidation.ruleRequired]"
@@ -62,6 +63,14 @@ import DialogTitleI18n from '@/components/dialogs/DialogTitleI18n.vue';
 import EventFeatureTypeField from '@/components/event/event-feature/EventFeatureTypeField.vue';
 import { useI18n } from 'vue-i18n';
 import FieldIconMdi from '@/components/fields/FieldIconMdi.vue';
+import type { EventFeatureTypes } from '@/api/types/EventFeature.ts';
+
+defineProps({
+  disabledFeaturesTypes: {
+    type: Array as PropType<EventFeatureTypes[]>,
+    default: () => [],
+  },
+});
 
 const model = defineModel({ type: Object, default: () => ({}) });
 

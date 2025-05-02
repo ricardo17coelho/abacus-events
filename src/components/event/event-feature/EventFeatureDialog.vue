@@ -4,7 +4,12 @@
       <slot name="activator" v-bind="activatorProps" />
     </template>
     <template #content>
-      <EventFeatureForm v-if="currentEvent" ref="formRef" v-model="form" />
+      <EventFeatureForm
+        v-if="currentEvent"
+        ref="formRef"
+        v-model="form"
+        :disabled-features-types="currentEventFeaturesTypes"
+      />
     </template>
     <template #actions>
       <VBtnPrimary :loading="isLoading" @click="onSave">
@@ -146,5 +151,14 @@ watch(
       void onGetDataById(props.eventFeatureId);
     }
   },
+);
+
+const currentEventFeaturesTypes = computed(() =>
+  currentEvent.value?.features.map((feature) => {
+    return (
+      eventFeature.value?.feature_id === feature.feature_id ||
+      feature.feature_id
+    );
+  }),
 );
 </script>

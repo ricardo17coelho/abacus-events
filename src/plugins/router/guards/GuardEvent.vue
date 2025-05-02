@@ -50,12 +50,14 @@ const currentCompanyBrand = computed(() => currentEvent.value?.brand);
 watch(
   () => currentCompanyBrand.value,
   (newValue) => {
+    clearBrand();
     if (newValue && (newValue.color_primary || newValue.color_secondary)) {
       setBrand(newValue.color_primary, newValue?.color_secondary);
     } else {
       clearBrand();
     }
   },
+  { deep: true },
 );
 
 function clear() {

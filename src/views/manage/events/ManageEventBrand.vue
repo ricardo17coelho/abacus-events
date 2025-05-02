@@ -8,42 +8,27 @@
       <v-col cols="12" md="6">
         <VCardSettings height="100%" title="Colors">
           <v-card-item>
-            <v-menu :close-on-content-click="false" z-index="2501">
-              <template #activator="{ props: ActivatorProps }">
-                <v-btn color="primary" v-bind="ActivatorProps">
-                  Primary Color
-                </v-btn>
-              </template>
-              <v-card>
-                <v-card-text>
-                  <v-color-picker
-                    :model-value="currentEvent.brand?.color_primary"
-                    @update:model-value="
-                      onUpdateCompanyBrandDebounced({ color_primary: $event })
-                    "
-                  ></v-color-picker>
-                </v-card-text>
-              </v-card>
-            </v-menu>
-            <v-menu :close-on-content-click="false" z-index="2501">
-              <template #activator="{ props: ActivatorProps }">
-                <v-btn v-bind="ActivatorProps" class="ml-2" color="secondary">
-                  Secondary Color
-                </v-btn>
-              </template>
-              <v-card>
-                <v-card-text>
-                  <v-color-picker
-                    :model-value="currentEvent.brand?.color_secondary"
-                    @update:model-value="
-                      onUpdateCompanyBrandDebounced({
-                        color_secondary: $event,
-                      })
-                    "
-                  ></v-color-picker>
-                </v-card-text>
-              </v-card>
-            </v-menu>
+            <div class="d-flex ga-4">
+              <FieldColorPickerBtn
+                color="primary"
+                label="Primary Color"
+                :model-value="currentEvent.brand?.color_primary"
+                @update:model-value="
+                  onUpdateCompanyBrandDebounced({ color_primary: $event })
+                "
+              />
+
+              <FieldColorPickerBtn
+                color="secondary"
+                label="Secondary Color"
+                :model-value="currentEvent.brand?.color_secondary"
+                @update:model-value="
+                  onUpdateCompanyBrandDebounced({
+                    color_secondary: $event,
+                  })
+                "
+              />
+            </div>
           </v-card-item>
         </VCardSettings>
       </v-col>
@@ -151,6 +136,7 @@ import EventLayoutField from '@/components/event/EventLayoutField.vue';
 import type { EventLayout } from '@/api/types/EventLayout.ts';
 import useApiEventAttachment from '@/api/event-attachments.ts';
 import useApiEventBrand from '@/api/event-brand.ts';
+import FieldColorPickerBtn from '@/components/fields/FieldColorPickerBtn.vue';
 
 const currentEvent = requireInjection(CURRENT_EVENT_KEY);
 
@@ -170,8 +156,12 @@ async function onUpdateCompanyBrand(data: Partial<EventBrand>) {
     if (currentEvent.value?.brand) {
       currentEvent.value.brand = {
         ...currentEvent.value.brand,
-        color_primary: data.color_primary,
-        color_secondary: data.color_secondary,
+        color_primary: Object.keys(data).includes('color_primary')
+          ? data.color_primary
+          : currentEvent.value.brand.color_primary,
+        color_secondary: Object.keys(data).includes('color_secondary')
+          ? data.color_secondary
+          : currentEvent.value.brand.color_secondary,
       };
     }
     toast.success('Brand updated!');

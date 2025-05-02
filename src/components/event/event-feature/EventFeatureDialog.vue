@@ -154,11 +154,8 @@ watch(
 );
 
 const currentEventFeaturesTypes = computed(() =>
-  currentEvent.value?.features.map((feature) => {
-    return (
-      eventFeature.value?.feature_id === feature.feature_id ||
-      feature.feature_id
-    );
-  }),
+  currentEvent.value?.features
+    .filter((feature) => feature.feature_id !== eventFeature.value?.feature_id)
+    .map((feature) => feature.feature_id),
 );
 </script>

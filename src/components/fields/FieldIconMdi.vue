@@ -14,6 +14,7 @@
         target="_blank"
         tile
         variant="text"
+        @click.stop
       >
       </v-btn>
     </template>

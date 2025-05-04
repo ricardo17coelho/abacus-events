@@ -17,12 +17,6 @@
     "FOOD": "Essen",
     "KIDS": "Kinder"
   },
-  "greeting": {
-    "good-morning": "Guten Morgen",
-    "good-afternoon": "Guten Tag",
-    "good-evening": "Guten Abend",
-    "hello": "Hallo"
-  },
   "errors": {
     "error_occurred": "Ein Fehler ist aufgetreten",
     "validation": {
@@ -43,11 +37,21 @@
       "label": "Passwort"
     }
   },
+  "greeting": {
+    "good-afternoon": "Guten Tag",
+    "good-evening": "Guten Abend",
+    "good-morning": "Guten Morgen",
+    "hello": "Hallo"
+  },
   "labels": {
     "alert_hint": "Warnhinweis",
     "brand": "Brand",
     "category": "Kategorie",
     "contact": "Kontakt",
+    "contact_types": {
+      "EMAIL": "E-Mail",
+      "PHONE": "Telefon/Mobile"
+    },
     "date": "Datum",
     "description": "Beschreibung",
     "drinks": "Getränkkarte",

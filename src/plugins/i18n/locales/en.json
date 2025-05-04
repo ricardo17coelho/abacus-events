@@ -17,12 +17,6 @@
     "FOOD": "Food",
     "KIDS": "Kids"
   },
-  "greeting": {
-    "good-morning": "Good Morning",
-    "good-afternoon": "Good Afternoon",
-    "good-evening": "Good Evening",
-    "hello": "Hello"
-  },
   "errors": {
     "error_occurred": "An error has occurred",
     "validation": {
@@ -43,11 +37,21 @@
       "label": "Password"
     }
   },
+  "greeting": {
+    "good-afternoon": "Good Afternoon",
+    "good-evening": "Good Evening",
+    "good-morning": "Good Morning",
+    "hello": "Hello"
+  },
   "labels": {
     "alert_hint": "Alert hint",
     "brand": "Brand",
     "category": "Category",
     "contact": "Contact",
+    "contact_types": {
+      "EMAIL": "Email",
+      "PHONE": "Phone/Mobile"
+    },
     "date": "Date",
     "description": "Description",
     "drinks": "drinks menu",

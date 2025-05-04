@@ -27,6 +27,19 @@
             {{ showDefaultTranslationOrEmpty(item.title) }}
           </v-list-item-title>
 
+          <div class="d-flex ma-3">
+            <UiAvatarUser
+              v-for="person in item.persons"
+              :key="person.id"
+              v-tooltip="getUserFullName(person)"
+              border
+              class="ml-n3"
+              color="white"
+              :logo="person.avatar_url"
+              :name="getUserFullName(person)"
+            />
+          </div>
+
           <slot></slot>
 
           <template #append>
@@ -44,6 +57,8 @@ import { showDefaultTranslationOrEmpty } from '@/utils/showDefaultTranslationOrE
 import AppLiveLabel from '@/components/app/AppLiveLabel.vue';
 import { isDateToday } from '@/utils/date.ts';
 import { isStartEndCurrentTime } from '@/utils/time.ts';
+import { getUserFullName } from '@/utils/profile.ts';
+import { UiAvatarUser } from '@lib/ui';
 
 const props = defineProps({
   items: {

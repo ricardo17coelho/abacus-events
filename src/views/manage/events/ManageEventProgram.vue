@@ -50,19 +50,6 @@
 
       <EventTimeline01 v-if="currentCategoryFilter" :items="sortedItems">
         <template v-if="isUserAdmin" #actions="{ item }">
-          <div class="d-flex ma-3">
-            <UiAvatarUser
-              v-for="person in item.persons"
-              :key="person.id"
-              v-tooltip="getUserFullName(person)"
-              border
-              class="ml-n3"
-              color="white"
-              :logo="person.avatar_url"
-              :name="getUserFullName(person)"
-            />
-          </div>
-
           <EventTimelineDialog
             v-if="isUserAdmin"
             :event-timetable-id="item.id"
@@ -97,9 +84,8 @@ import { useI18n } from 'vue-i18n';
 import { showDefaultTranslationOrEmpty } from '@/utils/showDefaultTranslationOrEmpty.ts';
 import useEventProgram from '@/composables/event-program.ts';
 import EventTimelineCategoriesTable from '@/components/event/event-timeline/event-timeline-categories/EventTimelineCategoriesTable.vue';
-import { UiAvatarUser, UiDialog } from '@lib/ui';
+import { UiDialog } from '@lib/ui';
 import EventTimeline01 from '@/components/event/event-timeline/EventTimeline01.vue';
-import { getUserFullName } from '@/utils/profile.ts';
 import ManageEventContainer from '@/components/manage/ManageEventContainer.vue';
 
 const currentEvent = requireInjection(CURRENT_EVENT_KEY);

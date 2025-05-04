@@ -109,6 +109,14 @@ const tabs = computed(() =>
       },
       matchRouteName: 'manage-events-id-brand',
     },
+    {
+      value: 'manage-events-id-persons',
+      text: t('labels.persons'),
+      to: {
+        name: 'manage-events-id-persons',
+      },
+      matchRouteName: 'manage-events-id-persons',
+    },
     // {
     //   value: 'manage-events-id-users',
     //   text: t('labels.users'),

@@ -17,12 +17,6 @@
     "FOOD": "Nourriture",
     "KIDS": "Enfants"
   },
-  "greeting": {
-    "good-morning": "Bonjour",
-    "good-afternoon": "Bon après-midi",
-    "good-evening": "Bonsoir",
-    "hello": "Salut"
-  },
   "errors": {
     "error_occurred": "Une erreur s'est produite",
     "validation": {
@@ -43,8 +37,15 @@
       "label": "Mot de passe"
     }
   },
+  "greeting": {
+    "good-afternoon": "Bon après-midi",
+    "good-evening": "Bonsoir",
+    "good-morning": "Bonjour",
+    "hello": "Salut"
+  },
   "labels": {
     "alert_hint": "",
+    "bio": "",
     "brand": "",
     "category": "Catégorie",
     "contact": "",
@@ -64,7 +65,9 @@
       "PROGRAM": "Programme",
       "SHUTTLE_PLAN": "Plan de navette"
     },
+    "first_name": "",
     "icon": "Icône",
+    "last_name": "",
     "layout": "Layout",
     "location": "Nom du lieu",
     "location_link": "",
@@ -82,6 +85,8 @@
       "free": "Libre",
       "full": "Complet"
     },
+    "person": "",
+    "persons": "",
     "plan": "Plan du site",
     "program_timeline": "Chronologie du programme",
     "programm": "Programme",

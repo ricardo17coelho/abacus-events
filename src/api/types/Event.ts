@@ -8,6 +8,7 @@ import type {
   EventShuttleAlert,
   EventShuttlePlan,
 } from '@/api/types/EventShuttlePlan.ts';
+import type { EventPerson } from '@/api/types/EventPerson.ts';
 
 export type Event = {
   id: string;
@@ -24,5 +25,6 @@ export type Event = {
   files: EventFile[];
   contacts: EventContact[];
   shuttle_plan: EventShuttlePlan[];
+  persons: EventPerson[];
   shuttle_plan_alerts: EventShuttleAlert[];
 };

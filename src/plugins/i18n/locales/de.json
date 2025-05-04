@@ -45,6 +45,7 @@
   },
   "labels": {
     "alert_hint": "Warnhinweis",
+    "bio": "Bio",
     "brand": "Brand",
     "category": "Kategorie",
     "contact": "Kontakt",
@@ -68,7 +69,9 @@
       "PROGRAM": "Programm",
       "SHUTTLE_PLAN": "Shuttle-Plan"
     },
+    "first_name": "Vorname",
     "icon": "Symbol",
+    "last_name": "Nachname",
     "layout": "Layout",
     "location": "Standortname",
     "location_link": "Standortlink",
@@ -86,6 +89,8 @@
       "free": "Frei",
       "full": "Voll"
     },
+    "person": "Person",
+    "persons": "Personen",
     "plan": "Geländeplan",
     "program_timeline": "Programmablauf",
     "programm": "Programm",

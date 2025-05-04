@@ -45,6 +45,7 @@
   },
   "labels": {
     "alert_hint": "Alert hint",
+    "bio": "Bio",
     "brand": "Brand",
     "category": "Category",
     "contact": "Contact",
@@ -68,7 +69,9 @@
       "PROGRAM": "Program",
       "SHUTTLE_PLAN": "Shuttle plan"
     },
+    "first_name": "Firstname",
     "icon": "Icon",
+    "last_name": "Lastname",
     "layout": "Layout",
     "location": "Location Name",
     "location_link": "Location link",
@@ -86,6 +89,8 @@
       "free": "Free",
       "full": "Full"
     },
+    "person": "Person",
+    "persons": "Persons",
     "plan": "Site plan",
     "program_timeline": "Program Timeline",
     "programm": "Program",

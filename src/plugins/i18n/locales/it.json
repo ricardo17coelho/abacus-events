@@ -17,12 +17,6 @@
     "FOOD": "Cibo",
     "KIDS": "Bambini"
   },
-  "greeting": {
-    "good-morning": "Buongiorno",
-    "good-afternoon": "Buon pomeriggio",
-    "good-evening": "Buona sera",
-    "hello": "Ciao"
-  },
   "errors": {
     "error_occurred": "Si è verificato un errore",
     "validation": {
@@ -43,8 +37,15 @@
       "label": "Password"
     }
   },
+  "greeting": {
+    "good-afternoon": "Buon pomeriggio",
+    "good-evening": "Buona sera",
+    "good-morning": "Buongiorno",
+    "hello": "Ciao"
+  },
   "labels": {
     "alert_hint": "",
+    "bio": "",
     "brand": "",
     "category": "Categoria",
     "contact": "",
@@ -64,7 +65,9 @@
       "PROGRAM": "Programma",
       "SHUTTLE_PLAN": "Piano navetta"
     },
+    "first_name": "",
     "icon": "Icona",
+    "last_name": "",
     "layout": "Layout",
     "location": "Nome della posizione",
     "location_link": "",
@@ -82,6 +85,8 @@
       "free": "Libero",
       "full": "Pieno"
     },
+    "person": "",
+    "persons": "",
     "plan": "Planimetria",
     "program_timeline": "Cronologia del programma",
     "programm": "Programma",

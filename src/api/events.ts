@@ -24,7 +24,8 @@ export default function useApiEvents() {
     ),
     contacts:event_contacts(*),
     shuttle_plan:event_shuttle_plan(*),
-    shuttle_plan_alerts:event_shuttle_plan_alerts(*)
+    shuttle_plan_alerts:event_shuttle_plan_alerts(*),
+    persons:event_persons(*)
   `;
 
   function getEvents(

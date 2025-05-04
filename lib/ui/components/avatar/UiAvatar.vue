@@ -8,7 +8,13 @@
         {{ initials }}
       </span>
     </slot>
-    <VIcon v-else-if="icon" color="white" size="small">{{ icon }}</VIcon>
+    <VIcon
+      v-else-if="icon"
+      :color="color && color === 'white' ? 'black' : 'white'"
+      size="small"
+    >
+      {{ icon }}
+    </VIcon>
   </VAvatar>
 </template>
 

@@ -67,70 +67,14 @@ const DEFAULT_FORM = {
   time_start: '',
   time_end: '',
   icon: '',
+  persons: [] as string[],
 };
 
 const form = ref({
   ...DEFAULT_FORM,
 });
 
-const { createEventTimeline, updateEventTimeline, getEventTimelineById } =
-  useApiEventTimeline();
-
-const isLoading = ref(false);
-const formRef = ref();
-
-async function onSave() {
-  const { valid } = await formRef.value.formRef.validate();
-  if (valid) {
-    isLoading.value = true;
-    if (props.eventTimetableId) {
-      // edit
-      const { error, data } = await updateEventTimeline(
-        props.eventTimetableId,
-        { ...form.value, event_id: currentEvent.value?.id },
-      );
-
-      if (error) {
-        if (error.message) {
-          toast.error(error.message);
-        }
-      } else {
-        if (data) {
-          emit('success', data);
-          form.value = { ...DEFAULT_FORM };
-          isLoading.value = false;
-          toast.success('Event timetable updated!');
-          model.value = false;
-        }
-      }
-    } else {
-      // add
-      const { error, data } = await createEventTimeline({
-        ...form.value,
-        event_id: currentEvent.value?.id,
-      });
-
-      if (error) {
-        if (error.message) {
-          toast.error(error.message);
-        }
-      } else {
-        if (data) {
-          emit('success', data);
-          form.value = clone(DEFAULT_FORM);
-          toast.success('Event timetable created!');
-          model.value = false;
-        }
-      }
-    }
-    isLoading.value = false;
-  } else {
-    toast.error(t('errors.validation.invalid'));
-    isLoading.value = false;
-  }
-}
-
-const programTimetable = ref<EventTimeline>();
+const timelineItem = ref<EventTimeline>();
 const isLoadingInitial = ref(false);
 
 async function onGetDataById(id: string) {
@@ -143,8 +87,11 @@ async function onGetDataById(id: string) {
     }
   } else {
     if (data) {
-      programTimetable.value = data;
-      form.value = merge2ObjectsIfKeysExists({ ...DEFAULT_FORM }, data);
+      timelineItem.value = data;
+      form.value = merge2ObjectsIfKeysExists(
+        { ...DEFAULT_FORM },
+        { ...data, persons: data.persons.map((i) => i.event_person_id) },
+      );
     }
   }
   isLoadingInitial.value = false;
@@ -158,4 +105,104 @@ watch(
     }
   },
 );
+
+const {
+  createEventTimeline,
+  updateEventTimeline,
+  getEventTimelineById,
+  removeEventTimelinePerson,
+  createEventTimelinePerson,
+} = useApiEventTimeline();
+
+const isLoading = ref(false);
+const formRef = ref();
+
+async function handleEventPersons(
+  eventTimetableId: string,
+  personsIds: string[],
+) {
+  const currentPersonIds =
+    timelineItem.value?.persons?.map((item) => item.event_person_id) || [];
+
+  // IDs to add
+  const toAdd = personsIds.filter((id) => !currentPersonIds.includes(id));
+  console.warn('toAdd', toAdd);
+
+  for (const id of toAdd) {
+    await createEventTimelinePerson({
+      event_person_id: id,
+      event_timeline_id: eventTimetableId,
+    });
+  }
+
+  // IDs to remove
+  const toRemove = currentPersonIds.filter((id) => !personsIds.includes(id));
+  console.warn('toRemove', toRemove);
+
+  for (const id of toRemove) {
+    await removeEventTimelinePerson(id, 'event_person_id');
+  }
+}
+
+async function onSave() {
+  const { valid } = await formRef.value.formRef.validate();
+  if (valid) {
+    isLoading.value = true;
+    const formData = { ...form.value };
+    const persons = formData.persons;
+    if ('persons' in formData) {
+      delete formData.persons;
+    }
+    if (props.eventTimetableId) {
+      // edit
+      const { error, data } = await updateEventTimeline(
+        props.eventTimetableId,
+        { ...formData, event_id: currentEvent.value?.id },
+      );
+
+      if (error) {
+        if (error.message) {
+          toast.error(error.message);
+        }
+      } else {
+        if (data) {
+          await handleEventPersons(data.id, persons);
+          const { data: eventData } = await getEventTimelineById(data.id);
+
+          emit('success', eventData);
+          form.value = { ...DEFAULT_FORM };
+          isLoading.value = false;
+          toast.success('Event timetable updated!');
+          model.value = false;
+        }
+      }
+    } else {
+      // add
+      const { error, data } = await createEventTimeline({
+        ...formData,
+        event_id: currentEvent.value?.id,
+      });
+
+      if (error) {
+        if (error.message) {
+          toast.error(error.message);
+        }
+      } else {
+        if (data) {
+          await handleEventPersons(data.id, persons);
+          const { data: eventData } = await getEventTimelineById(data.id);
+
+          emit('success', eventData);
+          form.value = clone(DEFAULT_FORM);
+          toast.success('Event timetable created!');
+          model.value = false;
+        }
+      }
+    }
+    isLoading.value = false;
+  } else {
+    toast.error(t('errors.validation.invalid'));
+    isLoading.value = false;
+  }
+}
 </script>

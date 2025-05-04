@@ -1,6 +1,7 @@
-import type { Profile } from '@/api/types/Profile.ts';
-
-export function getUserFullName(user: Profile) {
+export function getUserFullName(user: {
+  first_name: string;
+  last_name: string;
+}) {
   if (user.first_name && user.last_name) {
     return `${user.first_name} ${user.last_name}`;
   } else if (user.first_name) {

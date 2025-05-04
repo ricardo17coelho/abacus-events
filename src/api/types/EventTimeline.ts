@@ -1,4 +1,5 @@
 import type { TitleI18n } from '@/types/TitleI18n';
+import type { EventPerson } from '@/api/types/EventPerson.ts';
 
 export type EventTimelineCategory = {
   id: string;
@@ -7,6 +8,10 @@ export type EventTimelineCategory = {
   color: string;
   icon: string;
 };
+
+export interface EventTimelinePerson extends EventPerson {
+  event_person_id: string;
+}
 
 export type EventTimeline = {
   id: string;
@@ -19,4 +24,5 @@ export type EventTimeline = {
   note?: TitleI18n;
   icon?: string;
   category: string;
+  persons: EventTimelinePerson[];
 };

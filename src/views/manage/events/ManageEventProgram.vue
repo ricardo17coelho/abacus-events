@@ -52,8 +52,21 @@
         </v-col>
       </v-row>
 
-      <AppTimeline v-if="currentCategoryFilter" :items="sortedItems">
+      <EventTimeline01 v-if="currentCategoryFilter" :items="sortedItems">
         <template v-if="isUserAdmin" #actions="{ item }">
+          <div class="d-flex ma-3">
+            <UiAvatarUser
+              v-for="person in item.persons"
+              :key="person.id"
+              v-tooltip="getUserFullName(person)"
+              border
+              class="ml-n3"
+              color="white"
+              :logo="person.avatar_url"
+              :name="getUserFullName(person)"
+            />
+          </div>
+
           <EventTimelineDialog
             v-if="isUserAdmin"
             :event-timetable-id="item.id"
@@ -70,7 +83,7 @@
             @click="onDeleteItem(item)"
           />
         </template>
-      </AppTimeline>
+      </EventTimeline01>
     </template>
   </v-container>
 </template>
@@ -79,7 +92,6 @@
 import { requireInjection } from '@/utils/injection.ts';
 import { CURRENT_EVENT_KEY } from '@/types/injectionKeys.ts';
 import AppLoader from '@/components/app/AppLoader.vue';
-import AppTimeline from '@/components/app/AppTimeline.vue';
 import EventTimelineDialog from '@/components/event/event-timeline/EventTimelineDialog.vue';
 import useAuthUser from '@/composables/auth-user.ts';
 import { toast } from 'vue-sonner';
@@ -89,7 +101,9 @@ import { useI18n } from 'vue-i18n';
 import { showDefaultTranslationOrEmpty } from '@/utils/showDefaultTranslationOrEmpty.ts';
 import useEventProgram from '@/composables/event-program.ts';
 import EventTimelineCategoriesTable from '@/components/event/event-timeline/event-timeline-categories/EventTimelineCategoriesTable.vue';
-import { UiDialog } from '@lib/ui';
+import { UiAvatarUser, UiDialog } from '@lib/ui';
+import EventTimeline01 from '@/components/event/event-timeline/EventTimeline01.vue';
+import { getUserFullName } from '@/utils/profile.ts';
 
 const currentEvent = requireInjection(CURRENT_EVENT_KEY);
 

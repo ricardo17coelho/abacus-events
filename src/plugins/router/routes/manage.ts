@@ -51,6 +51,14 @@ export default [
                           import('@/views/manage/events/ManageEventBrand.vue'),
                       },
                       {
+                        path: 'persons',
+                        name: 'manage-events-id-persons',
+                        component: () =>
+                          import(
+                            '@/views/manage/events/ManageEventPersons.vue'
+                          ),
+                      },
+                      {
                         path: 'settings',
                         name: 'manage-events-id-settings',
                         component: () =>

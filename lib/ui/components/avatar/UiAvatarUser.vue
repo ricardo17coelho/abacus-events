@@ -1,7 +1,7 @@
 <template>
   <UiAvatar
     :color="color"
-    icon="$iconUser"
+    icon="mdi-account"
     :name="name"
     :rounded="rounded"
     :size="size"

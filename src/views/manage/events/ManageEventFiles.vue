@@ -11,22 +11,20 @@
       :title="t('labels.features.FILES')"
     >
       <template #toolbar-actions>
-        <UiDialog v-model="dialogUpload" max-width="600">
+        <AppFileUploadDialog
+          v-model="dialogUpload"
+          :allowed-file-types="['image/*', 'application/pdf']"
+          bucket="events"
+          :folder-path="`${currentEvent.id}/files`"
+          :on-save="onSave"
+          @upload:success="onUploadSuccess"
+        >
           <template #activator="{ props: ActivatorProps }">
             <VBtnPrimary v-bind="ActivatorProps" append-icon="mdi-plus">
               {{ t('actions.upload') }}
             </VBtnPrimary>
           </template>
-          <template #content>
-            <AppFileUpload
-              :allowed-file-types="['image/*', 'application/pdf']"
-              bucket="events"
-              :folder-path="`${currentEvent.id}/files`"
-              :on-save="onSave"
-              @upload:success="onUploadSuccess"
-            />
-          </template>
-        </UiDialog>
+        </AppFileUploadDialog>
       </template>
       <template #[`item.mime_type`]="{ item }">
         <AttachmentMimeTypeIcon :attachment="item" />
@@ -42,13 +40,10 @@
 <script lang="ts" setup>
 import { requireInjection } from '@/utils/injection.ts';
 import { CURRENT_EVENT_KEY } from '@/types/injectionKeys.ts';
-import AppFileUpload, {
-  type UploadedAttachment,
-} from '@/components/app/AppFileUpload.vue';
+import { type UploadedAttachment } from '@/components/app/AppFileUpload.vue';
 import {
   formatDateTimeByFormat,
   type MenuItem,
-  UiDialog,
   UiTable,
   useMenuActions,
 } from '@lib/ui';
@@ -59,6 +54,7 @@ import type { EventFile } from '@/api/types/EventFile.ts';
 import useApiEventAttachment from '@/api/event-attachments.ts';
 import AttachmentMimeTypeIcon from '@/components/attachments/AttachmentMimeTypeIcon.vue';
 import { useI18n } from 'vue-i18n';
+import AppFileUploadDialog from '@/components/app/AppFileUploadDialog.vue';
 
 const currentEvent = requireInjection(CURRENT_EVENT_KEY);
 

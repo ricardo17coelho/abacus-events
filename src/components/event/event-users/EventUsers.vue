@@ -13,8 +13,8 @@
     </template>
     <template #[`item.name`]="{ item }">
       <div v-if="item.data">
-        <div v-if="item.data?.firstname || item.data?.lastname">
-          {{ `${item.data?.firstname} ${item.data?.lastname}` }}
+        <div v-if="item.data?.first_name || item.data?.last_name">
+          {{ getUserFullName(item.data) }}
         </div>
         <div v-else>-</div>
       </div>
@@ -42,6 +42,7 @@ import type { EventUser } from '@/api/types/EventUser.ts';
 import { type MenuItem, UiTable, useMenuActions } from '@lib/ui';
 import { requireInjection } from '@/utils/injection.ts';
 import { CURRENT_EVENT_KEY } from '@/types/injectionKeys.ts';
+import { getUserFullName } from '@/utils/profile.ts';
 
 const currentEvent = requireInjection(CURRENT_EVENT_KEY);
 

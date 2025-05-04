@@ -94,6 +94,12 @@
         <FieldIconMdi v-model="model.icon" />
       </v-col>
     </v-row>
+    <v-row dense>
+      <v-col cols="12">
+        <br />
+        <EventPersonFieldSelect v-model="model.persons" clearable multiple />
+      </v-col>
+    </v-row>
   </v-form>
 </template>
 
@@ -106,6 +112,7 @@ import EventTimelineCategoriesField from '@/components/event/event-timeline/even
 import { useI18n } from 'vue-i18n';
 import FieldIconMdi from '@/components/fields/FieldIconMdi.vue';
 import FieldTimePicker from '@/components/fields/FieldTimePicker.vue';
+import EventPersonFieldSelect from '@/components/event/event-persons/EventPersonFieldSelect.vue';
 
 defineProps({
   eventId: {

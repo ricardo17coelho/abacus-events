@@ -26,8 +26,12 @@
           <v-list-item-title class="text-subtitle-2 font-weight-bold text-wrap">
             {{ showDefaultTranslationOrEmpty(item.title) }}
           </v-list-item-title>
-          <template v-if="isCurrentTimeValid(item)" #append>
-            <AppLiveLabel />
+
+          <slot></slot>
+
+          <template #append>
+            <AppLiveLabel v-if="isCurrentTimeValid(item)" />
+            <slot v-if="$slots.actions" :item="item" name="actions" />
           </template>
         </v-list-item>
       </template>
@@ -53,8 +57,8 @@ const props = defineProps({
 });
 
 function isCurrentTimeValid(item: EventTimeline) {
+  if (!props.date || (props.date && isDateToday(props.date))) return false;
   return (
-    (!props.date || (props.date && isDateToday(props.date))) &&
     item.time_start &&
     item.time_end &&
     isStartEndCurrentTime(item.time_start, item.time_end)

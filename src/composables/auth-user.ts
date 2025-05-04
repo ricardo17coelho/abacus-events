@@ -2,6 +2,7 @@ import { ref } from 'vue';
 import type { Provider, UserAttributes } from '@supabase/supabase-js';
 import { supabase } from '@/services/supabase';
 import { getInitials } from '@/utils/initials.ts';
+import { getUserFullName } from '@/utils/profile.ts';
 // user is set outside the useAuthUser function
 // so that it will act as global state and always refer to a single user
 
@@ -60,11 +61,7 @@ export default function useAuthUser() {
   const userMetadata = computed(() => user.value?.user_metadata);
 
   const userDisplayName = computed(() => {
-    if (!userMetadata.value?.first_name) return undefined;
-    if (!userMetadata.value?.last_name) {
-      return userMetadata.value?.first_name;
-    }
-    return `${userMetadata.value?.first_name} ${userMetadata.value?.last_name}`;
+    return getUserFullName(userMetadata.value);
   });
 
   const userInitials = computed(() => getInitials(userDisplayName.value));

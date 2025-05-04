@@ -2,14 +2,23 @@ import useApi from '@/composables/api';
 import {
   type EventTimeline,
   type EventTimelineCategory,
+  type EventTimelinePerson,
 } from './types/EventTimeline';
 import type { FindFilter } from './types/QueryTypes';
 
 export default function useApiEventTimeline() {
   const { find, findById, create, update, remove } = useApi();
 
+  const baseSelect = `
+      *,
+      persons:event_timeline_persons(
+       *,
+       ...event_persons(*)
+      )
+  `;
+
   function getEventTimelines(
-    select = '*',
+    select = baseSelect,
     filters: FindFilter[] = [],
     range = [0, 100],
   ) {
@@ -34,11 +43,11 @@ export default function useApiEventTimeline() {
       ['event_id', 'eq', eventId],
       ['category', 'eq', category],
     ];
-    return getEventTimelines('*', filters, range);
+    return getEventTimelines(baseSelect, filters, range);
   }
 
   function getEventTimelineById(id: string) {
-    return findById<EventTimeline>('event_timeline', id, '*');
+    return findById<EventTimeline>('event_timeline', id, baseSelect);
   }
 
   // eslint-disable-next-line  @typescript-eslint/no-explicit-any
@@ -59,7 +68,6 @@ export default function useApiEventTimeline() {
   }
 
   // EventTimelineCategory
-
   function getEventTimelineCategories(eventId: string, range = [0, 100]) {
     const filters: FindFilter[] = [['event_id', 'eq', eventId]];
     const select = '*';
@@ -97,6 +105,44 @@ export default function useApiEventTimeline() {
     return remove('event_timeline_category', id);
   }
 
+  // EventTimelinePerson
+  function getEventTimelinePersons(eventId: string, range = [0, 100]) {
+    const filters: FindFilter[] = [['event_id', 'eq', eventId]];
+    const select = '*';
+
+    return find<EventTimelinePerson>(
+      'event_timeline_persons',
+      filters,
+      select,
+      range,
+      [],
+      {
+        count: 'exact',
+      },
+    );
+  }
+
+  function getEventTimelinePersonById(id: string) {
+    return findById<EventTimelinePerson>('event_timeline_persons', id, '*');
+  }
+
+  // eslint-disable-next-line  @typescript-eslint/no-explicit-any
+  function createEventTimelinePerson(form: Record<string, any>) {
+    return create<EventTimelinePerson>('event_timeline_persons', form);
+  }
+
+  // eslint-disable-next-line  @typescript-eslint/no-explicit-any
+  function updateEventTimelinePerson(id: string, form: Record<string, any>) {
+    return update<EventTimelinePerson>('event_timeline_persons', {
+      id,
+      ...form,
+    });
+  }
+
+  function removeEventTimelinePerson(id: string, key = 'id') {
+    return remove('event_timeline_persons', id, key);
+  }
+
   return {
     getEventTimelines,
     getEventTimelineById,
@@ -110,5 +156,11 @@ export default function useApiEventTimeline() {
     createEventTimelineCategory,
     updateEventTimelineCategory,
     removeEventTimelineCategory,
+    // EventTimelinePerson
+    getEventTimelinePersons,
+    getEventTimelinePersonById,
+    createEventTimelinePerson,
+    updateEventTimelinePerson,
+    removeEventTimelinePerson,
   };
 }

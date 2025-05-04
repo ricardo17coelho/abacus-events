@@ -44,6 +44,18 @@
           </div>
         </div>
       </div>
+      <div class="d-flex ma-3">
+        <UiAvatarUser
+          v-for="person in item.persons"
+          :key="person.id"
+          v-tooltip="getUserFullName(person)"
+          border
+          class="ml-n3"
+          color="white"
+          :logo="person.avatar_url"
+          :name="getUserFullName(person)"
+        />
+      </div>
       <slot :item="item" name="actions" />
     </v-timeline-item>
   </v-timeline>
@@ -55,6 +67,8 @@ import { isValidHttpUrl } from '@/utils/isValidUrl';
 import { showDefaultTranslationOrEmpty } from '@/utils/showDefaultTranslationOrEmpty';
 import type { PropType } from 'vue';
 import { useDisplay } from 'vuetify';
+import { UiAvatarUser } from '@lib/ui';
+import { getUserFullName } from '@/utils/profile.ts';
 
 defineProps({
   items: {

@@ -1,9 +1,5 @@
 <template>
-  <v-container
-    v-if="currentEvent"
-    class="d-flex justify-center flex-column ga-10 ma-0"
-    fluid
-  >
+  <ManageEventContainer v-if="currentEvent">
     <UiTable
       :actions="actions"
       :headers="headers"
@@ -49,7 +45,7 @@
       @success="onSave"
       @update:model-value="currentEventPersonId = undefined"
     />
-  </v-container>
+  </ManageEventContainer>
 </template>
 <script lang="ts" setup>
 import { requireInjection } from '@/utils/injection.ts';
@@ -62,6 +58,7 @@ import { toast } from 'vue-sonner';
 import useApiEventPerson from '@/api/event-person.ts';
 import { showDefaultTranslationOrEmpty } from '../../../utils/showDefaultTranslationOrEmpty.ts';
 import { getUserFullName } from '@/utils/profile.ts';
+import ManageEventContainer from '@/components/manage/ManageEventContainer.vue';
 
 const currentEvent = requireInjection(CURRENT_EVENT_KEY);
 

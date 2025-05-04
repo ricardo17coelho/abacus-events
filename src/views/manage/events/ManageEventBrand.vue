@@ -1,12 +1,12 @@
 <template>
-  <v-container
-    v-if="currentEvent"
-    class="d-flex justify-center flex-column ga-10 ma-0"
-    fluid
-  >
+  <ManageEventContainer v-if="currentEvent">
     <v-row>
       <v-col cols="12" md="6">
-        <VCardSettings height="100%" title="Colors">
+        <VCardSettings
+          height="100%"
+          subtitle="The primary/secondary color of the event"
+          title="Colors"
+        >
           <v-card-item>
             <div class="d-flex ga-4">
               <FieldColorPickerBtn
@@ -33,7 +33,11 @@
         </VCardSettings>
       </v-col>
       <v-col cols="12" md="6">
-        <VCardSettings height="100%" title="Logo">
+        <VCardSettings
+          height="100%"
+          subtitle="The logo of the event"
+          title="Logo"
+        >
           <v-card-item>
             <v-img
               class="cursor-pointer border border-dashed"
@@ -70,7 +74,7 @@
       </v-col>
     </v-row>
 
-    <VCardSettings title="Banner">
+    <VCardSettings subtitle="The banners of the events" title="Banner">
       <template #append>
         <UiDialog v-model="dialogUpload" max-width="600">
           <template #activator="{ props: ActivatorProps }">
@@ -108,7 +112,11 @@
       </v-card-text>
     </VCardSettings>
 
-    <VCardSettings height="100%" title="Layout">
+    <VCardSettings
+      height="100%"
+      subtitle="The layout of the event used on the main page"
+      title="Layout"
+    >
       <v-card-text>
         <v-row>
           <v-col cols="12" sm="4">
@@ -120,7 +128,7 @@
         </v-row>
       </v-card-text>
     </VCardSettings>
-  </v-container>
+  </ManageEventContainer>
 </template>
 <script lang="ts" setup>
 import { requireInjection } from '@/utils/injection.ts';
@@ -137,6 +145,7 @@ import type { EventLayout } from '@/api/types/EventLayout.ts';
 import useApiEventAttachment from '@/api/event-attachments.ts';
 import useApiEventBrand from '@/api/event-brand.ts';
 import FieldColorPickerBtn from '@/components/fields/FieldColorPickerBtn.vue';
+import ManageEventContainer from '@/components/manage/ManageEventContainer.vue';
 
 const currentEvent = requireInjection(CURRENT_EVENT_KEY);
 

@@ -79,6 +79,9 @@ const opts = {
     VCardSettings: {
       variant: 'elevated',
       rounded: 'lg',
+      VCardSubtitle: {
+        class: 'text-wrap',
+      },
     },
     VIcon: {
       size: 'small',

@@ -1,9 +1,5 @@
 <template>
-  <v-container
-    v-if="currentEvent"
-    class="d-flex justify-center flex-column ga-10 ma-0"
-    fluid
-  >
+  <ManageEventContainer v-if="currentEvent">
     <PageHeading>
       <template #title>
         <span class="text-h6">{{ t('labels.features.PARKING') }}</span>
@@ -37,7 +33,7 @@
         </ParkingLotCard>
       </v-col>
     </v-row>
-  </v-container>
+  </ManageEventContainer>
 </template>
 <script lang="ts" setup>
 import { requireInjection } from '@/utils/injection.ts';
@@ -48,6 +44,7 @@ import ParkingLotCard from '@/components/parking-lot/ParkingLotCard.vue';
 import useApiEventParkingLot from '@/api/event-parking-lots.ts';
 import { toast } from 'vue-sonner';
 import { PageHeading } from '@/components/page';
+import ManageEventContainer from '@/components/manage/ManageEventContainer.vue';
 
 const { t } = useI18n();
 

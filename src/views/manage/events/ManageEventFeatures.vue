@@ -1,5 +1,10 @@
 <template>
-  <VCardSettings v-if="currentEvent" title="Features">
+  <VCardSettings
+    v-if="currentEvent"
+    class="text-wrap"
+    subtitle="Additional feature for the event can be managed here"
+    title="Features"
+  >
     <template #append>
       <EventFeatureDialog @success="onSave">
         <template #activator="{ props: activatorProps }">
@@ -20,18 +25,18 @@
           md="4"
           sm="6"
         >
-          <v-card height="100%" max-width="300">
+          <v-card border height="100%" max-width="300" variant="flat">
             <v-card-item>
-              <EventFeatureCard :feature="feature"> </EventFeatureCard>
+              <EventFeatureCard :feature="feature">
+                <template #append>
+                  <UiMenu
+                    :context="feature"
+                    :items="featureMenuItems"
+                    show-activator
+                  ></UiMenu>
+                </template>
+              </EventFeatureCard>
             </v-card-item>
-            <v-card-actions>
-              <v-spacer />
-              <UiMenu
-                :context="feature"
-                :items="featureMenuItems"
-                show-activator
-              ></UiMenu>
-            </v-card-actions>
           </v-card>
         </v-col>
       </v-row>

@@ -1,9 +1,5 @@
 <template>
-  <v-container
-    v-if="currentEvent"
-    class="d-flex justify-center flex-column ga-10 ma-0"
-    fluid
-  >
+  <ManageEventContainer v-if="currentEvent">
     <v-row>
       <v-col>
         <VCardSettings>
@@ -25,7 +21,7 @@
         </VCardSettings>
       </v-col>
     </v-row>
-  </v-container>
+  </ManageEventContainer>
 </template>
 <script lang="ts" setup>
 // components
@@ -35,6 +31,7 @@ import EventUsersInvitations from '@/components/event/event-users/EventUsersInvi
 import { requireInjection } from '@/utils/injection.ts';
 import { CURRENT_EVENT_KEY } from '@/types/injectionKeys.ts';
 import AppStateSoonAlert from '@/components/app/AppStateSoonAlert.vue';
+import ManageEventContainer from '@/components/manage/ManageEventContainer.vue';
 
 const currentEvent = requireInjection(CURRENT_EVENT_KEY);
 

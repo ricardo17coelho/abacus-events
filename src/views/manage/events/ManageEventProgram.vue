@@ -1,9 +1,5 @@
 <template>
-  <v-container
-    v-if="currentEvent"
-    class="d-flex justify-center flex-column ga-10 ma-0"
-    fluid
-  >
+  <ManageEventContainer v-if="currentEvent">
     <AppLoader v-if="isLoading" />
     <template v-else>
       <div class="text-center">
@@ -85,7 +81,7 @@
         </template>
       </EventTimeline01>
     </template>
-  </v-container>
+  </ManageEventContainer>
 </template>
 
 <script lang="ts" setup>
@@ -104,6 +100,7 @@ import EventTimelineCategoriesTable from '@/components/event/event-timeline/even
 import { UiAvatarUser, UiDialog } from '@lib/ui';
 import EventTimeline01 from '@/components/event/event-timeline/EventTimeline01.vue';
 import { getUserFullName } from '@/utils/profile.ts';
+import ManageEventContainer from '@/components/manage/ManageEventContainer.vue';
 
 const currentEvent = requireInjection(CURRENT_EVENT_KEY);
 

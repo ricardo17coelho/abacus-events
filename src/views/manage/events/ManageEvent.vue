@@ -30,7 +30,7 @@
         </EventDialog>
       </template>
     </PageHeading>
-    <PageContent>
+    <PageContent class="px-sm-0">
       <v-toolbar color="white" density="compact">
         <v-tabs
           align-tabs="end"
@@ -50,9 +50,7 @@
         </v-tabs>
       </v-toolbar>
 
-      <v-container class="pa-0" fluid>
-        <router-view />
-      </v-container>
+      <router-view />
     </PageContent>
   </Page>
 </template>

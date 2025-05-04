@@ -1,9 +1,5 @@
 <template>
-  <v-container
-    v-if="currentEvent"
-    class="d-flex justify-center flex-column ga-10 ma-0"
-    fluid
-  >
+  <ManageEventContainer v-if="currentEvent">
     <UiTable
       :actions="actions"
       :headers="headers"
@@ -35,7 +31,7 @@
         </v-chip>
       </template>
     </UiTable>
-  </v-container>
+  </ManageEventContainer>
 </template>
 <script lang="ts" setup>
 import { requireInjection } from '@/utils/injection.ts';
@@ -55,6 +51,7 @@ import useApiEventAttachment from '@/api/event-attachments.ts';
 import AttachmentMimeTypeIcon from '@/components/attachments/AttachmentMimeTypeIcon.vue';
 import { useI18n } from 'vue-i18n';
 import AppFileUploadDialog from '@/components/app/AppFileUploadDialog.vue';
+import ManageEventContainer from '@/components/manage/ManageEventContainer.vue';
 
 const currentEvent = requireInjection(CURRENT_EVENT_KEY);
 

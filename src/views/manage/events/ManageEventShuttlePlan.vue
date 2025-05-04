@@ -1,9 +1,5 @@
 <template>
-  <v-container
-    v-if="currentEvent"
-    class="d-flex justify-center flex-column ga-10 mx-0 px-0"
-    fluid
-  >
+  <ManageEventContainer v-if="currentEvent">
     <div
       v-if="isUserAdmin"
       class="d-flex ga-2 align-self-sm-end flex-column flex-sm-row"
@@ -107,7 +103,7 @@
         </v-card>
       </v-col>
     </v-row>
-  </v-container>
+  </ManageEventContainer>
 </template>
 <script lang="ts" setup>
 import { requireInjection } from '@/utils/injection.ts';
@@ -126,6 +122,7 @@ import { toast } from 'vue-sonner';
 import useApiEventShuttlePlan from '@/api/event-shuttle-plan.ts';
 import useApiEventShuttleAlert from '@/api/event-shuttle-plan-alert.ts';
 import EventShuttlePlanAlertDialog from '@/components/event/event-shuttle-plan-alert/EventShuttlePlanAlertDialog.vue';
+import ManageEventContainer from '@/components/manage/ManageEventContainer.vue';
 
 const { t } = useI18n();
 

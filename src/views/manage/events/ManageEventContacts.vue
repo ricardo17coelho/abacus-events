@@ -1,9 +1,5 @@
 <template>
-  <v-container
-    v-if="currentEvent"
-    class="d-flex justify-center flex-column ga-10 ma-0"
-    fluid
-  >
+  <ManageEventContainer v-if="currentEvent">
     <UiTable
       :actions="actions"
       :headers="headers"
@@ -32,7 +28,7 @@
       @success="onSave"
       @update:model-value="currentEventContactId = undefined"
     />
-  </v-container>
+  </ManageEventContainer>
 </template>
 <script lang="ts" setup>
 import { requireInjection } from '@/utils/injection.ts';
@@ -44,6 +40,7 @@ import type { EventContact } from '@/api/types/EventContact.ts';
 import { toast } from 'vue-sonner';
 import useApiEventContact from '@/api/event-contact.ts';
 import { getEventContactIcon } from '@/components/event/event-contacts/event-contacts.ts';
+import ManageEventContainer from '@/components/manage/ManageEventContainer.vue';
 
 const currentEvent = requireInjection(CURRENT_EVENT_KEY);
 

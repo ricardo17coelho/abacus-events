@@ -72,7 +72,8 @@ const props = defineProps({
 });
 
 function isCurrentTimeValid(item: EventTimeline) {
-  if (!props.date || (props.date && isDateToday(props.date))) return false;
+  console.warn('date', props.date);
+  if (!props.date || (props.date && !isDateToday(props.date))) return false;
   return (
     item.time_start &&
     item.time_end &&

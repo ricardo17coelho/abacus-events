@@ -39,37 +39,50 @@
         />
       </v-col>
     </v-row>
-    <v-row v-if="'locations' in model && Array.isArray(model.locations)" dense>
+    <v-row dense>
       <div class="text-subtitle-1 text-medium-emphasis">
         {{ t('labels.location') }}
       </div>
-      <v-col
-        v-for="(_, idx) in model.locations"
-        :key="`location-field-${idx}`"
-        cols="12"
+      <template
+        v-if="
+          'locations' in model &&
+          Array.isArray(model.locations) &&
+          model.locations.length
+        "
       >
-        <v-text-field
-          v-model="model.locations[idx]"
-          :label="`${t('labels.location_name')} ${idx + 1}`"
+        <v-col
+          v-for="(_, idx) in model.locations"
+          :key="`location-field-${idx}`"
+          cols="12"
         >
-          <template #append>
-            <v-icon-btn
-              v-if="
-                model.locations.length === 0 ||
-                idx === model.locations.length - 1
-              "
-              @click="model.locations.push('')"
-            >
-              +
-            </v-icon-btn>
-            <v-icon-btn
-              v-if="model.locations.length > 1"
-              @click="model.locations.splice(idx, 1)"
-            >
-              -
-            </v-icon-btn>
-          </template>
-        </v-text-field>
+          <v-text-field
+            v-model="model.locations[idx]"
+            :label="`${t('labels.location_name')} ${idx + 1}`"
+          >
+            <template #append>
+              <v-icon-btn
+                v-if="
+                  model.locations.length === 0 ||
+                  idx === model.locations.length - 1
+                "
+                @click="model.locations.push('')"
+              >
+                +
+              </v-icon-btn>
+              <v-icon-btn
+                v-if="model.locations.length > 1"
+                @click="model.locations.splice(idx, 1)"
+              >
+                -
+              </v-icon-btn>
+            </template>
+          </v-text-field>
+        </v-col>
+      </template>
+      <v-col v-else class="my-2" cols="12">
+        <VBtnPrimary @click="onEmptyLocationAdd">
+          {{ t('actions.add') }}
+        </VBtnPrimary>
       </v-col>
     </v-row>
     <v-row dense>
@@ -162,6 +175,13 @@ const modelValueTitleI18n = computed(() =>
 const modelValueNoteI18n = computed(() =>
   showDefaultTranslationOrEmpty(model.value?.note),
 );
+
+function onEmptyLocationAdd() {
+  model.value = {
+    ...model.value,
+    locations: [''],
+  };
+}
 
 defineExpose({ formRef });
 </script>

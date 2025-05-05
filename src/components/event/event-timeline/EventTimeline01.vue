@@ -27,6 +27,21 @@
             {{ showDefaultTranslationOrEmpty(item.title) }}
           </v-list-item-title>
 
+          <div v-if="item.locations?.length">
+            <v-chip
+              v-for="location in item.locations"
+              :key="`${item.title}-${location}`"
+              class="mr-1"
+              color="primary"
+              density="compact"
+              prepend-icon="mdi-home-map-marker"
+              size="small"
+              variant="tonal"
+            >
+              {{ location }}
+            </v-chip>
+          </div>
+
           <div class="d-flex ma-3">
             <UiAvatarUser
               v-for="person in item.persons"
@@ -37,6 +52,7 @@
               color="white"
               :logo="person.avatar_url"
               :name="getUserFullName(person)"
+              size="small"
             />
           </div>
 

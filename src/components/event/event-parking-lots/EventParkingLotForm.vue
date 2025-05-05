@@ -4,7 +4,7 @@
       <v-col>
         <EventParkingLotFieldSelect
           v-model="model.parking_lot_id"
-          :label="t('labels.location')"
+          :label="t('labels.location_name')"
         />
       </v-col>
     </v-row>

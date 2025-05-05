@@ -39,7 +39,10 @@
         />
       </v-col>
     </v-row>
-    <v-row dense>
+    <v-row v-if="'locations' in model && Array.isArray(model.locations)" dense>
+      <div class="text-subtitle-1 text-medium-emphasis">
+        {{ t('labels.location') }}
+      </div>
       <v-col
         v-for="(_, idx) in model.locations"
         :key="`location-field-${idx}`"
@@ -47,28 +50,24 @@
       >
         <v-text-field
           v-model="model.locations[idx]"
-          :label="`${t('labels.location')} ${idx + 1}`"
+          :label="`${t('labels.location_name')} ${idx + 1}`"
         >
           <template #append>
-            <v-btn
+            <v-icon-btn
               v-if="
                 model.locations.length === 0 ||
                 idx === model.locations.length - 1
               "
-              size="small"
-              slim
               @click="model.locations.push('')"
             >
               +
-            </v-btn>
-            <v-btn
+            </v-icon-btn>
+            <v-icon-btn
               v-if="model.locations.length > 1"
-              size="small"
-              slim
               @click="model.locations.splice(idx, 1)"
             >
               -
-            </v-btn>
+            </v-icon-btn>
           </template>
         </v-text-field>
       </v-col>
@@ -103,6 +102,32 @@
   </v-form>
 </template>
 
+<script lang="ts">
+import type { EventTimeline } from '@/api/types/EventTimeline.ts';
+
+export const DEFAULT_FORM = {
+  title: {},
+  note: {},
+  category: undefined,
+  locations: ['test'] as string[],
+  time_start: '',
+  time_end: '',
+  icon: '',
+  persons: [] as string[],
+};
+
+export type EventTimelineFormModel = Pick<
+  EventTimeline,
+  | 'title'
+  | 'locations'
+  | 'time_start'
+  | 'time_end'
+  | 'note'
+  | 'icon'
+  | 'category'
+  | 'persons'
+>;
+</script>
 <script lang="ts" setup>
 // utils
 import { showDefaultTranslationOrEmpty } from '@/utils/showDefaultTranslationOrEmpty';
@@ -121,7 +146,10 @@ defineProps({
   },
 });
 
-const model = defineModel({ type: Object, default: () => ({}) });
+const model = defineModel({
+  type: Object as PropType<EventTimelineFormModel>,
+  default: () => ({ ...DEFAULT_FORM }),
+});
 
 const { t } = useI18n();
 

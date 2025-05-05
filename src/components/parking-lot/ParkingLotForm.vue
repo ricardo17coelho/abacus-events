@@ -17,7 +17,10 @@
     </v-row>
     <v-row dense>
       <v-col>
-        <v-text-field v-model="model.location" :label="t('labels.location')" />
+        <v-text-field
+          v-model="model.location"
+          :label="t('labels.location_name')"
+        />
       </v-col>
     </v-row>
     <v-row dense>

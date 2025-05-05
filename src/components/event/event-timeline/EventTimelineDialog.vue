@@ -26,7 +26,7 @@
 <script setup lang="ts">
 // components
 import { UiDialog } from '@lib/ui';
-import EventTimelineForm from './EventTimelineForm.vue';
+import EventTimelineForm, { DEFAULT_FORM } from './EventTimelineForm.vue';
 // apis
 import useApiEventTimeline from '@/api/event-timeline.ts';
 // types & constants
@@ -55,23 +55,19 @@ const currentEvent = requireInjection(CURRENT_EVENT_KEY);
 
 const { t, locale } = useI18n();
 
-const DEFAULT_FORM = {
+const DEFAULT_FORM_DATA = {
+  ...DEFAULT_FORM,
   title: {
     [locale.value]: '',
   },
   note: {
     [locale.value]: '',
   },
-  category: undefined,
-  locations: [],
-  time_start: '',
-  time_end: '',
-  icon: '',
-  persons: [] as string[],
+  locations: [''],
 };
 
 const form = ref({
-  ...DEFAULT_FORM,
+  ...DEFAULT_FORM_DATA,
 });
 
 const timelineItem = ref<EventTimeline>();
@@ -89,7 +85,7 @@ async function onGetDataById(id: string) {
     if (data) {
       timelineItem.value = data;
       form.value = merge2ObjectsIfKeysExists(
-        { ...DEFAULT_FORM },
+        { ...DEFAULT_FORM_DATA },
         { ...data, persons: data.persons.map((i) => i.event_person_id) },
       );
     }
@@ -170,7 +166,7 @@ async function onSave() {
           const { data: eventData } = await getEventTimelineById(data.id);
 
           emit('success', eventData);
-          form.value = { ...DEFAULT_FORM };
+          form.value = { ...DEFAULT_FORM_DATA };
           isLoading.value = false;
           toast.success('Event timetable updated!');
           model.value = false;
@@ -193,7 +189,7 @@ async function onSave() {
           const { data: eventData } = await getEventTimelineById(data.id);
 
           emit('success', eventData);
-          form.value = clone(DEFAULT_FORM);
+          form.value = clone(DEFAULT_FORM_DATA);
           toast.success('Event timetable created!');
           model.value = false;
         }

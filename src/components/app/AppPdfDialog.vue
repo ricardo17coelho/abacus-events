@@ -1,5 +1,9 @@
 <template>
-  <UiDialog height="100%" max-width="1000">
+  <UiDialog
+    card-text-cls="d-flex align-center justify-center"
+    height="100%"
+    max-width="1000"
+  >
     <template #activator="{ props: activatorProps }">
       <slot name="activator" :props="activatorProps" />
     </template>
@@ -8,6 +12,7 @@
       <AppLoadingIcon v-show="!pdfLoaded" />
       <VuePDF
         v-show="pdfLoaded"
+        class="elevation-4"
         :pdf="pdf"
         :scale="scale"
         @loaded="pdfLoaded = true"

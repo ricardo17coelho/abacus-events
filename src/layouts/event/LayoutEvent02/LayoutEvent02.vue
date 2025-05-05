@@ -139,36 +139,7 @@
           fluid
         >
           <div class="text-h4">{{ t('labels.features.FILES') }}</div>
-          <v-row>
-            <v-col
-              v-for="file in currentEvent.files.filter((i) => isPdf(i))"
-              :key="file.id"
-              cols="12"
-              lg="6"
-            >
-              <AppPdfDialog v-if="isPdf(file) && file.url" :pdf-url="file.url">
-                <template #activator="{ props: ActivatorProps }">
-                  <VBtnPrimary v-bind="ActivatorProps">
-                    OPEN (pdf)
-                  </VBtnPrimary>
-                </template>
-              </AppPdfDialog>
-            </v-col>
-
-            <v-col cols="12" lg="6">
-              <AppImagesView
-                :images="
-                  currentEvent.files.filter((i) => !isPdf(i)).map((a) => a.url)
-                "
-              >
-                <template #activator="ActivatorProps">
-                  <VBtnPrimary v-bind="ActivatorProps">
-                    OPEN (gallery)
-                  </VBtnPrimary>
-                </template>
-              </AppImagesView>
-            </v-col>
-          </v-row>
+          <EventFilesLayout01 :files="currentEvent.files" />
         </v-container>
         <v-container
           v-if="
@@ -179,32 +150,8 @@
           fluid
         >
           <div class="text-h4">{{ t('labels.features.CONTACTS') }}</div>
-          <v-row>
-            <v-col
-              v-for="contact in currentEvent.contacts"
-              :key="contact.id"
-              cols="12"
-              lg="6"
-            >
-              <div>
-                {{ contact.description }}
-                <a
-                  v-if="contact.type === 'PHONE'"
-                  :href="`tel:${contact.value}`"
-                >
-                  <v-icon>{{ getEventContactIcon(contact.type) }}</v-icon>
-                  {{ contact.value }}
-                </a>
-                <a
-                  v-if="contact.type === 'EMAIL'"
-                  :href="`mailto:${contact.value}`"
-                >
-                  <v-icon>{{ getEventContactIcon(contact.type) }}</v-icon>
-                  {{ contact.value }}
-                </a>
-              </div>
-            </v-col>
-          </v-row>
+
+          <EventContactsLayout01 :contacts="currentEvent.contacts" />
         </v-container>
         <UiBtnScrollToTop :scroll-container="`#${layoutMainContainerId}`" />
       </v-container>
@@ -229,10 +176,8 @@ import AppStateSoon from '@/components/app/AppStateSoon.vue';
 import { formatDateByFormat, UiBtnScrollToTop } from '@lib/ui';
 import ParkingLotCard from '@/components/parking-lot/ParkingLotCard.vue';
 import { useI18n } from 'vue-i18n';
-import { getEventContactIcon } from '@/components/event/event-contacts/event-contacts.ts';
-import AppPdfDialog from '@/components/app/AppPdfDialog.vue';
-import { isPdf } from '@/utils/attachments/utils.ts';
-import AppImagesView from '@/components/app/AppImagesView.vue';
+import EventContactsLayout01 from '@/components/event/event-contacts/layouts/EventContactsLayout01.vue';
+import EventFilesLayout01 from '@/components/event/event-files/layouts/EventFilesLayout01.vue';
 
 const layoutMainContainerId = 'layout-main-container';
 const { smAndDown, mdAndUp } = useDisplay();

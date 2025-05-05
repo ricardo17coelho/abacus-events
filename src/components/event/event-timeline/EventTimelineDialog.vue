@@ -122,7 +122,6 @@ async function handleEventPersons(
 
   // IDs to add
   const toAdd = personsIds.filter((id) => !currentPersonIds.includes(id));
-  console.warn('toAdd', toAdd);
 
   for (const id of toAdd) {
     await createEventTimelinePerson({
@@ -133,7 +132,6 @@ async function handleEventPersons(
 
   // IDs to remove
   const toRemove = currentPersonIds.filter((id) => !personsIds.includes(id));
-  console.warn('toRemove', toRemove);
 
   for (const id of toRemove) {
     await removeEventTimelinePerson(id, 'event_person_id');

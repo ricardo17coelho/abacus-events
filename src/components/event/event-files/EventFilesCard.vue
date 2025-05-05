@@ -4,7 +4,7 @@
     border
     class="d-flex flex-column"
     flat
-    height="200"
+    height="250"
     rounded="lg"
     width="200"
   >
@@ -24,7 +24,9 @@
       </template>
 
       <template #subtitle>
-        {{ file.extension }}
+        <v-chip color="primary" density="compact">
+          {{ file.extension }}
+        </v-chip>
       </template>
     </v-list-item>
   </v-card>

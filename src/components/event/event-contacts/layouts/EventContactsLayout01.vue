@@ -1,17 +1,21 @@
 <template>
-  <v-row>
-    <v-col v-for="contact in contacts" :key="contact.id" cols="12" lg="6">
-      <div>
-        {{ contact.description }}
-        <a v-if="contact.type === 'PHONE'" :href="`tel:${contact.value}`">
-          <v-icon>{{ getEventContactIcon(contact.type) }}</v-icon>
-          {{ contact.value }}
-        </a>
-        <a v-if="contact.type === 'EMAIL'" :href="`mailto:${contact.value}`">
-          <v-icon>{{ getEventContactIcon(contact.type) }}</v-icon>
-          {{ contact.value }}
-        </a>
-      </div>
+  <v-row justify="center">
+    <v-col v-for="contact in contacts" :key="contact.id" cols="12" sm="6">
+      <v-list-item
+        class="px-0"
+        density="compact"
+        :href="getContactHREF(contact)"
+        :subtitle="contact.value"
+        :title="contact.description"
+      >
+        <template #prepend>
+          <v-avatar color="surface-light" :size="48">
+            <v-icon color="primary">
+              {{ getEventContactIcon(contact.type) }}
+            </v-icon>
+          </v-avatar>
+        </template>
+      </v-list-item>
     </v-col>
   </v-row>
 </template>
@@ -26,4 +30,12 @@ defineProps({
     default: () => [],
   },
 });
+
+function getContactHREF(contact: EventContact) {
+  if (contact.type === 'PHONE') {
+    return `tel:${contact.value}`;
+  } else if (contact.type === 'EMAIL') {
+    return `mailto:${contact.value}`;
+  }
+}
 </script>

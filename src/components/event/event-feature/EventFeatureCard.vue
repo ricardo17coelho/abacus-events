@@ -19,7 +19,9 @@
       <template v-if="feature.title" #title>
         <span class="text-h6 text-sm-h5">
           {{ showDefaultTranslationOrEmpty(feature.title) }}
-          <AppLiveLabel v-if="feature.feature_id === 'PARKING'" />
+          <AppLiveLabel
+            v-if="feature.feature_id === 'PARKING' && canShowLiveLabel"
+          />
         </span>
       </template>
       <template v-if="feature.description" #subtitle>
@@ -42,6 +44,10 @@ defineProps({
   feature: {
     type: Object as PropType<EventFeature>,
     default: undefined,
+  },
+  canShowLiveLabel: {
+    type: Boolean,
+    default: false,
   },
 });
 

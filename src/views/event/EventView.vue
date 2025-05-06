@@ -13,6 +13,7 @@
         sm="6"
       >
         <EventFeatureCard
+          can-show-live-label
           :feature="feature"
           :to="feature.to"
           @click="

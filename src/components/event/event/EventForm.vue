@@ -10,7 +10,13 @@
               readonly
               :rules="[rulesValidation.ruleRequired]"
               v-bind="activatorProps"
-            />
+            >
+              <template #append-inner>
+                <UiInfoHint
+                  text="The title of the event. Should be entered in all available languages"
+                />
+              </template>
+            </v-text-field>
           </template>
         </DialogTitleI18n>
       </v-col>
@@ -21,7 +27,13 @@
               :label="t('labels.subtitle')"
               :model-value="modelValueSubtitleI18n"
               v-bind="activatorProps"
-            />
+            >
+              <template #append-inner>
+                <UiInfoHint
+                  text="The subtitle helps to describe the event name. Should be entered in all available languages"
+                />
+              </template>
+            </v-text-field>
           </template>
         </DialogTitleI18n>
       </v-col>
@@ -39,7 +51,13 @@
     </v-row>
     <v-row dense>
       <v-col>
-        <v-text-field v-model="model.slug" :label="t('labels.slug')" />
+        <v-text-field v-model="model.slug" :label="t('labels.slug')">
+          <template #append-inner>
+            <UiInfoHint
+              text="The slug can be used to find the event, instead of using the UUID. Typically the slug should match the event name and be hyphenated"
+            />
+          </template>
+        </v-text-field>
       </v-col>
     </v-row>
     <v-row dense>
@@ -49,12 +67,26 @@
           display-format="keyboardDate"
           :label="t('labels.date')"
           :min="today"
-        ></v-date-input>
+        >
+          <template #append-inner>
+            <UiInfoHint text="The date of the event" />
+          </template>
+        </v-date-input>
       </v-col>
     </v-row>
     <v-row dense>
       <v-col>
-        <v-switch v-model="model.public" :label="t('labels.public')" />
+        <v-switch
+          v-model="model.public"
+          class="mx-3"
+          :label="t('labels.public')"
+        >
+          <template #append>
+            <UiInfoHint
+              text="Defines if the event is public accessible or not"
+            />
+          </template>
+        </v-switch>
       </v-col>
     </v-row>
   </v-form>
@@ -66,7 +98,9 @@ import DialogTitleI18n from '@/components/dialogs/DialogTitleI18n.vue';
 import { showDefaultTranslationOrEmpty } from '@/utils/showDefaultTranslationOrEmpty';
 import rulesValidation from '@/utils/validations';
 import { useI18n } from 'vue-i18n';
-import { UiHtmlEditor } from '@lib/ui';
+import { toHyphenated, UiHtmlEditor } from '@lib/ui';
+import UiInfoHint from '@lib/ui/components/UiInfoHint.vue';
+import { watch } from 'vue';
 
 const model = defineModel({ type: Object, default: () => ({}) });
 
@@ -83,6 +117,15 @@ const modelValueTitleI18n = computed(() =>
 
 const modelValueSubtitleI18n = computed(() =>
   showDefaultTranslationOrEmpty(model.value?.subtitle),
+);
+
+watch(
+  () => model.value?.title,
+  (newValue) => {
+    if (!model.value?.slug && newValue && newValue.en) {
+      model.value.slug = toHyphenated(newValue.en);
+    }
+  },
 );
 
 defineExpose({ formRef });

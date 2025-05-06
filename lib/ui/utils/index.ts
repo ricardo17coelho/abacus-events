@@ -1,5 +1,6 @@
 export * from './date';
 export * from './valueOf';
+export * from './text';
 export { clone } from './clone';
 export { getInitials } from './initials';
 export { getIsoCodeByLanguage } from './getIsoCodeByLanguage';

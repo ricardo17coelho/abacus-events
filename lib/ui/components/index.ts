@@ -1,4 +1,7 @@
 export * from './avatar';
+export * from './fields';
+export * from './html';
+export * from './html-editor';
 export * from './loader';
 export * from './menu';
 export * from './text';

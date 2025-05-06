@@ -26,18 +26,15 @@
         </DialogTitleI18n>
       </v-col>
       <v-col cols="12">
-        <DialogTitleI18n
-          :i18n="model.description"
-          @save="model.description = $event"
+        <UiHtmlEditor
+          v-if="currentModelLang"
+          :key="currentModelLang"
+          v-model="model.description[currentModelLang]"
+          v-model:locale="currentModelLang"
+          :available-locales="availableLocales"
+          show-locale-select
         >
-          <template #activator="{ props: activatorProps }">
-            <v-text-field
-              :label="t('labels.description')"
-              :model-value="modelValueDescriptionI18n"
-              v-bind="activatorProps"
-            />
-          </template>
-        </DialogTitleI18n>
+        </UiHtmlEditor>
       </v-col>
     </v-row>
     <v-row dense>
@@ -69,10 +66,12 @@ import DialogTitleI18n from '@/components/dialogs/DialogTitleI18n.vue';
 import { showDefaultTranslationOrEmpty } from '@/utils/showDefaultTranslationOrEmpty';
 import rulesValidation from '@/utils/validations';
 import { useI18n } from 'vue-i18n';
+import { UiHtmlEditor } from '@lib/ui';
 
 const model = defineModel({ type: Object, default: () => ({}) });
 
-const { t } = useI18n();
+const { t, availableLocales, locale } = useI18n();
+const currentModelLang = ref(locale.value);
 
 const today = new Date();
 
@@ -84,10 +83,6 @@ const modelValueTitleI18n = computed(() =>
 
 const modelValueSubtitleI18n = computed(() =>
   showDefaultTranslationOrEmpty(model.value?.subtitle),
-);
-
-const modelValueDescriptionI18n = computed(() =>
-  showDefaultTranslationOrEmpty(model.value?.description),
 );
 
 defineExpose({ formRef });

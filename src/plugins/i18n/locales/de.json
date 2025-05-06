@@ -134,6 +134,22 @@
     "min": "Das Feld muss mehr als 1 Zeichen enthalten | Das Feld muss mehr als {n} Zeichen enthalten",
     "required": "Feld erforderlich"
   },
+  "ui_lib": {
+    "html_editor": {
+      "blockquote": "Blockzitat",
+      "bold": "Fett",
+      "bullet_list": "Aufzählungsliste",
+      "clear_style": "Stil löschen",
+      "hard_break": "Zeilenumbruch",
+      "heading": "Überschrift",
+      "image": "Bild",
+      "italic": "Kursiv",
+      "ordered_list": "Nummerierte Liste",
+      "paragraph": "Absatz",
+      "redo": "Wiederholen",
+      "undo": "Rückgängig machen"
+    }
+  },
   "views": {
     "parking": {
       "alert_01": "Wenn du einen fixen PP im AbaHome II hast, nutze diesen bitte. Danke 😇"

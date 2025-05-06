@@ -130,6 +130,22 @@
     "min": "Le champ doit contenir plus de 1 caractère | Le champ doit contenir plus de {n} caractères",
     "required": "Champ requis"
   },
+  "ui_lib": {
+    "html_editor": {
+      "blockquote": "Citation",
+      "bold": "Gras",
+      "bullet_list": "Liste à puces",
+      "clear_style": "Effacer le style",
+      "hard_break": "Saut de ligne",
+      "heading": "Titre",
+      "image": "Image",
+      "italic": "Italique",
+      "ordered_list": "Liste ordonnée",
+      "paragraph": "Paragraphe",
+      "redo": "Rétablir",
+      "undo": "Annuler"
+    }
+  },
   "views": {
     "parking": {
       "alert_01": "Si tu as un PP fixe dans AbaHome II, merci de l'utiliser. Merci 😇"

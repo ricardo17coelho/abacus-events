@@ -28,11 +28,13 @@
                   </div>
                 </template>
                 <v-card-text>
-                  <div class="text-body-1 mb-2 text-medium-emphasis">
-                    {{
+                  <UiHtmlRender
+                    class="text-body-1 mb-2 text-medium-emphasis"
+                    :content="
                       showDefaultTranslationOrEmpty(currentEvent.description)
-                    }}
-                  </div>
+                    "
+                  />
+
                   <v-chip color="primary">
                     {{ formatDateByFormat(currentEvent.date) }}
                   </v-chip>
@@ -185,7 +187,7 @@ import {
   getEventFeatureIfExists,
   hasEventFeature,
 } from '@/utils/event-features.ts';
-import { formatDateByFormat, UiBtnScrollToTop } from '@lib/ui';
+import { formatDateByFormat, UiBtnScrollToTop, UiHtmlRender } from '@lib/ui';
 import { showDefaultTranslationOrEmpty } from '@/utils/showDefaultTranslationOrEmpty.ts';
 import { requireInjection } from '@/utils/injection.ts';
 

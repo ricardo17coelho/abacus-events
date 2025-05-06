@@ -51,9 +51,12 @@
                 {{ showDefaultTranslationOrEmpty(currentEvent.title) }}
               </h1>
 
-              <div class="text-body-1 text-medium-emphasis mb-10">
-                {{ showDefaultTranslationOrEmpty(currentEvent.description) }}
-              </div>
+              <UiHtmlRender
+                class="text-body-1 text-medium-emphasis mb-10"
+                :content="
+                  showDefaultTranslationOrEmpty(currentEvent.description)
+                "
+              />
 
               <div class="d-flex ga-4 justify-center">
                 <v-btn
@@ -142,7 +145,12 @@ import { computed } from 'vue';
 import { useDisplay } from 'vuetify';
 import { requireInjection } from '@/utils/injection.ts';
 import { CURRENT_EVENT_KEY } from '@/types/injectionKeys.ts';
-import { formatDateByFormat, type MenuItem, UiBtnScrollToTop } from '@lib/ui';
+import {
+  formatDateByFormat,
+  type MenuItem,
+  UiBtnScrollToTop,
+  UiHtmlRender,
+} from '@lib/ui';
 import { showDefaultTranslationOrEmpty } from '@/utils/showDefaultTranslationOrEmpty.ts';
 import {
   getEventFeatureIfExists,

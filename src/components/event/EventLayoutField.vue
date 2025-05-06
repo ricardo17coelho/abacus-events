@@ -19,6 +19,8 @@ function getLayoutTitle(layoutId: EventLayout) {
       return 'Layout 01';
     case 'EVENT_LAYOUT_02':
       return 'Layout 02';
+    case 'EVENT_LAYOUT_03':
+      return 'Layout 03';
     default:
       return layoutId;
   }

@@ -8,6 +8,7 @@
         :id="layoutMainContainerId"
         class="main-container overflow-auto app-container pt-0"
       >
+        <!-- HERO SECTION -->
         <v-container fluid>
           <v-row>
             <v-col
@@ -75,6 +76,7 @@
             </v-col>
           </v-row>
         </v-container>
+        <!-- PROGRAM -->
         <v-container
           v-if="hasEventFeature(currentEvent, 'PROGRAM')"
           :id="`feature-${getEventFeatureIfExists(currentEvent, 'PROGRAM')?.id}`"
@@ -103,6 +105,7 @@
           </v-chip-group>
           <EventTimeline01 :date="currentEvent.date" :items="sortedItems" />
         </v-container>
+        <!-- SHUTTLE_PLAN -->
         <v-container
           v-if="hasEventFeature(currentEvent, 'SHUTTLE_PLAN')"
           :id="`feature-${getEventFeatureIfExists(currentEvent, 'SHUTTLE_PLAN')?.id}`"
@@ -111,6 +114,7 @@
           <div class="text-h4">{{ t('labels.features.SHUTTLE_PLAN') }}</div>
           <AppStateSoon />
         </v-container>
+        <!-- PARKING -->
         <v-container
           v-if="
             hasEventFeature(currentEvent, 'PARKING') &&
@@ -131,6 +135,7 @@
             </v-col>
           </v-row>
         </v-container>
+        <!-- FILES -->
         <v-container
           v-if="
             hasEventFeature(currentEvent, 'FILES') && currentEvent.files.length
@@ -141,6 +146,7 @@
           <div class="text-h4">{{ t('labels.features.FILES') }}</div>
           <EventFilesLayout01 :files="currentEvent.files" />
         </v-container>
+        <!-- CONTACTS -->
         <v-container
           v-if="
             hasEventFeature(currentEvent, 'CONTACTS') &&
@@ -160,24 +166,28 @@
 </template>
 
 <script lang="ts" setup>
+// components
 import LayoutEvent02AppBar from './LayoutEvent02AppBar.vue';
+import EventContactsLayout01 from '@/components/event/event-contacts/layouts/EventContactsLayout01.vue';
+import EventFilesLayout01 from '@/components/event/event-files/layouts/EventFilesLayout01.vue';
+import EventCarousel from '@/components/event/event/EventCarousel.vue';
+import EventTimeline01 from '@/components/event/event-timeline/EventTimeline01.vue';
+import ParkingLotCard from '@/components/parking-lot/ParkingLotCard.vue';
+import AppStateSoon from '@/components/app/AppStateSoon.vue';
+// composables
 import { useDisplay, useGoTo } from 'vuetify';
-import { showDefaultTranslationOrEmpty } from '@/utils/showDefaultTranslationOrEmpty.ts';
-import { requireInjection } from '@/utils/injection.ts';
+import useEventProgram from '@/composables/event-program.ts';
+import { useI18n } from 'vue-i18n';
+// types & constants
 import { CURRENT_EVENT_KEY } from '@/types/injectionKeys.ts';
+// utilities
 import {
   getEventFeatureIfExists,
   hasEventFeature,
 } from '@/utils/event-features.ts';
-import EventCarousel from '@/components/event/event/EventCarousel.vue';
-import EventTimeline01 from '@/components/event/event-timeline/EventTimeline01.vue';
-import useEventProgram from '@/composables/event-program.ts';
-import AppStateSoon from '@/components/app/AppStateSoon.vue';
 import { formatDateByFormat, UiBtnScrollToTop } from '@lib/ui';
-import ParkingLotCard from '@/components/parking-lot/ParkingLotCard.vue';
-import { useI18n } from 'vue-i18n';
-import EventContactsLayout01 from '@/components/event/event-contacts/layouts/EventContactsLayout01.vue';
-import EventFilesLayout01 from '@/components/event/event-files/layouts/EventFilesLayout01.vue';
+import { showDefaultTranslationOrEmpty } from '@/utils/showDefaultTranslationOrEmpty.ts';
+import { requireInjection } from '@/utils/injection.ts';
 
 const layoutMainContainerId = 'layout-main-container';
 const { smAndDown, mdAndUp } = useDisplay();

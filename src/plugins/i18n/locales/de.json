@@ -107,6 +107,7 @@
     "slots_total": "Max. Plätze",
     "slug": "Slug",
     "stop_on_request": "Halt auf Verlangen",
+    "subtitle": "Untertitel",
     "time_end": "Endzeit",
     "time_start": "Startzeit",
     "users": "Benutzer",
@@ -128,12 +129,6 @@
     "program": "Informationen",
     "shuttle_schedule": "Shuttle-Fahrplan"
   },
-  "validation": {
-    "email": "Das E-Mail-Feld muss eine gültige E-Mail-Adresse enthalten.",
-    "max": "Das Feld darf nicht mehr als 1 Zeichen enthalten | Das Feld darf nicht mehr als {n} Zeichen enthalten",
-    "min": "Das Feld muss mehr als 1 Zeichen enthalten | Das Feld muss mehr als {n} Zeichen enthalten",
-    "required": "Feld erforderlich"
-  },
   "ui_lib": {
     "html_editor": {
       "blockquote": "Blockzitat",
@@ -149,6 +144,12 @@
       "redo": "Wiederholen",
       "undo": "Rückgängig machen"
     }
+  },
+  "validation": {
+    "email": "Das E-Mail-Feld muss eine gültige E-Mail-Adresse enthalten.",
+    "max": "Das Feld darf nicht mehr als 1 Zeichen enthalten | Das Feld darf nicht mehr als {n} Zeichen enthalten",
+    "min": "Das Feld muss mehr als 1 Zeichen enthalten | Das Feld muss mehr als {n} Zeichen enthalten",
+    "required": "Feld erforderlich"
   },
   "views": {
     "parking": {

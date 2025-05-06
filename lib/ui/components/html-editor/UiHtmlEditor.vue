@@ -234,7 +234,7 @@ defineExpose({ validate, setContent });
 }
 
 .editor-content {
-  max-height: 400px;
+  max-height: 250px;
 
   :deep(.ProseMirror) {
     min-height: 250px;

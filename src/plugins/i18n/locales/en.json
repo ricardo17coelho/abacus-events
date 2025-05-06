@@ -107,6 +107,7 @@
     "slots_total": "Max. Spaces",
     "slug": "Slug",
     "stop_on_request": "Stop on request",
+    "subtitle": "Subtitle",
     "time_end": "End Time",
     "time_start": "Start Time",
     "users": "Users",
@@ -128,12 +129,6 @@
     "program": "Information",
     "shuttle_schedule": "Shuttle Schedule"
   },
-  "validation": {
-    "email": "The email field must contain a valid email address.",
-    "max": "The field must not contain more than 1 character | The field must not contain more than {n} characters",
-    "min": "The field must contain more than 1 character | The field must contain more than {n} characters",
-    "required": "Field required"
-  },
   "ui_lib": {
     "html_editor": {
       "blockquote": "Blockquote",
@@ -149,6 +144,12 @@
       "redo": "Redo",
       "undo": "Undo"
     }
+  },
+  "validation": {
+    "email": "The email field must contain a valid email address.",
+    "max": "The field must not contain more than 1 character | The field must not contain more than {n} characters",
+    "min": "The field must contain more than 1 character | The field must contain more than {n} characters",
+    "required": "Field required"
   },
   "views": {
     "parking": {

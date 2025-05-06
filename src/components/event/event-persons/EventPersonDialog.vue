@@ -44,14 +44,18 @@ const model = defineModel({ type: Boolean, default: false });
 
 const emit = defineEmits(['success']);
 
-const { t } = useI18n();
+const { t, locale } = useI18n();
 
 const DEFAULT_FORM = {
   first_name: undefined,
   last_name: undefined,
   event_id: undefined,
-  description: undefined,
-  bio: undefined,
+  description: {
+    [locale.value]: '',
+  },
+  bio: {
+    [locale.value]: '',
+  },
   avatar_url: undefined,
 };
 

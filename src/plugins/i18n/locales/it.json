@@ -103,6 +103,7 @@
     "slots_total": "Posti massimi",
     "slug": "Slug",
     "stop_on_request": "Arresto su richiesta",
+    "subtitle": "Sottotitolo",
     "time_end": "Ora di fine",
     "time_start": "Ora di inizio",
     "users": "",
@@ -124,12 +125,6 @@
     "program": "Informazioni",
     "shuttle_schedule": "Orario della navetta"
   },
-  "validation": {
-    "email": "Il campo email deve contenere un indirizzo email valido.",
-    "max": "Il campo non deve contenere più di 1 carattere | Il campo non deve contenere più di {n} caratteri",
-    "min": "Il campo deve contenere più di 1 carattere | Il campo deve contenere più di {n} caratteri",
-    "required": "Campo obbligatorio"
-  },
   "ui_lib": {
     "html_editor": {
       "blockquote": "Citazione",
@@ -145,6 +140,12 @@
       "redo": "Rifai",
       "undo": "Annulla"
     }
+  },
+  "validation": {
+    "email": "Il campo email deve contenere un indirizzo email valido.",
+    "max": "Il campo non deve contenere più di 1 carattere | Il campo non deve contenere più di {n} caratteri",
+    "min": "Il campo deve contenere più di 1 carattere | Il campo deve contenere più di {n} caratteri",
+    "required": "Campo obbligatorio"
   },
   "views": {
     "parking": {

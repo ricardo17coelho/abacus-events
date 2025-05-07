@@ -18,7 +18,7 @@ export type EventTimeline = {
   event_id: string;
   created_at: string;
   title: TitleI18n;
-  locations?: string[];
+  locations?: TitleI18n[];
   time_start?: string;
   time_end?: string;
   note?: TitleI18n;

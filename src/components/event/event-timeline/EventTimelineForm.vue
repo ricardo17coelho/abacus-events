@@ -40,50 +40,12 @@
       </v-col>
     </v-row>
     <v-row dense>
-      <div class="text-subtitle-1 text-medium-emphasis">
-        {{ t('labels.location') }}
-      </div>
-      <template
-        v-if="
-          'locations' in model &&
-          Array.isArray(model.locations) &&
-          model.locations.length
-        "
-      >
-        <v-col
-          v-for="(_, idx) in model.locations"
-          :key="`location-field-${idx}`"
-          cols="12"
-        >
-          <v-text-field
-            v-model="model.locations[idx]"
-            :label="`${t('labels.location_name')} ${idx + 1}`"
-          >
-            <template #append>
-              <v-icon-btn
-                v-if="
-                  model.locations.length === 0 ||
-                  idx === model.locations.length - 1
-                "
-                @click="model.locations.push('')"
-              >
-                +
-              </v-icon-btn>
-              <v-icon-btn
-                v-if="model.locations.length > 1"
-                @click="model.locations.splice(idx, 1)"
-              >
-                -
-              </v-icon-btn>
-            </template>
-          </v-text-field>
-        </v-col>
-      </template>
-      <v-col v-else class="my-2" cols="12">
-        <VBtnPrimary @click="onEmptyLocationAdd">
-          {{ t('actions.add') }}
-        </VBtnPrimary>
-      </v-col>
+      <FieldMultipleValue
+        v-model="model.locations"
+        :label="t('labels.location')"
+        :label-field="t('labels.location_name')"
+        multiple-language-mode
+      />
     </v-row>
     <v-row dense>
       <v-col cols="12" sm="6">
@@ -127,7 +89,7 @@ export const DEFAULT_FORM = {
   title: {},
   note: {},
   category: undefined,
-  locations: ['test'] as string[],
+  locations: [{}],
   time_start: '',
   time_end: '',
   icon: '',
@@ -156,6 +118,7 @@ import { useI18n } from 'vue-i18n';
 import FieldIconMdi from '@/components/fields/FieldIconMdi.vue';
 import FieldTimePicker from '@/components/fields/FieldTimePicker.vue';
 import EventPersonFieldSelect from '@/components/event/event-persons/EventPersonFieldSelect.vue';
+import FieldMultipleValue from '@/components/fields/FieldMultipleValue.vue';
 
 defineProps({
   eventId: {
@@ -180,13 +143,6 @@ const modelValueTitleI18n = computed(() =>
 const modelValueNoteI18n = computed(() =>
   showDefaultTranslationOrEmpty(model.value?.note),
 );
-
-function onEmptyLocationAdd() {
-  model.value = {
-    ...model.value,
-    locations: [''],
-  };
-}
 
 defineExpose({ formRef });
 </script>

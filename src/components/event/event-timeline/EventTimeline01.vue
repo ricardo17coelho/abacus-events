@@ -38,7 +38,12 @@
               size="small"
               variant="tonal"
             >
-              {{ location }}
+              <span v-if="typeof location === 'string'">
+                {{ location }}
+              </span>
+              <span v-else>
+                {{ showDefaultTranslationOrEmpty(location) }}
+              </span>
             </v-chip>
           </div>
 

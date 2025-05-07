@@ -63,7 +63,11 @@ const DEFAULT_FORM_DATA = {
   note: {
     [locale.value]: '',
   },
-  locations: [''],
+  locations: [
+    {
+      [locale.value]: '',
+    },
+  ],
 };
 
 const form = ref({

@@ -1,15 +1,29 @@
 import useApi from '@/composables/api';
 import type { EventPerson } from '@/api/types/EventPerson';
+import type { FindFilter } from '@/api/types/QueryTypes.ts';
 
 export default function useApiEventPerson() {
   const { find, findById, create, update, remove } = useApi();
 
-  function getEventPersons(range = [0, 10]) {
-    return find<EventPerson>('event_persons', [], '*', range);
+  const baseSelect = `
+      *
+  `;
+
+  function getEventPersons(
+    select = baseSelect,
+    filters: FindFilter[] = [],
+    range = [0, 100],
+  ) {
+    return find<EventPerson>('event_persons', filters, select, range);
   }
 
   function getEventPersonById(EventPersonId: string) {
     return findById<EventPerson>('event_persons', EventPersonId, '*');
+  }
+
+  function getEventPersonsByEventId(eventId: string, range = [0, 100]) {
+    const filters: FindFilter[] = [['event_id', 'eq', eventId]];
+    return getEventPersons(baseSelect, filters, range);
   }
 
   // eslint-disable-next-line  @typescript-eslint/no-explicit-any
@@ -31,6 +45,7 @@ export default function useApiEventPerson() {
 
   return {
     getEventPersons,
+    getEventPersonsByEventId,
     getEventPersonById,
     createEventPerson,
     updateEventPerson,

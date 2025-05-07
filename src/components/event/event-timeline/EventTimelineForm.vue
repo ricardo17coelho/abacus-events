@@ -109,7 +109,12 @@
     <v-row dense>
       <v-col cols="12">
         <br />
-        <EventPersonFieldSelect v-model="model.persons" clearable multiple />
+        <EventPersonFieldSelect
+          v-model="model.persons"
+          clearable
+          :event-id="eventId"
+          multiple
+        />
       </v-col>
     </v-row>
   </v-form>

@@ -32,22 +32,34 @@ import useApiEventPerson from '@/api/event-person.ts';
 import { UiAvatarUser } from '@lib/ui';
 import { getUserFullName } from '@/utils/profile.ts';
 
+const props = defineProps({
+  eventId: {
+    type: String,
+    default: undefined,
+  },
+});
+
 const { t } = useI18n();
 
 const items = ref<EventPerson[]>([]);
 
-const { getEventPersons } = useApiEventPerson();
+const { getEventPersons, getEventPersonsByEventId } = useApiEventPerson();
 
 async function onGetAll() {
-  const { data, error } = await getEventPersons();
+  let res;
+  if (props.eventId) {
+    res = await getEventPersonsByEventId(props.eventId);
+  } else {
+    res = await getEventPersons();
+  }
 
-  if (error) {
+  if (res.error) {
     if (error.message) {
       toast.error(error.message);
     }
   } else {
-    if (data) {
-      items.value = data;
+    if (res.data) {
+      items.value = res.data;
     }
   }
 }

@@ -24,6 +24,12 @@
       {{ showDefaultTranslationOrEmpty(event.subtitle) }}
     </v-card-subtitle>
 
+    <div class="d-flex justify-space-between ma-4">
+      <v-chip v-if="event.date" density="compact">
+        {{ formatDateByFormat(event.date) }}
+      </v-chip>
+    </div>
+
     <v-card-subtitle v-if="event.description" class="text-wrap">
       <UiHtmlRender
         :content="
@@ -35,12 +41,6 @@
       >
       </UiHtmlRender>
     </v-card-subtitle>
-
-    <div class="d-flex justify-space-between ma-4">
-      <v-chip v-if="event.date" density="compact">
-        {{ formatDateByFormat(event.date) }}
-      </v-chip>
-    </div>
   </v-card>
 </template>
 

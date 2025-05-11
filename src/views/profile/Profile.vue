@@ -2,70 +2,68 @@
   <Page>
     <PageHeading title="Profile" />
     <PageContent>
-      <v-container>
-        <v-card flat>
-          <v-card-text>
-            <v-text-field v-model="modelApiKey" hide-details label="API KEY" />
-          </v-card-text>
-          <v-card-actions>
-            <v-spacer />
-            <VBtnPrimary :disabled="!modelApiKey" @click="onSaveApi">
-              SET MY API
-            </VBtnPrimary>
-          </v-card-actions>
-        </v-card>
-      </v-container>
+      <AppStateSoonAlert />
 
-      <v-container>
-        <v-card flat>
-          <v-card-text>
-            <v-text-field
-              v-model="modelText"
-              label="Translate"
-              :prefix="locale"
-            />
-            <v-switch v-model="forceOpenAPI" label="FORCE OpenAI" />
-          </v-card-text>
-          <v-card-actions>
-            <v-spacer />
-            <VBtnPrimary
-              @click="
-                onTranslateBatch({
-                  text: modelText,
-                  source: locale,
-                  targets: availableLocales.filter((i) => i !== locale),
-                  force_api: forceOpenAPI,
-                })
-              "
-            >
-              TRANSLATE
-            </VBtnPrimary>
-          </v-card-actions>
+      <v-card flat>
+        <v-card-text>
+          <v-text-field v-model="modelApiKey" hide-details label="API KEY" />
+        </v-card-text>
+        <v-card-actions>
+          <v-spacer />
+          <VBtnPrimary :disabled="!modelApiKey" @click="onSaveApi">
+            SET MY API
+          </VBtnPrimary>
+        </v-card-actions>
+      </v-card>
 
-          <template v-if="translations">
-            <div>
-              <v-kbd>
-                {{ translations }}
-              </v-kbd>
-            </div>
+      <v-card flat>
+        <v-card-text>
+          <v-text-field
+            v-model="modelText"
+            label="Translate"
+            :prefix="locale"
+          />
+          <v-switch v-model="forceOpenAPI" label="FORCE OpenAI" />
+        </v-card-text>
+        <v-card-actions>
+          <v-spacer />
+          <VBtnPrimary
+            @click="
+              onTranslateBatch({
+                text: modelText,
+                source: locale,
+                targets: availableLocales.filter((i) => i !== locale),
+                force_api: forceOpenAPI,
+              })
+            "
+          >
+            TRANSLATE
+          </VBtnPrimary>
+        </v-card-actions>
 
-            <v-container>
-              <v-row>
-                <v-col
-                  v-for="(translation, translationLang) in translations"
-                  :key="translationLang"
-                >
-                  <v-text-field
-                    label="Translate"
-                    :model-value="translation.value"
-                    :prefix="translationLang"
-                  />
-                </v-col>
-              </v-row>
-            </v-container>
-          </template>
-        </v-card>
-      </v-container>
+        <template v-if="translations">
+          <div>
+            <v-kbd>
+              {{ translations }}
+            </v-kbd>
+          </div>
+
+          <v-container>
+            <v-row>
+              <v-col
+                v-for="(translation, translationLang) in translations"
+                :key="translationLang"
+              >
+                <v-text-field
+                  label="Translate"
+                  :model-value="translation.value"
+                  :prefix="translationLang"
+                />
+              </v-col>
+            </v-row>
+          </v-container>
+        </template>
+      </v-card>
     </PageContent>
   </Page>
 </template>
@@ -79,6 +77,7 @@ import useApiAi, {
 } from '@/api/ai.ts';
 import { toast } from 'vue-sonner';
 import { useI18n } from 'vue-i18n';
+import AppStateSoonAlert from '@/components/app/AppStateSoonAlert.vue';
 
 const { t, locale, availableLocales } = useI18n();
 const { saveAiApiKey } = useApiProfileSettings();

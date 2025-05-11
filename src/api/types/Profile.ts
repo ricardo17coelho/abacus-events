@@ -6,3 +6,9 @@ export type Profile = {
   last_name: string;
   avatar_url: string;
 };
+
+export type ProfileSettings = {
+  id: string;
+  created_at: string;
+  openai_api_key_encrypted: string;
+};

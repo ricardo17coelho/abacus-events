@@ -238,6 +238,7 @@ export default function useApi() {
   }
 
   return {
+    supabase,
     find,
     findById,
     count,

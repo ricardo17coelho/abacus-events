@@ -13,6 +13,11 @@
           <v-menu activator="parent">
             <v-list density="compact" nav>
               <v-list-item
+                append-icon="mdi-account"
+                title="Profile"
+                :to="{ name: 'profile' }"
+              />
+              <v-list-item
                 append-icon="mdi-logout"
                 link
                 title="Logout"

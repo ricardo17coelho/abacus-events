@@ -72,6 +72,17 @@ CREATE EXTENSION IF NOT EXISTS "uuid-ossp" WITH SCHEMA "extensions";
 
 
 
+CREATE TYPE "public"."alert_types" AS ENUM (
+    'warning',
+    'info',
+    'error',
+    'success'
+);
+
+
+ALTER TYPE "public"."alert_types" OWNER TO "postgres";
+
+
 CREATE TYPE "public"."event_features_type" AS ENUM (
     'PARKING',
     'PROGRAM',
@@ -141,6 +152,15 @@ CREATE TYPE "public"."permissions" AS ENUM (
 
 
 ALTER TYPE "public"."permissions" OWNER TO "postgres";
+
+
+CREATE TYPE "public"."shuttle_plan_directions" AS ENUM (
+    'OUTWARD',
+    'RETURN'
+);
+
+
+ALTER TYPE "public"."shuttle_plan_directions" OWNER TO "postgres";
 
 
 CREATE OR REPLACE FUNCTION "public"."delete_claim"("uid" "uuid", "claim" "text") RETURNS "text"
@@ -336,6 +356,19 @@ CREATE TABLE IF NOT EXISTS "public"."event_brand_banners" (
 ALTER TABLE "public"."event_brand_banners" OWNER TO "postgres";
 
 
+CREATE TABLE IF NOT EXISTS "public"."event_contacts" (
+    "id" "uuid" DEFAULT "gen_random_uuid"() NOT NULL,
+    "created_at" timestamp with time zone DEFAULT "now"() NOT NULL,
+    "type" "text" NOT NULL,
+    "value" "text" NOT NULL,
+    "description" "text" NOT NULL,
+    "event_id" "uuid" DEFAULT "gen_random_uuid"() NOT NULL
+);
+
+
+ALTER TABLE "public"."event_contacts" OWNER TO "postgres";
+
+
 CREATE TABLE IF NOT EXISTS "public"."event_features" (
     "id" "uuid" DEFAULT "gen_random_uuid"() NOT NULL,
     "created_at" timestamp with time zone DEFAULT "now"() NOT NULL,
@@ -362,6 +395,20 @@ CREATE TABLE IF NOT EXISTS "public"."event_files" (
 ALTER TABLE "public"."event_files" OWNER TO "postgres";
 
 
+CREATE TABLE IF NOT EXISTS "public"."event_invitations" (
+    "id" "uuid" DEFAULT "extensions"."uuid_generate_v4"() NOT NULL,
+    "created_at" timestamp with time zone DEFAULT "now"() NOT NULL,
+    "email" "text" NOT NULL,
+    "message" "text",
+    "status" "public"."invitation_status" DEFAULT 'PENDING'::"public"."invitation_status" NOT NULL,
+    "role_id" "uuid" NOT NULL,
+    "event_id" "uuid" NOT NULL
+);
+
+
+ALTER TABLE "public"."event_invitations" OWNER TO "postgres";
+
+
 CREATE TABLE IF NOT EXISTS "public"."event_parking_lots" (
     "event_id" "uuid" DEFAULT "gen_random_uuid"() NOT NULL,
     "parking_lot_id" "uuid" DEFAULT "gen_random_uuid"() NOT NULL
@@ -371,11 +418,54 @@ CREATE TABLE IF NOT EXISTS "public"."event_parking_lots" (
 ALTER TABLE "public"."event_parking_lots" OWNER TO "postgres";
 
 
+CREATE TABLE IF NOT EXISTS "public"."event_persons" (
+    "id" "uuid" DEFAULT "gen_random_uuid"() NOT NULL,
+    "created_at" timestamp with time zone DEFAULT "now"() NOT NULL,
+    "first_name" "text" NOT NULL,
+    "last_name" "text" NOT NULL,
+    "avatar_url" "text",
+    "bio" "json",
+    "description" "json",
+    "event_id" "uuid" DEFAULT "gen_random_uuid"() NOT NULL
+);
+
+
+ALTER TABLE "public"."event_persons" OWNER TO "postgres";
+
+
+CREATE TABLE IF NOT EXISTS "public"."event_shuttle_plan" (
+    "id" "uuid" DEFAULT "gen_random_uuid"() NOT NULL,
+    "created_at" timestamp with time zone DEFAULT "now"() NOT NULL,
+    "direction" "public"."shuttle_plan_directions" NOT NULL,
+    "location" "text" NOT NULL,
+    "location_link" "text" NOT NULL,
+    "order" smallint NOT NULL,
+    "event_id" "uuid" DEFAULT "gen_random_uuid"() NOT NULL
+);
+
+
+ALTER TABLE "public"."event_shuttle_plan" OWNER TO "postgres";
+
+
+CREATE TABLE IF NOT EXISTS "public"."event_shuttle_plan_alerts" (
+    "id" "uuid" DEFAULT "gen_random_uuid"() NOT NULL,
+    "created_at" timestamp with time zone DEFAULT "now"() NOT NULL,
+    "event_id" "uuid" DEFAULT "gen_random_uuid"() NOT NULL,
+    "type" "public"."alert_types",
+    "icon" "text",
+    "message" "json" NOT NULL,
+    "title" "json"
+);
+
+
+ALTER TABLE "public"."event_shuttle_plan_alerts" OWNER TO "postgres";
+
+
 CREATE TABLE IF NOT EXISTS "public"."event_timeline" (
     "id" "uuid" DEFAULT "extensions"."uuid_generate_v4"() NOT NULL,
     "created_at" timestamp with time zone DEFAULT "now"() NOT NULL,
     "title" "json" NOT NULL,
-    "locations" "text"[],
+    "locations" "jsonb" DEFAULT '[]'::"jsonb",
     "time_start" "text",
     "time_end" "text",
     "note" "json",
@@ -409,6 +499,17 @@ COMMENT ON TABLE "public"."event_timeline_category" IS 'Event Program timeline c
 
 
 
+CREATE TABLE IF NOT EXISTS "public"."event_timeline_persons" (
+    "id" "uuid" DEFAULT "gen_random_uuid"() NOT NULL,
+    "created_at" timestamp with time zone DEFAULT "now"() NOT NULL,
+    "event_person_id" "uuid" DEFAULT "gen_random_uuid"() NOT NULL,
+    "event_timeline_id" "uuid" DEFAULT "gen_random_uuid"() NOT NULL
+);
+
+
+ALTER TABLE "public"."event_timeline_persons" OWNER TO "postgres";
+
+
 CREATE TABLE IF NOT EXISTS "public"."event_users" (
     "created_at" timestamp with time zone DEFAULT "now"() NOT NULL,
     "user_id" "uuid" NOT NULL,
@@ -424,28 +525,15 @@ CREATE TABLE IF NOT EXISTS "public"."events" (
     "id" "uuid" DEFAULT "gen_random_uuid"() NOT NULL,
     "created_at" timestamp with time zone DEFAULT "now"() NOT NULL,
     "title" "json" NOT NULL,
-    "description" "json" NOT NULL,
+    "description" "json",
     "date" "date" NOT NULL,
     "slug" "text",
-    "public" boolean DEFAULT false NOT NULL
+    "public" boolean DEFAULT false NOT NULL,
+    "subtitle" "json"
 );
 
 
 ALTER TABLE "public"."events" OWNER TO "postgres";
-
-
-CREATE TABLE IF NOT EXISTS "public"."invitations" (
-    "id" "uuid" DEFAULT "extensions"."uuid_generate_v4"() NOT NULL,
-    "created_at" timestamp with time zone DEFAULT "now"() NOT NULL,
-    "email" "text" NOT NULL,
-    "message" "text",
-    "status" "public"."invitation_status" NOT NULL,
-    "role_id" "uuid" NOT NULL,
-    "event_id" "uuid" NOT NULL
-);
-
-
-ALTER TABLE "public"."invitations" OWNER TO "postgres";
 
 
 CREATE TABLE IF NOT EXISTS "public"."parking_lots" (
@@ -464,6 +552,16 @@ ALTER TABLE "public"."parking_lots" OWNER TO "postgres";
 
 COMMENT ON TABLE "public"."parking_lots" IS 'Parking lots for the event';
 
+
+
+CREATE TABLE IF NOT EXISTS "public"."profile_settings" (
+    "user_id" "uuid" DEFAULT "gen_random_uuid"() NOT NULL,
+    "created_at" timestamp with time zone DEFAULT "now"() NOT NULL,
+    "openai_api_key_encrypted" "text"
+);
+
+
+ALTER TABLE "public"."profile_settings" OWNER TO "postgres";
 
 
 CREATE TABLE IF NOT EXISTS "public"."profiles" (
@@ -504,6 +602,11 @@ ALTER TABLE ONLY "public"."event_brand"
 
 
 
+ALTER TABLE ONLY "public"."event_contacts"
+    ADD CONSTRAINT "event_contacts_pkey" PRIMARY KEY ("id");
+
+
+
 ALTER TABLE ONLY "public"."event_features"
     ADD CONSTRAINT "event_features_2_pkey" PRIMARY KEY ("id");
 
@@ -519,8 +622,28 @@ ALTER TABLE ONLY "public"."event_parking_lots"
 
 
 
+ALTER TABLE ONLY "public"."event_persons"
+    ADD CONSTRAINT "event_persons_pkey" PRIMARY KEY ("id");
+
+
+
 ALTER TABLE ONLY "public"."roles"
     ADD CONSTRAINT "event_roles_pkey" PRIMARY KEY ("id");
+
+
+
+ALTER TABLE ONLY "public"."event_shuttle_plan_alerts"
+    ADD CONSTRAINT "event_shuttle_plan_alerts_pkey" PRIMARY KEY ("id");
+
+
+
+ALTER TABLE ONLY "public"."event_shuttle_plan"
+    ADD CONSTRAINT "event_shuttle_plan_pkey" PRIMARY KEY ("id");
+
+
+
+ALTER TABLE ONLY "public"."event_timeline_persons"
+    ADD CONSTRAINT "event_timeline_persons_pkey" PRIMARY KEY ("id");
 
 
 
@@ -539,13 +662,18 @@ ALTER TABLE ONLY "public"."events"
 
 
 
-ALTER TABLE ONLY "public"."invitations"
+ALTER TABLE ONLY "public"."event_invitations"
     ADD CONSTRAINT "invitations_pkey" PRIMARY KEY ("id");
 
 
 
 ALTER TABLE ONLY "public"."parking_lots"
     ADD CONSTRAINT "parking_lots_pkey" PRIMARY KEY ("id");
+
+
+
+ALTER TABLE ONLY "public"."profile_settings"
+    ADD CONSTRAINT "profile_settings_pkey" PRIMARY KEY ("user_id");
 
 
 
@@ -584,6 +712,11 @@ ALTER TABLE ONLY "public"."event_brand"
 
 
 
+ALTER TABLE ONLY "public"."event_contacts"
+    ADD CONSTRAINT "event_contacts_event_id_fkey" FOREIGN KEY ("event_id") REFERENCES "public"."events"("id") ON DELETE CASCADE;
+
+
+
 ALTER TABLE ONLY "public"."event_features"
     ADD CONSTRAINT "event_features_2_event_id_fkey" FOREIGN KEY ("event_id") REFERENCES "public"."events"("id") ON DELETE CASCADE;
 
@@ -609,6 +742,21 @@ ALTER TABLE ONLY "public"."event_parking_lots"
 
 
 
+ALTER TABLE ONLY "public"."event_persons"
+    ADD CONSTRAINT "event_persons_event_id_fkey" FOREIGN KEY ("event_id") REFERENCES "public"."events"("id") ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+
+ALTER TABLE ONLY "public"."event_shuttle_plan_alerts"
+    ADD CONSTRAINT "event_shuttle_plan_alerts_event_id_fkey" FOREIGN KEY ("event_id") REFERENCES "public"."events"("id") ON DELETE CASCADE;
+
+
+
+ALTER TABLE ONLY "public"."event_shuttle_plan"
+    ADD CONSTRAINT "event_shuttle_plan_event_id_fkey" FOREIGN KEY ("event_id") REFERENCES "public"."events"("id") ON DELETE CASCADE;
+
+
+
 ALTER TABLE ONLY "public"."event_timeline_category"
     ADD CONSTRAINT "event_timeline_category_event_id_fkey" FOREIGN KEY ("event_id") REFERENCES "public"."events"("id") ON DELETE CASCADE;
 
@@ -621,6 +769,16 @@ ALTER TABLE ONLY "public"."event_timeline"
 
 ALTER TABLE ONLY "public"."event_timeline"
     ADD CONSTRAINT "event_timeline_event_id_fkey" FOREIGN KEY ("event_id") REFERENCES "public"."events"("id") ON DELETE CASCADE;
+
+
+
+ALTER TABLE ONLY "public"."event_timeline_persons"
+    ADD CONSTRAINT "event_timeline_persons_event_person_id_fkey" FOREIGN KEY ("event_person_id") REFERENCES "public"."event_persons"("id") ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+
+ALTER TABLE ONLY "public"."event_timeline_persons"
+    ADD CONSTRAINT "event_timeline_persons_event_timeline_id_fkey" FOREIGN KEY ("event_timeline_id") REFERENCES "public"."event_timeline"("id") ON UPDATE CASCADE ON DELETE CASCADE;
 
 
 
@@ -639,13 +797,18 @@ ALTER TABLE ONLY "public"."event_users"
 
 
 
-ALTER TABLE ONLY "public"."invitations"
+ALTER TABLE ONLY "public"."event_invitations"
     ADD CONSTRAINT "invitations_event_id_fkey" FOREIGN KEY ("event_id") REFERENCES "public"."events"("id") ON DELETE CASCADE;
 
 
 
-ALTER TABLE ONLY "public"."invitations"
+ALTER TABLE ONLY "public"."event_invitations"
     ADD CONSTRAINT "invitations_role_id_fkey" FOREIGN KEY ("role_id") REFERENCES "public"."roles"("id") ON DELETE CASCADE;
+
+
+
+ALTER TABLE ONLY "public"."profile_settings"
+    ADD CONSTRAINT "profile_settings_id_fkey" FOREIGN KEY ("user_id") REFERENCES "auth"."users"("id") ON DELETE CASCADE;
 
 
 
@@ -678,6 +841,10 @@ CREATE POLICY "Admin can delete" ON "public"."event_brand_banners" FOR DELETE TO
 
 
 
+CREATE POLICY "Admin can delete" ON "public"."event_contacts" FOR DELETE TO "authenticated" USING (("public"."get_my_claim"('userroles'::"text") @> '["ADMIN"]'::"jsonb"));
+
+
+
 CREATE POLICY "Admin can delete" ON "public"."event_features" FOR DELETE TO "authenticated" USING (("public"."get_my_claim"('userroles'::"text") @> '["ADMIN"]'::"jsonb"));
 
 
@@ -686,7 +853,23 @@ CREATE POLICY "Admin can delete" ON "public"."event_files" FOR DELETE USING (("p
 
 
 
+CREATE POLICY "Admin can delete" ON "public"."event_invitations" FOR DELETE TO "authenticated" USING (("public"."get_my_claim"('userroles'::"text") @> '["ADMIN"]'::"jsonb"));
+
+
+
 CREATE POLICY "Admin can delete" ON "public"."event_parking_lots" FOR DELETE USING (("public"."get_my_claim"('userroles'::"text") @> '["ADMIN"]'::"jsonb"));
+
+
+
+CREATE POLICY "Admin can delete" ON "public"."event_persons" FOR DELETE TO "authenticated" USING (("public"."get_my_claim"('userroles'::"text") @> '["ADMIN"]'::"jsonb"));
+
+
+
+CREATE POLICY "Admin can delete" ON "public"."event_shuttle_plan" FOR DELETE TO "authenticated" USING (("public"."get_my_claim"('userroles'::"text") @> '["ADMIN"]'::"jsonb"));
+
+
+
+CREATE POLICY "Admin can delete" ON "public"."event_shuttle_plan_alerts" FOR DELETE TO "authenticated" USING (("public"."get_my_claim"('userroles'::"text") @> '["ADMIN"]'::"jsonb"));
 
 
 
@@ -698,6 +881,10 @@ CREATE POLICY "Admin can delete" ON "public"."event_timeline_category" FOR DELET
 
 
 
+CREATE POLICY "Admin can delete" ON "public"."event_timeline_persons" FOR DELETE TO "authenticated" USING (("public"."get_my_claim"('userroles'::"text") @> '["ADMIN"]'::"jsonb"));
+
+
+
 CREATE POLICY "Admin can delete" ON "public"."event_users" FOR DELETE TO "authenticated" USING (("public"."get_my_claim"('userroles'::"text") @> '["ADMIN"]'::"jsonb"));
 
 
@@ -705,10 +892,6 @@ CREATE POLICY "Admin can delete" ON "public"."event_users" FOR DELETE TO "authen
 CREATE POLICY "Admin can delete" ON "public"."events" FOR DELETE TO "authenticated" USING ((EXISTS ( SELECT 1
    FROM "jsonb_array_elements_text"("public"."get_my_claim"('userroles'::"text")) "role"("value")
   WHERE ("role"."value" = 'ADMIN'::"text"))));
-
-
-
-CREATE POLICY "Admin can delete" ON "public"."invitations" FOR DELETE TO "authenticated" USING (("public"."get_my_claim"('userroles'::"text") @> '["ADMIN"]'::"jsonb"));
 
 
 
@@ -734,6 +917,10 @@ CREATE POLICY "Admin can insert" ON "public"."event_brand_banners" FOR INSERT TO
 
 
 
+CREATE POLICY "Admin can insert" ON "public"."event_contacts" FOR INSERT TO "authenticated" WITH CHECK (("public"."get_my_claim"('userroles'::"text") @> '["ADMIN"]'::"jsonb"));
+
+
+
 CREATE POLICY "Admin can insert" ON "public"."event_features" FOR INSERT TO "authenticated" WITH CHECK (("public"."get_my_claim"('userroles'::"text") @> '["ADMIN"]'::"jsonb"));
 
 
@@ -742,7 +929,23 @@ CREATE POLICY "Admin can insert" ON "public"."event_files" FOR INSERT WITH CHECK
 
 
 
+CREATE POLICY "Admin can insert" ON "public"."event_invitations" FOR INSERT TO "authenticated" WITH CHECK (("public"."get_my_claim"('userroles'::"text") @> '["ADMIN"]'::"jsonb"));
+
+
+
 CREATE POLICY "Admin can insert" ON "public"."event_parking_lots" FOR INSERT TO "authenticated" WITH CHECK (("public"."get_my_claim"('userroles'::"text") @> '["ADMIN"]'::"jsonb"));
+
+
+
+CREATE POLICY "Admin can insert" ON "public"."event_persons" FOR INSERT TO "authenticated" WITH CHECK (("public"."get_my_claim"('userroles'::"text") @> '["ADMIN"]'::"jsonb"));
+
+
+
+CREATE POLICY "Admin can insert" ON "public"."event_shuttle_plan" FOR INSERT TO "authenticated" WITH CHECK (("public"."get_my_claim"('userroles'::"text") @> '["ADMIN"]'::"jsonb"));
+
+
+
+CREATE POLICY "Admin can insert" ON "public"."event_shuttle_plan_alerts" FOR INSERT TO "authenticated" WITH CHECK (("public"."get_my_claim"('userroles'::"text") @> '["ADMIN"]'::"jsonb"));
 
 
 
@@ -754,11 +957,11 @@ CREATE POLICY "Admin can insert" ON "public"."event_timeline_category" FOR INSER
 
 
 
+CREATE POLICY "Admin can insert" ON "public"."event_timeline_persons" FOR INSERT TO "authenticated" WITH CHECK (("public"."get_my_claim"('userroles'::"text") @> '["ADMIN"]'::"jsonb"));
+
+
+
 CREATE POLICY "Admin can insert" ON "public"."event_users" FOR INSERT TO "authenticated" WITH CHECK (("public"."get_my_claim"('userroles'::"text") @> '["ADMIN"]'::"jsonb"));
-
-
-
-CREATE POLICY "Admin can insert" ON "public"."invitations" FOR INSERT TO "authenticated" WITH CHECK (("public"."get_my_claim"('userroles'::"text") @> '["ADMIN"]'::"jsonb"));
 
 
 
@@ -778,6 +981,10 @@ CREATE POLICY "Admin can update" ON "public"."event_brand_banners" FOR UPDATE TO
 
 
 
+CREATE POLICY "Admin can update" ON "public"."event_contacts" FOR UPDATE TO "authenticated" USING (("public"."get_my_claim"('userroles'::"text") @> '["ADMIN"]'::"jsonb")) WITH CHECK (true);
+
+
+
 CREATE POLICY "Admin can update" ON "public"."event_features" FOR UPDATE TO "authenticated" USING (("public"."get_my_claim"('userroles'::"text") @> '["ADMIN"]'::"jsonb")) WITH CHECK (true);
 
 
@@ -786,7 +993,23 @@ CREATE POLICY "Admin can update" ON "public"."event_files" FOR UPDATE USING (("p
 
 
 
+CREATE POLICY "Admin can update" ON "public"."event_invitations" FOR UPDATE TO "authenticated" USING (("public"."get_my_claim"('userroles'::"text") @> '["ADMIN"]'::"jsonb")) WITH CHECK (true);
+
+
+
 CREATE POLICY "Admin can update" ON "public"."event_parking_lots" FOR UPDATE USING (("public"."get_my_claim"('userroles'::"text") @> '["ADMIN"]'::"jsonb")) WITH CHECK (true);
+
+
+
+CREATE POLICY "Admin can update" ON "public"."event_persons" FOR UPDATE TO "authenticated" USING (("public"."get_my_claim"('userroles'::"text") @> '["ADMIN"]'::"jsonb")) WITH CHECK (true);
+
+
+
+CREATE POLICY "Admin can update" ON "public"."event_shuttle_plan" FOR UPDATE TO "authenticated" USING (("public"."get_my_claim"('userroles'::"text") @> '["ADMIN"]'::"jsonb")) WITH CHECK (true);
+
+
+
+CREATE POLICY "Admin can update" ON "public"."event_shuttle_plan_alerts" FOR UPDATE TO "authenticated" USING (("public"."get_my_claim"('userroles'::"text") @> '["ADMIN"]'::"jsonb")) WITH CHECK (true);
 
 
 
@@ -798,6 +1021,10 @@ CREATE POLICY "Admin can update" ON "public"."event_timeline_category" FOR UPDAT
 
 
 
+CREATE POLICY "Admin can update" ON "public"."event_timeline_persons" FOR UPDATE TO "authenticated" USING (("public"."get_my_claim"('userroles'::"text") @> '["ADMIN"]'::"jsonb")) WITH CHECK (true);
+
+
+
 CREATE POLICY "Admin can update" ON "public"."event_users" FOR UPDATE TO "authenticated" USING (("public"."get_my_claim"('userroles'::"text") @> '["ADMIN"]'::"jsonb")) WITH CHECK (true);
 
 
@@ -805,10 +1032,6 @@ CREATE POLICY "Admin can update" ON "public"."event_users" FOR UPDATE TO "authen
 CREATE POLICY "Admin can update" ON "public"."events" FOR UPDATE USING ((EXISTS ( SELECT 1
    FROM "jsonb_array_elements_text"("public"."get_my_claim"('userroles'::"text")) "role"("value")
   WHERE ("role"."value" = 'ADMIN'::"text")))) WITH CHECK (true);
-
-
-
-CREATE POLICY "Admin can update" ON "public"."invitations" FOR UPDATE TO "authenticated" USING (("public"."get_my_claim"('userroles'::"text") @> '["ADMIN"]'::"jsonb")) WITH CHECK (true);
 
 
 
@@ -834,6 +1057,10 @@ CREATE POLICY "Enable read access for all users" ON "public"."event_brand_banner
 
 
 
+CREATE POLICY "Enable read access for all users" ON "public"."event_contacts" FOR SELECT USING (true);
+
+
+
 CREATE POLICY "Enable read access for all users" ON "public"."event_features" FOR SELECT USING (true);
 
 
@@ -842,7 +1069,23 @@ CREATE POLICY "Enable read access for all users" ON "public"."event_files" FOR S
 
 
 
+CREATE POLICY "Enable read access for all users" ON "public"."event_invitations" FOR SELECT USING (true);
+
+
+
 CREATE POLICY "Enable read access for all users" ON "public"."event_parking_lots" FOR SELECT USING (true);
+
+
+
+CREATE POLICY "Enable read access for all users" ON "public"."event_persons" FOR SELECT USING (true);
+
+
+
+CREATE POLICY "Enable read access for all users" ON "public"."event_shuttle_plan" FOR SELECT USING (true);
+
+
+
+CREATE POLICY "Enable read access for all users" ON "public"."event_shuttle_plan_alerts" FOR SELECT USING (true);
 
 
 
@@ -854,15 +1097,15 @@ CREATE POLICY "Enable read access for all users" ON "public"."event_timeline_cat
 
 
 
+CREATE POLICY "Enable read access for all users" ON "public"."event_timeline_persons" FOR SELECT USING (true);
+
+
+
 CREATE POLICY "Enable read access for all users" ON "public"."event_users" FOR SELECT USING (true);
 
 
 
 CREATE POLICY "Enable read access for all users" ON "public"."events" FOR SELECT USING (true);
-
-
-
-CREATE POLICY "Enable read access for all users" ON "public"."invitations" FOR SELECT USING (true);
 
 
 
@@ -895,13 +1138,28 @@ ALTER TABLE "public"."event_brand" ENABLE ROW LEVEL SECURITY;
 ALTER TABLE "public"."event_brand_banners" ENABLE ROW LEVEL SECURITY;
 
 
+ALTER TABLE "public"."event_contacts" ENABLE ROW LEVEL SECURITY;
+
+
 ALTER TABLE "public"."event_features" ENABLE ROW LEVEL SECURITY;
 
 
 ALTER TABLE "public"."event_files" ENABLE ROW LEVEL SECURITY;
 
 
+ALTER TABLE "public"."event_invitations" ENABLE ROW LEVEL SECURITY;
+
+
 ALTER TABLE "public"."event_parking_lots" ENABLE ROW LEVEL SECURITY;
+
+
+ALTER TABLE "public"."event_persons" ENABLE ROW LEVEL SECURITY;
+
+
+ALTER TABLE "public"."event_shuttle_plan" ENABLE ROW LEVEL SECURITY;
+
+
+ALTER TABLE "public"."event_shuttle_plan_alerts" ENABLE ROW LEVEL SECURITY;
 
 
 ALTER TABLE "public"."event_timeline" ENABLE ROW LEVEL SECURITY;
@@ -910,16 +1168,19 @@ ALTER TABLE "public"."event_timeline" ENABLE ROW LEVEL SECURITY;
 ALTER TABLE "public"."event_timeline_category" ENABLE ROW LEVEL SECURITY;
 
 
+ALTER TABLE "public"."event_timeline_persons" ENABLE ROW LEVEL SECURITY;
+
+
 ALTER TABLE "public"."event_users" ENABLE ROW LEVEL SECURITY;
 
 
 ALTER TABLE "public"."events" ENABLE ROW LEVEL SECURITY;
 
 
-ALTER TABLE "public"."invitations" ENABLE ROW LEVEL SECURITY;
-
-
 ALTER TABLE "public"."parking_lots" ENABLE ROW LEVEL SECURITY;
+
+
+ALTER TABLE "public"."profile_settings" ENABLE ROW LEVEL SECURITY;
 
 
 ALTER TABLE "public"."profiles" ENABLE ROW LEVEL SECURITY;
@@ -1207,6 +1468,12 @@ GRANT ALL ON TABLE "public"."event_brand_banners" TO "service_role";
 
 
 
+GRANT ALL ON TABLE "public"."event_contacts" TO "anon";
+GRANT ALL ON TABLE "public"."event_contacts" TO "authenticated";
+GRANT ALL ON TABLE "public"."event_contacts" TO "service_role";
+
+
+
 GRANT ALL ON TABLE "public"."event_features" TO "anon";
 GRANT ALL ON TABLE "public"."event_features" TO "authenticated";
 GRANT ALL ON TABLE "public"."event_features" TO "service_role";
@@ -1219,9 +1486,33 @@ GRANT ALL ON TABLE "public"."event_files" TO "service_role";
 
 
 
+GRANT ALL ON TABLE "public"."event_invitations" TO "anon";
+GRANT ALL ON TABLE "public"."event_invitations" TO "authenticated";
+GRANT ALL ON TABLE "public"."event_invitations" TO "service_role";
+
+
+
 GRANT ALL ON TABLE "public"."event_parking_lots" TO "anon";
 GRANT ALL ON TABLE "public"."event_parking_lots" TO "authenticated";
 GRANT ALL ON TABLE "public"."event_parking_lots" TO "service_role";
+
+
+
+GRANT ALL ON TABLE "public"."event_persons" TO "anon";
+GRANT ALL ON TABLE "public"."event_persons" TO "authenticated";
+GRANT ALL ON TABLE "public"."event_persons" TO "service_role";
+
+
+
+GRANT ALL ON TABLE "public"."event_shuttle_plan" TO "anon";
+GRANT ALL ON TABLE "public"."event_shuttle_plan" TO "authenticated";
+GRANT ALL ON TABLE "public"."event_shuttle_plan" TO "service_role";
+
+
+
+GRANT ALL ON TABLE "public"."event_shuttle_plan_alerts" TO "anon";
+GRANT ALL ON TABLE "public"."event_shuttle_plan_alerts" TO "authenticated";
+GRANT ALL ON TABLE "public"."event_shuttle_plan_alerts" TO "service_role";
 
 
 
@@ -1237,6 +1528,12 @@ GRANT ALL ON TABLE "public"."event_timeline_category" TO "service_role";
 
 
 
+GRANT ALL ON TABLE "public"."event_timeline_persons" TO "anon";
+GRANT ALL ON TABLE "public"."event_timeline_persons" TO "authenticated";
+GRANT ALL ON TABLE "public"."event_timeline_persons" TO "service_role";
+
+
+
 GRANT ALL ON TABLE "public"."event_users" TO "anon";
 GRANT ALL ON TABLE "public"."event_users" TO "authenticated";
 GRANT ALL ON TABLE "public"."event_users" TO "service_role";
@@ -1249,15 +1546,15 @@ GRANT ALL ON TABLE "public"."events" TO "service_role";
 
 
 
-GRANT ALL ON TABLE "public"."invitations" TO "anon";
-GRANT ALL ON TABLE "public"."invitations" TO "authenticated";
-GRANT ALL ON TABLE "public"."invitations" TO "service_role";
-
-
-
 GRANT ALL ON TABLE "public"."parking_lots" TO "anon";
 GRANT ALL ON TABLE "public"."parking_lots" TO "authenticated";
 GRANT ALL ON TABLE "public"."parking_lots" TO "service_role";
+
+
+
+GRANT ALL ON TABLE "public"."profile_settings" TO "anon";
+GRANT ALL ON TABLE "public"."profile_settings" TO "authenticated";
+GRANT ALL ON TABLE "public"."profile_settings" TO "service_role";
 
 
 

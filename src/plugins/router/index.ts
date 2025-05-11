@@ -4,14 +4,20 @@ import type { AuthChangeEvent } from '@supabase/supabase-js';
 import useAuthUser from '@/composables/auth-user.ts';
 
 // routes
-import routesManage from './routes/manage';
 import routesAuth from './routes/auth';
+import routesProfile from './routes/profile';
+import routesManage from './routes/manage';
 import routesEvent from './routes/event';
 
 // layouts
 import LayoutDefault from '@/layouts/default/LayoutDefault.vue';
 
-const routes = [...routesAuth, ...routesEvent, ...routesManage];
+const routes = [
+  ...routesAuth,
+  ...routesProfile,
+  ...routesEvent,
+  ...routesManage,
+];
 
 if (import.meta.env.DEV) {
   routes.push({

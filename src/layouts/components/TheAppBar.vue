@@ -21,6 +21,7 @@
       >
         <TheAppMenuLanguage />
       </div>
+      <TheUserMenu />
     </TheLayoutContainer>
   </v-app-bar>
 </template>
@@ -30,6 +31,7 @@ import useAuthUser from '@/composables/auth-user.ts';
 import { useDisplay } from 'vuetify';
 import TheLayoutContainer from '@/layouts/components/TheLayoutContainer.vue';
 import TheAppMenuLanguage from '@/components/TheAppMenuLanguage.vue';
+import TheUserMenu from '@/layouts/components/TheUserMenu.vue';
 
 const { isUserAdminOrHelper } = useAuthUser();
 

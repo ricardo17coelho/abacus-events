@@ -35,17 +35,41 @@ async function saveTranslationToCache(
   targetLang: string,
   translation: string,
 ) {
-  const { error } = await supabase.from('translations_cache').upsert([
-    {
-      source_text: text,
-      source_lang: sourceLang,
-      translation_lang: targetLang,
-      translation_text: translation,
-    },
-  ]);
+  // Step 1: Check if the translation already exists
+  const { data: existing, error: fetchError } = await supabase
+    .from('translations_cache')
+    .select('translation_text')
+    .eq('source_text', text)
+    .eq('source_lang', sourceLang)
+    .eq('translation_lang', targetLang)
+    .single();
 
-  if (error) {
-    console.error('Error saving translation to cache:', error);
+  if (fetchError && fetchError.code !== 'PGRST116') {
+    // 'PGRST116' = no rows found
+    console.error('Error fetching existing translation:', fetchError);
+    return;
+  }
+
+  // Step 2: Compare and decide if update or insert
+  if (!existing || existing.translation_text !== translation) {
+    const { error: upsertError } = await supabase
+      .from('translations_cache')
+      .upsert([
+        {
+          source_text: text,
+          source_lang: sourceLang,
+          translation_lang: targetLang,
+          translation_text: translation,
+        },
+      ]);
+
+    if (upsertError) {
+      console.error('Error saving translation to cache:', upsertError);
+    } else {
+      console.log('Translation saved/updated in cache');
+    }
+  } else {
+    console.log('No changes to cache needed; translation already up-to-date.');
   }
 }
 
@@ -64,6 +88,10 @@ serve(async (req) => {
     if (!text || !source || !Array.isArray(targets)) {
       return new Response('Invalid request body', { status: 400 });
     }
+
+    // Optional parameter to force OpenAI API usage
+    const url = new URL(req.url);
+    const forceApi = url.searchParams.get('force_api') === 'true';
 
     const authHeader = req.headers.get('Authorization') || '';
     const jwt = authHeader.replace('Bearer ', '');
@@ -99,26 +127,26 @@ serve(async (req) => {
 
     for (const target of targets) {
       // 1. check DB cache
-
-      // First, check if translation is already in cache
-      const cachedTranslation = await getCachedTranslation(
-        text,
-        source,
-        target,
-      );
-
-      if (cachedTranslation) {
-        console.log(
-          `Found cached translation for ${target}: ${cachedTranslation}`,
+      if (!forceApi) {
+        const cachedTranslation = await getCachedTranslation(
+          text,
+          source,
+          target,
         );
-        translations[target] = {
-          status: 200,
-          value: cachedTranslation,
-        };
-        continue;
+
+        if (cachedTranslation) {
+          console.log(
+            `Found cached translation for ${target}: ${cachedTranslation}`,
+          );
+          translations[target] = {
+            status: 200,
+            value: cachedTranslation,
+          };
+          continue;
+        }
       }
 
-      // const prompt = `Translate the following from ${source} to ${target}: "${text}"`;
+      // If not cached or force_api is true, make OpenAI API call
       const prompt = `Translate the following word from ${source} to ${target}, without any extra explanations, just the translated word: "${text}"`;
       console.warn('prompt', prompt);
 

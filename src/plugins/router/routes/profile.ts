@@ -6,7 +6,7 @@ export default [
     component: LayoutDefault,
     children: [
       {
-        path: '/',
+        path: '',
         name: 'profile',
         component: () => import('@/views/profile/Profile.vue'),
       },

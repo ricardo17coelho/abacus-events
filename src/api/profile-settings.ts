@@ -12,8 +12,13 @@ export default function useApiProfileSettings() {
     return find<ProfileSettings>('profile_settings', [], baseSelect, range);
   }
 
-  function getProfileSettingById(eventId: string) {
-    return findById<ProfileSettings>('profile_settings', eventId, baseSelect);
+  function getProfileSettingById(id: string) {
+    return findById<ProfileSettings>(
+      'profile_settings',
+      id,
+      baseSelect,
+      'user_id',
+    );
   }
 
   // eslint-disable-next-line  @typescript-eslint/no-explicit-any

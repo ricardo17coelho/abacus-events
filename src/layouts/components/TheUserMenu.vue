@@ -12,7 +12,7 @@
         <v-list-item
           prepend-icon="mdi-account"
           title="Profile"
-          :to="{ name: 'profile' }"
+          :to="{ name: 'profile-account' }"
         />
         <v-list-item
           link

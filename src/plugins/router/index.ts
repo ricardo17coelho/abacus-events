@@ -13,9 +13,33 @@ import routesEvent from './routes/event';
 import LayoutDefault from '@/layouts/default/LayoutDefault.vue';
 
 const routes = [
+  {
+    path: '/',
+    meta: {
+      requiresNoAuth: true,
+    },
+    children: [
+      {
+        path: '/:pathMatch(.*)*',
+        name: 'NotFound',
+        component: () => import('@/views/NotFound.vue'),
+      },
+      {
+        path: '',
+        component: LayoutDefault,
+        children: [
+          {
+            path: '',
+            name: 'home',
+            component: () => import('@/views/HomeView.vue'),
+          },
+          ...routesProfile,
+          ...routesEvent,
+        ],
+      },
+    ],
+  },
   ...routesAuth,
-  ...routesProfile,
-  ...routesEvent,
   ...routesManage,
 ];
 

@@ -17,6 +17,8 @@
         <slot name="actions"></slot>
       </div>
     </div>
+
+    <slot name="extension"> </slot>
   </v-container>
 </template>
 

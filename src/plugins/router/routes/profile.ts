@@ -1,14 +1,17 @@
-import LayoutDefault from '@/layouts/default/LayoutDefault.vue';
-
 export default [
   {
     path: '/profile',
-    component: LayoutDefault,
+    component: () => import('@/views/user/profile/UserProfile.vue'),
     children: [
       {
         path: '',
-        name: 'profile',
-        component: () => import('@/views/profile/Profile.vue'),
+        name: 'profile-account',
+        component: () => import('@/views/user/profile/UserProfileAccount.vue'),
+      },
+      {
+        path: 'settings',
+        name: 'profile-settings',
+        component: () => import('@/views/user/profile/UserProfileSettings.vue'),
       },
     ],
   },

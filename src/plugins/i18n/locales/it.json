@@ -161,6 +161,36 @@
       "return_journey": {
         "info": "21:30-01:30 (ogni 30 minuti)"
       }
+    },
+    "profile": {
+      "firstname": {
+        "label": "Cambia il tuo nome",
+        "placeholder": "Scegli un nuovo nome"
+      },
+      "lastname": {
+        "label": "Cambia il tuo cognome",
+        "placeholder": "Scegli un nuovo cognome"
+      },
+      "password_confirm": {
+        "label": "Conferma password",
+        "placeholder": "Conferma la tua nuova password"
+      },
+      "password_current": {
+        "label": "Password attuale",
+        "placeholder": "Conferma la tua password attuale"
+      },
+      "password_new": {
+        "label": "Nuova password",
+        "placeholder": "Scegli una nuova password"
+      },
+      "toast": {
+        "password": {
+          "success": "La tua password è stata cambiata con successo"
+        },
+        "user_infos": {
+          "success": "Le informazioni del tuo account sono state aggiornate con successo"
+        }
+      }
     }
   }
 }

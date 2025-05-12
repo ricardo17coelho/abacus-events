@@ -4,9 +4,24 @@
   <v-row>
     <v-col cols="12" md="6">
       <VCardSettings height="100%" title="Open AI">
-        <v-card-text>
+        <v-card-text v-if="!!userSettings?.openai_api_key_encrypted">
+          <v-alert
+            class="mb-3"
+            density="compact"
+            rounded="lg"
+            type="warning"
+            variant="tonal"
+          >
+            <template #text>
+              <div>The API-Key can not be edited.</div>
+              <div>
+                If u want to change, pls remove the existing API-Key first
+              </div>
+            </template>
+          </v-alert>
+
           <v-list-item
-            v-if="!!userSettings?.openai_api_key_encrypted"
+            subtitle="The Key is saved encrypted. "
             title="OpenAI key enabled"
           >
             <template #prepend>
@@ -25,12 +40,9 @@
               />
             </template>
           </v-list-item>
-          <v-text-field
-            v-else
-            v-model="modelApiKey"
-            hide-details
-            label="API KEY"
-          />
+        </v-card-text>
+        <v-card-text v-else>
+          <v-text-field v-model="modelApiKey" hide-details label="API KEY" />
         </v-card-text>
         <v-card-actions v-if="!userSettings?.openai_api_key_encrypted">
           <v-spacer />

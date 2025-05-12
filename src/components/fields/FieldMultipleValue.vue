@@ -48,6 +48,7 @@
 <script setup lang="ts">
 import DialogTitleI18n from '@/components/dialogs/DialogTitleI18n.vue';
 import FieldMultipleValueTextField from '@/components/fields/FieldMultipleValueTextField.vue';
+import { useI18n } from 'vue-i18n';
 
 const props = defineProps({
   label: {
@@ -65,6 +66,8 @@ const props = defineProps({
 });
 
 const model = defineModel({ type: Array, default: () => [] });
+
+const { t } = useI18n();
 
 function onFieldAdd() {
   if (props.multipleLanguageMode) {

@@ -6,18 +6,22 @@
     v-bind="$attrs"
   >
     <template #append>
-      <v-icon-btn
-        v-if="modelList.length === 0 || idx === modelList.length - 1"
-        @click.stop.prevent="emit('click:add')"
-      >
-        +
-      </v-icon-btn>
-      <v-icon-btn
-        v-if="modelList.length > 1"
-        @click.stop.prevent="emit('click:remove')"
-      >
-        -
-      </v-icon-btn>
+      <slot name="append">
+        <slot name="append-prepend"></slot>
+        <v-icon-btn
+          v-if="modelList.length === 0 || idx === modelList.length - 1"
+          @click.stop.prevent="emit('click:add')"
+        >
+          +
+        </v-icon-btn>
+        <v-icon-btn
+          v-if="modelList.length > 1"
+          @click.stop.prevent="emit('click:remove')"
+        >
+          -
+        </v-icon-btn>
+        <slot name="append-append"></slot>
+      </slot>
     </template>
   </v-text-field>
 </template>

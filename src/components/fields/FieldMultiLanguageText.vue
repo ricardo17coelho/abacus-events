@@ -11,6 +11,7 @@
       <v-row v-for="(_, modelKey) in model" :key="modelKey" dense>
         <v-col cols="4">
           <v-select
+            hide-details="auto"
             :items="getLangItemsByLang(modelKey)"
             :label="
               fieldKeyLabel || t('fields.multi_language_text.field_key_label')
@@ -39,6 +40,7 @@
             autocomplete="off"
             autofocus
             clearable
+            hide-details="auto"
             :label="
               fieldValueLabel ||
               t('fields.multi_language_text.field_value_label')
@@ -57,6 +59,23 @@
               />
             </template>
           </v-text-field>
+          <v-btn
+            v-if="canAI && modelKey === Object.keys(model)[0]"
+            class="my-2"
+            color="purple"
+            density="compact"
+            prepend-icon="mdi-creation"
+            variant="text"
+            @click="
+              onTranslateBatch({
+                text: model[modelKey],
+                source: modelKey,
+                targets: computedAvailableLanguages,
+              })
+            "
+          >
+            Use AI
+          </v-btn>
         </v-col>
         <v-col align-self="start" cols="12">
           <v-btn
@@ -77,6 +96,11 @@
 import { useI18n } from 'vue-i18n';
 import validationsRules from '@/utils/validations/';
 import { useDisplay } from 'vuetify';
+import useApiAi, { type AiTranslateBatchPayload } from '@/api/ai.ts';
+import { toast } from 'vue-sonner';
+import useAuthUser from '@/composables/auth-user.ts';
+import useApiProfileSettings from '@/api/profile-settings.ts';
+import type { TitleI18n } from '@/types/TitleI18n.ts';
 
 defineProps({
   btnAdd: {
@@ -93,7 +117,10 @@ defineProps({
   },
 });
 
-const model = defineModel({ type: Object, default: () => ({}) });
+const model = defineModel({
+  type: Object as PropType<TitleI18n>,
+  default: () => ({}),
+});
 
 const { t, availableLocales } = useI18n();
 const { xs } = useDisplay();
@@ -156,5 +183,41 @@ function getLangItemsByLang(langKey: string) {
         value: lang,
       };
     });
+}
+
+const { user } = useAuthUser();
+const { getProfileSettingById } = useApiProfileSettings();
+
+const canAI = computedAsync<string[]>(async () => {
+  const { data } = await getProfileSettingById(user.value.id);
+  if (data) {
+    return !!data.openai_api_key_encrypted;
+  }
+}, false);
+
+const { translateBatch } = useApiAi();
+async function onTranslateBatch(payload: AiTranslateBatchPayload) {
+  const { data, error } = await translateBatch(payload);
+  if (error) {
+    toast.error(t('errors.error_occurred'));
+  }
+  if (data) {
+    const translations = data.translations;
+    // remove current translation
+    delete translations[payload.source];
+
+    const translationsFormatted = Object.fromEntries(
+      Object.entries(data.translations)
+        .filter(([, val]) => val.status === 200)
+        .map(([key, val]) => [key, val.value]),
+    );
+
+    if (translations) {
+      model.value = {
+        ...model.value,
+        ...translationsFormatted,
+      };
+    }
+  }
 }
 </script>

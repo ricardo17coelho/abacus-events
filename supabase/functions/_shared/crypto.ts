@@ -32,3 +32,13 @@ async function getKey(secret: string): Promise<CryptoKey> {
     'decrypt',
   ]);
 }
+
+export function generateSecretKey(length = 32): string {
+  const charset =
+    'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  const array = new Uint8Array(length);
+  crypto.getRandomValues(array);
+  return Array.from(array, (x) => charset[x % charset.length]).join('');
+}
+
+// const secret = generateSecretKey(32); // AES-256

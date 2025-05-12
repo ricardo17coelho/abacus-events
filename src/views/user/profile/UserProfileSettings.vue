@@ -131,7 +131,6 @@ async function onGetUserSettings() {
     toast.error(t('errors.error_occurred'));
   }
   if (data) {
-    console.warn('data', data);
     userSettings.value = data;
   }
 }
@@ -140,7 +139,6 @@ onMounted(() => onGetUserSettings());
 const modelText = ref('Auto');
 const translations = ref<AiTranslateBatchTranslation>();
 async function onTranslateBatch(payload: AiTranslateBatchPayload) {
-  console.warn('onTranslateBatch', payload);
   const { data, error } = await translateBatch(payload);
   if (error) {
     toast.error(t('errors.error_occurred'));

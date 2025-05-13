@@ -314,6 +314,8 @@
     "usePreferredReducedTransparency": true,
     "useSSRWidth": true,
     "useTemplateRef": true,
-    "createRef": true
+    "createRef": true,
+    "Slot": true,
+    "Slots": true
   }
 }

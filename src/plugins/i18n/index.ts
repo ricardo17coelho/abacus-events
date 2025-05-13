@@ -7,6 +7,7 @@ import it from './locales/it.json';
 import fr from './locales/fr.json';
 
 const i18n = createI18n({
+  legacy: false,
   locale: 'de',
   fallbackLocale: 'de',
   globalInjection: true,

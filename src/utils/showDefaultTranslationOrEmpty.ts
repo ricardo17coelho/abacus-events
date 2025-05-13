@@ -2,7 +2,7 @@ import i18n from '@/plugins/i18n';
 
 export function showDefaultTranslationOrEmpty(value?: Record<string, string>) {
   if (!value) return '';
-  const locale = i18n.global.locale;
+  const locale = i18n.global.locale.value;
   return Object.keys(value).includes(locale)
     ? value[locale]
     : Object.values(value).length > 0

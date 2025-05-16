@@ -1,10 +1,14 @@
 <template>
-  <UiDialog v-model="model" max-width="600" :title="t('labels.alert_hint')">
+  <UiDialog
+    v-model="model"
+    max-width="600"
+    :title="t('labels.features.SCHEDULE')"
+  >
     <template #activator="activatorProps">
       <slot name="activator" v-bind="activatorProps" />
     </template>
     <template #content>
-      <EventShuttlePlanAlertForm ref="formRef" v-model="form" />
+      <EventScheduleItemForm ref="formRef" v-model="form" />
     </template>
     <template #actions>
       <VBtnPrimary :loading="isLoading" @click="onSave">
@@ -17,20 +21,24 @@
 <script setup lang="ts">
 // components
 import { UiDialog } from '@lib/ui';
-import EventShuttlePlanAlertForm from './EventShuttlePlanAlertForm.vue';
+import EventScheduleItemForm from './EventScheduleItemForm.vue';
 // apis
-import useApiEventShuttleAlert from '@/api/event-shuttle-plan-alert.ts';
+import useApiEventSchedule from '@/api/event-schedule.ts';
 // types & constants
 import { requireInjection } from '@/utils/injection.ts';
 import { CURRENT_EVENT_KEY } from '@/types/injectionKeys.ts';
-import type { EventShuttlePlan } from '@/api/types/EventShuttlePlan.ts';
+import type { EventSchedule } from '@/api/types/EventSchedule.ts';
 // composables
 import { toast } from 'vue-sonner';
 import { useI18n } from 'vue-i18n';
 import { merge2ObjectsIfKeysExists } from '@/utils/merge.ts';
 
 const props = defineProps({
-  eventShuttlePlanAlertId: {
+  eventScheduleId: {
+    type: String,
+    required: true,
+  },
+  eventScheduleItemId: {
     type: String,
     default: undefined,
   },
@@ -40,17 +48,12 @@ const model = defineModel({ type: Boolean, default: false });
 
 const emit = defineEmits(['success']);
 
-const { t, locale } = useI18n();
+const { t } = useI18n();
 
 const DEFAULT_FORM = {
-  type: undefined,
-  icon: undefined,
-  title: {
-    [locale.value]: '',
-  },
-  message: {
-    [locale.value]: '',
-  },
+  text: undefined,
+  text_link: undefined,
+  order: undefined,
 };
 
 const form = ref({
@@ -60,10 +63,10 @@ const form = ref({
 const currentEvent = requireInjection(CURRENT_EVENT_KEY);
 
 const {
-  createEventShuttleAlert,
-  updateEventShuttleAlert,
-  getEventShuttleAlertById,
-} = useApiEventShuttleAlert();
+  createEventScheduleItem,
+  updateEventScheduleItem,
+  getEventScheduleItemById,
+} = useApiEventSchedule();
 
 const isLoading = ref(false);
 const formRef = ref();
@@ -73,13 +76,11 @@ async function onSave() {
   const { valid } = await formRef.value.formRef.validate();
   if (valid) {
     isLoading.value = true;
-
-    if (props.eventShuttlePlanAlertId) {
-      const { error, data } = await updateEventShuttleAlert(
-        props.eventShuttlePlanAlertId,
+    if (props.eventScheduleItemId) {
+      const { error, data } = await updateEventScheduleItem(
+        props.eventScheduleItemId,
         {
           ...form.value,
-          event_id: currentEvent.value?.id,
         },
       );
 
@@ -98,9 +99,9 @@ async function onSave() {
       }
     } else {
       // add
-      const { error, data } = await createEventShuttleAlert({
+      const { error, data } = await createEventScheduleItem({
         ...form.value,
-        event_id: currentEvent.value.id,
+        event_schedule_id: props.eventScheduleId,
       });
 
       if (error) {
@@ -115,6 +116,7 @@ async function onSave() {
         }
       }
     }
+
     isLoading.value = false;
   } else {
     toast.error(t('errors.validation.invalid'));
@@ -122,12 +124,12 @@ async function onSave() {
   }
 }
 
-const shuttlePlan = ref<EventShuttlePlan>();
+const eventSchedule = ref<EventSchedule>();
 const isLoadingInitial = ref(false);
 
 async function onGetDataById(id: string) {
   isLoadingInitial.value = true;
-  const { error, data } = await getEventShuttleAlertById(id);
+  const { error, data } = await getEventScheduleItemById(id);
 
   if (error) {
     if (error.message) {
@@ -135,7 +137,7 @@ async function onGetDataById(id: string) {
     }
   } else {
     if (data) {
-      shuttlePlan.value = data;
+      eventSchedule.value = data;
       form.value = merge2ObjectsIfKeysExists({ ...DEFAULT_FORM }, data);
     }
   }
@@ -145,8 +147,8 @@ async function onGetDataById(id: string) {
 watch(
   () => model.value,
   async (newValue) => {
-    if (newValue && props.eventShuttlePlanAlertId) {
-      onGetDataById(props.eventShuttlePlanAlertId);
+    if (newValue && props.eventScheduleItemId) {
+      onGetDataById(props.eventScheduleItemId);
     }
   },
 );

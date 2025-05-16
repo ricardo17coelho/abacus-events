@@ -2,7 +2,7 @@
   "actions": {
     "add": "Hinzufügen",
     "add_alert": "Alert hinzufügen",
-    "add_ride": "Fahrt hinzufügen",
+    "add_schedule": "Zeitplan hinzufügen",
     "delete": "Löschen",
     "edit": "Bearbeiten",
     "open": "Öffnen",
@@ -66,8 +66,8 @@
       "FILES": "Dateien",
       "GUEST_LIST": "Gästeliste",
       "PARKING": "Parkplatz",
-      "PROGRAM": "Programm",
-      "SHUTTLE_PLAN": "Shuttle-Plan"
+      "SCHEDULE": "Schedule",
+      "PROGRAM": "Programm"
     },
     "first_name": "Vorname",
     "icon": "Symbol",
@@ -99,10 +99,6 @@
     "return_journey": "Rückfahrt",
     "role": "Role",
     "settings": "Einstellungen",
-    "shuttle_plan_direction": {
-      "outward": "Hinfahrt",
-      "return": "Rückfahrt"
-    },
     "slots_filled": "Belegte Plätze",
     "slots_total": "Max. Plätze",
     "slug": "Slug",
@@ -155,17 +151,6 @@
     "parking": {
       "alert_01": "Wenn du einen fixen PP im AbaHome II hast, nutze diesen bitte. Danke 😇"
     },
-    "shuttle_schedule": {
-      "alert_01": "VBSG-Bus ist mit EXTRAFAHRT beschriftet",
-      "info_01": "Zwischen 19.00 - 21.30 Uhr verkehrt KEIN Shuttlebus",
-      "info_02": "bitte auf ÖV ({link} - Haltestelle Sonnrainweg) ausweichen!",
-      "outward_journey": {
-        "info": "13:30-19:00 Uhr (im 30min Takt)"
-      },
-      "return_journey": {
-        "info": "21:30-01:30 Uhr (im 30min Takt)"
-      }
-    },
     "profile": {
       "first_name": {
         "label": "Ändern Sie Ihren Vornamen",
@@ -194,6 +179,17 @@
         "user_infos": {
           "success": "Ihre Kontoinformationen wurden erfolgreich aktualisiert"
         }
+      }
+    },
+    "shuttle_schedule": {
+      "alert_01": "VBSG-Bus ist mit EXTRAFAHRT beschriftet",
+      "info_01": "Zwischen 19.00 - 21.30 Uhr verkehrt KEIN Shuttlebus",
+      "info_02": "bitte auf ÖV ({link} - Haltestelle Sonnrainweg) ausweichen!",
+      "outward_journey": {
+        "info": "13:30-19:00 Uhr (im 30min Takt)"
+      },
+      "return_journey": {
+        "info": "21:30-01:30 Uhr (im 30min Takt)"
       }
     }
   }

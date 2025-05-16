@@ -2,7 +2,7 @@
   "actions": {
     "add": "Ajouter",
     "add_alert": "",
-    "add_ride": "",
+    "add_schedule": "Ajouter un programme",
     "delete": "Supprimer",
     "edit": "Editer",
     "open": "Ouvrir",
@@ -62,8 +62,8 @@
       "FILES": "Dossiers",
       "GUEST_LIST": "Liste des invités",
       "PARKING": "Parking",
-      "PROGRAM": "Programme",
-      "SHUTTLE_PLAN": "Plan de navette"
+      "SCHEDULE": "Schedule",
+      "PROGRAM": "Programme"
     },
     "first_name": "",
     "icon": "Icône",
@@ -95,10 +95,6 @@
     "return_journey": "Retour",
     "role": "Rôle",
     "settings": "",
-    "shuttle_plan_direction": {
-      "outward": "",
-      "return": ""
-    },
     "slots_filled": "Places occupées",
     "slots_total": "Nb max. de places",
     "slug": "Slug",
@@ -151,17 +147,6 @@
     "parking": {
       "alert_01": "Si tu as un PP fixe dans AbaHome II, merci de l'utiliser. Merci 😇"
     },
-    "shuttle_schedule": {
-      "alert_01": "Le bus VBSG est marqué EXTRA COURSE",
-      "info_01": "Entre 19:00 et 21:30, il n'y a PAS de navette",
-      "info_02": "veuillez utiliser les transports publics ({link} - arrêt Sonnrainweg) !",
-      "outward_journey": {
-        "info": "13:30-19:00 (toutes les 30 minutes)"
-      },
-      "return_journey": {
-        "info": "21:30-01:30 (toutes les 30 minutes)"
-      }
-    },
     "profile": {
       "firstname": {
         "label": "Changer votre prénom",
@@ -190,6 +175,17 @@
         "user_infos": {
           "success": "Les informations de votre compte ont été mises à jour avec succès"
         }
+      }
+    },
+    "shuttle_schedule": {
+      "alert_01": "Le bus VBSG est marqué EXTRA COURSE",
+      "info_01": "Entre 19:00 et 21:30, il n'y a PAS de navette",
+      "info_02": "veuillez utiliser les transports publics ({link} - arrêt Sonnrainweg) !",
+      "outward_journey": {
+        "info": "13:30-19:00 (toutes les 30 minutes)"
+      },
+      "return_journey": {
+        "info": "21:30-01:30 (toutes les 30 minutes)"
       }
     }
   }

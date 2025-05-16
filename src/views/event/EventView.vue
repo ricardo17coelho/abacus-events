@@ -64,8 +64,8 @@ function getEventFeatureLinkOrAction(feature: EventFeatureTypes) {
           name: 'event-parking',
         },
       };
-    case 'SHUTTLE_PLAN':
-      return { to: { name: 'event-shuttle-plan' } };
+    case 'SCHEDULE':
+      return { to: { name: 'event-schedule' } };
     case 'FILES':
       return {
         action: () => {

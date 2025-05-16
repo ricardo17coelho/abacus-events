@@ -107,13 +107,13 @@
           </v-chip-group>
           <EventTimeline01 :date="currentEvent.date" :items="sortedItems" />
         </v-container>
-        <!-- SHUTTLE_PLAN -->
+        <!-- SCHEDULE -->
         <v-container
-          v-if="hasEventFeature(currentEvent, 'SHUTTLE_PLAN')"
-          :id="`feature-${getEventFeatureIfExists(currentEvent, 'SHUTTLE_PLAN')?.id}`"
+          v-if="hasEventFeature(currentEvent, 'SCHEDULE')"
+          :id="`feature-${getEventFeatureIfExists(currentEvent, 'SCHEDULE')?.id}`"
           fluid
         >
-          <div class="text-h4">{{ t('labels.features.SHUTTLE_PLAN') }}</div>
+          <div class="text-h4">{{ t('labels.features.SCHEDULE') }}</div>
           <AppStateSoon />
         </v-container>
         <!-- PARKING -->

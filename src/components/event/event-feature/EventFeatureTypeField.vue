@@ -50,7 +50,7 @@ function getIcon(i: EventFeatureTypes) {
       return 'mdi-car';
     case 'PROGRAM':
       return 'mdi-list-box';
-    case 'SHUTTLE_PLAN':
+    case 'SCHEDULE':
       return 'mdi-bus';
   }
 }

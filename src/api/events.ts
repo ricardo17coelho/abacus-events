@@ -23,8 +23,11 @@ export default function useApiEvents() {
       ...parking_lots(*)
     ),
     contacts:event_contacts(*),
-    shuttle_plan:event_shuttle_plan(*),
-    shuttle_plan_alerts:event_shuttle_plan_alerts(*),
+    schedule:event_schedule(
+      *,
+      items:event_schedule_items(*)
+    ),
+    schedule_alerts:event_schedule_alerts(*),
     persons:event_persons(*)
   `;
 

@@ -103,11 +103,11 @@ export default [
                           ),
                       },
                       {
-                        path: 'shuttle-plan',
-                        name: 'manage-events-id-shuttle-plan',
+                        path: 'event-schedule',
+                        name: 'manage-events-id-event-schedule',
                         component: () =>
                           import(
-                            '@/views/manage/events/ManageEventShuttlePlan.vue'
+                            '@/views/manage/events/ManageEventSchedule.vue'
                           ),
                       },
                       {

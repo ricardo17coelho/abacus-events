@@ -39,7 +39,7 @@
             </div>
           </template>
           <v-card-item>
-            <EventShuttlePlanTimeline :items="itemsOutward" />
+            <EventScheduleItemTimeline :items="itemsOutward" />
           </v-card-item>
         </v-card>
 
@@ -55,7 +55,7 @@
           </template>
 
           <v-card-item>
-            <EventShuttlePlanTimeline :items="itemsReturn" />
+            <EventScheduleItemTimeline :items="itemsReturn" />
           </v-card-item>
         </v-card>
       </v-card>
@@ -67,7 +67,7 @@
 import TheAppTitle from '@/components/app/TheAppTitle.vue';
 import ContainerCentered from '@/components/containers/ContainerCentered.vue';
 import { useI18n } from 'vue-i18n';
-import EventShuttlePlanTimeline from '@/components/event/event-shuttle-plan/EventShuttlePlanTimeline.vue';
+import EventScheduleItemTimeline from '@/components/event/event-schedule/event-schedule-items/EventScheduleItemTimeline.vue';
 
 const { t } = useI18n();
 

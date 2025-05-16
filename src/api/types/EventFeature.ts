@@ -6,7 +6,7 @@ export const EVENT_FEATURE_TYPE = {
   GUEST_LIST: 'GUEST_LIST',
   PARKING: 'PARKING',
   PROGRAM: 'PROGRAM',
-  SHUTTLE_PLAN: 'SHUTTLE_PLAN',
+  SCHEDULE: 'SCHEDULE',
 } as const;
 
 export type EventFeatureTypes =

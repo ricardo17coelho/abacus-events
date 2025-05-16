@@ -5,9 +5,9 @@ import type { EventBrand } from './EventBrand.ts';
 import type { EventFile } from './EventFile.ts';
 import type { EventContact } from '@/api/types/EventContact.ts';
 import type {
-  EventShuttleAlert,
-  EventShuttlePlan,
-} from '@/api/types/EventShuttlePlan.ts';
+  EventSchedule,
+  EventScheduleAlert,
+} from '@/api/types/EventSchedule.ts';
 import type { EventPerson } from '@/api/types/EventPerson.ts';
 
 export type Event = {
@@ -24,7 +24,7 @@ export type Event = {
   public: boolean;
   files: EventFile[];
   contacts: EventContact[];
-  shuttle_plan: EventShuttlePlan[];
+  schedule: EventSchedule[];
   persons: EventPerson[];
-  shuttle_plan_alerts: EventShuttleAlert[];
+  schedule_alerts: EventScheduleAlert[];
 };

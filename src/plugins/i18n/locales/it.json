@@ -2,7 +2,7 @@
   "actions": {
     "add": "Aggiungi",
     "add_alert": "",
-    "add_ride": "",
+    "add_schedule": "Aggiungi programma",
     "delete": "Cancellare",
     "edit": "Modifica",
     "open": "Aperto",
@@ -62,8 +62,8 @@
       "FILES": "File",
       "GUEST_LIST": "Elenco degli ospiti",
       "PARKING": "Parcheggio",
-      "PROGRAM": "Programma",
-      "SHUTTLE_PLAN": "Piano navetta"
+      "SCHEDULE": "Piano",
+      "PROGRAM": "Programma"
     },
     "first_name": "",
     "icon": "Icona",
@@ -95,10 +95,6 @@
     "return_journey": "Ritorno",
     "role": "Ruolo",
     "settings": "",
-    "shuttle_plan_direction": {
-      "outward": "",
-      "return": ""
-    },
     "slots_filled": "Posti occupati",
     "slots_total": "Posti massimi",
     "slug": "Slug",
@@ -151,17 +147,6 @@
     "parking": {
       "alert_01": "Se avete un PP fisso in AbaHome II, vi preghiamo di utilizzarlo. Grazie 😇"
     },
-    "shuttle_schedule": {
-      "alert_01": "Il bus VBSG è etichettato EXTRA CORSA",
-      "info_01": "Tra le 19:00 e le 21:30 non c'è navetta",
-      "info_02": "si prega di utilizzare i mezzi pubblici ({link} - fermata Sonnrainweg)!",
-      "outward_journey": {
-        "info": "13:30-19:00 (ogni 30 minuti)"
-      },
-      "return_journey": {
-        "info": "21:30-01:30 (ogni 30 minuti)"
-      }
-    },
     "profile": {
       "firstname": {
         "label": "Cambia il tuo nome",
@@ -190,6 +175,17 @@
         "user_infos": {
           "success": "Le informazioni del tuo account sono state aggiornate con successo"
         }
+      }
+    },
+    "shuttle_schedule": {
+      "alert_01": "Il bus VBSG è etichettato EXTRA CORSA",
+      "info_01": "Tra le 19:00 e le 21:30 non c'è navetta",
+      "info_02": "si prega di utilizzare i mezzi pubblici ({link} - fermata Sonnrainweg)!",
+      "outward_journey": {
+        "info": "13:30-19:00 (ogni 30 minuti)"
+      },
+      "return_journey": {
+        "info": "21:30-01:30 (ogni 30 minuti)"
       }
     }
   }

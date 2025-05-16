@@ -147,7 +147,7 @@ const imagesBtn = computed(() => {
   //   return { text: t('labels.drinks'), icon: 'mdi-glass-cocktail' };
   // }
 
-  return { text: t('labels.plan'), icon: 'mdi-map' };
+  return { text: t('labels.schedule'), icon: 'mdi-map' };
 });
 </script>
 

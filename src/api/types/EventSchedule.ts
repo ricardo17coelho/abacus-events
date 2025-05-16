@@ -1,13 +1,5 @@
 import type { TitleI18n } from '@/types/TitleI18n.ts';
 
-export const SHUTTLE_PLAN_DIRECTION = {
-  OUTWARD: 'OUTWARD',
-  RETURN: 'RETURN',
-} as const;
-
-export type ShuttlePlanDirection =
-  (typeof SHUTTLE_PLAN_DIRECTION)[keyof typeof SHUTTLE_PLAN_DIRECTION];
-
 export const ALERT_TYPES = {
   warning: 'warning',
   info: 'info',
@@ -17,17 +9,26 @@ export const ALERT_TYPES = {
 
 export type AlertTypes = (typeof ALERT_TYPES)[keyof typeof ALERT_TYPES];
 
-export type EventShuttlePlan = {
+export type EventScheduleItem = {
   id: string;
   created_at: string;
-  event_id: number;
-  direction: ShuttlePlanDirection;
-  location: string;
-  location_link: string;
+  event_schedule_id: number;
+  text: string;
+  text_link: string;
   order: number;
 };
 
-export type EventShuttleAlert = {
+export type EventSchedule = {
+  id: string;
+  created_at: string;
+  event_id: number;
+  title: TitleI18n;
+  description?: TitleI18n;
+  icon?: string;
+  items: EventScheduleItem[];
+};
+
+export type EventScheduleAlert = {
   id: string;
   created_at: string;
   event_id: number;

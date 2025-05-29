@@ -14,6 +14,7 @@
           exact
           link
           :prepend-icon="item.icon"
+          :subtitle="item.subtitle"
           :title="item.title"
           :to="item.to"
         >
@@ -69,6 +70,7 @@ const navItems = [
   },
   {
     title: 'Roles',
+    subtitle: 'WIP',
     icon: 'mdi-account-key-outline',
     to: {
       name: 'manage-roles',

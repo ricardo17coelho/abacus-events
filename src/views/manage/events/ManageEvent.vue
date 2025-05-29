@@ -3,13 +3,26 @@
     <PageHeading
       :caption="formatDateByFormat(currentEvent.date)"
       :subtitle="showDefaultTranslationOrEmpty(currentEvent.subtitle)"
-      :title="showDefaultTranslationOrEmpty(currentEvent.title)"
     >
+      <template #title>
+        <UiLink
+          class="text-h4"
+          :to="{
+            name: 'event',
+            params: {
+              id: currentEvent.id,
+            },
+          }"
+        >
+          {{ showDefaultTranslationOrEmpty(currentEvent.title) }}
+        </UiLink>
+      </template>
       <template #actions>
         <DialogEventLayoutView>
           <template #activator="{ props: activatorProps }">
             <VBtnPrimary
               v-bind="activatorProps"
+              density="comfortable"
               icon="mdi-eye"
               variant="text"
             />
@@ -23,6 +36,7 @@
           <template #activator="{ props: activatorProps }">
             <VBtnPrimary
               v-bind="activatorProps"
+              density="comfortable"
               icon="mdi-pencil"
               variant="text"
             />
@@ -64,7 +78,7 @@ import EventDialog from '@/components/event/event/EventDialog.vue';
 import useAuthUser from '@/composables/auth-user.ts';
 import { useI18n } from 'vue-i18n';
 import DialogEventLayoutView from '@/components/dialogs/DialogEventLayoutView.vue';
-import { formatDateByFormat } from '@lib/ui';
+import { formatDateByFormat, UiLink } from '@lib/ui';
 import type { Event } from '@/api/types/Event.ts';
 import { toast } from 'vue-sonner';
 import useApiEvents from '@/api/events.ts';

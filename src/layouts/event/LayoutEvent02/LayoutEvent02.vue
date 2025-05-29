@@ -84,28 +84,33 @@
           :id="`feature-${getEventFeatureIfExists(currentEvent, 'PROGRAM')?.id}`"
           fluid
         >
-          <div class="text-h4">{{ t('labels.features.PROGRAM') }}</div>
-          <v-chip-group
-            v-if="categories.length > 0"
-            v-model="currentCategoryFilter"
-            class="categories-chip-group"
-            color="primary"
-            column
-            mandatory
-            mobile
+          <EventFeatureDisplayCard
+            :feature="getEventFeatureIfExists(currentEvent, 'PROGRAM')"
           >
-            <v-chip
-              v-for="category in categories"
-              :key="category.id"
-              centered
-              filter
-              :prepend-icon="category.icon"
-              :text="showDefaultTranslationOrEmpty(category.title)"
-              :value="category.id"
-              variant="outlined"
-            />
-          </v-chip-group>
-          <EventTimeline01 :date="currentEvent.date" :items="sortedItems" />
+            <v-card-text>
+              <v-chip-group
+                v-if="categories.length > 0"
+                v-model="currentCategoryFilter"
+                class="categories-chip-group"
+                color="primary"
+                column
+                mandatory
+                mobile
+              >
+                <v-chip
+                  v-for="category in categories"
+                  :key="category.id"
+                  centered
+                  filter
+                  :prepend-icon="category.icon"
+                  :text="showDefaultTranslationOrEmpty(category.title)"
+                  :value="category.id"
+                  variant="outlined"
+                />
+              </v-chip-group>
+              <EventTimeline01 :date="currentEvent.date" :items="sortedItems" />
+            </v-card-text>
+          </EventFeatureDisplayCard>
         </v-container>
         <!-- SCHEDULE -->
         <v-container
@@ -113,8 +118,13 @@
           :id="`feature-${getEventFeatureIfExists(currentEvent, 'SCHEDULE')?.id}`"
           fluid
         >
-          <div class="text-h4">{{ t('labels.features.SCHEDULE') }}</div>
-          <AppStateSoon />
+          <EventFeatureDisplayCard
+            :feature="getEventFeatureIfExists(currentEvent, 'SCHEDULE')"
+          >
+            <v-card-text>
+              <EventScheduleDisplay01 />
+            </v-card-text>
+          </EventFeatureDisplayCard>
         </v-container>
         <!-- PARKING -->
         <v-container
@@ -125,17 +135,24 @@
           :id="`feature-${getEventFeatureIfExists(currentEvent, 'PARKING')?.id}`"
           fluid
         >
-          <div class="text-h4">{{ t('labels.features.PARKING') }}</div>
-          <v-row>
-            <v-col
-              v-for="parkingLot in currentEvent.parking_lots"
-              :key="parkingLot.id"
-              cols="12"
-              lg="6"
-            >
-              <ParkingLotCard :parking-lot="parkingLot" />
-            </v-col>
-          </v-row>
+          <EventFeatureDisplayCard
+            :feature="getEventFeatureIfExists(currentEvent, 'PARKING')"
+          >
+            <v-card-text>
+              <v-card-text>
+                <v-row>
+                  <v-col
+                    v-for="parkingLot in currentEvent.parking_lots"
+                    :key="parkingLot.id"
+                    cols="12"
+                    lg="6"
+                  >
+                    <ParkingLotCard :parking-lot="parkingLot" />
+                  </v-col>
+                </v-row>
+              </v-card-text>
+            </v-card-text>
+          </EventFeatureDisplayCard>
         </v-container>
         <!-- FILES -->
         <v-container
@@ -145,8 +162,15 @@
           :id="`feature-${getEventFeatureIfExists(currentEvent, 'FILES')?.id}`"
           fluid
         >
-          <div class="text-h4">{{ t('labels.features.FILES') }}</div>
-          <EventFilesLayout01 :files="currentEvent.files" />
+          <EventFeatureDisplayCard
+            :feature="getEventFeatureIfExists(currentEvent, 'FILES')"
+          >
+            <v-card-text>
+              <v-card-text>
+                <EventFilesLayout01 :files="currentEvent.files" />
+              </v-card-text>
+            </v-card-text>
+          </EventFeatureDisplayCard>
         </v-container>
         <!-- CONTACTS -->
         <v-container
@@ -157,9 +181,15 @@
           :id="`feature-${getEventFeatureIfExists(currentEvent, 'CONTACTS')?.id}`"
           fluid
         >
-          <div class="text-h4">{{ t('labels.features.CONTACTS') }}</div>
-
-          <EventContactsLayout01 :contacts="currentEvent.contacts" />
+          <EventFeatureDisplayCard
+            :feature="getEventFeatureIfExists(currentEvent, 'CONTACTS')"
+          >
+            <v-card-text>
+              <v-card-text>
+                <EventContactsLayout01 :contacts="currentEvent.contacts" />
+              </v-card-text>
+            </v-card-text>
+          </EventFeatureDisplayCard>
         </v-container>
         <UiBtnScrollToTop :scroll-container="`#${layoutMainContainerId}`" />
       </v-container>
@@ -175,11 +205,11 @@ import EventFilesLayout01 from '@/components/event/event-files/layouts/EventFile
 import EventCarousel from '@/components/event/event/EventCarousel.vue';
 import EventTimeline01 from '@/components/event/event-timeline/EventTimeline01.vue';
 import ParkingLotCard from '@/components/parking-lot/ParkingLotCard.vue';
-import AppStateSoon from '@/components/app/AppStateSoon.vue';
+import EventScheduleDisplay01 from '@/components/event/event-schedule/event-schedule-display/EventScheduleDisplay01.vue';
+import EventFeatureDisplayCard from '@/components/event/event-feature/event-feature-display/EventFeatureDisplayCard.vue';
 // composables
 import { useDisplay, useGoTo } from 'vuetify';
 import useEventProgram from '@/composables/event-program.ts';
-import { useI18n } from 'vue-i18n';
 // types & constants
 import { CURRENT_EVENT_KEY } from '@/types/injectionKeys.ts';
 // utilities
@@ -194,7 +224,6 @@ import { requireInjection } from '@/utils/injection.ts';
 const layoutMainContainerId = 'layout-main-container';
 const { smAndDown, mdAndUp } = useDisplay();
 const goTo = useGoTo();
-const { t } = useI18n();
 
 const currentEvent = requireInjection(CURRENT_EVENT_KEY);
 

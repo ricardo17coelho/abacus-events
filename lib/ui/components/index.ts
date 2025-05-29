@@ -10,5 +10,6 @@ export { default as UiBtnScrollToTop } from './UiBtnScrollToTop.vue';
 export { default as UiDateTimePicker } from './UiDateTimePicker.vue';
 export { default as UiDialog } from './UiDialog.vue';
 export { default as UiFileInput } from './UiFileInput.vue';
+export { default as UiLink } from './UiLink.vue';
 export { default as UiStageLabel } from './UiStageLabel.vue';
 export { default as UiTable } from './UiTable.vue';

@@ -5,6 +5,7 @@
   </v-app>
 </template>
 <script lang="ts" setup>
+import 'vue-sonner/style.css';
 import { Toaster } from 'vue-sonner';
 import { useGoogleAnalytics } from '@/plugins/google-analytics';
 import { isProdEnv } from './utils';

@@ -69,6 +69,15 @@
                 @change="onLogoChange($event.file)"
               />
             </v-img>
+            <v-btn
+              v-if="currentEvent.brand?.logo"
+              class="mt-2"
+              color="error"
+              variant="text"
+              @click="onLogoDelete(currentEvent.brand?.logo)"
+            >
+              Delete
+            </v-btn>
           </v-card-item>
         </VCardSettings>
       </v-col>
@@ -196,6 +205,11 @@ const onLogoUpload = () => {
 
 const onLogoChange = async (file: File) => {
   if (file && currentEvent.value) {
+    // remove current logo if exists before upload
+    if (currentEvent.value?.brand?.logo) {
+      await onLogoDelete(currentEvent.value.brand?.logo);
+    }
+
     const { data } = await uploadImg(
       file,
       'events',
@@ -292,6 +306,26 @@ async function onClickBannerDelete(banner: EventBrandBanner) {
     }
   } catch (e) {
     console.log(e);
+  }
+}
+
+async function onLogoDelete(logo: string) {
+  if (!logo) return;
+
+  const logoPath = logo.split('/public/events/')?.[1];
+
+  if (!logoPath) return;
+  try {
+    await removeImg('events', logoPath);
+    if (currentEvent.value?.brand) {
+      currentEvent.value.brand = {
+        ...currentEvent.value.brand,
+        logo: '',
+      };
+    }
+  } catch (e) {
+    console.log(e);
+    toast.error('Error on delete logo');
   }
 }
 

@@ -28,6 +28,15 @@
                   })
                 "
               />
+
+              <FieldColorPickerBtn
+                color="tertiary"
+                label="Tertiary Color"
+                :model-value="currentEvent.brand?.color_tertiary"
+                @update:model-value="
+                  onUpdateCompanyBrandDebounced({ color_tertiary: $event })
+                "
+              />
             </div>
           </v-card-item>
         </VCardSettings>
@@ -180,6 +189,9 @@ async function onUpdateCompanyBrand(data: Partial<EventBrand>) {
         color_secondary: Object.keys(data).includes('color_secondary')
           ? data.color_secondary
           : currentEvent.value.brand.color_secondary,
+        color_tertiary: Object.keys(data).includes('color_tertiary')
+          ? data.color_tertiary
+          : currentEvent.value.brand.color_tertiary,
       };
     }
     toast.success('Brand updated!');

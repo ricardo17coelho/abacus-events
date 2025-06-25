@@ -10,6 +10,7 @@ export type EventBrand = {
   created_at: string;
   color_primary: string;
   color_secondary: string;
+  color_tertiary: string;
   banners: EventBrandBanner[];
   logo: string;
   layout: EventLayout;

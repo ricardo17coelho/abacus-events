@@ -51,8 +51,17 @@ watch(
   () => currentCompanyBrand.value,
   (newValue) => {
     clearBrand();
-    if (newValue && (newValue.color_primary || newValue.color_secondary)) {
-      setBrand(newValue.color_primary, newValue?.color_secondary);
+    if (
+      newValue &&
+      (newValue.color_primary ||
+        newValue.color_secondary ||
+        newValue.color_tertiary)
+    ) {
+      setBrand(
+        newValue.color_primary,
+        newValue?.color_secondary,
+        newValue?.color_tertiary,
+      );
     } else {
       clearBrand();
     }

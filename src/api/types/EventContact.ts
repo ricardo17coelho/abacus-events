@@ -1,15 +1,5 @@
-export const EVENT_CONTACT_TYPES = {
-  EMAIL: 'EMAIL',
-  PHONE: 'PHONE',
-} as const;
+import { type Contact, CONTACT_TYPES } from '@/api/types/Contact.ts';
 
-export type EventContactTypes =
-  (typeof EVENT_CONTACT_TYPES)[keyof typeof EVENT_CONTACT_TYPES];
-
-export type EventContact = {
-  id: string;
-  created_at: string;
-  type: EventContactTypes;
-  value: string;
-  description: string;
-};
+export type EventContactTypes = Contact;
+export const EVENT_CONTACT_TYPES = CONTACT_TYPES;
+export type EventContact = Contact;

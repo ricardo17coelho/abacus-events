@@ -10,9 +10,10 @@
 <script lang="ts" setup>
 import { useI18n } from 'vue-i18n';
 import { EVENT_CONTACT_TYPES } from '@/api/types/EventContact.ts';
-import { getEventContactIcon } from '@/components/event/event-contacts/event-contacts.ts';
+import useContact from '@/composables/contact.ts';
 
 const { t } = useI18n();
+const { getContactIcon } = useContact();
 
 const items = computed(() =>
   Object.values(EVENT_CONTACT_TYPES).map((i) => {
@@ -21,7 +22,7 @@ const items = computed(() =>
       title: t(`labels.contact_types.${i}`),
       props: {
         slim: true,
-        prependIcon: getEventContactIcon(i),
+        prependIcon: getContactIcon(i),
         color: 'primary',
       },
     };

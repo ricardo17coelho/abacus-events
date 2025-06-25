@@ -30,7 +30,11 @@ export default function useBrand() {
       themes[currentThemeVariant]?.colors?.secondary;
   };
 
-  const setBrand = (primary?: string, secondary?: string) => {
+  const setBrand = (
+    primary?: string,
+    secondary?: string,
+    tertiary?: string,
+  ) => {
     if (primary) {
       theme.themes.value[currentThemeVariant].colors.primary = primary;
     } else {
@@ -39,6 +43,10 @@ export default function useBrand() {
 
     if (secondary) {
       theme.themes.value[currentThemeVariant].colors.secondary = secondary;
+    }
+
+    if (tertiary) {
+      theme.themes.value[currentThemeVariant].colors.tertiary = tertiary;
     }
   };
 

@@ -22,6 +22,7 @@ export const themes: Record<string, ThemeDefinition> = {
     colors: {
       primary: '#386867',
       secondary: '#F0E8D9',
+      tertiary: '#ff825b',
     },
   },
 };

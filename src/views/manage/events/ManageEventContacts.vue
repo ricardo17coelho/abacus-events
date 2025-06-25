@@ -17,7 +17,7 @@
       </template>
       <template #[`item.type`]="{ item }">
         <v-icon v-if="item.type">
-          {{ getEventContactIcon(item.type) }}
+          {{ getContactIcon(item.type) }}
         </v-icon>
       </template>
     </UiTable>
@@ -39,10 +39,11 @@ import EventContactDialog from '@/components/event/event-contacts/EventContactDi
 import type { EventContact } from '@/api/types/EventContact.ts';
 import { toast } from 'vue-sonner';
 import useApiEventContact from '@/api/event-contact.ts';
-import { getEventContactIcon } from '@/components/event/event-contacts/event-contacts.ts';
 import ManageEventContainer from '@/components/manage/ManageEventContainer.vue';
-
+import useContact from '@/composables/contact.ts';
 const currentEvent = requireInjection(CURRENT_EVENT_KEY);
+
+const { getContactIcon } = useContact();
 
 const { t } = useI18n();
 

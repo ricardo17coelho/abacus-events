@@ -1,6 +1,6 @@
 <template>
   <v-row>
-    <v-col v-for="file in filesPDF" :key="file.id">
+    <v-col v-for="file in filesPDF" :key="file.id" cols="auto">
       <AppPdfDialog v-if="isPdf(file) && file.url" :pdf-url="file.url">
         <template #activator="{ props: ActivatorProps }">
           <EventFilesCard v-bind="ActivatorProps" :file="file" />
@@ -8,13 +8,13 @@
       </AppPdfDialog>
     </v-col>
 
-    <AppImagesView :images="filesImageUrls">
-      <template #activator="ActivatorProps">
-        <v-col v-for="image in filesIMAGE" :key="image.id">
+    <v-col v-for="(image, idx) in filesIMAGE" :key="image.id" cols="auto">
+      <AppImagesView :images="filesImageUrls" :init-index="idx">
+        <template #activator="ActivatorProps">
           <EventFilesCard v-bind="ActivatorProps" :file="image" />
-        </v-col>
-      </template>
-    </AppImagesView>
+        </template>
+      </AppImagesView>
+    </v-col>
   </v-row>
 </template>
 

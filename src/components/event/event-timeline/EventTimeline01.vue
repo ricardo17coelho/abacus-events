@@ -8,7 +8,7 @@
           :variant="isCurrentTimeValid(item) ? 'outlined' : undefined"
         >
           <template #prepend>
-            <v-avatar color="surface-light" size="64" tile>
+            <v-avatar color="secondary" size="64" tile>
               <div>
                 <div class="font-weight-black">
                   {{ item.time_start }}
@@ -32,7 +32,7 @@
               v-for="location in item.locations"
               :key="`${item.title}-${location}`"
               class="mr-1"
-              color="primary"
+              color="tertiary"
               density="compact"
               prepend-icon="mdi-home-map-marker"
               size="small"

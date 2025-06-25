@@ -11,7 +11,7 @@
         <template #prepend>
           <v-avatar color="surface-light" :size="48">
             <v-icon color="primary">
-              {{ getEventContactIcon(contact.type) }}
+              {{ getContactIcon(contact.type) }}
             </v-icon>
           </v-avatar>
         </template>
@@ -21,8 +21,8 @@
 </template>
 
 <script setup lang="ts">
-import { getEventContactIcon } from '@/components/event/event-contacts/event-contacts.ts';
 import type { EventContact } from '@/api/types/EventContact.ts';
+import useContact from '@/composables/contact.ts';
 
 defineProps({
   contacts: {
@@ -31,11 +31,5 @@ defineProps({
   },
 });
 
-function getContactHREF(contact: EventContact) {
-  if (contact.type === 'PHONE') {
-    return `tel:${contact.value}`;
-  } else if (contact.type === 'EMAIL') {
-    return `mailto:${contact.value}`;
-  }
-}
+const { getContactHREF, getContactIcon } = useContact();
 </script>

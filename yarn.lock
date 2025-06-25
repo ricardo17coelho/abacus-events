@@ -1480,10 +1480,10 @@
   resolved "https://registry.yarnpkg.com/@transloadit/prettier-bytes/-/prettier-bytes-0.3.5.tgz#0cca83975293e3f4990229914942c69714122ede"
   integrity sha512-xF4A3d/ZyX2LJWeQZREZQw+qFX4TGQ8bGVP97OLRt6sPO6T0TNHBFTuRHOJh7RNmYOBmQ9MHxpolD9bXihpuVA==
 
-"@tsconfig/node22@^22.0.2":
-  version "22.0.2"
-  resolved "https://registry.yarnpkg.com/@tsconfig/node22/-/node22-22.0.2.tgz#1e04e2c5cc946dac787d69bb502462a851ae51b6"
-  integrity sha512-Kmwj4u8sDRDrMYRoN9FDEcXD8UpBSaPQQ24Gz+Gamqfm7xxn+GBR7ge/Z7pK8OXNGyUzbSwJj+TH6B+DS/epyA==
+"@tsconfig/node24@^24.0.1":
+  version "24.0.1"
+  resolved "https://registry.yarnpkg.com/@tsconfig/node24/-/node24-24.0.1.tgz#5e6f9ca0574896161fa5f6ea3975021ad0d8956a"
+  integrity sha512-3+IXshza3bIrT0tbHBr9CixQDVf4iBf0HTR0hCYowhpLqkzJjswu3UY8aZWjRXZep31kYB+o2SQeD8KwIoUHYw==
 
 "@tybys/wasm-util@^0.9.0":
   version "0.9.0"

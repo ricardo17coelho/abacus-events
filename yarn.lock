@@ -1628,14 +1628,14 @@
     "@typescript-eslint/types" "8.35.0"
     eslint-visitor-keys "^4.2.1"
 
-"@uppy/core@^4.4.5":
-  version "4.4.5"
-  resolved "https://registry.yarnpkg.com/@uppy/core/-/core-4.4.5.tgz#09a162c37885f352f04975ee87bd033752bc38bb"
-  integrity sha512-4/VyKeFY5KDHp3LT66UCATfCqoWmxSaZsN0YvHehbejjrN3UZWCGjQTZFmQMQtKUKa31hpTKIoPeMXcd+6D3OA==
+"@uppy/core@^4.4.6":
+  version "4.4.6"
+  resolved "https://registry.yarnpkg.com/@uppy/core/-/core-4.4.6.tgz#9908222b175e5a1260ca22a8142531b8d31b7c48"
+  integrity sha512-EH5C5TSwY3tXp/gl4SPTpcxzEjBz8Ntt1o1s/v03bw8AUTl7X0lGUWRepbCh/XIUJyBTMJ1O+4Uv4/164WQSLg==
   dependencies:
     "@transloadit/prettier-bytes" "^0.3.4"
     "@uppy/store-default" "^4.2.0"
-    "@uppy/utils" "^6.1.4"
+    "@uppy/utils" "^6.1.5"
     lodash "^4.17.21"
     mime-match "^1.0.2"
     namespace-emitter "^2.0.1"
@@ -1746,6 +1746,14 @@
   version "6.1.4"
   resolved "https://registry.yarnpkg.com/@uppy/utils/-/utils-6.1.4.tgz#2fefa02e76b063f7412a7834bf1bdc82b305c0f4"
   integrity sha512-VMad3BA8QwYu9GYwkOa7MkmgnUET0Q582/htjLAAcH2QXCFZsX7l59qRs/wW6nyR1tUJYU1XSAFlCTjjwTPecA==
+  dependencies:
+    lodash "^4.17.21"
+    preact "^10.5.13"
+
+"@uppy/utils@^6.1.5":
+  version "6.1.5"
+  resolved "https://registry.yarnpkg.com/@uppy/utils/-/utils-6.1.5.tgz#161203d440325a9417ad1e9010a6a6c1690e6e97"
+  integrity sha512-R+3l4ir01I6MzZ80t5CSBoOGvV9mCqLZC9FoNYVTp/lsanQ3yMAZFGLN/x7JVGO7oi/m/ykmNR1jAH+JTtXdFg==
   dependencies:
     lodash "^4.17.21"
     preact "^10.5.13"

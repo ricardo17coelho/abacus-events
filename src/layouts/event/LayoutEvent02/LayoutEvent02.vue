@@ -1,175 +1,173 @@
 <template>
-  <v-layout>
-    <LayoutEvent02AppBar :scroll-container="`#${layoutMainContainerId}`" />
+  <LayoutEvent02AppBar :scroll-container="`#${layoutMainContainerId}`" />
 
-    <v-main scrollable>
-      <v-container
-        v-if="currentEvent"
-        :id="layoutMainContainerId"
-        class="main-container overflow-auto app-container"
-      >
-        <!-- HERO SECTION -->
-        <div>
-          <v-row>
-            <v-col
-              class="px-0 px-md-4 d-flex flex-column justify-space-between"
-              cols="12"
-              md="6"
-            >
-              <v-card class="d-flex flex-column" height="100%" variant="flat">
-                <v-card-item v-if="smAndDown">
-                  <EventCarousel
-                    :height="mdAndUp ? 400 : 200"
-                    :images="currentEventBrandBannersUrls"
-                  />
-                </v-card-item>
-
-                <v-card-title>
-                  <div class="text-md-h4 font-weight-bold mb-2 text-h5">
-                    {{ showDefaultTranslationOrEmpty(currentEvent.title) }}
-                  </div>
-                </v-card-title>
-
-                <v-card-subtitle>
-                  <div class="text-md-h5 font-weight-bold mb-2 text-h6">
-                    {{ showDefaultTranslationOrEmpty(currentEvent.subtitle) }}
-                  </div>
-                </v-card-subtitle>
-                <v-card-text>
-                  <UiHtmlRender
-                    class="text-body-1 mb-2 text-medium-emphasis"
-                    :content="
-                      showDefaultTranslationOrEmpty(currentEvent.description)
-                    "
-                  />
-
-                  <v-chip color="primary">
-                    {{ formatDateByFormat(currentEvent.date) }}
-                  </v-chip>
-                </v-card-text>
-                <v-card-actions
-                  v-if="hasEventFeature(currentEvent, 'PROGRAM')"
-                  class="px-4"
-                >
-                  <VBtnPrimary
-                    block
-                    color="primary"
-                    size="large"
-                    :text="
-                      showDefaultTranslationOrEmpty(
-                        getEventFeatureIfExists(currentEvent, 'PROGRAM')?.title,
-                      )
-                    "
-                    @click="
-                      goTo(
-                        `#feature-${
-                          getEventFeatureIfExists(currentEvent, 'PROGRAM')?.id
-                        }`,
-                        { container: `#${layoutMainContainerId}` },
-                      )
-                    "
-                  />
-                </v-card-actions>
-              </v-card>
-            </v-col>
-
-            <v-col class="hidden-sm-and-down" cols="12" md="6">
-              <div class="d-flex flex-column ga-6">
-                <EventCarousel :images="currentEventBrandBannersUrls" />
-              </div>
-            </v-col>
-          </v-row>
-        </div>
-        <!-- PROGRAM -->
-        <div
-          v-if="hasEventFeature(currentEvent, 'PROGRAM')"
-          :id="`feature-${getEventFeatureIfExists(currentEvent, 'PROGRAM')?.id}`"
-        >
-          <EventFeatureDisplayCard
-            :feature="getEventFeatureIfExists(currentEvent, 'PROGRAM')"
+  <v-main scrollable>
+    <v-container
+      v-if="currentEvent"
+      :id="layoutMainContainerId"
+      class="main-container overflow-auto app-container"
+    >
+      <!-- HERO SECTION -->
+      <div>
+        <v-row>
+          <v-col
+            class="px-0 px-md-4 d-flex flex-column justify-space-between"
+            cols="12"
+            md="6"
           >
-            <v-card-text>
-              <v-chip-group
-                v-if="categories.length > 0"
-                v-model="currentCategoryFilter"
-                class="categories-chip-group"
-                color="primary"
-                column
-                mandatory
-                mobile
-              >
-                <v-chip
-                  v-for="category in categories"
-                  :key="category.id"
-                  centered
-                  filter
-                  :prepend-icon="category.icon"
-                  :text="showDefaultTranslationOrEmpty(category.title)"
-                  :value="category.id"
-                  variant="outlined"
+            <v-card class="d-flex flex-column" height="100%" variant="flat">
+              <v-card-item v-if="smAndDown">
+                <EventCarousel
+                  :height="mdAndUp ? 400 : 200"
+                  :images="currentEventBrandBannersUrls"
                 />
-              </v-chip-group>
-              <EventTimeline01 :date="currentEvent.date" :items="sortedItems" />
-            </v-card-text>
-          </EventFeatureDisplayCard>
-        </div>
-        <!-- SCHEDULE -->
-        <div
-          v-if="hasEventFeature(currentEvent, 'SCHEDULE')"
-          :id="`feature-${getEventFeatureIfExists(currentEvent, 'SCHEDULE')?.id}`"
+              </v-card-item>
+
+              <v-card-title>
+                <div class="text-md-h4 font-weight-bold mb-2 text-h5">
+                  {{ showDefaultTranslationOrEmpty(currentEvent.title) }}
+                </div>
+              </v-card-title>
+
+              <v-card-subtitle>
+                <div class="text-md-h5 font-weight-bold mb-2 text-h6">
+                  {{ showDefaultTranslationOrEmpty(currentEvent.subtitle) }}
+                </div>
+              </v-card-subtitle>
+              <v-card-text>
+                <UiHtmlRender
+                  class="text-body-1 mb-2 text-medium-emphasis"
+                  :content="
+                    showDefaultTranslationOrEmpty(currentEvent.description)
+                  "
+                />
+
+                <v-chip color="primary">
+                  {{ formatDateByFormat(currentEvent.date) }}
+                </v-chip>
+              </v-card-text>
+              <v-card-actions
+                v-if="hasEventFeature(currentEvent, 'PROGRAM')"
+                class="px-4"
+              >
+                <VBtnPrimary
+                  block
+                  color="primary"
+                  size="large"
+                  :text="
+                    showDefaultTranslationOrEmpty(
+                      getEventFeatureIfExists(currentEvent, 'PROGRAM')?.title,
+                    )
+                  "
+                  @click="
+                    goTo(
+                      `#feature-${
+                        getEventFeatureIfExists(currentEvent, 'PROGRAM')?.id
+                      }`,
+                      { container: `#${layoutMainContainerId}` },
+                    )
+                  "
+                />
+              </v-card-actions>
+            </v-card>
+          </v-col>
+
+          <v-col class="hidden-sm-and-down" cols="12" md="6">
+            <div class="d-flex flex-column ga-6">
+              <EventCarousel :images="currentEventBrandBannersUrls" />
+            </div>
+          </v-col>
+        </v-row>
+      </div>
+      <!-- PROGRAM -->
+      <div
+        v-if="hasEventFeature(currentEvent, 'PROGRAM')"
+        :id="`feature-${getEventFeatureIfExists(currentEvent, 'PROGRAM')?.id}`"
+      >
+        <EventFeatureDisplayCard
+          :feature="getEventFeatureIfExists(currentEvent, 'PROGRAM')"
         >
-          <EventFeatureDisplayCard
-            :feature="getEventFeatureIfExists(currentEvent, 'SCHEDULE')"
-          >
-            <v-card-text>
-              <EventScheduleDisplay01 />
-            </v-card-text>
-          </EventFeatureDisplayCard>
-        </div>
-        <!-- PARKING -->
-        <div
-          v-if="
-            hasEventFeature(currentEvent, 'PARKING') &&
-            currentEvent.parking_lots.length
-          "
-          :id="`feature-${getEventFeatureIfExists(currentEvent, 'PARKING')?.id}`"
+          <v-card-text>
+            <v-chip-group
+              v-if="categories.length > 0"
+              v-model="currentCategoryFilter"
+              class="categories-chip-group"
+              color="primary"
+              column
+              mandatory
+              mobile
+            >
+              <v-chip
+                v-for="category in categories"
+                :key="category.id"
+                centered
+                filter
+                :prepend-icon="category.icon"
+                :text="showDefaultTranslationOrEmpty(category.title)"
+                :value="category.id"
+                variant="outlined"
+              />
+            </v-chip-group>
+            <EventTimeline01 :date="currentEvent.date" :items="sortedItems" />
+          </v-card-text>
+        </EventFeatureDisplayCard>
+      </div>
+      <!-- SCHEDULE -->
+      <div
+        v-if="hasEventFeature(currentEvent, 'SCHEDULE')"
+        :id="`feature-${getEventFeatureIfExists(currentEvent, 'SCHEDULE')?.id}`"
+      >
+        <EventFeatureDisplayCard
+          :feature="getEventFeatureIfExists(currentEvent, 'SCHEDULE')"
         >
-          <EventFeatureDisplayCard
-            :feature="getEventFeatureIfExists(currentEvent, 'PARKING')"
-          >
-            <v-card-text>
-              <v-row>
-                <v-col
-                  v-for="parkingLot in currentEvent.parking_lots"
-                  :key="parkingLot.id"
-                  cols="12"
-                  lg="4"
-                >
-                  <ParkingLotCard :parking-lot="parkingLot" />
-                </v-col>
-              </v-row>
-            </v-card-text>
-          </EventFeatureDisplayCard>
-        </div>
-        <!-- FILES -->
-        <div
-          v-if="
-            hasEventFeature(currentEvent, 'FILES') && currentEvent.files.length
-          "
-          :id="`feature-${getEventFeatureIfExists(currentEvent, 'FILES')?.id}`"
+          <v-card-text>
+            <EventScheduleDisplay01 />
+          </v-card-text>
+        </EventFeatureDisplayCard>
+      </div>
+      <!-- PARKING -->
+      <div
+        v-if="
+          hasEventFeature(currentEvent, 'PARKING') &&
+          currentEvent.parking_lots.length
+        "
+        :id="`feature-${getEventFeatureIfExists(currentEvent, 'PARKING')?.id}`"
+      >
+        <EventFeatureDisplayCard
+          :feature="getEventFeatureIfExists(currentEvent, 'PARKING')"
         >
-          <EventFeatureDisplayCard
-            :feature="getEventFeatureIfExists(currentEvent, 'FILES')"
-          >
-            <v-card-text>
-              <EventFilesLayout01 :files="currentEvent.files" />
-            </v-card-text>
-          </EventFeatureDisplayCard>
-        </div>
-        <UiBtnScrollToTop :scroll-container="`#${layoutMainContainerId}`" />
-      </v-container>
-    </v-main>
-  </v-layout>
+          <v-card-text>
+            <v-row>
+              <v-col
+                v-for="parkingLot in currentEvent.parking_lots"
+                :key="parkingLot.id"
+                cols="12"
+                lg="4"
+              >
+                <ParkingLotCard :parking-lot="parkingLot" />
+              </v-col>
+            </v-row>
+          </v-card-text>
+        </EventFeatureDisplayCard>
+      </div>
+      <!-- FILES -->
+      <div
+        v-if="
+          hasEventFeature(currentEvent, 'FILES') && currentEvent.files.length
+        "
+        :id="`feature-${getEventFeatureIfExists(currentEvent, 'FILES')?.id}`"
+      >
+        <EventFeatureDisplayCard
+          :feature="getEventFeatureIfExists(currentEvent, 'FILES')"
+        >
+          <v-card-text>
+            <EventFilesLayout01 :files="currentEvent.files" />
+          </v-card-text>
+        </EventFeatureDisplayCard>
+      </div>
+      <UiBtnScrollToTop :scroll-container="`#${layoutMainContainerId}`" />
+    </v-container>
+  </v-main>
 </template>
 
 <script lang="ts" setup>

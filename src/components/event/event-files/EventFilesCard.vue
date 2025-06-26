@@ -7,10 +7,11 @@
     height="250"
     rounded="lg"
     width="200"
+    v-bind="$attrs"
   >
     <VSheet class="bg-grey-lighten-4 d-flex flex-column" height="100%">
-      <VSheet class="d-flex justify-space-between" color="transparent">
-      </VSheet>
+      <VSheet class="d-flex justify-space-between" color="transparent" />
+
       <div class="d-flex justify-center align-center flex-fill ma-4">
         <v-icon v-if="file.mime_type === 'application/pdf'" size="100">
           mdi-file-pdf-box

@@ -1,6 +1,6 @@
 <template>
   <v-row>
-    <v-col v-for="file in filesPDF" :key="file.id" cols="auto">
+    <v-col v-for="file in filesPDF" :key="file.id" :cols="xs ? 12 : 'auto'">
       <AppPdfDialog v-if="isPdf(file) && file.url" :pdf-url="file.url">
         <template #activator="{ props: ActivatorProps }">
           <EventFilesCard v-bind="ActivatorProps" :file="file" />
@@ -8,7 +8,11 @@
       </AppPdfDialog>
     </v-col>
 
-    <v-col v-for="(image, idx) in filesIMAGE" :key="image.id" cols="auto">
+    <v-col
+      v-for="(image, idx) in filesIMAGE"
+      :key="image.id"
+      :cols="xs ? 12 : 'auto'"
+    >
       <AppImagesView :images="filesImageUrls" :init-index="idx">
         <template #activator="ActivatorProps">
           <EventFilesCard v-bind="ActivatorProps" :file="image" />
@@ -24,6 +28,7 @@ import { isPdf } from '@/utils/attachments/utils.ts';
 import AppPdfDialog from '@/components/app/AppPdfDialog.vue';
 import AppImagesView from '@/components/app/AppImagesView.vue';
 import EventFilesCard from '@/components/event/event-files/EventFilesCard.vue';
+import { useDisplay } from 'vuetify';
 
 const props = defineProps({
   files: {
@@ -31,6 +36,8 @@ const props = defineProps({
     default: () => [],
   },
 });
+
+const { xs } = useDisplay();
 
 const filesPDF = computed(() => props.files.filter((i) => isPdf(i)));
 

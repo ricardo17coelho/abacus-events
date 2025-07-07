@@ -1604,13 +1604,15 @@
     "@typescript-eslint/types" "8.35.0"
     eslint-visitor-keys "^4.2.1"
 
-"@uppy/components@^0.1.0":
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/@uppy/components/-/components-0.1.0.tgz#6322c6fc1657297c52a3bebf4931abdf95c31f8c"
-  integrity sha512-pKWDb036mMlARgRbBUKIXNDgxA9au30MYs+95/FD97wuiA4tEiGewSmYX7vUa6yf4NTDi6ouIU+CImGtEZlgww==
+"@uppy/components@^0.2.0":
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/@uppy/components/-/components-0.2.0.tgz#6739e10a55671df0c9594cf7048d3a003e542caf"
+  integrity sha512-qE2SDkXcT4lZ2c/fFBhhEnUlCvz8NDrqo7uC9r+1dUbAxbyXRphLvCK7wyOeVPTDEeWnTPwM4RGMq7NyfFvIGA==
   dependencies:
     "@tailwindcss/cli" "^4.0.6"
+    "@webcam/core" "^1.0.1"
     clsx "^2.1.1"
+    dequal "^2.0.3"
     preact "^10.5.13"
     pretty-bytes "^6.1.1"
     tailwindcss "^4.0.6"
@@ -1745,12 +1747,12 @@
     lodash "^4.17.21"
     preact "^10.5.13"
 
-"@uppy/vue@2.2.0":
-  version "2.2.0"
-  resolved "https://registry.yarnpkg.com/@uppy/vue/-/vue-2.2.0.tgz#07cc990cd4fa0220e56f3428197b0c7a7ee52168"
-  integrity sha512-4jsZQEl49lbb1pei19RroYLqIR6H9b1mAwRnoSrmoJ6ol4B2btyknQunrUKNM58vKFQqVDcn1fxM4QPZPQ4yNA==
+"@uppy/vue@2.3.0":
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/@uppy/vue/-/vue-2.3.0.tgz#6add02e26b4d210024700ae1e20cf0fcb5eda7bc"
+  integrity sha512-eAzIOywEmEb3XRYaMoaCxOfWRhN3RxdMMjw7JrkfJ9f1E4zvtp/w9uPBJe3ZaoafWv84HgwDRXEtOuNeTlY2zA==
   dependencies:
-    "@uppy/components" "^0.1.0"
+    "@uppy/components" "^0.2.0"
     preact "^10.5.13"
     shallow-equal "^3.0.0"
 
@@ -2056,6 +2058,11 @@
   version "13.4.0"
   resolved "https://registry.yarnpkg.com/@vueuse/shared/-/shared-13.4.0.tgz#0bc48d961bc8154b2fb96c26de869659ead55b71"
   integrity sha512-+AxuKbw8R1gYy5T21V5yhadeNM7rJqb4cPaRI9DdGnnNl3uqXh+unvQ3uCaA2DjYLbNr1+l7ht/B4qEsRegX6A==
+
+"@webcam/core@^1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@webcam/core/-/core-1.0.1.tgz#89394d0faaf97ea842952735d7fbfe0aaf45abd6"
+  integrity sha512-N422fDE1iJ5pc5IiLh2NhvxQPFYTMLDbw+x0YtREGMDg4S05qvRgD8Au0N0/JoQUVvS7Vw+ns16/jYPUDgljtQ==
 
 JSONStream@^1.3.5:
   version "1.3.5"
@@ -2483,6 +2490,11 @@ defu@6.1.4:
   version "6.1.4"
   resolved "https://registry.yarnpkg.com/defu/-/defu-6.1.4.tgz#4e0c9cf9ff68fe5f3d7f2765cc1a012dfdcb0479"
   integrity sha512-mEQCMmwJu317oSz8CwdIOdwf3xMif1ttiM8LTufzc3g6kR+9Pe236twL8j3IYT1F7GfRgGcW6MWxzZjLIkuHIg==
+
+dequal@^2.0.3:
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/dequal/-/dequal-2.0.3.tgz#2644214f1997d39ed0ee0ece72335490a7ac67be"
+  integrity sha512-0je+qPKHEMohvfRTCEo3CrPG6cAzAYgmzKyxRiYSSDkS6eGJdyVJm7WaYA5ECaAD9wLB2T4EEeymA5aFVcYXCA==
 
 detect-libc@^1.0.3:
   version "1.0.3"

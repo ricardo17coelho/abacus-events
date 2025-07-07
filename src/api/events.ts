@@ -16,6 +16,8 @@ export default function useApiEvents() {
       )
     ),
     files:event_files(
+      visible,
+      file_id:id,
       ...event_attachments(*)
     ),
     parking_lots:event_parking_lots(

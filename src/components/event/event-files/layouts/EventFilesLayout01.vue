@@ -3,7 +3,11 @@
     <v-col v-for="file in filesPDF" :key="file.id" :cols="xs ? 12 : 'auto'">
       <AppPdfDialog v-if="isPdf(file) && file.url" :pdf-url="file.url">
         <template #activator="{ props: ActivatorProps }">
-          <EventFilesCard v-bind="ActivatorProps" :file="file" />
+          <EventFilesCard
+            v-bind="ActivatorProps"
+            :file="file"
+            :width="xs ? '100%' : 200"
+          />
         </template>
       </AppPdfDialog>
     </v-col>
@@ -15,7 +19,11 @@
     >
       <AppImagesView :images="filesImageUrls" :init-index="idx">
         <template #activator="ActivatorProps">
-          <EventFilesCard v-bind="ActivatorProps" :file="image" />
+          <EventFilesCard
+            v-bind="ActivatorProps"
+            :file="image"
+            :width="xs ? '100%' : 200"
+          />
         </template>
       </AppImagesView>
     </v-col>
@@ -39,9 +47,10 @@ const props = defineProps({
 
 const { xs } = useDisplay();
 
-const filesPDF = computed(() => props.files.filter((i) => isPdf(i)));
+const filesFiltered = computed(() => props.files.filter((i) => i.visible));
+const filesPDF = computed(() => filesFiltered.value.filter((i) => isPdf(i)));
 
-const filesIMAGE = computed(() => props.files.filter((i) => !isPdf(i)));
+const filesIMAGE = computed(() => filesFiltered.value.filter((i) => !isPdf(i)));
 
 const filesImageUrls = computed(() => filesIMAGE.value.map((a) => a.url));
 </script>

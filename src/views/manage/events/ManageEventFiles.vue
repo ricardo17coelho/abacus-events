@@ -25,6 +25,12 @@
       <template #[`item.mime_type`]="{ item }">
         <AttachmentMimeTypeIcon :attachment="item" />
       </template>
+      <template #[`item.visible`]="{ item }">
+        <v-checkbox-btn
+          :model-value="item.visible"
+          @click.prevent.stop="onClickToggleVisible(item)"
+        ></v-checkbox-btn>
+      </template>
       <template #[`item.uploaded_at`]="{ item }">
         <v-chip color="primary" density="compact">
           {{ formatDateTimeByFormat(item.uploaded_at) }}
@@ -60,13 +66,14 @@ const { t } = useI18n();
 const headers = ref([
   { title: '', key: 'mime_type' },
   { title: 'Display Name', key: 'display_name' },
+  { title: 'Visible', key: 'visible' },
   { title: 'Uploaded at', key: 'uploaded_at' },
 ]);
 
 const { createEventAttachment, getEventAttachmentById, removeEventAttachment } =
   useApiEventAttachment();
 
-const { createEventFile } = useApiEventFiles();
+const { createEventFile, updateEventFile } = useApiEventFiles();
 const { removeImg } = useApi();
 
 const dialogUpload = ref(false);
@@ -145,4 +152,23 @@ const actions = computed<MenuItem[]>(() => [
     action: (item: EventFile) => onClickDelete(item),
   },
 ]);
+
+async function onClickToggleVisible(item: EventFile) {
+  const { error } = await updateEventFile(item.file_id, {
+    visible: !item.visible,
+  });
+
+  if (error) {
+    toast.error(t('errors.error_occurred'));
+    return;
+  }
+
+  if (item.visible) {
+    toast.success('File is no longer visible on the event');
+    item.visible = false;
+  } else {
+    toast.success('File is now visible on the event');
+    item.visible = true;
+  }
+}
 </script>

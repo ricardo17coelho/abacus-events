@@ -1615,10 +1615,10 @@
     pretty-bytes "^6.1.1"
     tailwindcss "^4.0.6"
 
-"@uppy/core@4.4.6":
-  version "4.4.6"
-  resolved "https://registry.yarnpkg.com/@uppy/core/-/core-4.4.6.tgz#9908222b175e5a1260ca22a8142531b8d31b7c48"
-  integrity sha512-EH5C5TSwY3tXp/gl4SPTpcxzEjBz8Ntt1o1s/v03bw8AUTl7X0lGUWRepbCh/XIUJyBTMJ1O+4Uv4/164WQSLg==
+"@uppy/core@4.4.7":
+  version "4.4.7"
+  resolved "https://registry.yarnpkg.com/@uppy/core/-/core-4.4.7.tgz#5a000635ee00fc162dbd1c80a5965e29de77c7af"
+  integrity sha512-ZEdRiVnkHVITS7afBCWxQGNKOZ22DFXoDb4ZcLK2Srp5iBnxUbg1rV3sntHDNjZq7QHQAtZqHKAF8RxE6ZSNeg==
   dependencies:
     "@transloadit/prettier-bytes" "^0.3.4"
     "@uppy/store-default" "^4.2.0"

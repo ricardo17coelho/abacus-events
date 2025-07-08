@@ -13,12 +13,21 @@ export interface EventTimelinePerson extends EventPerson {
   event_person_id: string;
 }
 
+export type EventTimelineLocation = {
+  id: string;
+  event_timeline_location_id: string;
+  created_at: string;
+  title: TitleI18n;
+  img_url: string;
+};
+
 export type EventTimeline = {
   id: string;
   event_id: string;
   created_at: string;
   title: TitleI18n;
-  locations?: TitleI18n[];
+  // locations?: TitleI18n[];
+  locations?: EventTimelineLocation[];
   time_start?: string;
   time_end?: string;
   note?: TitleI18n;

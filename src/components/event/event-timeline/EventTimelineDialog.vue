@@ -63,11 +63,6 @@ const DEFAULT_FORM_DATA = {
   note: {
     [locale.value]: '',
   },
-  locations: [
-    {
-      [locale.value]: '',
-    },
-  ],
 };
 
 const form = ref({
@@ -91,6 +86,10 @@ async function onGetDataById(id: string) {
       form.value = merge2ObjectsIfKeysExists(
         { ...DEFAULT_FORM_DATA },
         { ...data, persons: data.persons.map((i) => i.event_person_id) },
+        {
+          ...data,
+          locations: data.locations.map((i) => i.event_timeline_location_id),
+        },
       );
     }
   }
@@ -112,6 +111,7 @@ const {
   getEventTimelineById,
   removeEventTimelinePerson,
   createEventTimelinePerson,
+  createEventTimelineLocationMap,
 } = useApiEventTimeline();
 
 const isLoading = ref(false);
@@ -142,6 +142,35 @@ async function handleEventPersons(
   }
 }
 
+async function handleEventLocations(
+  eventTimetableId: string,
+  locationsIds: string[],
+) {
+  const currentLocationsIds =
+    timelineItem.value?.locations?.map(
+      (item) => item.event_timeline_location_id,
+    ) || [];
+
+  // IDs to add
+  const toAdd = locationsIds.filter((id) => !currentLocationsIds.includes(id));
+
+  for (const id of toAdd) {
+    await createEventTimelineLocationMap({
+      event_timeline_location_id: id,
+      event_timeline_id: eventTimetableId,
+    });
+  }
+
+  // IDs to remove
+  const toRemove = currentLocationsIds.filter(
+    (id) => !locationsIds.includes(id),
+  );
+
+  for (const id of toRemove) {
+    await removeEventTimelinePerson(id, 'event_timeline_location_id');
+  }
+}
+
 async function onSave() {
   const { valid } = await formRef.value.formRef.validate();
   if (valid) {
@@ -150,6 +179,10 @@ async function onSave() {
     const persons = formData.persons;
     if ('persons' in formData) {
       delete formData.persons;
+    }
+    const locations = formData.locations;
+    if ('locations' in formData) {
+      delete formData.locations;
     }
     if (props.eventTimetableId) {
       // edit
@@ -165,6 +198,7 @@ async function onSave() {
       } else {
         if (data) {
           await handleEventPersons(data.id, persons);
+          await handleEventLocations(data.id, locations);
           const { data: eventData } = await getEventTimelineById(data.id);
 
           emit('success', eventData);
@@ -188,6 +222,7 @@ async function onSave() {
       } else {
         if (data) {
           await handleEventPersons(data.id, persons);
+          await handleEventLocations(data.id, locations);
           const { data: eventData } = await getEventTimelineById(data.id);
 
           emit('success', eventData);

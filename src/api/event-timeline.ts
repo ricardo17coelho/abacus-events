@@ -2,6 +2,7 @@ import useApi from '@/composables/api';
 import {
   type EventTimeline,
   type EventTimelineCategory,
+  type EventTimelineLocation,
   type EventTimelinePerson,
 } from './types/EventTimeline';
 import type { FindFilter } from './types/QueryTypes';
@@ -14,6 +15,10 @@ export default function useApiEventTimeline() {
       persons:event_timeline_persons(
        *,
        ...event_persons(*)
+      ),
+      locations:event_timeline_locations_map(
+        *,
+         ...event_timeline_locations(*)
       )
   `;
 
@@ -143,6 +148,53 @@ export default function useApiEventTimeline() {
     return remove('event_timeline_persons', id, key);
   }
 
+  // EventTimelineLocation
+  function getEventTimelineLocations(eventId: string, range = [0, 100]) {
+    const filters: FindFilter[] = [['event_id', 'eq', eventId]];
+    const select = '*';
+
+    return find<EventTimelineLocation>(
+      'event_timeline_locations',
+      filters,
+      select,
+      range,
+      [],
+      {
+        count: 'exact',
+      },
+    );
+  }
+
+  function getEventTimelineLocationById(id: string) {
+    return findById<EventTimelineLocation>('event_timeline_locations', id, '*');
+  }
+
+  // eslint-disable-next-line  @typescript-eslint/no-explicit-any
+  function createEventTimelineLocation(form: Record<string, any>) {
+    return create<EventTimelineLocation>('event_timeline_locations', form);
+  }
+
+  // eslint-disable-next-line  @typescript-eslint/no-explicit-any
+  function updateEventTimelineLocation(id: string, form: Record<string, any>) {
+    return update<EventTimelineLocation>('event_timeline_locations', {
+      id,
+      ...form,
+    });
+  }
+
+  function removeEventTimelineLocation(id: string, key = 'id') {
+    return remove('event_timeline_locations', id, key);
+  }
+
+  // eslint-disable-next-line  @typescript-eslint/no-explicit-any
+  function createEventTimelineLocationMap(form: Record<string, any>) {
+    return create('event_timeline_locations_map', form);
+  }
+
+  function removeEventTimelineLocationMap(id: string, key = 'id') {
+    return remove('event_timeline_locations_map', id, key);
+  }
+
   return {
     getEventTimelines,
     getEventTimelineById,
@@ -162,5 +214,13 @@ export default function useApiEventTimeline() {
     createEventTimelinePerson,
     updateEventTimelinePerson,
     removeEventTimelinePerson,
+    // EventTimelineLocation
+    getEventTimelineLocations,
+    getEventTimelineLocationById,
+    createEventTimelineLocation,
+    updateEventTimelineLocation,
+    removeEventTimelineLocation,
+    createEventTimelineLocationMap,
+    removeEventTimelineLocationMap,
   };
 }

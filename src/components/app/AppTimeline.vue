@@ -30,17 +30,28 @@
             </div>
           </div>
           <div>
-            <v-chip
+            <template
               v-for="location in item.locations"
-              :key="`${item.title}-${location}`"
-              class="mr-1"
-              color="primary"
-              prepend-icon="mdi-home-map-marker"
-              size="small"
-              variant="tonal"
+              :key="`${item.title}-${location.id}`"
             >
-              {{ location }}
-            </v-chip>
+              <AppImagesView
+                :images="location.img_url ? [location.img_url] : []"
+              >
+                <template #activator="activatorProps">
+                  <v-chip
+                    v-bind="activatorProps"
+                    class="mr-1"
+                    color="tertiary"
+                    density="compact"
+                    prepend-icon="mdi-home-map-marker"
+                    size="small"
+                    variant="tonal"
+                  >
+                    {{ showDefaultTranslationOrEmpty(location.title) }}
+                  </v-chip>
+                </template>
+              </AppImagesView>
+            </template>
           </div>
         </div>
       </div>
@@ -69,6 +80,7 @@ import type { PropType } from 'vue';
 import { useDisplay } from 'vuetify';
 import { UiAvatarUser } from '@lib/ui';
 import { getUserFullName } from '@/utils/profile.ts';
+import AppImagesView from '@/components/app/AppImagesView.vue';
 
 defineProps({
   items: {

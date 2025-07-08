@@ -108,6 +108,9 @@ export default function useApi() {
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   function create<T>(table: string, form: any) {
+    if (Array.isArray(form)) {
+      return supabase.from(table).insert(form).select().select<T>();
+    }
     return supabase.from(table).insert([form]).select().single<T>();
   }
 

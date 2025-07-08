@@ -1,11 +1,17 @@
 <template>
-  <slot name="activator" :on-click="show" />
-  <vue-easy-lightbox
-    :imgs="imgsRef"
-    :index="indexRef"
-    :visible="visibleRef"
-    @hide="onEasyLightBoxHide"
-  />
+  <template v-if="images.length">
+    <slot name="activator" :on-click="show" />
+    <vue-easy-lightbox
+      :imgs="imgsRef"
+      :index="indexRef"
+      :visible="visibleRef"
+      @hide="onEasyLightBoxHide"
+    />
+  </template>
+  <template v-else>
+    <slot />
+    <slot name="activator" />
+  </template>
 </template>
 
 <script setup lang="ts">

@@ -28,23 +28,28 @@
           </v-list-item-title>
 
           <div v-if="item.locations?.length">
-            <v-chip
+            <template
               v-for="location in item.locations"
-              :key="`${item.title}-${location}`"
-              class="mr-1"
-              color="tertiary"
-              density="compact"
-              prepend-icon="mdi-home-map-marker"
-              size="small"
-              variant="tonal"
+              :key="`${item.title}-${location.id}`"
             >
-              <span v-if="typeof location === 'string'">
-                {{ location }}
-              </span>
-              <span v-else>
-                {{ showDefaultTranslationOrEmpty(location) }}
-              </span>
-            </v-chip>
+              <AppImagesView
+                :images="location.img_url ? [location.img_url] : []"
+              >
+                <template #activator="activatorProps">
+                  <v-chip
+                    v-bind="activatorProps"
+                    class="mr-1"
+                    color="tertiary"
+                    density="compact"
+                    prepend-icon="mdi-home-map-marker"
+                    size="small"
+                    variant="tonal"
+                  >
+                    {{ showDefaultTranslationOrEmpty(location.title) }}
+                  </v-chip>
+                </template>
+              </AppImagesView>
+            </template>
           </div>
 
           <div class="d-flex ma-3">
@@ -80,6 +85,7 @@ import { isDateToday } from '@/utils/date.ts';
 import { isStartEndCurrentTime } from '@/utils/time.ts';
 import { getUserFullName } from '@/utils/profile.ts';
 import { UiAvatarUser } from '@lib/ui';
+import AppImagesView from '@/components/app/AppImagesView.vue';
 
 const props = defineProps({
   items: {

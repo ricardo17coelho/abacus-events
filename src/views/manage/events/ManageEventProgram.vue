@@ -3,6 +3,18 @@
     <AppLoader v-if="isLoading" />
     <template v-else>
       <div class="text-center">
+        <UiDialog max-width="600">
+          <template #activator="{ props: ActivatorProps }">
+            <v-icon-btn
+              v-bind="ActivatorProps"
+              icon="mdi-map"
+              icon-size="small"
+            />
+          </template>
+          <template #content>
+            <EventTimelineLocationsTable />
+          </template>
+        </UiDialog>
         <v-chip-group
           v-model="currentCategoryFilter"
           class="categories-chip-group"
@@ -87,6 +99,7 @@ import EventTimelineCategoriesTable from '@/components/event/event-timeline/even
 import { UiDialog } from '@lib/ui';
 import EventTimeline01 from '@/components/event/event-timeline/EventTimeline01.vue';
 import ManageEventContainer from '@/components/manage/ManageEventContainer.vue';
+import EventTimelineLocationsTable from '@/components/event/event-timeline/event-timeline-locations/EventTimelineLocationsTable.vue';
 
 const currentEvent = requireInjection(CURRENT_EVENT_KEY);
 

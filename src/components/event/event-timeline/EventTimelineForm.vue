@@ -40,11 +40,11 @@
       </v-col>
     </v-row>
     <v-row dense>
-      <FieldMultipleValue
+      <EventTimelineLocationsField
         v-model="model.locations"
+        :event-id="eventId"
         :label="t('labels.location')"
-        :label-field="t('labels.location_name')"
-        multiple-language-mode
+        multiple
       />
     </v-row>
     <v-row dense>
@@ -89,7 +89,7 @@ export const DEFAULT_FORM = {
   title: {},
   note: {},
   category: undefined,
-  locations: [{}],
+  locations: [] as string[],
   time_start: '',
   time_end: '',
   icon: '',
@@ -118,7 +118,7 @@ import { useI18n } from 'vue-i18n';
 import FieldIconMdi from '@/components/fields/FieldIconMdi.vue';
 import FieldTimePicker from '@/components/fields/FieldTimePicker.vue';
 import EventPersonFieldSelect from '@/components/event/event-persons/EventPersonFieldSelect.vue';
-import FieldMultipleValue from '@/components/fields/FieldMultipleValue.vue';
+import EventTimelineLocationsField from '@/components/event/event-timeline/event-timeline-locations/EventTimelineLocationsField.vue';
 
 defineProps({
   eventId: {

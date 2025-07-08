@@ -2,19 +2,7 @@
   <ManageEventContainer v-if="currentEvent">
     <AppLoader v-if="isLoading" />
     <template v-else>
-      <div class="text-center">
-        <UiDialog max-width="600">
-          <template #activator="{ props: ActivatorProps }">
-            <v-icon-btn
-              v-bind="ActivatorProps"
-              icon="mdi-map"
-              icon-size="small"
-            />
-          </template>
-          <template #content>
-            <EventTimelineLocationsTable />
-          </template>
-        </UiDialog>
+      <div class="text-center d-flex justify-space-between align-center">
         <v-chip-group
           v-model="currentCategoryFilter"
           class="categories-chip-group"
@@ -46,6 +34,17 @@
             </template>
           </UiDialog>
         </v-chip-group>
+
+        <UiDialog max-width="600">
+          <template #activator="{ props: ActivatorProps }">
+            <VBtnSecondary v-bind="ActivatorProps" prepend-icon="mdi-map">
+              Locations
+            </VBtnSecondary>
+          </template>
+          <template #content>
+            <EventTimelineLocationsTable />
+          </template>
+        </UiDialog>
       </div>
 
       <v-row v-if="isUserAdmin">

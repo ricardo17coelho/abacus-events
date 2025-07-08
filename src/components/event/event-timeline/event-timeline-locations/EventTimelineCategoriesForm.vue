@@ -16,8 +16,8 @@
       </v-col>
     </v-row>
     <v-row dense>
-      <v-col cols="12" sm="6">
-        <v-text-field v-model="model.img_url" label="IMG URL" />
+      <v-col cols="12">
+        <EventFilePicker v-model:selected="model.img_url" label="Image URL" />
       </v-col>
     </v-row>
   </v-form>
@@ -30,6 +30,7 @@ import DialogTitleI18n from '@/components/dialogs/DialogTitleI18n.vue';
 import { showDefaultTranslationOrEmpty } from '@/utils/showDefaultTranslationOrEmpty';
 import rulesValidation from '@/utils/validations';
 import { useI18n } from 'vue-i18n';
+import EventFilePicker from '@/components/event/EventFilePicker.vue';
 
 const model = defineModel({ type: Object, default: () => ({}) });
 

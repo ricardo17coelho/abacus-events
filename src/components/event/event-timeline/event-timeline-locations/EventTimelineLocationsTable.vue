@@ -20,6 +20,16 @@
         </template>
       </EventTimelineLocationDialog>
     </template>
+    <template #[`item.img_url`]="{ item }">
+      <v-avatar v-if="item.img_url" tile>
+        <AppImagesView :images="[item.img_url]">
+          <template #activator="activatorProps">
+            <v-img v-bind="activatorProps" :src="item.img_url"></v-img>
+          </template>
+        </AppImagesView>
+      </v-avatar>
+      <span v-else>-</span>
+    </template>
     <template #[`item.title`]="{ item }">
       {{ showDefaultTranslationOrEmpty(item.title) }}
     </template>
@@ -37,6 +47,7 @@ import type { EventTimelineLocation } from '@/api/types/EventTimeline.ts';
 import { useI18n } from 'vue-i18n';
 import { requireInjection } from '@/utils/injection.ts';
 import { CURRENT_EVENT_KEY } from '@/types/injectionKeys.ts';
+import AppImagesView from '@/components/app/AppImagesView.vue';
 
 const { t } = useI18n();
 
@@ -86,7 +97,10 @@ async function onRemove(id: string) {
   }
 }
 
-const headers = ref([{ title: 'Title', key: 'title' }]);
+const headers = ref([
+  { title: 'Image', key: 'img_url' },
+  { title: 'Title', key: 'title' },
+]);
 
 const currentItemId = ref();
 

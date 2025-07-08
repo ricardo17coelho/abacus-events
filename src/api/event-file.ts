@@ -17,9 +17,13 @@ export default function useApiEventFile() {
     return find<EventFile>('event_files', filters, select, range);
   }
 
-  function getEventFilesByEventId(eventId: string, range = [0, 100]) {
-    const filters: FindFilter[] = [['event_id', 'eq', eventId]];
-    return getEventFiles(baseSelect, filters, range);
+  function getEventFilesByEventId(
+    eventId: string,
+    filters: FindFilter[] = [],
+    range = [0, 100],
+  ) {
+    const _filters: FindFilter[] = [['event_id', 'eq', eventId], ...filters];
+    return getEventFiles(baseSelect, _filters, range);
   }
 
   function getEventFileById(EventFileId: string) {

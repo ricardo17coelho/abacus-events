@@ -1,5 +1,10 @@
 <template>
-  <Dashboard height="250" inline :uppy="uppyInstance" width="100%" />
+  <Dashboard
+    :height="250"
+    :inline="true"
+    :uppy="uppyInstance"
+    v-bind="$attrs"
+  />
 </template>
 
 <script setup lang="ts">

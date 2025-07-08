@@ -131,6 +131,10 @@
                 <v-text-field v-model="selected"></v-text-field>
               </v-col>
             </v-row>
+            <div v-if="selected" class="d-flex">
+              <v-spacer></v-spacer>
+              <VBtnPrimary @click="onApply">Apply</VBtnPrimary>
+            </div>
           </v-container>
         </v-tabs-window-item>
       </v-tabs-window>

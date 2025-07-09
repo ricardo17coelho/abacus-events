@@ -5,51 +5,55 @@
     class="mobile-container"
     fluid
   >
-    <v-tabs-window v-model="currentTab" class="pb-4">
-      <v-tabs-window-item value="overview">
-        <LayoutEvent04MobileTabHero />
-      </v-tabs-window-item>
+    <div v-if="currentTab === 'overview'">
+      <LayoutEvent04MobileTabHero />
+    </div>
 
-      <v-tabs-window-item :value="EVENT_FEATURE_TYPE.PROGRAM">
-        <LayoutEvent04MobileTabProgram />
-      </v-tabs-window-item>
+    <div v-if="currentTab === EVENT_FEATURE_TYPE.PROGRAM">
+      <LayoutEvent04MobileTabProgram />
+    </div>
 
-      <v-tabs-window-item :value="EVENT_FEATURE_TYPE.PARKING">
-        <LayoutEvent04MobileTabParking />
-      </v-tabs-window-item>
+    <div v-if="currentTab === EVENT_FEATURE_TYPE.PARKING">
+      <LayoutEvent04MobileTabParking />
+    </div>
 
-      <v-tabs-window-item :value="EVENT_FEATURE_TYPE.SCHEDULE">
-        <LayoutEvent04MobileTabSchedule />
-      </v-tabs-window-item>
+    <div v-if="currentTab === EVENT_FEATURE_TYPE.SCHEDULE">
+      <LayoutEvent04MobileTabSchedule />
+    </div>
 
-      <v-tabs-window-item :value="EVENT_FEATURE_TYPE.FILES">
-        <LayoutEvent04MobileTabFiles />
-      </v-tabs-window-item>
+    <div v-if="currentTab === EVENT_FEATURE_TYPE.FILES">
+      <LayoutEvent04MobileTabFiles />
+    </div>
 
-      <v-tabs-window-item value="more">
-        <v-tabs-window v-if="currentMoreTab" v-model="currentMoreTab">
-          <v-btn @click="currentMoreTab = undefined">Back</v-btn>
+    <div v-if="currentTab === 'more'" class="fill-height">
+      <div v-if="currentMoreTab">
+        <v-btn icon="mdi-arrow-left" @click="currentMoreTab = undefined" />
 
-          <v-tabs-window-item :value="EVENT_FEATURE_TYPE.PROGRAM">
-            <LayoutEvent04MobileTabProgram />
-          </v-tabs-window-item>
+        <div v-if="currentMoreTab === EVENT_FEATURE_TYPE.PROGRAM">
+          <LayoutEvent04MobileTabProgram />
+        </div>
 
-          <v-tabs-window-item :value="EVENT_FEATURE_TYPE.PARKING">
-            <LayoutEvent04MobileTabParking />
-          </v-tabs-window-item>
+        <div v-if="currentMoreTab === EVENT_FEATURE_TYPE.PARKING">
+          <LayoutEvent04MobileTabParking />
+        </div>
 
-          <v-tabs-window-item :value="EVENT_FEATURE_TYPE.SCHEDULE">
-            <LayoutEvent04MobileTabSchedule />
-          </v-tabs-window-item>
+        <div v-if="currentMoreTab === EVENT_FEATURE_TYPE.SCHEDULE">
+          <LayoutEvent04MobileTabSchedule />
+        </div>
 
-          <v-tabs-window-item :value="EVENT_FEATURE_TYPE.FILES">
-            <LayoutEvent04MobileTabFiles />
-          </v-tabs-window-item>
-        </v-tabs-window>
+        <div v-if="currentMoreTab === EVENT_FEATURE_TYPE.FILES">
+          <LayoutEvent04MobileTabFiles />
+        </div>
 
-        <div v-else fluid>
-          <LayoutEvent04MobileTitle title="More" />
+        <div v-if="currentMoreTab === EVENT_FEATURE_TYPE.CONTACTS">
+          <LayoutEvent04MobileTabContacts />
+        </div>
+      </div>
 
+      <div v-else class="fill-height">
+        <LayoutEvent04MobileTitle title="More" />
+
+        <div class="d-flex flex-column justify-space-between fill-height">
           <v-list base-color="primary" rounded="lg" variant="outlined">
             <v-list-item
               v-for="item in tabsItemsMore"
@@ -58,6 +62,7 @@
               class="my-2"
               :prepend-icon="item.icon"
               rounded="lg"
+              slim
               :title="
                 typeof item.title === 'string'
                   ? item.title
@@ -66,9 +71,13 @@
               @click="currentMoreTab = item.id"
             ></v-list-item>
           </v-list>
+
+          <div>
+            <!-- Contacts -->
+          </div>
         </div>
-      </v-tabs-window-item>
-    </v-tabs-window>
+      </div>
+    </div>
 
     <UiBtnScrollToTop :scroll-container="`#${layoutMainContainerId}`" />
   </v-container>
@@ -130,6 +139,7 @@ import LayoutEvent04MobileTabFiles from '@/layouts/event/LayoutEvent04/mobile/La
 import LayoutEvent04MobileTabHero from '@/layouts/event/LayoutEvent04/mobile/LayoutEvent04MobileTabHero.vue';
 import { useI18n } from 'vue-i18n';
 import LayoutEvent04MobileTitle from '@/layouts/event/LayoutEvent04/mobile/LayoutEvent04MobileTitle.vue';
+import LayoutEvent04MobileTabContacts from '@/layouts/event/LayoutEvent04/mobile/LayoutEvent04MobileTabContacts.vue';
 
 const currentEvent = requireInjection(CURRENT_EVENT_KEY);
 
@@ -204,6 +214,19 @@ const tabs = computed(() => {
       title: featureGuestList.title || t('labels.features.GUEST_LIST'),
       icon: featureGuestList.icon,
       show: () => hasEventFeature(currentEvent.value!, 'GUEST_LIST'),
+    });
+  }
+
+  const featureContacts = getEventFeatureIfExists(
+    currentEvent.value,
+    'CONTACTS',
+  );
+  if (featureContacts) {
+    items.push({
+      id: EVENT_FEATURE_TYPE.CONTACTS,
+      title: featureContacts.title || t('labels.features.CONTACTS'),
+      icon: featureContacts.icon,
+      show: () => hasEventFeature(currentEvent.value!, 'CONTACTS'),
     });
   }
 

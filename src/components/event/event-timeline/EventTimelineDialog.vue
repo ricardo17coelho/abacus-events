@@ -85,9 +85,9 @@ async function onGetDataById(id: string) {
       timelineItem.value = data;
       form.value = merge2ObjectsIfKeysExists(
         { ...DEFAULT_FORM_DATA },
-        { ...data, persons: data.persons.map((i) => i.event_person_id) },
         {
           ...data,
+          persons: data.persons.map((i) => i.event_person_id),
           locations: data.locations.map((i) => i.event_timeline_location_id),
         },
       );

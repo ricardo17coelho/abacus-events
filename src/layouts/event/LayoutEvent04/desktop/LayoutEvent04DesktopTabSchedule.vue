@@ -1,16 +1,12 @@
 <template>
-  <div
+  <EventFeatureDisplayCard
     v-if="currentEvent && hasEventFeature(currentEvent, 'SCHEDULE')"
-    :id="`feature-${getEventFeatureIfExists(currentEvent, 'SCHEDULE')?.id}`"
+    :feature="getEventFeatureIfExists(currentEvent, 'SCHEDULE')"
   >
-    <EventFeatureDisplayCard
-      :feature="getEventFeatureIfExists(currentEvent, 'SCHEDULE')"
-    >
-      <v-card-text>
-        <EventScheduleDisplay01 />
-      </v-card-text>
-    </EventFeatureDisplayCard>
-  </div>
+    <v-card-text>
+      <LayoutEvent04SharedTabSchedule />
+    </v-card-text>
+  </EventFeatureDisplayCard>
 </template>
 
 <script setup lang="ts">
@@ -21,7 +17,7 @@ import {
 import EventFeatureDisplayCard from '@/components/event/event-feature/event-feature-display/EventFeatureDisplayCard.vue';
 import { requireInjection } from '@/utils/injection.ts';
 import { CURRENT_EVENT_KEY } from '@/types/injectionKeys.ts';
-import EventScheduleDisplay01 from '@/components/event/event-schedule/event-schedule-display/EventScheduleDisplay01.vue';
+import LayoutEvent04SharedTabSchedule from '@/layouts/event/LayoutEvent04/shared/LayoutEvent04SharedTabSchedule.vue';
 
 const currentEvent = requireInjection(CURRENT_EVENT_KEY);
 </script>

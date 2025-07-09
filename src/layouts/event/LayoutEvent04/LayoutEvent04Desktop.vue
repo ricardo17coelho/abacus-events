@@ -5,7 +5,7 @@
     class="app-container"
   >
     <!-- HERO SECTION -->
-    <LayoutEvent04TabHero />
+    <LayoutEvent04DesktopTabHero />
 
     <v-tabs v-model="currentTab" color="primary" density="compact" hide-slider>
       <v-tab
@@ -22,19 +22,19 @@
 
     <v-tabs-window v-model="currentTab">
       <v-tabs-window-item :value="EVENT_FEATURE_TYPE.PROGRAM">
-        <LayoutEvent04TabProgram />
+        <LayoutEvent04DesktopTabProgram />
       </v-tabs-window-item>
 
       <v-tabs-window-item :value="EVENT_FEATURE_TYPE.PARKING">
-        <LayoutEvent04TabParking />
+        <LayoutEvent04DesktopTabParking />
       </v-tabs-window-item>
 
       <v-tabs-window-item :value="EVENT_FEATURE_TYPE.SCHEDULE">
-        <LayoutEvent04TabSchedule />
+        <LayoutEvent04DesktopTabSchedule />
       </v-tabs-window-item>
 
       <v-tabs-window-item :value="EVENT_FEATURE_TYPE.FILES">
-        <LayoutEvent04TabFiles />
+        <LayoutEvent04DesktopTabFiles />
       </v-tabs-window-item>
     </v-tabs-window>
 
@@ -52,11 +52,11 @@ import { UiBtnScrollToTop } from '@lib/ui';
 import { showDefaultTranslationOrEmpty } from '@/utils/showDefaultTranslationOrEmpty.ts';
 import { requireInjection } from '@/utils/injection.ts';
 import { EVENT_FEATURE_TYPE } from '@/api/types/EventFeature.ts';
-import LayoutEvent04TabProgram from '@/layouts/event/LayoutEvent04/LayoutEvent04TabProgram.vue';
-import LayoutEvent04TabSchedule from '@/layouts/event/LayoutEvent04/LayoutEvent04TabSchedule.vue';
-import LayoutEvent04TabParking from '@/layouts/event/LayoutEvent04/LayoutEvent04TabParking.vue';
-import LayoutEvent04TabFiles from '@/layouts/event/LayoutEvent04/LayoutEvent04TabFiles.vue';
-import LayoutEvent04TabHero from '@/layouts/event/LayoutEvent04/LayoutEvent04TabHero.vue';
+import LayoutEvent04DesktopTabProgram from '@/layouts/event/LayoutEvent04/desktop/LayoutEvent04DesktopTabProgram.vue';
+import LayoutEvent04DesktopTabSchedule from '@/layouts/event/LayoutEvent04/desktop/LayoutEvent04DesktopTabSchedule.vue';
+import LayoutEvent04DesktopTabParking from '@/layouts/event/LayoutEvent04/desktop/LayoutEvent04DesktopTabParking.vue';
+import LayoutEvent04DesktopTabFiles from '@/layouts/event/LayoutEvent04/desktop/LayoutEvent04DesktopTabFiles.vue';
+import LayoutEvent04DesktopTabHero from '@/layouts/event/LayoutEvent04/desktop/LayoutEvent04DesktopTabHero.vue';
 import { useI18n } from 'vue-i18n';
 
 const currentEvent = requireInjection(CURRENT_EVENT_KEY);

@@ -2,27 +2,28 @@
   <v-container
     v-if="currentEvent"
     :id="layoutMainContainerId"
-    class="app-container"
+    class="mobile-container"
+    fluid
   >
-    <v-tabs-window v-model="currentTab">
+    <v-tabs-window v-model="currentTab" class="pb-4">
       <v-tabs-window-item value="overview">
-        <LayoutEvent04TabHero />
+        <LayoutEvent04MobileTabHero />
       </v-tabs-window-item>
 
       <v-tabs-window-item :value="EVENT_FEATURE_TYPE.PROGRAM">
-        <LayoutEvent04TabProgram />
+        <LayoutEvent04MobileTabProgram />
       </v-tabs-window-item>
 
       <v-tabs-window-item :value="EVENT_FEATURE_TYPE.PARKING">
-        <LayoutEvent04TabParking />
+        <LayoutEvent04MobileTabParking />
       </v-tabs-window-item>
 
       <v-tabs-window-item :value="EVENT_FEATURE_TYPE.SCHEDULE">
-        <LayoutEvent04TabSchedule />
+        <LayoutEvent04MobileTabSchedule />
       </v-tabs-window-item>
 
       <v-tabs-window-item :value="EVENT_FEATURE_TYPE.FILES">
-        <LayoutEvent04TabFiles />
+        <LayoutEvent04MobileTabFiles />
       </v-tabs-window-item>
 
       <v-tabs-window-item value="more">
@@ -30,24 +31,25 @@
           <v-btn @click="currentMoreTab = undefined">Back</v-btn>
 
           <v-tabs-window-item :value="EVENT_FEATURE_TYPE.PROGRAM">
-            <LayoutEvent04TabProgram />
+            <LayoutEvent04MobileTabProgram />
           </v-tabs-window-item>
 
           <v-tabs-window-item :value="EVENT_FEATURE_TYPE.PARKING">
-            <LayoutEvent04TabParking />
+            <LayoutEvent04MobileTabParking />
           </v-tabs-window-item>
 
           <v-tabs-window-item :value="EVENT_FEATURE_TYPE.SCHEDULE">
-            <LayoutEvent04TabSchedule />
+            <LayoutEvent04MobileTabSchedule />
           </v-tabs-window-item>
 
           <v-tabs-window-item :value="EVENT_FEATURE_TYPE.FILES">
-            <LayoutEvent04TabFiles />
+            <LayoutEvent04MobileTabFiles />
           </v-tabs-window-item>
         </v-tabs-window>
 
-        <v-container v-else fluid>
-          <h4 class="text-h4">More</h4>
+        <div v-else fluid>
+          <LayoutEvent04MobileTitle title="More" />
+
           <v-list base-color="primary" rounded="lg" variant="outlined">
             <v-list-item
               v-for="item in tabsItemsMore"
@@ -64,7 +66,7 @@
               @click="currentMoreTab = item.id"
             ></v-list-item>
           </v-list>
-        </v-container>
+        </div>
       </v-tabs-window-item>
     </v-tabs-window>
 
@@ -121,12 +123,13 @@ import { UiBtnScrollToTop } from '@lib/ui';
 import { showDefaultTranslationOrEmpty } from '@/utils/showDefaultTranslationOrEmpty.ts';
 import { requireInjection } from '@/utils/injection.ts';
 import { EVENT_FEATURE_TYPE } from '@/api/types/EventFeature.ts';
-import LayoutEvent04TabProgram from '@/layouts/event/LayoutEvent04/LayoutEvent04TabProgram.vue';
-import LayoutEvent04TabSchedule from '@/layouts/event/LayoutEvent04/LayoutEvent04TabSchedule.vue';
-import LayoutEvent04TabParking from '@/layouts/event/LayoutEvent04/LayoutEvent04TabParking.vue';
-import LayoutEvent04TabFiles from '@/layouts/event/LayoutEvent04/LayoutEvent04TabFiles.vue';
-import LayoutEvent04TabHero from '@/layouts/event/LayoutEvent04/LayoutEvent04TabHero.vue';
+import LayoutEvent04MobileTabProgram from '@/layouts/event/LayoutEvent04/mobile/LayoutEvent04MobileTabProgram.vue';
+import LayoutEvent04MobileTabSchedule from '@/layouts/event/LayoutEvent04/mobile/LayoutEvent04MobileTabSchedule.vue';
+import LayoutEvent04MobileTabParking from '@/layouts/event/LayoutEvent04/mobile/LayoutEvent04MobileTabParking.vue';
+import LayoutEvent04MobileTabFiles from '@/layouts/event/LayoutEvent04/mobile/LayoutEvent04MobileTabFiles.vue';
+import LayoutEvent04MobileTabHero from '@/layouts/event/LayoutEvent04/mobile/LayoutEvent04MobileTabHero.vue';
 import { useI18n } from 'vue-i18n';
+import LayoutEvent04MobileTitle from '@/layouts/event/LayoutEvent04/mobile/LayoutEvent04MobileTitle.vue';
 
 const currentEvent = requireInjection(CURRENT_EVENT_KEY);
 
@@ -224,3 +227,9 @@ watch(
   { immediate: true },
 );
 </script>
+
+<style scoped lang="scss">
+.mobile-container {
+  height: calc(100% - 56px);
+}
+</style>

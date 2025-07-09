@@ -1,5 +1,8 @@
 <template>
-  <div v-if="currentEvent && feature && currentEvent.files.length">
+  <v-container
+    v-if="currentEvent && feature && currentEvent.files.length"
+    class="px-0"
+  >
     <LayoutEvent04MobileTitle
       :prepend-icon="feature.icon"
       :title="
@@ -9,7 +12,7 @@
     />
 
     <LayoutEvent04SharedTabProgram />
-  </div>
+  </v-container>
 </template>
 
 <script setup lang="ts">

@@ -51,7 +51,7 @@
       </div>
 
       <div v-else class="fill-height">
-        <LayoutEvent04MobileTitle title="More" />
+        <LayoutEvent04MobileTitle :title="t('labels.more')" />
 
         <div class="d-flex flex-column justify-space-between fill-height">
           <v-list base-color="primary" rounded="lg" variant="outlined">
@@ -72,8 +72,11 @@
             ></v-list-item>
           </v-list>
 
-          <div>
-            <!-- Contacts -->
+          <div class="d-flex align-center justify-space-between">
+            <div></div>
+            <div>
+              <TheAppMenuLanguage />
+            </div>
           </div>
         </div>
       </div>
@@ -115,7 +118,7 @@
     >
       <v-icon>mdi-dots-horizontal</v-icon>
 
-      More
+      {{ t('labels.more') }}
     </v-btn>
   </v-bottom-navigation>
 </template>
@@ -140,6 +143,7 @@ import LayoutEvent04MobileTabHero from '@/layouts/event/LayoutEvent04/mobile/Lay
 import { useI18n } from 'vue-i18n';
 import LayoutEvent04MobileTitle from '@/layouts/event/LayoutEvent04/mobile/LayoutEvent04MobileTitle.vue';
 import LayoutEvent04MobileTabContacts from '@/layouts/event/LayoutEvent04/mobile/LayoutEvent04MobileTabContacts.vue';
+import TheAppMenuLanguage from '@/components/TheAppMenuLanguage.vue';
 
 const currentEvent = requireInjection(CURRENT_EVENT_KEY);
 

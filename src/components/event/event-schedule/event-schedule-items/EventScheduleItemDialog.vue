@@ -48,11 +48,14 @@ const model = defineModel({ type: Boolean, default: false });
 
 const emit = defineEmits(['success']);
 
-const { t } = useI18n();
+const { t, locale } = useI18n();
 
 const DEFAULT_FORM = {
   text: undefined,
   text_link: undefined,
+  description: {
+    [locale.value]: '',
+  },
   order: undefined,
 };
 

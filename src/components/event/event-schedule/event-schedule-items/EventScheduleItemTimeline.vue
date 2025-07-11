@@ -14,7 +14,12 @@
       class="timeline-item"
       icon="mdi-arrow-down"
     >
-      <v-list-item class="px-0" slim width="100%">
+      <v-list-item
+        class="px-0"
+        slim
+        :subtitle="showDefaultTranslationOrEmpty(item.description)"
+        width="100%"
+      >
         <template v-if="$slots.prepend" #prepend>
           <slot :item="item" name="prepend"> </slot>
         </template>
@@ -39,6 +44,7 @@
 
 <script setup lang="ts">
 import type { EventScheduleItem } from '@/api/types/EventSchedule.ts';
+import { showDefaultTranslationOrEmpty } from '@/utils/showDefaultTranslationOrEmpty.ts';
 
 defineProps({
   items: {

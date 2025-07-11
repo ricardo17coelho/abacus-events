@@ -16,6 +16,7 @@ export type EventScheduleItem = {
   text: string;
   text_link: string;
   order: number;
+  description?: TitleI18n;
 };
 
 export type EventSchedule = {

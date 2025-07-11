@@ -66,8 +66,8 @@
       "FILES": "Files",
       "GUEST_LIST": "Guest list",
       "PARKING": "Parking",
-      "SCHEDULE": "Schedule",
-      "PROGRAM": "Program"
+      "PROGRAM": "Program",
+      "SCHEDULE": "Schedule"
     },
     "first_name": "Firstname",
     "icon": "Icon",
@@ -80,6 +80,7 @@
     "login": "Login",
     "logout": "Logout",
     "message": "Message",
+    "more": "More",
     "n_of_parking_spaces": "Number of Parking Spaces",
     "name": "Name",
     "note": "Note",

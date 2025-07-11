@@ -5,7 +5,7 @@
     class="mobile-container"
     fluid
   >
-    <div v-if="currentTab === 'overview'">
+    <div v-if="currentTab === 'OVERVIEW'">
       <LayoutEvent04MobileTabHero />
     </div>
 
@@ -25,7 +25,7 @@
       <LayoutEvent04MobileTabFiles />
     </div>
 
-    <div v-if="currentTab === 'more'" class="fill-height">
+    <div v-if="currentTab === 'MORE'" class="fill-height">
       <div v-if="currentMoreTab">
         <v-btn icon="mdi-arrow-left" @click="currentMoreTab = undefined" />
 
@@ -111,9 +111,9 @@
 
     <v-btn
       v-if="tabsItemsMore.length"
-      :active="'more' === currentTab"
+      :active="'MORE' === currentTab"
       active-color="primary"
-      value="more"
+      value="MORE"
       @click="currentMoreTab = undefined"
     >
       <v-icon>mdi-dots-horizontal</v-icon>
@@ -150,6 +150,8 @@ const currentEvent = requireInjection(CURRENT_EVENT_KEY);
 const layoutMainContainerId = 'layout-main-container';
 const { smAndDown } = useDisplay();
 const { t } = useI18n();
+const route = useRoute();
+const router = useRouter();
 
 const currentTab = ref();
 const currentMoreTab = ref();
@@ -159,7 +161,7 @@ const tabs = computed(() => {
   const items = [];
 
   items.push({
-    id: 'overview',
+    id: 'OVERVIEW',
     title: 'Home',
     icon: 'mdi-home',
     show: () => smAndDown.value,
@@ -246,13 +248,37 @@ watch(
   () => smAndDown.value,
   (newValue) => {
     if (newValue && !currentTab.value) {
-      currentTab.value = 'overview';
-    } else if (!newValue && currentTab.value === 'overview') {
+      currentTab.value = 'OVERVIEW';
+    } else if (!newValue && currentTab.value === 'OVERVIEW') {
       currentTab.value = tabs.value[0].id;
     }
   },
   { immediate: true },
 );
+
+function updateRouteHash(tabId: string) {
+  console.warn('updateRouteHash', tabId);
+  if (route.hash !== `#${tabId}`) {
+    router.replace({ hash: `#${tabId}` });
+  }
+}
+
+// Sync tab selection with the URL hash
+onMounted(() => {
+  const hashTab = route.hash.replace('#', '');
+  console.warn('hashTab', hashTab);
+  if (tabs.value.map((t) => t.id).includes(hashTab)) {
+    currentTab.value = hashTab;
+  }
+  if (currentTab.value) {
+    updateRouteHash(currentTab.value);
+  }
+});
+
+// Update the hash when the tab changes
+watch(currentTab, (newTab) => {
+  updateRouteHash(newTab);
+});
 </script>
 
 <style scoped lang="scss">

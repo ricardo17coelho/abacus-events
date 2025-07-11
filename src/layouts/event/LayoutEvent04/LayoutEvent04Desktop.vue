@@ -63,6 +63,8 @@ const currentEvent = requireInjection(CURRENT_EVENT_KEY);
 
 const layoutMainContainerId = 'layout-main-container';
 const { t } = useI18n();
+const route = useRoute();
+const router = useRouter();
 
 const currentTab = ref();
 
@@ -127,5 +129,28 @@ const tabs = computed(() => {
   }
 
   return items.filter((i) => (i.show ? i.show() : true));
+});
+
+function updateRouteHash(tabId: string) {
+  console.warn('updateRouteHash', tabId);
+  if (route.hash !== `#${tabId}`) {
+    router.replace({ hash: `#${tabId}` });
+  }
+}
+
+// Sync tab selection with the URL hash
+onMounted(() => {
+  const hashTab = route.hash.replace('#', '');
+  if (tabs.value.map((t) => t.id).includes(hashTab)) {
+    currentTab.value = hashTab;
+  }
+  if (currentTab.value) {
+    updateRouteHash(currentTab.value);
+  }
+});
+
+// Update the hash when the tab changes
+watch(currentTab, (newTab) => {
+  updateRouteHash(newTab);
 });
 </script>

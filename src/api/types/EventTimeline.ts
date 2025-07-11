@@ -18,8 +18,7 @@ export type EventTimelineLocation = {
   event_timeline_location_id: string;
   created_at: string;
   title: TitleI18n;
-  img_url?: string;
-  iframe?: string;
+  img_url: string;
 };
 
 export type EventTimeline = {

@@ -32,23 +32,7 @@
               v-for="location in item.locations"
               :key="`${item.title}-${location.id}`"
             >
-              <IFrameDialog v-if="location.iframe" :src="location.iframe">
-                <template #activator="{ props }">
-                  <v-chip
-                    v-bind="props"
-                    class="mr-1 cursor-pointer"
-                    color="tertiary"
-                    density="compact"
-                    prepend-icon="mdi-home-map-marker"
-                    size="small"
-                    variant="tonal"
-                  >
-                    {{ showDefaultTranslationOrEmpty(location.title) }}
-                  </v-chip>
-                </template>
-              </IFrameDialog>
               <AppImagesView
-                v-else
                 :images="location.img_url ? [location.img_url] : []"
               >
                 <template #activator="activatorProps">
@@ -102,7 +86,6 @@ import { isStartEndCurrentTime } from '@/utils/time.ts';
 import { getUserFullName } from '@/utils/profile.ts';
 import { UiAvatarUser } from '@lib/ui';
 import AppImagesView from '@/components/app/AppImagesView.vue';
-import IFrameDialog from '@/components/IFrameDialog.vue';
 
 const props = defineProps({
   items: {

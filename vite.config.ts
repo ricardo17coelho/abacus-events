@@ -5,6 +5,7 @@ import vue from '@vitejs/plugin-vue';
 import vuetify, { transformAssetUrls } from 'vite-plugin-vuetify';
 import AutoImport from 'unplugin-auto-import/vite';
 import circleDependency from 'vite-plugin-circular-dependency';
+import { VitePWA } from 'vite-plugin-pwa';
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
@@ -34,6 +35,37 @@ export default defineConfig(({ mode }) => {
       }),
       circleDependency({
         outputFilePath: './circleDep',
+      }),
+      VitePWA({
+        registerType: 'autoUpdate',
+        includeAssets: ['favicon.icon', 'apple-touch-icon.png'],
+        manifest: {
+          name: 'Abacus Events',
+          short_name: 'AbacusEvents',
+          description: 'Your event guid',
+          theme_color: '#ffffff',
+          background_color: '#ffffff',
+          display: 'standalone',
+          start_url: '/',
+          icons: [
+            {
+              src: '192x192.png',
+              sizes: '192x192',
+              type: 'image/png',
+            },
+            {
+              src: '512x512.png',
+              sizes: '512x512',
+              type: 'image/png',
+            },
+            {
+              src: '512x512.png',
+              sizes: '512x512',
+              type: 'image/png',
+              purpose: 'any maskable',
+            },
+          ],
+        },
       }),
     ],
     server: {

@@ -1,15 +1,22 @@
 <template>
   <div v-if="currentEvent">
-    <v-alert
-      v-for="alert in currentEvent.schedule_alerts"
-      :key="alert.id"
-      :icon="alert.icon"
-      :text="showDefaultTranslationOrEmpty(alert.message)"
-      :title="showDefaultTranslationOrEmpty(alert.title)"
-      :type="alert.type"
-      variant="tonal"
-    >
-    </v-alert>
+    <v-row>
+      <v-col
+        v-for="alert in currentEvent.schedule_alerts"
+        :key="alert.id"
+        cols="12"
+      >
+        <v-alert
+          density="compact"
+          :icon="alert.icon"
+          :text="showDefaultTranslationOrEmpty(alert.message)"
+          :title="showDefaultTranslationOrEmpty(alert.title)"
+          :type="alert.type"
+          variant="tonal"
+        >
+        </v-alert>
+      </v-col>
+    </v-row>
 
     <v-row>
       <v-col
@@ -22,7 +29,6 @@
         <v-card
           height="100%"
           :min-width="width > 350 ? 300 : '100%'"
-          :subtitle="showDefaultTranslationOrEmpty(schedule.description)"
           width="100%"
         >
           <template #title>
@@ -31,12 +37,16 @@
             </v-icon>
             {{ showDefaultTranslationOrEmpty(schedule.title) }}
           </template>
+          <template #subtitle>
+            <span class="text-wrap">
+              {{ showDefaultTranslationOrEmpty(schedule.description) }}
+            </span>
+          </template>
           <v-card-item>
             <EventScheduleItemTimeline
               v-if="schedule.items"
               :items="schedule.items"
-            >
-            </EventScheduleItemTimeline>
+            />
           </v-card-item>
         </v-card>
       </v-col>

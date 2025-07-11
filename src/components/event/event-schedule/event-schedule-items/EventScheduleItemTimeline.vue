@@ -20,7 +20,11 @@
         </template>
         <template v-if="$slots.title || item.text" #title>
           <slot :item="item" name="title">
-            <a class="link-external" :href="item.text_link" target="_blank">
+            <a
+              class="link-external text-wrap"
+              :href="item.text_link"
+              target="_blank"
+            >
               {{ item.text }}
             </a>
           </slot>

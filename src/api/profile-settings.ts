@@ -38,7 +38,6 @@ export default function useApiProfileSettings() {
   }
 
   async function saveAiApiKey(key: string) {
-    console.warn('saveAiApiKey', key);
     return supabase.functions.invoke('ai-save_api_key', {
       body: { openai_api_key: key },
     });

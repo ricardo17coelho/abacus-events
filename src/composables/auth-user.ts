@@ -23,7 +23,6 @@ export default function useAuthUser() {
       email,
       password,
     });
-    console.warn(data);
     if (data && data.user) {
       user.value = data.user;
     }

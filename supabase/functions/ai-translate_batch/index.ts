@@ -81,9 +81,6 @@ serve(async (req) => {
 
   try {
     const { text, source, targets } = await req.json();
-    console.warn('text', text);
-    console.warn('source', source);
-    console.warn('targets', targets);
 
     if (!text || !source || !Array.isArray(targets)) {
       return new Response('Invalid request body', { status: 400 });
@@ -118,8 +115,6 @@ serve(async (req) => {
       Deno.env.get('ENCRYPTION_SECRET')!,
     );
 
-    console.warn('apiKey', apiKey);
-
     const translations: Record<
       string,
       { status: number; value?: string; error?: string }
@@ -148,7 +143,6 @@ serve(async (req) => {
 
       // If not cached or force_api is true, make OpenAI API call
       const prompt = `Translate the following word from ${source} to ${target}, without any extra explanations, just the translated word: "${text}"`;
-      console.warn('prompt', prompt);
 
       try {
         const response = await fetch(

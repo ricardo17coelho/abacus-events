@@ -116,16 +116,11 @@ watch(
 );
 
 function onSave() {
-  console.warn('onSave:date', date.value);
-  console.warn('onSave:time', time.value);
   if (!date.value || !time.value) return;
 
   const [hours, minutes] = time.value.split(':').map(Number);
-  console.warn('onSave:time:hours', hours);
-  console.warn('onSave:time:minutes', minutes);
   const fullDate = new Date(date.value);
   fullDate.setHours(hours, minutes, 0, 0);
-  console.warn('onSave:fullDate', fullDate);
 
   model.value = fullDate.toISOString();
   menu.value = false;

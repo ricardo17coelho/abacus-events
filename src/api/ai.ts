@@ -31,7 +31,6 @@ export default function useApiAi() {
     targets,
     force_api,
   }: AiTranslateBatchPayload) {
-    console.warn('ai-translateBatch', text, source, targets, force_api);
     let params = '';
     if (force_api) {
       params += `force_api=${force_api}`;

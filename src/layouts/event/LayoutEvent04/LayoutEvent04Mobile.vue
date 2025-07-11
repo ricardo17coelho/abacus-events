@@ -257,7 +257,6 @@ watch(
 );
 
 function updateRouteHash(tabId: string) {
-  console.warn('updateRouteHash', tabId);
   if (route.hash !== `#${tabId}`) {
     router.replace({ hash: `#${tabId}` });
   }
@@ -266,7 +265,6 @@ function updateRouteHash(tabId: string) {
 // Sync tab selection with the URL hash
 onMounted(() => {
   const hashTab = route.hash.replace('#', '');
-  console.warn('hashTab', hashTab);
   if (tabs.value.map((t) => t.id).includes(hashTab)) {
     currentTab.value = hashTab;
   }

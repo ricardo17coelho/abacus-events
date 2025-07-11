@@ -132,7 +132,6 @@ const tabs = computed(() => {
 });
 
 function updateRouteHash(tabId: string) {
-  console.warn('updateRouteHash', tabId);
   if (route.hash !== `#${tabId}`) {
     router.replace({ hash: `#${tabId}` });
   }

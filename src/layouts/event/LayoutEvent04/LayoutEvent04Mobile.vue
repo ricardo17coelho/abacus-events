@@ -51,7 +51,14 @@
       </div>
 
       <div v-else class="fill-height">
-        <LayoutEvent04MobileTitle :title="t('labels.more')" />
+        <LayoutEvent04MobileTitle
+          class="d-flex justify-space-between"
+          :title="t('labels.more')"
+        >
+          <template #append>
+            <TheAppMenuLanguage />
+          </template>
+        </LayoutEvent04MobileTitle>
 
         <div class="d-flex flex-column justify-space-between fill-height">
           <v-list base-color="primary" rounded="lg" variant="outlined">
@@ -71,13 +78,6 @@
               @click="currentMoreTab = item.id"
             ></v-list-item>
           </v-list>
-
-          <div class="d-flex align-center justify-space-between">
-            <div></div>
-            <div>
-              <TheAppMenuLanguage />
-            </div>
-          </div>
         </div>
       </div>
     </div>

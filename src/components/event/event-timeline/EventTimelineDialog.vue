@@ -112,6 +112,7 @@ const {
   removeEventTimelinePerson,
   createEventTimelinePerson,
   createEventTimelineLocationMap,
+  removeEventTimelineLocationMap,
 } = useApiEventTimeline();
 
 const isLoading = ref(false);
@@ -167,7 +168,7 @@ async function handleEventLocations(
   );
 
   for (const id of toRemove) {
-    await removeEventTimelinePerson(id, 'event_timeline_location_id');
+    await removeEventTimelineLocationMap(id, 'event_timeline_location_id');
   }
 }
 

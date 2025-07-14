@@ -2719,6 +2719,15 @@
     "@uppy/utils" "^6.1.4"
     preact "^10.5.13"
 
+"@uppy/image-editor@^3.3.3":
+  version "3.3.3"
+  resolved "https://registry.yarnpkg.com/@uppy/image-editor/-/image-editor-3.3.3.tgz#ecb32046b4e1c69463779e283b253491cbf392b6"
+  integrity sha512-1jfApC1nDYdvcOsWuRA+ZqlS5CxeW9HYZE8xOXCmnDNkmNYmemro0f6MU5tZrrPw8MncH6JOvzjuffPYQL0mzg==
+  dependencies:
+    "@uppy/utils" "^6.1.4"
+    cropperjs "^1.6.2"
+    preact "^10.5.13"
+
 "@uppy/informer@^4.2.1":
   version "4.2.1"
   resolved "https://registry.yarnpkg.com/@uppy/informer/-/informer-4.2.1.tgz#35c6d8750f1a388fea51307821d54106fdec7193"
@@ -3595,6 +3604,11 @@ crelt@^1.0.0:
   version "1.0.6"
   resolved "https://registry.yarnpkg.com/crelt/-/crelt-1.0.6.tgz#7cc898ea74e190fb6ef9dae57f8f81cf7302df72"
   integrity sha512-VQ2MBenTq1fWZUH9DJNGti7kKv6EeAuYr3cLwxUWhIu1baTaXh4Ib5W2CqHVqib4/MqbYGJqiL3Zb8GJZr3l4g==
+
+cropperjs@^1.6.2:
+  version "1.6.2"
+  resolved "https://registry.yarnpkg.com/cropperjs/-/cropperjs-1.6.2.tgz#d1a5d627d880581cca41b7901f06923500e4201b"
+  integrity sha512-nhymn9GdnV3CqiEHJVai54TULFAE3VshJTXSqSJKa8yXAKyBKDWdhHarnlIPrshJ0WMFTGuFvG02YjLXfPiuOA==
 
 cross-spawn@^7.0.6:
   version "7.0.6"

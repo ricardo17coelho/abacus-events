@@ -1,5 +1,5 @@
 <template>
-  <LayoutEvent02AppBar :scroll-container="`#${layoutMainContainerId}`" />
+  <LayoutEventAppBar :scroll-container="`#${layoutMainContainerId}`" />
 
   <v-main scrollable>
     <v-container
@@ -172,7 +172,7 @@
 
 <script lang="ts" setup>
 // components
-import LayoutEvent02AppBar from './LayoutEvent02AppBar.vue';
+import LayoutEventAppBar from '@/layouts/event/LayoutEventAppBar.vue';
 import EventFilesLayout01 from '@/components/event/event-files/layouts/EventFilesLayout01.vue';
 import EventCarousel from '@/components/event/event/EventCarousel.vue';
 import EventTimeline01 from '@/components/event/event-timeline/EventTimeline01.vue';

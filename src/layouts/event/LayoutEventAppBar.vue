@@ -1,9 +1,8 @@
 <template>
   <v-app-bar class="px-1" flat>
     <v-container class="d-flex align-center py-0 app-container">
-      <router-link to="/">
-        <v-img max-width="200" src="/logos/abacus.svg" width="150" />
-      </router-link>
+      <TheAppBarLogo />
+      <TheManageBtn />
       <v-spacer />
       <div
         class="d-flex"
@@ -19,6 +18,7 @@
         </UiMenu>
       </div>
       <TheAppMenuLanguage />
+      <TheUserMenu />
     </v-container>
   </v-app-bar>
 </template>
@@ -30,6 +30,9 @@ import { CURRENT_EVENT_KEY } from '@/types/injectionKeys.ts';
 import { type MenuItem, UiMenu } from '@lib/ui';
 import TheAppMenuLanguage from '@/components/TheAppMenuLanguage.vue';
 import useContact from '@/composables/contact.ts';
+import TheUserMenu from '@/layouts/components/TheUserMenu.vue';
+import TheManageBtn from '@/layouts/components/TheManageBtn.vue';
+import TheAppBarLogo from '@/layouts/components/TheAppBarLogo.vue';
 
 const currentEvent = requireInjection(CURRENT_EVENT_KEY);
 

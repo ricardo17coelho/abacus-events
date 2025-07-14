@@ -15,6 +15,12 @@
           :to="{ name: 'profile-account' }"
         />
         <v-list-item
+          v-if="isUserAdminOrHelper"
+          prepend-icon="mdi-view-dashboard"
+          title="Manage"
+          :to="{ name: 'manage' }"
+        />
+        <v-list-item
           link
           prepend-icon="mdi-logout"
           title="Logout"
@@ -29,4 +35,6 @@
 import useAuthUser from '@/composables/auth-user.ts';
 
 const { isLoggedIn, userInitials, logout } = useAuthUser();
+
+const { isUserAdminOrHelper } = useAuthUser();
 </script>

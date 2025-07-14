@@ -1,16 +1,9 @@
 <template>
   <v-app-bar class="px-1" flat>
     <TheLayoutContainer>
-      <router-link to="/">
-        <v-img max-width="200" src="/logos/abacus.svg" width="150" />
-      </router-link>
+      <TheAppBarLogo />
 
-      <v-btn
-        v-if="isUserAdminOrHelper"
-        class="ml-2"
-        icon="mdi-view-dashboard"
-        :to="{ name: 'manage' }"
-      />
+      <TheManageBtn />
       <v-spacer />
       <div
         class="d-flex"
@@ -27,13 +20,12 @@
 </template>
 
 <script setup lang="ts">
-import useAuthUser from '@/composables/auth-user.ts';
 import { useDisplay } from 'vuetify';
 import TheLayoutContainer from '@/layouts/components/TheLayoutContainer.vue';
 import TheAppMenuLanguage from '@/components/TheAppMenuLanguage.vue';
 import TheUserMenu from '@/layouts/components/TheUserMenu.vue';
-
-const { isUserAdminOrHelper } = useAuthUser();
+import TheManageBtn from '@/layouts/components/TheManageBtn.vue';
+import TheAppBarLogo from '@/layouts/components/TheAppBarLogo.vue';
 
 const { xs, smAndUp } = useDisplay();
 </script>

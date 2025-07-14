@@ -1,9 +1,7 @@
 <template>
   <v-navigation-drawer v-model="model" width="280">
-    <div class="d-flex align-center pa-4">
-      <router-link to="/">
-        <v-img src="/logos/abacus.svg" width="230" />
-      </router-link>
+    <div class="d-flex align-center justify-center pa-4">
+      <TheAppBarLogo width="230" />
     </div>
 
     <div class="px-2">
@@ -34,6 +32,7 @@
 
 <script setup lang="ts">
 import useAuthUser from '@/composables/auth-user.ts';
+import TheAppBarLogo from '@/layouts/components/TheAppBarLogo.vue';
 
 const model = defineModel({ type: Boolean, default: false });
 

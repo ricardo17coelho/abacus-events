@@ -3,9 +3,9 @@
     <v-col v-for="file in filesPDF" :key="file.id" :cols="xs ? 12 : 'auto'">
       <AppPdfDialog v-if="isPdf(file) && file.url" :pdf-url="file.url">
         <template #activator="{ props: ActivatorProps }">
-          <EventFilesCard
+          <AppAttachmentCard
             v-bind="ActivatorProps"
-            :file="file"
+            :attachment="file"
             :width="xs ? '100%' : 200"
           />
         </template>
@@ -19,9 +19,9 @@
     >
       <AppImagesView :images="filesImageUrls" :init-index="idx">
         <template #activator="ActivatorProps">
-          <EventFilesCard
+          <AppAttachmentCard
             v-bind="ActivatorProps"
-            :file="image"
+            :attachment="image"
             :width="xs ? '100%' : 200"
           />
         </template>
@@ -35,8 +35,8 @@ import type { EventFile } from '@/api/types/EventFile.ts';
 import { isPdf } from '@/utils/attachments/utils.ts';
 import AppPdfDialog from '@/components/app/AppPdfDialog.vue';
 import AppImagesView from '@/components/app/AppImagesView.vue';
-import EventFilesCard from '@/components/event/event-files/EventFilesCard.vue';
 import { useDisplay } from 'vuetify';
+import AppAttachmentCard from '@/components/app/AppAttachmentCard.vue';
 
 const props = defineProps({
   files: {

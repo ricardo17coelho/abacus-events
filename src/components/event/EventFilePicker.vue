@@ -37,6 +37,7 @@
         <v-tabs-window-item value="EVENT_FILES">
           <v-item-group
             v-model="selected"
+            :class="{ 'mb-13': showSelectedToolbar }"
             :multiple="multiple"
             selected-class="bg-primary"
           >
@@ -48,23 +49,22 @@
                   cols="auto"
                 >
                   <v-item
-                    v-slot="{ isSelected, selectedClass, toggle }"
+                    v-slot="{ isSelected, toggle }"
                     :value="eventFile.url"
                   >
-                    <v-card
-                      :class="['d-flex align-center', selectedClass]"
-                      color="primary"
-                      height="200"
+                    <AppAttachmentCard
+                      :attachment="eventFile"
                       :variant="isSelected ? 'outlined' : 'flat'"
-                      width="200"
                       @click="toggle"
                     >
-                      <v-img cover height="205" :src="eventFile.url">
+                      <template #image-default>
                         <div class="text-h3 flex-grow-1 text-center">
-                          <v-icon v-if="isSelected">mdi-check-circle</v-icon>
+                          <v-icon v-if="isSelected" color="primary"
+                            >mdi-check-circle</v-icon
+                          >
                         </div>
-                      </v-img>
-                    </v-card>
+                      </template>
+                    </AppAttachmentCard>
                   </v-item>
                 </v-col>
               </v-row>
@@ -72,9 +72,7 @@
           </v-item-group>
 
           <v-bottom-sheet
-            v-if="
-              (Array.isArray(selected) && selected.length > 0) || !!selected
-            "
+            v-if="showSelectedToolbar"
             contained
             :model-value="true"
             no-click-animation
@@ -154,6 +152,7 @@ import AppFileUpload, {
   type UploadedAttachment,
 } from '@/components/app/AppFileUpload.vue';
 import AppGallery from '@/components/app/AppGallery.vue';
+import AppAttachmentCard from '@/components/app/AppAttachmentCard.vue';
 
 defineProps({
   multiple: {
@@ -194,6 +193,11 @@ const { getEventFilesByEventId } = useApiEventFile();
 
 const eventFiles = ref<EventFile[]>([]);
 
+const showSelectedToolbar = computed(
+  () =>
+    (Array.isArray(selected) && selected.value.length > 0) || !!selected.value,
+);
+
 const isLoadingEventFiles = ref(false);
 async function onGetEventFiles() {
   if (!currentEvent.value?.id) return;
@@ -208,7 +212,9 @@ async function onGetEventFiles() {
     }
   } else {
     if (data) {
-      eventFiles.value = data;
+      eventFiles.value = data.filter(
+        (i) => !!i.mime_type && i.mime_type.startsWith('image/'),
+      );
     }
   }
   isLoadingEventFiles.value = false;

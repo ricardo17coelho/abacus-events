@@ -1,6 +1,6 @@
 <template>
   <v-card
-    v-if="file"
+    v-if="attachment"
     border
     class="d-flex flex-column"
     flat
@@ -13,20 +13,24 @@
       <VSheet class="d-flex justify-space-between" color="transparent" />
 
       <div class="d-flex justify-center align-center flex-fill ma-4">
-        <v-icon v-if="file.mime_type === 'application/pdf'" size="100">
+        <v-icon v-if="attachment.mime_type === 'application/pdf'" size="100">
           mdi-file-pdf-box
         </v-icon>
-        <v-img v-else :src="file.url"> </v-img>
+        <v-img v-else :src="attachment.url">
+          <slot name="image-default"></slot>
+        </v-img>
       </div>
     </VSheet>
     <v-list-item slim>
       <template #title>
-        {{ file.display_name }}
+        <span v-tooltip="attachment.display_name">
+          {{ attachment.display_name }}
+        </span>
       </template>
 
       <template #subtitle>
         <v-chip color="primary" density="compact">
-          {{ file.extension }}
+          {{ attachment.extension }}
         </v-chip>
       </template>
     </v-list-item>
@@ -34,11 +38,11 @@
 </template>
 
 <script setup lang="ts">
-import type { EventFile } from '@/api/types/EventFile.ts';
+import type { Attachment } from '@/api/types/Attachment.ts';
 
 defineProps({
-  file: {
-    type: Object as PropType<EventFile>,
+  attachment: {
+    type: Object as PropType<Attachment>,
     default: () => ({}),
   },
 });

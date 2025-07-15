@@ -33,13 +33,15 @@
       v-for="alert in currentEvent.schedule_alerts"
       :key="alert.id"
       :icon="alert.icon"
-      :text="showDefaultTranslationOrEmpty(alert.message)"
       :title="showDefaultTranslationOrEmpty(alert.title)"
       :type="alert.type"
       variant="tonal"
     >
       <template v-if="isUserAdmin" #append>
         <UiMenu :context="alert" :items="actionsAlert" show-activator />
+      </template>
+      <template #text>
+        <UiHtmlRender :content="showDefaultTranslationOrEmpty(alert.message)" />
       </template>
     </v-alert>
 
@@ -142,7 +144,7 @@ import { useI18n } from 'vue-i18n';
 import EventScheduleDialog from '@/components/event/event-schedule/EventScheduleDialog.vue';
 import { showDefaultTranslationOrEmpty } from '@/utils/showDefaultTranslationOrEmpty.ts';
 import useAuthUser from '@/composables/auth-user.ts';
-import { type MenuItem, UiMenu, useMenuActions } from '@lib/ui';
+import { type MenuItem, UiHtmlRender, UiMenu, useMenuActions } from '@lib/ui';
 import { toast } from 'vue-sonner';
 import useApiEventSchedule from '@/api/event-schedule.ts';
 import useApiEventScheduleAlert from '@/api/event-schedule-alert.ts';

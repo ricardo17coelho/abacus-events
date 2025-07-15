@@ -44,20 +44,11 @@
     </v-row>
     <v-row dense>
       <v-col cols="12">
-        <DialogTitleI18n
-          :i18n="model.description"
+        <FieldTextTitleI8n
+          v-model="model.description"
+          :label="t('labels.description')"
           name="field-description"
-          @save="model.description = $event"
-        >
-          <template #activator="{ props: activatorProps }">
-            <v-text-field
-              :label="t('labels.description')"
-              :model-value="modelValueDescriptionI18n"
-              readonly
-              v-bind="activatorProps"
-            />
-          </template>
-        </DialogTitleI18n>
+        />
       </v-col>
       <v-col cols="12">
         <v-label>{{ t('labels.bio') }}</v-label>
@@ -101,9 +92,8 @@ import { useI18n } from 'vue-i18n';
 import AppFileUploadDialog from '@/components/app/AppFileUploadDialog.vue';
 import type { UploadedAttachment } from '@/components/app/AppFileUpload.vue';
 import { UiAvatarUser, UiHtmlEditor } from '@lib/ui';
-import DialogTitleI18n from '@/components/dialogs/DialogTitleI18n.vue';
-import { showDefaultTranslationOrEmpty } from '@/utils/showDefaultTranslationOrEmpty.ts';
 import { getUserFullName } from '@/utils/profile.ts';
+import FieldTextTitleI8n from '@/components/fields/FieldTextTitleI8n.vue';
 
 defineProps({
   eventId: {
@@ -121,10 +111,6 @@ const { t, availableLocales, locale } = useI18n();
 const currentModelLang = ref(locale.value);
 
 const formRef = ref();
-
-const modelValueDescriptionI18n = computed(() =>
-  showDefaultTranslationOrEmpty(model.value?.description),
-);
 
 async function onSave(attachments: UploadedAttachment[] = []) {
   if (attachments.length) {

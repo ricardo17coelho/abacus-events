@@ -22,9 +22,7 @@ defineProps({
 
 <style lang="scss" scoped>
 .html-render {
-  font-family: Arial, sans-serif;
-  line-height: 1.6;
-  color: #333;
+  color: inherit;
 
   :deep(h1),
   :deep(h2),

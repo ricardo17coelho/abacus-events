@@ -12,31 +12,17 @@
     </v-row>
     <v-row dense>
       <v-col>
-        <DialogTitleI18n :i18n="model.title" @save="model.title = $event">
-          <template #activator="{ props: activatorProps }">
-            <v-text-field
-              :label="t('labels.title')"
-              :model-value="modelValueTitleI18n"
-              readonly
-              v-bind="activatorProps"
-            />
-          </template>
-        </DialogTitleI18n>
+        <FieldTextTitleI8n v-model="model.title" :label="t('labels.title')" />
       </v-col>
     </v-row>
     <v-row dense>
       <v-col>
-        <DialogTitleI18n :i18n="model.message" @save="model.message = $event">
-          <template #activator="{ props: activatorProps }">
-            <v-text-field
-              :label="t('labels.message')"
-              :model-value="modelValueMessageI18n"
-              readonly
-              :rules="[rulesValidation.ruleRequired]"
-              v-bind="activatorProps"
-            />
-          </template>
-        </DialogTitleI18n>
+        <UiHtmlEditorI18n
+          v-model="model.message"
+          :available-locales="availableLocales"
+          :label="t('labels.message')"
+          :rules="[rulesValidation.ruleRequired]"
+        />
       </v-col>
     </v-row>
     <v-row dense>
@@ -51,23 +37,15 @@
 // utils
 import { useI18n } from 'vue-i18n';
 import rulesValidation from '@/utils/validations';
-import DialogTitleI18n from '@/components/dialogs/DialogTitleI18n.vue';
-import { showDefaultTranslationOrEmpty } from '@/utils/showDefaultTranslationOrEmpty.ts';
 import FieldIconMdi from '@/components/fields/FieldIconMdi.vue';
+import { UiHtmlEditorI18n } from '@lib/ui';
+import FieldTextTitleI8n from '@/components/fields/FieldTextTitleI8n.vue';
 
 const model = defineModel({ type: Object, default: () => ({}) });
 
-const { t } = useI18n();
+const { t, availableLocales } = useI18n();
 
 const formRef = ref();
-
-const modelValueTitleI18n = computed(() =>
-  showDefaultTranslationOrEmpty(model.value?.title),
-);
-
-const modelValueMessageI18n = computed(() =>
-  showDefaultTranslationOrEmpty(model.value?.message),
-);
 
 defineExpose({ formRef });
 </script>

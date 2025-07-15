@@ -2,29 +2,19 @@
   <v-form v-if="model" ref="formRef">
     <v-row dense>
       <v-col>
-        <DialogTitleI18n :i18n="model.title" @save="model.title = $event">
-          <template #activator="{ props: activatorProps }">
-            <v-text-field
-              :label="t('labels.name')"
-              :model-value="modelValueTitleI18n"
-              readonly
-              :rules="[rulesValidation.ruleRequired]"
-              v-bind="activatorProps"
-            />
-          </template>
-        </DialogTitleI18n>
+        <FieldTextTitleI8n
+          v-model="model.title"
+          :label="t('labels.name')"
+          name="field-name"
+          :rules="[rulesValidation.ruleRequired]"
+        />
       </v-col>
       <v-col>
-        <DialogTitleI18n :i18n="model.note" @save="model.note = $event">
-          <template #activator="{ props: activatorProps }">
-            <v-text-field
-              :label="t('labels.note')"
-              :model-value="modelValueNoteI18n"
-              readonly
-              v-bind="activatorProps"
-            />
-          </template>
-        </DialogTitleI18n>
+        <FieldTextTitleI8n
+          v-model="model.note"
+          :label="t('labels.note')"
+          name="field-note"
+        />
       </v-col>
     </v-row>
     <v-row dense>
@@ -110,15 +100,14 @@ export type EventTimelineFormModel = Pick<
 </script>
 <script lang="ts" setup>
 // utils
-import { showDefaultTranslationOrEmpty } from '@/utils/showDefaultTranslationOrEmpty';
 import rulesValidation from '@/utils/validations';
-import DialogTitleI18n from '@/components/dialogs/DialogTitleI18n.vue';
 import EventTimelineCategoriesField from '@/components/event/event-timeline/event-timeline-categories/EventTimelineCategoriesField.vue';
 import { useI18n } from 'vue-i18n';
 import FieldIconMdi from '@/components/fields/FieldIconMdi.vue';
 import FieldTimePicker from '@/components/fields/FieldTimePicker.vue';
 import EventPersonFieldSelect from '@/components/event/event-persons/EventPersonFieldSelect.vue';
 import EventTimelineLocationsField from '@/components/event/event-timeline/event-timeline-locations/EventTimelineLocationsField.vue';
+import FieldTextTitleI8n from '@/components/fields/FieldTextTitleI8n.vue';
 
 defineProps({
   eventId: {
@@ -135,14 +124,6 @@ const model = defineModel({
 const { t } = useI18n();
 
 const formRef = ref();
-
-const modelValueTitleI18n = computed(() =>
-  showDefaultTranslationOrEmpty(model.value?.title),
-);
-
-const modelValueNoteI18n = computed(() =>
-  showDefaultTranslationOrEmpty(model.value?.note),
-);
 
 defineExpose({ formRef });
 </script>

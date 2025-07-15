@@ -9,11 +9,15 @@
         <v-alert
           density="compact"
           :icon="alert.icon"
-          :text="showDefaultTranslationOrEmpty(alert.message)"
           :title="showDefaultTranslationOrEmpty(alert.title)"
           :type="alert.type"
           variant="tonal"
         >
+          <template #text>
+            <UiHtmlRender
+              :content="showDefaultTranslationOrEmpty(alert.message)"
+            />
+          </template>
         </v-alert>
       </v-col>
     </v-row>
@@ -60,6 +64,7 @@ import { requireInjection } from '@/utils/injection.ts';
 import { CURRENT_EVENT_KEY } from '@/types/injectionKeys.ts';
 import EventScheduleItemTimeline from '@/components/event/event-schedule/event-schedule-items/EventScheduleItemTimeline.vue';
 import { useDisplay } from 'vuetify/framework';
+import { UiHtmlRender } from '@lib/ui';
 
 const { width } = useDisplay();
 

@@ -2,32 +2,14 @@
   <v-form ref="formRef">
     <v-row dense>
       <v-col>
-        <DialogTitleI18n :i18n="model.title" @save="model.title = $event">
-          <template #activator="{ props: activatorProps }">
-            <v-text-field
-              :label="t('labels.name')"
-              :model-value="modelValueTitleI18n"
-              readonly
-              :rules="[rulesValidation.ruleRequired]"
-              v-bind="activatorProps"
-            />
-          </template>
-        </DialogTitleI18n>
+        <FieldTextTitleI8n
+          v-model="model.title"
+          :label="t('labels.name')"
+          :rules="[rulesValidation.ruleRequired]"
+        />
       </v-col>
       <v-col>
-        <DialogTitleI18n
-          :i18n="model.description"
-          @save="model.description = $event"
-        >
-          <template #activator="{ props: activatorProps }">
-            <v-text-field
-              :label="t('labels.description')"
-              :model-value="modelValueDescriptionI18n"
-              readonly
-              v-bind="activatorProps"
-            />
-          </template>
-        </DialogTitleI18n>
+        <FieldTextTitleI8n v-model="model.description" />
       </v-col>
     </v-row>
     <v-row dense>
@@ -57,13 +39,12 @@
 
 <script lang="ts" setup>
 // utils
-import { showDefaultTranslationOrEmpty } from '@/utils/showDefaultTranslationOrEmpty.ts';
 import rulesValidation from '@/utils/validations';
-import DialogTitleI18n from '@/components/dialogs/DialogTitleI18n.vue';
 import EventFeatureTypeField from '@/components/event/event-feature/EventFeatureTypeField.vue';
 import { useI18n } from 'vue-i18n';
 import FieldIconMdi from '@/components/fields/FieldIconMdi.vue';
 import type { EventFeatureTypes } from '@/api/types/EventFeature.ts';
+import FieldTextTitleI8n from '@/components/fields/FieldTextTitleI8n.vue';
 
 defineProps({
   disabledFeaturesTypes: {
@@ -77,14 +58,6 @@ const model = defineModel({ type: Object, default: () => ({}) });
 const { t } = useI18n();
 
 const formRef = ref();
-
-const modelValueTitleI18n = computed(() =>
-  showDefaultTranslationOrEmpty(model.value?.title),
-);
-
-const modelValueDescriptionI18n = computed(() =>
-  showDefaultTranslationOrEmpty(model.value?.description),
-);
 
 defineExpose({ formRef });
 </script>

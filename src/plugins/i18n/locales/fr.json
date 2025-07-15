@@ -91,7 +91,9 @@
     "persons": "",
     "plan": "Plan du site",
     "program_timeline": "Chronologie du programme",
-    "programm": "Programme",
+    "program_timeline_category": "",
+    "program_timeline_location": "",
+    "programm": "",
     "public": "Public",
     "return_journey": "Retour",
     "role": "Rôle",
@@ -103,6 +105,7 @@
     "subtitle": "Sous-titre",
     "time_end": "Heure de fin",
     "time_start": "Heure de début",
+    "title": "",
     "users": "",
     "value": ""
   },

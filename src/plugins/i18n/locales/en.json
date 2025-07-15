@@ -95,7 +95,9 @@
     "persons": "Persons",
     "plan": "Site plan",
     "program_timeline": "Program Timeline",
-    "programm": "Program",
+    "program_timeline_category": "Category",
+    "program_timeline_location": "Location",
+    "programm": "Link",
     "public": "Public",
     "return_journey": "Return Journey",
     "role": "Role",
@@ -107,6 +109,7 @@
     "subtitle": "Subtitle",
     "time_end": "End Time",
     "time_start": "Start Time",
+    "title": "Title",
     "users": "Users",
     "value": "Value"
   },

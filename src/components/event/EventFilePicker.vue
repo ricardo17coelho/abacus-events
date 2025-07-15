@@ -2,7 +2,7 @@
   <UiDialog
     v-if="currentEvent"
     v-model="dialog"
-    max-width="600"
+    max-width="720"
     title="File select"
   >
     <template #activator="{ props: ActivatorProps }">

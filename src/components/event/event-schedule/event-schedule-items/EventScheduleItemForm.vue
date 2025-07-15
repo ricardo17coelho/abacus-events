@@ -2,15 +2,12 @@
   <v-form ref="formRef">
     <v-row dense>
       <v-col>
-        <v-text-field v-model="model.text" :label="t('labels.text_name')" />
+        <v-text-field v-model="model.text" :label="t('labels.name')" />
       </v-col>
     </v-row>
     <v-row dense>
       <v-col>
-        <v-text-field
-          v-model="model.text_link"
-          :label="t('labels.text_link')"
-        />
+        <v-text-field v-model="model.text_link" :label="t('labels.link')" />
       </v-col>
     </v-row>
     <v-row dense>

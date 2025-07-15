@@ -95,7 +95,9 @@
     "persons": "Personen",
     "plan": "Geländeplan",
     "program_timeline": "Programmablauf",
-    "programm": "Programm",
+    "program_timeline_category": "Kategorie",
+    "program_timeline_location": "Standort",
+    "programm": "Link",
     "public": "Öffentlich",
     "return_journey": "Rückfahrt",
     "role": "Role",
@@ -107,6 +109,7 @@
     "subtitle": "Untertitel",
     "time_end": "Endzeit",
     "time_start": "Startzeit",
+    "title": "Titel",
     "users": "Benutzer",
     "value": "Wert"
   },

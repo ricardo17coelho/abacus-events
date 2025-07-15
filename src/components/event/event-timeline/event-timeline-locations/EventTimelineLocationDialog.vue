@@ -2,7 +2,7 @@
   <UiDialog
     v-model="model"
     max-width="600"
-    :title="t('labels.program_timeline_category')"
+    :title="t('labels.program_timeline_location')"
   >
     <template #activator="activatorProps">
       <slot name="activator" v-bind="activatorProps" />

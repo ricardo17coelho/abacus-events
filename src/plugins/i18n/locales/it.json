@@ -91,7 +91,9 @@
     "persons": "",
     "plan": "Planimetria",
     "program_timeline": "Cronologia del programma",
-    "programm": "Programma",
+    "program_timeline_category": "",
+    "program_timeline_location": "",
+    "programm": "",
     "public": "Pubblico",
     "return_journey": "Ritorno",
     "role": "Ruolo",
@@ -103,6 +105,7 @@
     "subtitle": "Sottotitolo",
     "time_end": "Ora di fine",
     "time_start": "Ora di inizio",
+    "title": "",
     "users": "",
     "value": ""
   },

@@ -49,11 +49,25 @@ export default function useApiEvents() {
   }
 
   function getEventById(eventId: string) {
-    return findById<Event>('events', eventId, baseSelect);
+    const orders: FindOrder[] = [
+      [
+        'order',
+        { referencedTable: 'schedule.event_schedule_items', ascending: true },
+      ],
+    ];
+
+    return findById<Event>('events', eventId, baseSelect, 'id', [], orders);
   }
 
   function getEventBySlug(slug: string) {
-    return findById<Event>('events', slug, baseSelect, 'slug');
+    const orders: FindOrder[] = [
+      [
+        'order',
+        { referencedTable: 'schedule.event_schedule_items', ascending: true },
+      ],
+    ];
+
+    return findById<Event>('events', slug, baseSelect, 'slug', [], orders);
   }
 
   function getEventByIdOrSlug(id: string) {

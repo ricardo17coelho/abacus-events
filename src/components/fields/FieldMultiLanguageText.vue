@@ -64,6 +64,7 @@
             class="my-2"
             color="purple"
             density="compact"
+            :loading="isTranslatingBatch"
             prepend-icon="mdi-creation"
             variant="text"
             @click="
@@ -196,7 +197,9 @@ const canAI = computedAsync<string[]>(async () => {
 }, false);
 
 const { translateBatch } = useApiAi();
+const isTranslatingBatch = ref(false);
 async function onTranslateBatch(payload: AiTranslateBatchPayload) {
+  isTranslatingBatch.value = true;
   const { data, error } = await translateBatch(payload);
   if (error) {
     toast.error(t('errors.error_occurred'));
@@ -219,5 +222,6 @@ async function onTranslateBatch(payload: AiTranslateBatchPayload) {
       };
     }
   }
+  isTranslatingBatch.value = false;
 }
 </script>

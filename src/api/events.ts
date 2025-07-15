@@ -38,7 +38,13 @@ export default function useApiEvents() {
     filters: FindFilter[] = [],
     range = [0, 100],
   ) {
-    const orders: FindOrder[] = [['date', { ascending: false }]];
+    const orders: FindOrder[] = [
+      ['date', { ascending: false }],
+      [
+        'order',
+        { referencedTable: 'schedule.event_schedule_items', ascending: true },
+      ],
+    ];
 
     return find<Event>('events', filters, select, range, orders);
   }

@@ -3,6 +3,7 @@ import type {
   EventSchedule,
   EventScheduleItem,
 } from '@/api/types/EventSchedule.ts';
+import type { FindOrder } from '@/api/types/QueryTypes.ts';
 
 export default function useApiEventSchedule() {
   const { find, findById, create, update, remove } = useApi();
@@ -13,14 +14,24 @@ export default function useApiEventSchedule() {
   `;
 
   function getEventSchedules(range = [0, 10]) {
-    return find<EventSchedule>('event_schedule', [], baseSelect, range);
+    const orders: FindOrder[] = [
+      ['order', { referencedTable: 'event_schedule_items', ascending: true }],
+    ];
+    return find<EventSchedule>('event_schedule', [], baseSelect, range, orders);
   }
 
   function getEventScheduleById(EventScheduleId: string) {
+    const orders: FindOrder[] = [
+      ['order', { referencedTable: 'event_schedule_items', ascending: true }],
+    ];
+
     return findById<EventSchedule>(
       'event_schedule',
       EventScheduleId,
       baseSelect,
+      'id',
+      [],
+      orders,
     );
   }
 

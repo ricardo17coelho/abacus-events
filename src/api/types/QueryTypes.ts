@@ -28,7 +28,10 @@ export type FindFilter = [
   value: string | number | boolean | null,
 ];
 
-export type FindOrder = [column: string, ascending?: boolean];
+export type FindOrder = [
+  column: string,
+  { ascending?: boolean; nullsFirst?: boolean; referencedTable?: string },
+];
 
 export type FindSelect = {
   head?: boolean;

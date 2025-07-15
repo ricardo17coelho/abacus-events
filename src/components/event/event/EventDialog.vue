@@ -61,7 +61,7 @@ const form = ref({
   ...DEFAULT_FORM,
 });
 
-const { createEvent, updateEvent, getEventById } = useApiEvents();
+const { createEvent, updateEvent, getEventByIdOrSlug } = useApiEvents();
 
 const isLoading = ref(false);
 const formRef = ref();
@@ -120,7 +120,7 @@ const isLoadingInitial = ref(false);
 
 async function onGetDataById(id: string) {
   isLoadingInitial.value = true;
-  const { error, data } = await getEventById(id);
+  const { error, data } = await getEventByIdOrSlug(id);
 
   if (error) {
     if (error.message) {

@@ -101,8 +101,6 @@ export default function useApiEvents() {
   return {
     getEvents,
     getEventsPublic,
-    getEventById,
-    getEventBySlug,
     getEventByIdOrSlug,
     createEvent,
     updateEvent,

@@ -82,7 +82,7 @@ import {
 // tiptap components
 import { EditorContent, useEditor } from '@tiptap/vue-3';
 import StarterKit from '@tiptap/starter-kit';
-import { CharacterCount } from '@tiptap/extension-character-count';
+import { CharacterCount } from '@tiptap/extensions';
 import Image from '@tiptap/extension-image';
 // components
 import UiFieldLocaleSelectMenu from '../fields/UiFieldLocaleSelectMenu.vue';

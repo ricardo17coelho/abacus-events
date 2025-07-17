@@ -59,7 +59,7 @@
     "@types/autosize": "4.0.3",
     "@types/heic-convert": "2.1.0",
     "@types/lodash": "4.17.20",
-    "@types/node": "24.0.10",
+    "@types/node": "24.0.14",
     "@vitejs/plugin-vue": "6.0.0",
     "@vue/compiler-sfc": "3.5.17",
     "@vue/eslint-config-prettier": "10.2.0",

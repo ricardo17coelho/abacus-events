@@ -16,7 +16,7 @@
   },
   "dependencies": {
     "@mdi/font": "7.4.47",
-    "@supabase/supabase-js": "2.50.3",
+    "@supabase/supabase-js": "2.51.0",
     "@tato30/vue-pdf": "1.11.3",
     "@tiptap/extension-character-count": "2.25.0",
     "@tiptap/extension-image": "2.25.0",

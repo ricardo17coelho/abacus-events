@@ -7103,10 +7103,10 @@ vue-router@4.5.1:
   dependencies:
     "@vue/devtools-api" "^6.6.4"
 
-vue-sonner@2.0.1:
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/vue-sonner/-/vue-sonner-2.0.1.tgz#ee8b1c7438af7a1bc3145018b8f06ef776d87a43"
-  integrity sha512-sn4vjCRzRcnMaxaLa9aNSyZQi6S+gshiea5Lc3eqpkj0ES9LH8ljg+WJCkxefr28V4PZ9xkUXBIWpxGfQxstIg==
+vue-sonner@2.0.2:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/vue-sonner/-/vue-sonner-2.0.2.tgz#9728fc8521c5d78b6ce5a8a92c68c55d287a68cd"
+  integrity sha512-cN6onnN6aBOZ56YWN8CMj6t4zqbz/XlenE+jx5z+mgduMMelFo6B6G+e2Q6hhxU9YFiV16MXG2MBPluZabyElQ==
 
 vue-tsc@3.0.1:
   version "3.0.1"

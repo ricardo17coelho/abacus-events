@@ -5,17 +5,19 @@
       :subtitle="showDefaultTranslationOrEmpty(currentEvent.subtitle)"
     >
       <template #title>
-        <UiLink
-          class="text-h4"
-          :to="{
-            name: 'event',
-            params: {
-              id: currentEvent.id,
-            },
-          }"
-        >
-          {{ showDefaultTranslationOrEmpty(currentEvent.title) }}
-        </UiLink>
+        <UiTextCopyToClipboard v-if="eventUrl" :text="eventUrl">
+          <UiLink
+            class="text-h4 mr-2"
+            :to="{
+              name: 'event',
+              params: {
+                eventId: currentEvent.slug || currentEvent.id,
+              },
+            }"
+          >
+            {{ showDefaultTranslationOrEmpty(currentEvent.title) }}
+          </UiLink>
+        </UiTextCopyToClipboard>
       </template>
       <template #actions>
         <DialogEventLayoutView>
@@ -78,7 +80,7 @@ import EventDialog from '@/components/event/event/EventDialog.vue';
 import useAuthUser from '@/composables/auth-user.ts';
 import { useI18n } from 'vue-i18n';
 import DialogEventLayoutView from '@/components/dialogs/DialogEventLayoutView.vue';
-import { formatDateByFormat, UiLink } from '@lib/ui';
+import { formatDateByFormat, UiLink, UiTextCopyToClipboard } from '@lib/ui';
 import type { Event } from '@/api/types/Event.ts';
 import { toast } from 'vue-sonner';
 import useApiEvents from '@/api/events.ts';
@@ -86,6 +88,7 @@ import useApiEvents from '@/api/events.ts';
 const currentEvent = requireInjection(CURRENT_EVENT_KEY);
 
 const route = useRoute();
+const router = useRouter();
 const { t } = useI18n();
 
 const { isUserAdmin } = useAuthUser();
@@ -101,6 +104,24 @@ const activeTab = computed(() => {
     return matchingTab ? matchingTab.value : null;
   }
   return null;
+});
+
+const eventUrl = computed(() => {
+  if (!currentEvent.value) return undefined;
+
+  const url = router.resolve({
+    name: 'event',
+    params: {
+      eventId: currentEvent.value.slug || currentEvent.value.id,
+    },
+  });
+
+  if (url?.href) {
+    const hostOrigin = window.location.origin;
+    return `${hostOrigin}${url.href}`;
+  }
+
+  return undefined;
 });
 
 const tabs = computed(() =>

@@ -20,6 +20,7 @@ import {
   UiMenuListItem,
   UiStageLabel,
   UiTable,
+  UiTextCopyToClipboard,
   UiTextGreeting,
 } from './components';
 
@@ -52,4 +53,5 @@ export {
   UiStageLabel,
   UiTable,
   UiTextGreeting,
+  UiTextCopyToClipboard,
 };

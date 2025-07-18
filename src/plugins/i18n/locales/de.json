@@ -56,6 +56,8 @@
       "EMAIL": "E-Mail",
       "PHONE": "Telefon/Mobile"
     },
+    "copied": "Kopiert",
+    "copy": "Kopieren",
     "date": "Datum",
     "description": "Beschreibung",
     "drinks": "Getränkkarte",

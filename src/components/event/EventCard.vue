@@ -8,9 +8,16 @@
       params: { eventId: event.slug || event.id },
     }"
   >
-    <v-img class="align-start pa-3" cover height="250" :src="event.brand?.logo">
+    <v-img class="align-end pa-3" height="250" :src="event.brand?.logo">
       <div v-if="showCountdown" class="d-flex justify-end ga-1">
-        <v-chip v-if="event.date" class="px-3" color="white" density="compact">
+        <v-chip
+          v-if="event.date"
+          border
+          class="px-3"
+          color="black"
+          density="compact"
+          variant="outlined"
+        >
           <CountdownDate :date="event.date" />
         </v-chip>
       </div>

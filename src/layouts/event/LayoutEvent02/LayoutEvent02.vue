@@ -42,9 +42,7 @@
                   "
                 />
 
-                <v-chip color="primary">
-                  {{ formatDateByFormat(currentEvent.date) }}
-                </v-chip>
+                <EventDateChip :date="currentEvent.date" />
               </v-card-text>
             </v-card>
           </v-col>
@@ -155,6 +153,7 @@ import EventTimeline01 from '@/components/event/event-timeline/EventTimeline01.v
 import ParkingLotCard from '@/components/parking-lot/ParkingLotCard.vue';
 import EventScheduleDisplay01 from '@/components/event/event-schedule/event-schedule-display/EventScheduleDisplay01.vue';
 import EventFeatureDisplayCard from '@/components/event/event-feature/event-feature-display/EventFeatureDisplayCard.vue';
+import EventDateChip from '@/components/event/EventDateChip.vue';
 // composables
 import { useDisplay } from 'vuetify';
 import useEventProgram from '@/composables/event-program.ts';
@@ -165,7 +164,7 @@ import {
   getEventFeatureIfExists,
   hasEventFeature,
 } from '@/utils/event-features.ts';
-import { formatDateByFormat, UiBtnScrollToTop, UiHtmlRender } from '@lib/ui';
+import { UiBtnScrollToTop, UiHtmlRender } from '@lib/ui';
 import { showDefaultTranslationOrEmpty } from '@/utils/showDefaultTranslationOrEmpty.ts';
 import { requireInjection } from '@/utils/injection.ts';
 

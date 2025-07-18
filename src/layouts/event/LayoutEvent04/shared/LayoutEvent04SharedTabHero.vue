@@ -31,9 +31,7 @@
               :content="showDefaultTranslationOrEmpty(currentEvent.description)"
             />
 
-            <v-chip color="primary">
-              {{ formatDateByFormat(currentEvent.date) }}
-            </v-chip>
+            <EventDateChip :date="currentEvent.date" />
           </v-card-text>
         </v-card>
       </v-col>
@@ -51,9 +49,10 @@
 import { requireInjection } from '@/utils/injection.ts';
 import { CURRENT_EVENT_KEY } from '@/types/injectionKeys.ts';
 import { showDefaultTranslationOrEmpty } from '@/utils/showDefaultTranslationOrEmpty.ts';
-import { formatDateByFormat, UiHtmlRender } from '@lib/ui';
+import { UiHtmlRender } from '@lib/ui';
 import EventCarousel from '@/components/event/event/EventCarousel.vue';
 import { useDisplay } from 'vuetify/framework';
+import EventDateChip from '@/components/event/EventDateChip.vue';
 
 const currentEvent = requireInjection(CURRENT_EVENT_KEY);
 

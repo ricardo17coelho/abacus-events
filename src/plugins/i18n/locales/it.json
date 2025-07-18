@@ -5,6 +5,7 @@
     "add_schedule": "Aggiungi programma",
     "delete": "Cancellare",
     "edit": "Modifica",
+    "install": "Installa",
     "open": "Aperto",
     "save": "Salva",
     "send": "Inviare",
@@ -52,6 +53,9 @@
     "brand": "",
     "category": "Categoria",
     "contact": "",
+    "contact_types": {
+      "EMAIL": ""
+    },
     "copied": "Copiato",
     "copy": "Copia",
     "date": "Data",
@@ -118,6 +122,13 @@
     "headline": "Ops, 404",
     "text": "La pagina che stavi cercando non esiste",
     "title": "Pagina non trovata"
+  },
+  "sw_reload_prompt": {
+    "actions": {
+      "reload_later": "Ricarica più tardi",
+      "reload_now": "Ricarica ora"
+    },
+    "text": "🔄 È disponibile una nuova versione."
   },
   "text": {
     "soon": {

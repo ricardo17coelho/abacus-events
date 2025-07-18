@@ -5,6 +5,7 @@
     "add_schedule": "Add schedule",
     "delete": "Delete",
     "edit": "Edit",
+    "install": "Install",
     "open": "Open",
     "save": "Save",
     "send": "Send",
@@ -122,6 +123,13 @@
     "headline": "Whoops, 404",
     "text": "The page you were looking for does not exist",
     "title": "Page not found"
+  },
+  "sw_reload_prompt": {
+    "actions": {
+      "reload_later": "Reload later",
+      "reload_now": "Reload now"
+    },
+    "text": "🔄 A new version is available."
   },
   "text": {
     "soon": {

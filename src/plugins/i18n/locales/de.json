@@ -5,6 +5,7 @@
     "add_schedule": "Zeitplan hinzufügen",
     "delete": "Löschen",
     "edit": "Bearbeiten",
+    "install": "Installieren",
     "open": "Öffnen",
     "save": "Speichern",
     "send": "Senden",
@@ -122,6 +123,13 @@
     "headline": "Hoppla, 404",
     "text": "Die gesuchte Seite existiert nicht",
     "title": "Seite nicht gefunden"
+  },
+  "sw_reload_prompt": {
+    "actions": {
+      "reload_later": "Später neu laden",
+      "reload_now": "Jetzt neu laden"
+    },
+    "text": "🔄 Eine neue Version ist verfügbar."
   },
   "text": {
     "soon": {

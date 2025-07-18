@@ -42,7 +42,7 @@ export default defineConfig(({ mode }) => {
         manifest: {
           name: 'Abacus Events',
           short_name: 'AbacusEvents',
-          description: 'Your event guid',
+          description: 'Day-guide for Abacus Events',
           theme_color: '#ffffff',
           background_color: '#ffffff',
           display: 'standalone',

@@ -19,6 +19,9 @@
   },
   "errors": {
     "error_occurred": "Ein Fehler ist aufgetreten",
+    "slug": {
+      "already_in_use": "Die URL-Slug ist bereits in Verwendung."
+    },
     "validation": {
       "invalid": "Bitte überprüfen Sie Ihre Eingabe"
     }
@@ -104,7 +107,7 @@
     "settings": "Einstellungen",
     "slots_filled": "Belegte Plätze",
     "slots_total": "Max. Plätze",
-    "slug": "Slug",
+    "slug": "URL-Slug",
     "stop_on_request": "Halt auf Verlangen",
     "subtitle": "Untertitel",
     "time_end": "Endzeit",

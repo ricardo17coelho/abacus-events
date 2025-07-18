@@ -19,6 +19,9 @@
   },
   "errors": {
     "error_occurred": "Si è verificato un errore",
+    "slug": {
+      "already_in_use": "L'URL slug è già in uso."
+    },
     "validation": {
       "invalid": "Si prega di controllare il proprio input"
     }
@@ -100,7 +103,7 @@
     "settings": "",
     "slots_filled": "Posti occupati",
     "slots_total": "Posti massimi",
-    "slug": "Slug",
+    "slug": "URL slug",
     "stop_on_request": "Arresto su richiesta",
     "subtitle": "Sottotitolo",
     "time_end": "Ora di fine",

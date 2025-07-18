@@ -51,13 +51,7 @@
     </v-row>
     <v-row dense>
       <v-col>
-        <v-text-field v-model="model.slug" :label="t('labels.slug')">
-          <template #append-inner>
-            <UiInfoHint
-              text="The slug can be used to find the event, instead of using the UUID. Typically the slug should match the event name and be hyphenated"
-            />
-          </template>
-        </v-text-field>
+        <EventFieldSlug v-model="model.slug" :event-id="eventId" />
       </v-col>
     </v-row>
     <v-row dense>
@@ -101,6 +95,14 @@ import { useI18n } from 'vue-i18n';
 import { toHyphenated, UiHtmlEditor } from '@lib/ui';
 import UiInfoHint from '@lib/ui/components/UiInfoHint.vue';
 import { watch } from 'vue';
+import EventFieldSlug from '@/components/event/event/EventFieldSlug.vue';
+
+defineProps({
+  eventId: {
+    type: String,
+    default: undefined,
+  },
+});
 
 const model = defineModel({ type: Object, default: () => ({}) });
 

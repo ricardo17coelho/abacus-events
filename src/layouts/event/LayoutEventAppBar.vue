@@ -11,7 +11,10 @@
           'ga-5': smAndUp,
         }"
       >
-        <UiMenu :items="currentEventContactsFormatted">
+        <UiMenu
+          v-if="currentEventContactsFormatted.length"
+          :items="currentEventContactsFormatted"
+        >
           <template #activator="{ props }">
             <v-btn icon="mdi-phone-alert" v-bind="props"></v-btn>
           </template>

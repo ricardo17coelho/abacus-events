@@ -19,6 +19,9 @@
   },
   "errors": {
     "error_occurred": "An error has occurred",
+    "slug": {
+      "already_in_use": "URL slug is already in use."
+    },
     "validation": {
       "invalid": "Please check your input"
     }
@@ -104,7 +107,7 @@
     "settings": "Settings",
     "slots_filled": "Occupied Spaces",
     "slots_total": "Max. Spaces",
-    "slug": "Slug",
+    "slug": "URL slug",
     "stop_on_request": "Stop on request",
     "subtitle": "Subtitle",
     "time_end": "End Time",

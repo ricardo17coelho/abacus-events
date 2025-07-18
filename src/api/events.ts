@@ -2,6 +2,7 @@ import useApi from '@/composables/api';
 import type { Event } from './types/Event';
 import { validate as isValidUUID } from 'uuid';
 import type { FindFilter, FindOrder } from '@/api/types/QueryTypes.ts';
+import { supabase } from '@/services/supabase.ts';
 
 export default function useApiEvents() {
   const { find, findById, create, update, remove, count } = useApi();
@@ -39,7 +40,7 @@ export default function useApiEvents() {
     range = [0, 100],
   ) {
     const orders: FindOrder[] = [
-      ['date', { ascending: false }],
+      ['date', { ascending: true }],
       [
         'order',
         { referencedTable: 'schedule.event_schedule_items', ascending: true },
@@ -104,6 +105,28 @@ export default function useApiEvents() {
     return count('events');
   }
 
+  async function checkIfSlugAlreadyExists(
+    slug: string,
+    currentEventId?: string,
+  ) {
+    let query = supabase
+      .from('events')
+      .select('slug', { count: 'exact', head: true }) // efficient count-only query
+      .eq('slug', slug);
+
+    if (currentEventId) {
+      query = query.neq('id', currentEventId); // exclude current event
+    }
+
+    const { count, error } = await query;
+
+    if (error) {
+      return { error, exists: undefined };
+    }
+
+    return { exists: !!count && count > 0, error: undefined };
+  }
+
   return {
     getEvents,
     getEventsPublic,
@@ -112,5 +135,6 @@ export default function useApiEvents() {
     updateEvent,
     removeEvent,
     getEventsCount,
+    checkIfSlugAlreadyExists,
   };
 }

@@ -46,29 +46,6 @@
                   {{ formatDateByFormat(currentEvent.date) }}
                 </v-chip>
               </v-card-text>
-              <v-card-actions
-                v-if="hasEventFeature(currentEvent, 'PROGRAM')"
-                class="px-4"
-              >
-                <VBtnPrimary
-                  block
-                  color="primary"
-                  size="large"
-                  :text="
-                    showDefaultTranslationOrEmpty(
-                      getEventFeatureIfExists(currentEvent, 'PROGRAM')?.title,
-                    )
-                  "
-                  @click="
-                    goTo(
-                      `#feature-${
-                        getEventFeatureIfExists(currentEvent, 'PROGRAM')?.id
-                      }`,
-                      { container: `#${layoutMainContainerId}` },
-                    )
-                  "
-                />
-              </v-card-actions>
             </v-card>
           </v-col>
 
@@ -93,7 +70,6 @@
               v-model="currentCategoryFilter"
               class="categories-chip-group"
               color="primary"
-              column
               mandatory
               mobile
             >
@@ -180,7 +156,7 @@ import ParkingLotCard from '@/components/parking-lot/ParkingLotCard.vue';
 import EventScheduleDisplay01 from '@/components/event/event-schedule/event-schedule-display/EventScheduleDisplay01.vue';
 import EventFeatureDisplayCard from '@/components/event/event-feature/event-feature-display/EventFeatureDisplayCard.vue';
 // composables
-import { useDisplay, useGoTo } from 'vuetify';
+import { useDisplay } from 'vuetify';
 import useEventProgram from '@/composables/event-program.ts';
 // types & constants
 import { CURRENT_EVENT_KEY } from '@/types/injectionKeys.ts';
@@ -195,7 +171,6 @@ import { requireInjection } from '@/utils/injection.ts';
 
 const layoutMainContainerId = 'layout-main-container';
 const { smAndDown, mdAndUp } = useDisplay();
-const goTo = useGoTo();
 
 const currentEvent = requireInjection(CURRENT_EVENT_KEY);
 

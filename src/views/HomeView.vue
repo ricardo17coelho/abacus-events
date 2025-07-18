@@ -21,7 +21,7 @@
       </v-col>
     </v-row>
 
-    <v-row>
+    <v-row v-if="pastEvents.length">
       <v-expansion-panels flat>
         <v-expansion-panel title="Past Events">
           <template #text>

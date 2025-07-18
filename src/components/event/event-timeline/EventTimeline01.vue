@@ -7,7 +7,7 @@
           class="my-1"
           :variant="isCurrentTimeValid(item) ? 'outlined' : undefined"
         >
-          <template #prepend>
+          <template v-if="item.time_start || item.time_end" #prepend>
             <v-avatar color="secondary" size="64" tile>
               <div>
                 <div class="font-weight-black">

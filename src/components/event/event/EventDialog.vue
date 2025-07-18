@@ -4,7 +4,7 @@
       <slot name="activator" v-bind="activatorProps" />
     </template>
     <template #content>
-      <EventForm ref="formRef" v-model="form" />
+      <EventForm ref="formRef" v-model="form" :event-id="eventId" />
     </template>
     <template #actions>
       <VBtnPrimary :loading="isLoading" @click="onSave">

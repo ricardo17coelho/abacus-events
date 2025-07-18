@@ -1,6 +1,6 @@
 import useApi from '@/composables/api';
 import type { EventPerson } from '@/api/types/EventPerson';
-import type { FindFilter } from '@/api/types/QueryTypes.ts';
+import type { FindFilter, FindOrder } from '@/api/types/QueryTypes.ts';
 
 export default function useApiEventPerson() {
   const { find, findById, create, update, remove } = useApi();
@@ -14,7 +14,9 @@ export default function useApiEventPerson() {
     filters: FindFilter[] = [],
     range = [0, 100],
   ) {
-    return find<EventPerson>('event_persons', filters, select, range);
+    const orders: FindOrder[] = [['first_name', { ascending: true }]];
+
+    return find<EventPerson>('event_persons', filters, select, range, orders);
   }
 
   function getEventPersonById(EventPersonId: string) {

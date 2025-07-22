@@ -2,10 +2,7 @@
   <v-list class="py-0" :lines="false">
     <template v-for="(item, i) in items" :key="i">
       <v-divider v-if="i !== 0" />
-      <v-list-item
-        class="my-1 pa-0"
-        :variant="isCurrentTimeValid(item) ? 'outlined' : undefined"
-      >
+      <v-list-item class="my-1 pa-0">
         <template v-if="item.time_start || item.time_end" #prepend>
           <v-avatar color="secondary" size="64" tile>
             <div>
@@ -69,7 +66,7 @@
         <slot></slot>
 
         <template #append>
-          <AppLiveLabel v-if="isCurrentTimeValid(item)" />
+          <AppLiveLabel v-if="isCurrentTimeValid(item)" class="mx-2" />
           <slot v-if="$slots.actions" :item="item" name="actions" />
         </template>
       </v-list-item>

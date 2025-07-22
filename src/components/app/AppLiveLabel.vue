@@ -1,9 +1,7 @@
 <template>
-  <v-chip density="compact">
+  <v-chip color="red" density="compact" variant="flat">
     <template #prepend>
-      <v-icon class="flash" color="red" size="18" start>
-        mdi-radiobox-marked
-      </v-icon>
+      <v-icon class="flash" size="18" start> mdi-play-circle </v-icon>
     </template>
     <span class="text-caption"> Live </span>
   </v-chip>

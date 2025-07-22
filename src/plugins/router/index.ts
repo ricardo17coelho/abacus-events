@@ -13,6 +13,7 @@ import routesEvent from './routes/event';
 import LayoutDefault from '@/layouts/default/LayoutDefault.vue';
 
 const routes = [
+  // PUBLIC
   {
     path: '/',
     meta: {
@@ -33,10 +34,25 @@ const routes = [
             name: 'home',
             component: () => import('@/views/HomeView.vue'),
           },
-          ...routesProfile,
         ],
       },
       ...routesEvent,
+    ],
+  },
+  // PROTECTED
+  {
+    path: '/',
+    children: [
+      {
+        path: '/:pathMatch(.*)*',
+        name: 'NotFound',
+        component: () => import('@/views/NotFound.vue'),
+      },
+      {
+        path: '',
+        component: LayoutDefault,
+        children: [...routesProfile],
+      },
     ],
   },
   ...routesAuth,

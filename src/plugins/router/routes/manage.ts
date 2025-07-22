@@ -3,7 +3,7 @@ import LayoutManage from '@/layouts/manage/LayoutManage.vue';
 export default [
   {
     path: '/',
-    component: LayoutManage,
+    component: () => import('@/plugins/router/guards/GuardManage.vue'),
     children: [
       {
         path: '/:pathMatch(.*)*',
@@ -12,6 +12,7 @@ export default [
       },
       {
         path: 'manage',
+        component: LayoutManage,
         children: [
           {
             path: '',

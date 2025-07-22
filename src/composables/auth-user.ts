@@ -109,6 +109,16 @@ export default function useAuthUser() {
   };
 
   /**
+   * Resend verification email
+   */
+  const resendVerificationEmail = async (email: string) => {
+    return supabase.auth.resend({
+      type: 'signup',
+      email,
+    });
+  };
+
+  /**
    * Update user email, password, or meta data
    */
   const updateUser = async (payload: UserAttributes) => {
@@ -170,6 +180,7 @@ export default function useAuthUser() {
     isLoggedIn,
     logout,
     signUp,
+    resendVerificationEmail,
     updateUser,
     sendPasswordRestEmail,
     resetPassword,

@@ -36,7 +36,7 @@ import TheAppBarLogo from '@/layouts/components/TheAppBarLogo.vue';
 
 const model = defineModel({ type: Boolean, default: false });
 
-const { logout } = useAuthUser();
+const { logout, isUserAdmin, isUserAdminOrHelper } = useAuthUser();
 
 const navItems = [
   {
@@ -49,6 +49,7 @@ const navItems = [
   {
     title: 'Users',
     icon: 'mdi-account-multiple',
+    show: () => isUserAdmin.value,
     to: {
       name: 'manage-users',
     },
@@ -56,6 +57,7 @@ const navItems = [
   {
     title: 'Events',
     icon: 'mdi-calendar',
+    show: () => isUserAdmin.value,
     to: {
       name: 'manage-events',
     },
@@ -63,6 +65,7 @@ const navItems = [
   {
     title: 'Parking Lots',
     icon: 'mdi-car',
+    show: () => isUserAdminOrHelper.value,
     to: {
       name: 'manage-parking-lots',
     },
@@ -71,9 +74,10 @@ const navItems = [
     title: 'Roles',
     subtitle: 'WIP',
     icon: 'mdi-account-key-outline',
+    show: () => isUserAdmin.value,
     to: {
       name: 'manage-roles',
     },
   },
-];
+].filter((i) => (i.show ? i.show() : true));
 </script>

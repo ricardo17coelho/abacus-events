@@ -1,5 +1,5 @@
 <template>
-  <v-container fluid>
+  <v-container class="pa-0 pa-sm-3" fluid>
     <div class="d-flex justify-space-between align-center flex-wrap ga-4 mb-4">
       <div class="d-flex align-start align-md-center ga-4">
         <UserGreetings />
@@ -27,7 +27,7 @@
       </v-col>
     </v-row>
 
-    <v-row>
+    <v-row v-if="isUserAdmin">
       <v-col align="start" cols="12" lg="4">
         <WidgetEvents />
       </v-col>
@@ -41,58 +41,87 @@ import UserGreetings from '@/components/UserGreetings.vue';
 import useApiEvents from '@/api/events.ts';
 import useApiParkingLot from '@/api/parking-lots.ts';
 import useApiProfiles from '@/api/profiles.ts';
-const counts = ref({
+import useAuthUser from '@/composables/auth-user.ts';
+
+interface CountData {
+  events: number;
+  users: number;
+  parkingLots: number;
+}
+
+const { isUserAdmin, isUserAdminOrHelper } = useAuthUser();
+
+const counts: Ref<CountData> = ref({
   events: 0,
   users: 0,
   parkingLots: 0,
 });
 
-const items = computed(() => [
-  {
-    subtitle: 'Total events',
-    title: counts.value.events,
-    icon: 'mdi-calendar',
-    color: 'success',
-    to: {
-      name: 'manage-events',
+const items = computed(() =>
+  [
+    {
+      subtitle: 'Total events',
+      title: counts.value.events,
+      icon: 'mdi-calendar',
+      color: 'success',
+      to: { name: 'manage-events' },
+      show: () => isUserAdmin.value,
     },
-  },
-  {
-    subtitle: 'Total users',
-    title: counts.value.users,
-    icon: 'mdi-account-group-outline',
-    color: 'primary',
-    to: {
-      name: 'manage-users',
+    {
+      subtitle: 'Total users',
+      title: counts.value.users,
+      icon: 'mdi-account-group-outline',
+      color: 'primary',
+      to: { name: 'manage-users' },
+      show: () => isUserAdmin.value,
     },
-  },
-
-  {
-    subtitle: 'Total parking lots',
-    title: counts.value.parkingLots,
-    icon: 'mdi-car',
-    color: 'info',
-    to: {
-      name: 'manage-parking-lots',
+    {
+      subtitle: 'Total parking lots',
+      title: counts.value.parkingLots,
+      icon: 'mdi-car',
+      color: 'info',
+      to: { name: 'manage-parking-lots' },
+      show: () => isUserAdminOrHelper.value,
     },
-  },
-]);
+  ].filter((i) => (typeof i.show === 'function' ? i.show() : true)),
+);
 
 const { getEventsCount } = useApiEvents();
 const { getProfilesCount } = useApiProfiles();
 const { getParkingLotsCount } = useApiParkingLot();
 
-async function fetchData() {
-  const apis = [getEventsCount(), getProfilesCount(), getParkingLotsCount()];
+async function fetchData(): Promise<void> {
+  const fetchPromises = [];
+  const keys: (keyof CountData)[] = [];
 
-  const results = await Promise.allSettled(apis);
+  // Parking lots is always fetched
+  fetchPromises.push(getParkingLotsCount());
+  keys.push('parkingLots');
+
+  if (isUserAdmin.value) {
+    fetchPromises.push(getProfilesCount(), getEventsCount());
+    keys.push('users', 'events');
+  }
+
+  const results = await Promise.allSettled(fetchPromises);
+
+  const updatedCounts: Partial<CountData> = { ...counts.value };
+
+  results.forEach((result, index) => {
+    const key = keys[index];
+    if (result.status === 'fulfilled') {
+      updatedCounts[key] = result.value?.count ?? 0;
+    } else {
+      updatedCounts[key] = 0;
+    }
+  });
 
   counts.value = {
-    events: results[0].status === 'fulfilled' ? results[0].value.count || 0 : 0,
-    users: results[1].status === 'fulfilled' ? results[1].value.count || 0 : 0,
-    parkingLots:
-      results[2].status === 'fulfilled' ? results[2].value.count || 0 : 0,
+    events: updatedCounts.events ?? 0,
+    users: updatedCounts.users ?? 0,
+    parkingLots: updatedCounts.parkingLots ?? 0,
   };
 }
+
 fetchData();
 </script>

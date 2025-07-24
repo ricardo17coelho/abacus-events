@@ -105,7 +105,7 @@ export default [
                       },
                       {
                         path: 'event-schedule',
-                        name: 'manage-events-id-event-schedule',
+                        name: 'manage-events-id-schedule',
                         component: () =>
                           import(
                             '@/views/manage/events/ManageEventSchedule.vue'
@@ -117,6 +117,14 @@ export default [
                         component: () =>
                           import(
                             '@/views/manage/events/ManageEventProgram.vue'
+                          ),
+                      },
+                      {
+                        path: 'informations',
+                        name: 'manage-events-id-informations',
+                        component: () =>
+                          import(
+                            '@/views/manage/events/ManageEventInformations.vue'
                           ),
                       },
                     ],

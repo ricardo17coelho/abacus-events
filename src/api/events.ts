@@ -31,7 +31,8 @@ export default function useApiEvents() {
       items:event_schedule_items(*)
     ),
     schedule_alerts:event_schedule_alerts(*),
-    persons:event_persons(*)
+    persons:event_persons(*),
+    informations:event_informations(*)
   `;
 
   function getEvents(

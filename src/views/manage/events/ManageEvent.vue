@@ -210,14 +210,25 @@ const tabs = computed(() =>
         currentEvent.value && hasEventFeature(currentEvent.value, 'PROGRAM'),
     },
     {
-      value: 'manage-events-id-event-schedule',
+      value: 'manage-events-id-schedule',
       text: t('labels.features.SCHEDULE'),
       to: {
-        name: 'manage-events-id-event-schedule',
+        name: 'manage-events-id-schedule',
       },
-      matchRouteName: 'manage-events-id-event-schedule',
+      matchRouteName: 'manage-events-id-schedule',
       show: () =>
         currentEvent.value && hasEventFeature(currentEvent.value, 'SCHEDULE'),
+    },
+    {
+      value: 'manage-events-id-informations',
+      text: t('labels.features.INFORMATIONS'),
+      to: {
+        name: 'manage-events-id-informations',
+      },
+      matchRouteName: 'manage-events-id-informations',
+      show: () =>
+        currentEvent.value &&
+        hasEventFeature(currentEvent.value, 'INFORMATIONS'),
     },
   ].filter((i) => (i.show ? i.show() : true)),
 );

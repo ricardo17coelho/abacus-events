@@ -9,6 +9,7 @@ import type {
   EventScheduleAlert,
 } from '@/api/types/EventSchedule.ts';
 import type { EventPerson } from '@/api/types/EventPerson.ts';
+import type { EventInformation } from '@/api/types/EventInformation.ts';
 
 export type Event = {
   id: string;
@@ -27,4 +28,5 @@ export type Event = {
   schedule: EventSchedule[];
   persons: EventPerson[];
   schedule_alerts: EventScheduleAlert[];
+  informations: EventInformation[];
 };

@@ -21,6 +21,10 @@
       <LayoutEvent04MobileTabSchedule />
     </div>
 
+    <div v-if="currentTab === EVENT_FEATURE_TYPE.INFORMATIONS">
+      <LayoutEvent04MobileTabInformations />
+    </div>
+
     <div v-if="currentTab === EVENT_FEATURE_TYPE.FILES">
       <LayoutEvent04MobileTabFiles />
     </div>
@@ -39,6 +43,10 @@
 
         <div v-if="currentMoreTab === EVENT_FEATURE_TYPE.SCHEDULE">
           <LayoutEvent04MobileTabSchedule />
+        </div>
+
+        <div v-if="currentMoreTab === EVENT_FEATURE_TYPE.INFORMATIONS">
+          <LayoutEvent04MobileTabInformations />
         </div>
 
         <div v-if="currentMoreTab === EVENT_FEATURE_TYPE.FILES">
@@ -144,6 +152,7 @@ import { useI18n } from 'vue-i18n';
 import LayoutEvent04MobileTitle from '@/layouts/event/LayoutEvent04/mobile/LayoutEvent04MobileTitle.vue';
 import LayoutEvent04MobileTabContacts from '@/layouts/event/LayoutEvent04/mobile/LayoutEvent04MobileTabContacts.vue';
 import TheAppMenuLanguage from '@/components/TheAppMenuLanguage.vue';
+import LayoutEvent04MobileTabInformations from '@/layouts/event/LayoutEvent04/mobile/LayoutEvent04MobileTabInformations.vue';
 
 const currentEvent = requireInjection(CURRENT_EVENT_KEY);
 
@@ -197,6 +206,19 @@ const tabs = computed(() => {
       title: featureSchedule.title || t('labels.features.SCHEDULE'),
       icon: featureSchedule.icon,
       show: () => hasEventFeature(currentEvent.value!, 'SCHEDULE'),
+    });
+  }
+
+  const featureInformations = getEventFeatureIfExists(
+    currentEvent.value,
+    'INFORMATIONS',
+  );
+  if (featureInformations) {
+    items.push({
+      id: EVENT_FEATURE_TYPE.INFORMATIONS,
+      title: featureInformations.title || t('labels.features.INFORMATIONS'),
+      icon: featureInformations.icon,
+      show: () => hasEventFeature(currentEvent.value!, 'INFORMATIONS'),
     });
   }
 

@@ -1,10 +1,42 @@
 <template>
   <ManageEventContainer v-if="currentEvent">
+    <v-chip-group
+      v-model="currentCategoryFilter"
+      class="categories-chip-group"
+      color="primary"
+      column
+      mandatory
+      mobile
+    >
+      <v-chip
+        v-for="category in categories"
+        :key="category.id"
+        centered
+        filter
+        :prepend-icon="category.icon"
+        :text="showDefaultTranslationOrEmpty(category.title)"
+        :value="category.id"
+        variant="outlined"
+      />
+      <UiDialog max-width="600">
+        <template #activator="{ props: ActivatorProps }">
+          <v-icon-btn
+            v-bind="ActivatorProps"
+            icon="mdi-pencil"
+            icon-size="small"
+          />
+        </template>
+        <template #content>
+          <EventInformationsCategoriesTable />
+        </template>
+      </UiDialog>
+    </v-chip-group>
+
     <v-row v-if="isUserAdmin">
       <v-col align="end">
         <EventInformationsDialog
           :event-id="currentEvent.id"
-          @success="mutateById($event.id, $event)"
+          @success="onSuccess"
         >
           <template #activator="{ props: activatorProps }">
             <VBtnPrimary v-bind="activatorProps" prepend-icon="mdi-plus">
@@ -16,21 +48,29 @@
     </v-row>
 
     <v-row>
-      <v-col v-for="info in currentEvent.informations" :key="info.id">
-        <v-card :title="showDefaultTranslationOrEmpty(info.title)">
+      <v-col v-for="info in items" :key="info.id" cols="12" :md="6">
+        <v-card
+          height="100%"
+          :title="showDefaultTranslationOrEmpty(info.title)"
+        >
           <template #text>
             <UiHtmlRender
               :content="showDefaultTranslationOrEmpty(info.content)"
             />
           </template>
-          <template #actions>
-            <VBtnPrimary @click="onDeleteItem(info)">
-              {{ t('actions.delete') }}
-            </VBtnPrimary>
+          <template #append>
+            <UiMenu :context="info" :items="actionsAlert" show-activator />
           </template>
         </v-card>
       </v-col>
     </v-row>
+    <EventInformationsDialog
+      :event-id="currentEvent.id"
+      :event-informations-id="currentEventInformationId"
+      :model-value="currentEventInformationId !== undefined"
+      @success="onSuccess"
+      @update:model-value="currentEventInformationId = undefined"
+    />
   </ManageEventContainer>
 </template>
 
@@ -39,13 +79,21 @@ import { requireInjection } from '@/utils/injection.ts';
 import { CURRENT_EVENT_KEY } from '@/types/injectionKeys.ts';
 import useAuthUser from '@/composables/auth-user.ts';
 import { toast } from 'vue-sonner';
-import { type EventTimeline } from '@/api/types/EventTimeline.ts';
+import { type EventInformation } from '@/api/types/EventInformation.ts';
 import { useI18n } from 'vue-i18n';
 import ManageEventContainer from '@/components/manage/ManageEventContainer.vue';
 import EventInformationsDialog from '@/components/event/event-informations/EventInformationsDialog.vue';
 import useApiEventInformations from '@/api/event-informations.ts';
 import { showDefaultTranslationOrEmpty } from '@/utils/showDefaultTranslationOrEmpty.ts';
-import { UiHtmlRender } from '@lib/ui';
+import {
+  type MenuItem,
+  UiDialog,
+  UiHtmlRender,
+  UiMenu,
+  useMenuActions,
+} from '@lib/ui';
+import useEventInformations from '@/composables/event-informations.ts';
+import EventInformationsCategoriesTable from '@/components/event/event-informations/event-informations-categories/EventInformationsCategoriesTable.vue';
 
 const currentEvent = requireInjection(CURRENT_EVENT_KEY);
 
@@ -53,10 +101,11 @@ const { isUserAdmin } = useAuthUser();
 
 const { removeEventInformation } = useApiEventInformations();
 
-const items = ref([]);
+const { items, categories, currentCategoryFilter } = useEventInformations();
 
-function mutateById(id: string, payload: EventTimeline) {
-  const idx = items.value.findIndex((i) => i.id === id);
+function onSuccess(payload: EventInformation) {
+  console.warn('onSuccess', payload);
+  const idx = items.value.findIndex((i) => i.id === payload.id);
   if (idx > -1) {
     Object.assign(items.value[idx], payload);
   } else {
@@ -66,15 +115,31 @@ function mutateById(id: string, payload: EventTimeline) {
 
 const { t } = useI18n();
 
-async function onDeleteItem(item: EventTimeline) {
-  const { error } = await removeEventInformation(item.id);
+async function onDeleteItem(id: string) {
+  const { error } = await removeEventInformation(id);
   if (error) {
     toast.error(t('errors.error_occurred'));
     return;
   }
-  const idx = items.value.findIndex((i) => i.id === item.id);
+  const idx = items.value.findIndex((i) => i.id === id);
   if (idx > -1) {
     items.value.splice(idx, 1);
   }
 }
+
+const currentEventInformationId = ref();
+
+const { menuGlobalActions } = useMenuActions();
+const actionsAlert = computed<MenuItem[]>(() => [
+  {
+    ...menuGlobalActions.value.edit,
+    action: (item: EventInformation) => {
+      currentEventInformationId.value = item.id;
+    },
+  },
+  {
+    ...menuGlobalActions.value.delete,
+    action: (item: EventInformation) => onDeleteItem(item.id),
+  },
+]);
 </script>

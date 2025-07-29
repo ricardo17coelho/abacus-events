@@ -28,7 +28,7 @@ defineProps({
 
 const model = defineModel({
   type: Object,
-  default: () => ({ title: {} }),
+  default: undefined,
 });
 
 const { locale } = useI18n();

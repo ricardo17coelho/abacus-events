@@ -2,6 +2,18 @@
   <v-form ref="formRef">
     <v-row dense>
       <v-col>
+        <EventInformationsCategoriesField
+          v-model="model.category_id"
+          chips
+          :event-id="eventId"
+          :label="t('labels.category')"
+          name="field-category"
+          :rules="[rulesValidation.ruleRequired]"
+        />
+      </v-col>
+    </v-row>
+    <v-row dense>
+      <v-col>
         <FieldTextTitleI8n
           v-model="model.title"
           :available-locales="availableLocales"
@@ -25,17 +37,19 @@
 </template>
 
 <script lang="ts">
-import type { TitleI18n } from '@/types/TitleI18n';
+import type { EventInformation } from '@/api/types/EventInformation.ts';
 
-export interface EventInformationsForm {
-  title: TitleI18n;
-  content: TitleI18n;
-  img_path?: string;
-}
+export type EventInformationsForm = Pick<
+  EventInformation,
+  'title' | 'content'
+> & {
+  category_id: string | undefined;
+};
 
 export const DEFAULT_FORM: EventInformationsForm = {
-  title: {} as TitleI18n,
-  content: {} as TitleI18n,
+  title: {},
+  content: {},
+  category_id: undefined,
 };
 </script>
 
@@ -44,6 +58,14 @@ import FieldTextTitleI8n from '@/components/fields/FieldTextTitleI8n.vue';
 import { UiHtmlEditorI18n } from '@lib/ui';
 import { useI18n } from 'vue-i18n';
 import rulesValidation from '@/utils/validations';
+import EventInformationsCategoriesField from '@/components/event/event-informations/event-informations-categories/EventInformationsCategoriesField.vue';
+
+defineProps({
+  eventId: {
+    type: String,
+    required: true,
+  },
+});
 
 const model = defineModel({
   type: Object as PropType<EventInformationsForm>,

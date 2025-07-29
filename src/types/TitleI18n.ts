@@ -1,3 +1,3 @@
-import type { AppLocalesAvailable } from '@/plugins/i18n';
+import type { AppLocales } from '@/plugins/i18n';
 
-export type TitleI18n = Record<AppLocalesAvailable, string>;
+export type TitleI18n = Partial<Record<AppLocales, string>>;

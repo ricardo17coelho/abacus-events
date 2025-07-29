@@ -33,6 +33,10 @@
         <LayoutEvent04DesktopTabSchedule />
       </v-tabs-window-item>
 
+      <v-tabs-window-item :value="EVENT_FEATURE_TYPE.INFORMATIONS">
+        <LayoutEvent04DesktopTabInformations />
+      </v-tabs-window-item>
+
       <v-tabs-window-item :value="EVENT_FEATURE_TYPE.FILES">
         <LayoutEvent04DesktopTabFiles />
       </v-tabs-window-item>
@@ -58,6 +62,7 @@ import LayoutEvent04DesktopTabParking from '@/layouts/event/LayoutEvent04/deskto
 import LayoutEvent04DesktopTabFiles from '@/layouts/event/LayoutEvent04/desktop/LayoutEvent04DesktopTabFiles.vue';
 import LayoutEvent04DesktopTabHero from '@/layouts/event/LayoutEvent04/desktop/LayoutEvent04DesktopTabHero.vue';
 import { useI18n } from 'vue-i18n';
+import LayoutEvent04DesktopTabInformations from '@/layouts/event/LayoutEvent04/desktop/LayoutEvent04DesktopTabInformations.vue';
 
 const currentEvent = requireInjection(CURRENT_EVENT_KEY);
 
@@ -102,6 +107,19 @@ const tabs = computed(() => {
       title: featureSchedule.title || t('labels.features.SCHEDULE'),
       icon: featureSchedule.icon,
       show: () => hasEventFeature(currentEvent.value!, 'SCHEDULE'),
+    });
+  }
+
+  const featureInformations = getEventFeatureIfExists(
+    currentEvent.value,
+    'INFORMATIONS',
+  );
+  if (featureInformations) {
+    items.push({
+      id: EVENT_FEATURE_TYPE.INFORMATIONS,
+      title: featureInformations.title || t('labels.features.INFORMATIONS'),
+      icon: featureInformations.icon,
+      show: () => hasEventFeature(currentEvent.value!, 'INFORMATIONS'),
     });
   }
 

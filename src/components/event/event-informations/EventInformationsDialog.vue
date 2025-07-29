@@ -9,7 +9,11 @@
       <slot name="activator" v-bind="activatorProps"></slot>
     </template>
     <template #content>
-      <EventInformationsForm ref="formRef" v-model="form" />
+      <EventInformationsForm
+        ref="formRef"
+        v-model="form"
+        :event-id="currentEvent!.id"
+      />
     </template>
     <template #actions>
       <VBtnPrimary :loading="isLoading" @click="onSave">
@@ -26,14 +30,18 @@ import { useI18n } from 'vue-i18n';
 import { merge2ObjectsIfKeysExists } from '@/utils/merge';
 import useApiEventInformations from '@/api/event-informations.ts';
 import type { EventInformation } from '@/api/types/EventInformation.ts';
-import EventInformationsForm from '@/components/event/event-informations/EventInformationsForm.vue';
+import EventInformationsForm, {
+  DEFAULT_FORM,
+} from '@/components/event/event-informations/EventInformationsForm.vue';
+import { requireInjection } from '@/utils/injection.ts';
+import { CURRENT_EVENT_KEY } from '@/types/injectionKeys.ts';
 
 const props = defineProps({
   eventId: {
     type: String,
     required: true,
   },
-  itemId: {
+  eventInformationsId: {
     type: String,
     default: undefined,
   },
@@ -43,21 +51,21 @@ const model = defineModel({ type: Boolean, default: false });
 
 const emit = defineEmits(['success']);
 
+const currentEvent = requireInjection(CURRENT_EVENT_KEY);
+
 const { t, locale } = useI18n();
 
-const DEFAULT_FORM = {
+const DEFAULT_FORM_DATA = {
+  ...DEFAULT_FORM,
   title: {
     [locale.value]: '',
   },
   content: {
     [locale.value]: '',
   },
-  img_path: undefined,
 };
 
-const form = ref({
-  ...DEFAULT_FORM,
-});
+let form = reactive(structuredClone(DEFAULT_FORM_DATA));
 
 const isLoading = ref(false);
 const formRef = ref();
@@ -68,15 +76,19 @@ const {
   getEventInformationById,
 } = useApiEventInformations();
 
+function onClearForm() {
+  Object.assign(form, structuredClone(DEFAULT_FORM_DATA));
+}
+
 async function onSave() {
   const { valid } = await formRef.value.formRef.validate();
   if (valid) {
     isLoading.value = true;
-    if (props.itemId) {
+    if (props.eventInformationsId) {
       // edit
       const { error, data } = await updateEventInformation(
-        props.itemId,
-        form.value,
+        props.eventInformationsId,
+        form,
       );
 
       if (error) {
@@ -85,16 +97,16 @@ async function onSave() {
         }
       } else {
         if (data) {
-          emit('success', form.value);
-          form.value = { ...DEFAULT_FORM };
+          onClearForm();
           isLoading.value = false;
-          toast.success('Post updated!');
+          toast.success('Information updated!');
+          emit('success', data);
         }
       }
     } else {
       // add
       const { error, data } = await createEventInformation({
-        ...form.value,
+        ...form,
         event_id: props.eventId,
       });
 
@@ -104,9 +116,10 @@ async function onSave() {
         }
       } else {
         if (data) {
+          onClearForm();
+          toast.success('Information created!');
+
           emit('success', data);
-          form.value = { ...DEFAULT_FORM };
-          toast.success('Post created!');
         }
       }
     }
@@ -132,7 +145,7 @@ async function onGetCompanyInformationsById(id: string) {
   } else {
     if (data) {
       item.value = data;
-      form.value = merge2ObjectsIfKeysExists({ ...DEFAULT_FORM }, data);
+      form = merge2ObjectsIfKeysExists({ ...DEFAULT_FORM_DATA }, data);
     }
   }
   isLoadingItem.value = false;
@@ -141,8 +154,12 @@ async function onGetCompanyInformationsById(id: string) {
 watch(
   () => model.value,
   (newValue) => {
-    if (newValue && props.itemId) {
-      onGetCompanyInformationsById(props.itemId);
+    console.warn('WATCH => ', newValue);
+    if (newValue && props.eventInformationsId) {
+      onGetCompanyInformationsById(props.eventInformationsId);
+    } else if (!newValue) {
+      item.value = undefined;
+      onClearForm();
     }
   },
 );

@@ -30,16 +30,15 @@
       </v-row>
       <v-row dense>
         <v-col v-for="information in items" :key="information.id" cols="12">
-          <v-card
-            class="mx-0"
-            :title="showDefaultTranslationOrEmpty(information.title)"
-            variant="flat"
-          >
-            <template #text>
+          <v-card class="mx-0" variant="flat">
+            <v-card-title class="px-0 text-wrap">
+              {{ showDefaultTranslationOrEmpty(information.title) }}
+            </v-card-title>
+            <v-card-text class="px-0">
               <UiHtmlRender
                 :content="showDefaultTranslationOrEmpty(information.content)"
               />
-            </template>
+            </v-card-text>
           </v-card>
         </v-col>
       </v-row>

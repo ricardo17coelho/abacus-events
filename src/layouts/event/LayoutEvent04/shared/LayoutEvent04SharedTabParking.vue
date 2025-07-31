@@ -25,7 +25,6 @@ import {
   getEventFeatureIfExists,
   hasEventFeature,
 } from '@/utils/event-features.ts';
-
 import { requireInjection } from '@/utils/injection.ts';
 import { CURRENT_EVENT_KEY } from '@/types/injectionKeys.ts';
 import ParkingLotCard from '@/components/parking-lot/ParkingLotCard.vue';

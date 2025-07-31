@@ -8,9 +8,7 @@
 
 <script setup lang="ts">
 import { provide, ref } from 'vue';
-// components
 import AppLoader from '@/components/app/AppLoader.vue';
-// composables
 import { useParams } from '@/composables/route';
 import useApiEvents from '@/api/events.ts';
 import { toast } from 'vue-sonner';
@@ -19,6 +17,8 @@ import type { Event } from '@/api/types/Event';
 import ErrorNotFound from '@/components/errors/ErrorNotFound.vue';
 import { CURRENT_EVENT_KEY } from '@/types/injectionKeys';
 import useBrand from '@/composables/brand.ts';
+import useApiParkingLot from '@/api/parking-lots.ts';
+import { supabase } from '@/services/supabase.ts';
 
 const { t } = useI18n();
 
@@ -87,4 +87,52 @@ watch(
 );
 
 onUnmounted(() => clear());
+
+// PARKING LOTS
+const { getParkingLots } = useApiParkingLot();
+
+// eslint-disable-next-line  @typescript-eslint/no-explicit-any
+function mutateParkingLotById(id: string, payload: Record<any, any>) {
+  if (!currentEvent.value) return;
+  const idx = currentEvent.value.parking_lots.findIndex((i) => i.id === id);
+  if (idx > -1) {
+    Object.assign(currentEvent.value?.parking_lots[idx], payload);
+  }
+}
+
+const fetchDataParkingLots = async () => {
+  const { data, error } = await getParkingLots();
+  if (error) {
+    toast.error(t('errors.error_occurred'));
+    return;
+  }
+  if (data && currentEvent.value) {
+    currentEvent.value.parking_lots = data;
+  }
+};
+
+const subscribeToChanges = () => {
+  const channel = supabase
+    .channel('parking_lots')
+    .on(
+      'postgres_changes',
+      { event: 'UPDATE', schema: 'public', table: 'parking_lots' },
+      (payload) => {
+        fetchDataParkingLots();
+        if (payload.new) {
+          mutateParkingLotById(payload.new.id, payload.new);
+        }
+      },
+    )
+    .subscribe();
+
+  return channel;
+};
+
+onMounted(() => {
+  const subscription = subscribeToChanges();
+  onUnmounted(() => {
+    supabase.removeChannel(subscription);
+  });
+});
 </script>

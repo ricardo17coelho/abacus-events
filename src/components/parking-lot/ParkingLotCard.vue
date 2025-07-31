@@ -1,6 +1,6 @@
 <template>
   <v-card v-if="parkingLot" border flat width="100%">
-    <v-card-item :title="showDefaultTranslationOrEmpty(parkingLot.name)">
+    <v-card-item :title="showDefaultTranslationOrEmpty(parkingLot.title)">
       <template #subtitle>
         <v-chip
           :href="parkingLot.location_url || undefined"

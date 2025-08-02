@@ -2,6 +2,54 @@
   <Page>
     <PageHeading title="Parking Lots">
       <template #actions>
+        <v-menu :close-on-content-click="false" location="end">
+          <template v-slot:activator="{ props }">
+            <v-badge
+              v-if="parkingLotsVisible.length > 0"
+              :content="parkingLotsVisible.length"
+              location="top right"
+            >
+              <v-btn
+                color="primary"
+                density="comfortable"
+                icon="mdi-filter"
+                title="Filter"
+                variant="text"
+                v-bind="props"
+              />
+            </v-badge>
+            <v-btn
+              v-else
+              color="primary"
+              density="comfortable"
+              icon="mdi-filter"
+              title="Filter"
+              variant="text"
+              v-bind="props"
+            />
+          </template>
+
+          <v-card min-width="300">
+            <v-list density="compact">
+              <v-list-subheader> Show only </v-list-subheader>
+              <v-list-item
+                v-for="parkingLot in parkingLots"
+                :key="`filter-${parkingLot.id}`"
+                density="compact"
+              >
+                <v-switch
+                  v-model="parkingLotsVisible"
+                  color="primary"
+                  density="compact"
+                  hide-details
+                  inset
+                  :label="showDefaultTranslationOrEmpty(parkingLot.title)"
+                  :value="parkingLot.id"
+                ></v-switch>
+              </v-list-item>
+            </v-list>
+          </v-card>
+        </v-menu>
         <ParkingLotDialog v-if="isUserAdmin" @success="onSuccessUpdate">
           <template #activator="{ props: activatorProps }">
             <VBtnPrimary v-bind="activatorProps" prepend-icon="mdi-plus">
@@ -15,7 +63,7 @@
     <PageContent>
       <v-row>
         <v-col
-          v-for="parkingLot in parkingLots"
+          v-for="parkingLot in parkingLotsFiltered"
           :key="parkingLot.id"
           cols="12"
           lg="6"
@@ -40,10 +88,21 @@ import { useI18n } from 'vue-i18n';
 import { toast } from 'vue-sonner';
 import { Page, PageContent, PageHeading } from '@/components/page/';
 import ParkingLotCardEditable from '@/components/parking-lot/ParkingLotCardEditable.vue';
+import { showDefaultTranslationOrEmpty } from '@/utils/showDefaultTranslationOrEmpty.ts';
 
 const { t } = useI18n();
 
 const parkingLots = ref<ParkingLot[]>([]);
+
+const parkingLotsVisible = useLocalStorage<string[]>('parkingLotsVisible', []);
+
+const parkingLotsFiltered = computed(() =>
+  parkingLotsVisible.value.length
+    ? [...parkingLots.value].filter((p) =>
+        parkingLotsVisible.value.includes(p.id),
+      )
+    : [...parkingLots.value],
+);
 
 const { getParkingLots } = useApiParkingLot();
 

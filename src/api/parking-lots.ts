@@ -1,11 +1,21 @@
 import useApi from '@/composables/api';
 import type { ParkingLot } from '@/api/types/ParkingLot';
+import type { FindFilter } from '@/api/types/QueryTypes.ts';
 
 export default function useApiParkingLot() {
   const { find, findById, create, update, remove, count } = useApi();
 
-  function getParkingLots(range = [0, 10]) {
-    return find<ParkingLot>('parking_lots', [], '*', range);
+  function getParkingLots(
+    select = '*',
+    filters: FindFilter[] = [],
+    range = [0, 100],
+  ) {
+    return find<ParkingLot>('parking_lots', filters, select, range);
+  }
+
+  function getParkingLotsByEventId(eventId: string, range = [0, 10]) {
+    const filters: FindFilter[] = [['event_id', 'eq', eventId]];
+    return getParkingLots('*', filters, range);
   }
 
   function getParkingLotById(ParkingLotId: string) {
@@ -35,6 +45,7 @@ export default function useApiParkingLot() {
 
   return {
     getParkingLots,
+    getParkingLotsByEventId,
     getParkingLotById,
     createParkingLot,
     updateParkingLot,

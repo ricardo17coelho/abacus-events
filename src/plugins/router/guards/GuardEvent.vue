@@ -89,7 +89,7 @@ watch(
 onUnmounted(() => clear());
 
 // PARKING LOTS
-const { getParkingLots } = useApiParkingLot();
+const { getParkingLotsByEventId } = useApiParkingLot();
 
 // eslint-disable-next-line  @typescript-eslint/no-explicit-any
 function mutateParkingLotById(id: string, payload: Record<any, any>) {
@@ -101,7 +101,8 @@ function mutateParkingLotById(id: string, payload: Record<any, any>) {
 }
 
 const fetchDataParkingLots = async () => {
-  const { data, error } = await getParkingLots();
+  if (!currentEvent.value?.id) return;
+  const { data, error } = await getParkingLotsByEventId(currentEvent.value?.id);
   if (error) {
     toast.error(t('errors.error_occurred'));
     return;

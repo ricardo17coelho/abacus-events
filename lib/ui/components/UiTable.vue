@@ -1,5 +1,5 @@
 <template>
-  <VCard rounded="lg" variant="flat">
+  <VCard class="h-100" rounded="lg" variant="flat">
     <UiForwardSlots :slots="$slots">
       <VDataTable
         v-bind="$attrs"
@@ -35,12 +35,13 @@
             <span v-else>-</span>
           </VChip>
         </template>
-        <template #[`item.logoUrl`]="{ item }: { item: any }">
-          <UiAvatar
-            v-if="item.logoUrl"
+        <template #[`item.logo_url`]="{ item }: { item: any }">
+          <UiAvatarUser
+            v-if="item.logo_url"
             class="border-solid"
-            :logo="item.logoUrl"
+            :logo="item.logo_url"
             :logo-alt="`logo-url-${item.name}`"
+            :name="item.name"
           />
         </template>
 
@@ -69,8 +70,7 @@ import { computed, type PropType, ref } from 'vue';
 // vuetify components
 import { VCard, VChip, VDataTable } from 'vuetify/components';
 // UI components
-
-import { UiAvatar } from './avatar';
+import { UiAvatarUser } from './avatar';
 import { UiForwardSlots } from './UiForwardSlots';
 import { type MenuItem, UiMenu } from './menu';
 // types

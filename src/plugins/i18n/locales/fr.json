@@ -27,6 +27,9 @@
       "invalid": "Veuillez vérifier votre saisie"
     }
   },
+  "event": {
+    "feature": ""
+  },
   "fields": {
     "color": {
       "hint": "Choisir une couleur",
@@ -107,6 +110,10 @@
     "public": "Public",
     "return_journey": "Retour",
     "role": "Rôle",
+    "roles": {
+      "ADMIN": "",
+      "HELPER": ""
+    },
     "settings": "",
     "slots_filled": "Places occupées",
     "slots_total": "Nb max. de places",
@@ -116,6 +123,7 @@
     "time_end": "Heure de fin",
     "time_start": "Heure de début",
     "title": "",
+    "user": "",
     "users": "",
     "value": ""
   },

@@ -27,6 +27,9 @@
       "invalid": "Please check your input"
     }
   },
+  "event": {
+    "feature": "Feature"
+  },
   "fields": {
     "color": {
       "hint": "Pick a color",
@@ -107,7 +110,11 @@
     "programm": "Link",
     "public": "Public",
     "return_journey": "Return Journey",
-    "role": "Role",
+    "role": "Role | Roles",
+    "roles": {
+      "ADMIN": "Admin",
+      "HELPER": "Helper"
+    },
     "settings": "Settings",
     "slots_filled": "Occupied Spaces",
     "slots_total": "Max. Spaces",
@@ -117,6 +124,7 @@
     "time_end": "End Time",
     "time_start": "Start Time",
     "title": "Title",
+    "user": "User",
     "users": "Users",
     "value": "Value"
   },

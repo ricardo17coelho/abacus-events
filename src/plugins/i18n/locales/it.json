@@ -27,6 +27,9 @@
       "invalid": "Si prega di controllare il proprio input"
     }
   },
+  "event": {
+    "feature": ""
+  },
   "fields": {
     "color": {
       "hint": "Scegliere un colore",
@@ -107,6 +110,10 @@
     "public": "Pubblico",
     "return_journey": "Ritorno",
     "role": "Ruolo",
+    "roles": {
+      "ADMIN": "",
+      "HELPER": ""
+    },
     "settings": "",
     "slots_filled": "Posti occupati",
     "slots_total": "Posti massimi",
@@ -116,6 +123,7 @@
     "time_end": "Ora di fine",
     "time_start": "Ora di inizio",
     "title": "",
+    "user": "",
     "users": "",
     "value": ""
   },

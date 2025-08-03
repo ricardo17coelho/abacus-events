@@ -1,12 +1,15 @@
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
 import type { Provider, UserAttributes } from '@supabase/supabase-js';
 import { supabase } from '@/services/supabase';
 import { getInitials } from '@/utils/initials.ts';
 import { getUserFullName } from '@/utils/profile.ts';
+import type { Profile } from '@/api/types/Profile.ts';
+import useApiProfiles from '@/api/profiles.ts';
 // user is set outside the useAuthUser function
 // so that it will act as global state and always refer to a single user
 
 const user = ref();
+const userProfile = ref<Profile>();
 
 export default function useAuthUser() {
   /**
@@ -166,8 +169,24 @@ export default function useAuthUser() {
     return supabase.auth.refreshSession();
   };
 
+  const { getProfileById } = useApiProfiles();
+  watch(
+    () => user.value?.id,
+    async (newValue) => {
+      if (newValue) {
+        const { data } = await getProfileById(newValue);
+        if (data) {
+          userProfile.value = data;
+        }
+      } else {
+        userProfile.value = undefined;
+      }
+    },
+  );
+
   return {
     user,
+    userProfile,
     userMetadata,
     userDisplayName,
     userInitials,

@@ -1,10 +1,11 @@
 <template>
   <v-btn v-if="isLoggedIn" class="me-2" height="48" icon>
-    <v-avatar
+    <UiAvatarUser
+      class="border-solid"
       color="surface-light"
-      :icon="userInitials ? undefined : 'mdi-account'"
-      size="32"
-      :text="userInitials"
+      :logo="userProfile?.avatar_url"
+      :logo-alt="`logo-url-${getUserFullName(user.user_metadata)}`"
+      :name="getUserFullName(user.user_metadata)"
     />
 
     <v-menu activator="parent">
@@ -33,8 +34,10 @@
 
 <script setup lang="ts">
 import useAuthUser from '@/composables/auth-user.ts';
+import { getUserFullName } from '@/utils/profile.ts';
+import { UiAvatarUser } from '@lib/ui';
 
-const { isLoggedIn, userInitials, logout } = useAuthUser();
+const { isLoggedIn, logout, user, userProfile } = useAuthUser();
 
 const { isUserAdminOrHelper } = useAuthUser();
 </script>

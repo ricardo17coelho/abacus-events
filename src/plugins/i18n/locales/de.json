@@ -27,6 +27,9 @@
       "invalid": "Bitte überprüfen Sie Ihre Eingabe"
     }
   },
+  "event": {
+    "feature": "Feature"
+  },
   "fields": {
     "color": {
       "hint": "Wähle eine Farbe aus",
@@ -107,7 +110,11 @@
     "programm": "Link",
     "public": "Öffentlich",
     "return_journey": "Rückfahrt",
-    "role": "Role",
+    "role": "Role | Roles",
+    "roles": {
+      "ADMIN": "Admin",
+      "HELPER": "Helfer"
+    },
     "settings": "Einstellungen",
     "slots_filled": "Belegte Plätze",
     "slots_total": "Max. Plätze",
@@ -117,6 +124,7 @@
     "time_end": "Endzeit",
     "time_start": "Startzeit",
     "title": "Titel",
+    "user": "Benutzer",
     "users": "Benutzer",
     "value": "Wert"
   },

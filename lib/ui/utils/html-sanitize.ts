@@ -25,6 +25,7 @@ export function getSanitizedHtml(content: string, config?: Config) {
     content,
     defu(config, {
       ALLOWED_TAGS: [
+        'a',
         'b',
         'i',
         'em',

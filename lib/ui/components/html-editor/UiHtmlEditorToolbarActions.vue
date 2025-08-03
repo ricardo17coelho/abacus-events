@@ -16,7 +16,7 @@
       @click="editor.chain().focus().toggleItalic().run()"
     />
 
-    <v-divider class="mr-2 mb-2" vertical />
+    <v-divider class="py-2 mx-1" vertical />
 
     <UiHtmlEditorToolbarMenu icon="mdi-format-header-1" :items="headingItems" />
 
@@ -34,7 +34,9 @@
       @click="editor.chain().focus().toggleOrderedList().run()"
     />
 
-    <v-divider class="mr-2 mb-2" vertical />
+    <UiHtmlEditorToolbarLink :editor="editor" />
+
+    <v-divider class="py-2 mx-1" vertical />
 
     <UiHtmlEditorToolbarBtn
       v-tooltip="t('ui_lib.html_editor.blockquote')"
@@ -49,7 +51,7 @@
       @click="editor.chain().focus().unsetAllMarks().run()"
     />
 
-    <v-divider class="mr-2 mb-2" vertical />
+    <v-divider class="py-2 mx-1" vertical />
 
     <UiHtmlEditorToolbarBtn
       v-tooltip="t('ui_lib.html_editor.undo')"
@@ -65,7 +67,8 @@
       @click="editor.chain().focus().redo().run()"
     />
 
-    <v-divider class="mr-2 mb-2" vertical />
+    <v-divider class="py-2 mx-1" vertical />
+
     <UiHtmlEditorToolbarTableMenu :editor="editor" />
 
     <slot></slot>
@@ -81,7 +84,8 @@ import UiHtmlEditorToolbarMenu from './UiHtmlEditorToolbarMenu.vue';
 // composables
 import { useI18n } from 'vue-i18n';
 import { type MenuItem } from '../menu';
-import UiHtmlEditorToolbarTableMenu from '@lib/ui/components/html-editor/extensions/UiHtmlEditorToolbarTableMenu.vue';
+import UiHtmlEditorToolbarTableMenu from './extensions/UiHtmlEditorToolbarTableMenu.vue';
+import UiHtmlEditorToolbarLink from './extensions/UiHtmlEditorToolbarLink.vue';
 
 interface Props {
   editor: Editor;

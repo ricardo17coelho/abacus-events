@@ -88,6 +88,7 @@ import { Table } from '@tiptap/extension-table';
 import TableRow from '@tiptap/extension-table-row';
 import TableHeader from '@tiptap/extension-table-header';
 import TableCell from '@tiptap/extension-table-cell';
+import Link from '@tiptap/extension-link';
 // components
 import UiFieldLocaleSelectMenu from '../fields/UiFieldLocaleSelectMenu.vue';
 import UiHtmlEditorToolbarActions from './UiHtmlEditorToolbarActions.vue';
@@ -162,6 +163,11 @@ const editor = useEditor({
     TableRow,
     TableHeader,
     TableCell,
+    Link.configure({
+      autolink: true,
+      openOnClick: false,
+      linkOnPaste: true,
+    }),
   ],
   onUpdate: () => {
     updateEditorHeight();

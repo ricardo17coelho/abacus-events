@@ -52,7 +52,11 @@
         </v-menu>
         <ParkingLotDialog v-if="isUserAdmin" @success="onSuccessUpdate">
           <template #activator="{ props: activatorProps }">
-            <VBtnPrimary v-bind="activatorProps" prepend-icon="mdi-plus">
+            <VBtnPrimary
+              v-bind="activatorProps"
+              class="ml-2"
+              prepend-icon="mdi-plus"
+            >
               {{ t('actions.add') }}
             </VBtnPrimary>
           </template>

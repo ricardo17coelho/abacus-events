@@ -36,6 +36,8 @@
 
     <UiHtmlEditorToolbarLink :editor="editor" />
 
+    <UiHtmlEditorToolbarImage :editor="editor" />
+
     <v-divider class="py-2 mx-1" vertical />
 
     <UiHtmlEditorToolbarBtn
@@ -86,6 +88,7 @@ import { useI18n } from 'vue-i18n';
 import { type MenuItem } from '../menu';
 import UiHtmlEditorToolbarTableMenu from './extensions/UiHtmlEditorToolbarTableMenu.vue';
 import UiHtmlEditorToolbarLink from './extensions/UiHtmlEditorToolbarLink.vue';
+import UiHtmlEditorToolbarImage from '@lib/ui/components/html-editor/extensions/UiHtmlEditorToolbarImage.vue';
 
 interface Props {
   editor: Editor;

@@ -11,7 +11,10 @@
     </v-row>
     <v-row dense>
       <v-col cols="12">
-        <EventFilePicker v-model:selected="model.img_url" label="Image URL" />
+        <EventFilePickerField
+          v-model:selected="model.img_url"
+          label="Image URL"
+        />
       </v-col>
     </v-row>
   </v-form>
@@ -20,7 +23,7 @@
 <script lang="ts" setup>
 import rulesValidation from '@/utils/validations';
 import { useI18n } from 'vue-i18n';
-import EventFilePicker from '@/components/event/EventFilePicker.vue';
+import EventFilePickerField from '@/components/event/EventFilePickerField.vue';
 import FieldTextTitleI8n from '@/components/fields/FieldTextTitleI8n.vue';
 
 const model = defineModel({ type: Object, default: () => ({}) });

@@ -301,8 +301,13 @@ defineExpose({ validate, setContent });
     }
 
     img {
+      display: block;
       max-width: 100%;
       height: auto;
+      margin: 1rem 0;
+      border-radius: 0.5rem;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+      object-fit: contain;
     }
 
     blockquote {

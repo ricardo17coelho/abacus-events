@@ -5,26 +5,12 @@
     max-width="720"
     title="File select"
   >
-    <template #activator="{ props: ActivatorProps }">
-      <v-row>
-        <v-col cols="12">
-          <AppGallery
-            v-if="selectedModel"
-            :images="
-              Array.isArray(selectedModel) ? selectedModel : [selectedModel]
-            "
-          />
-        </v-col>
-        <v-col cols="12">
-          <v-text-field
-            v-bind="ActivatorProps"
-            v-model="selectedModel"
-            clearable
-            :label="label"
-            readonly
-          />
-        </v-col>
-      </v-row>
+    <template #activator="activatorProps">
+      <slot
+        name="activator"
+        :selected="selectedModel"
+        v-bind="activatorProps"
+      ></slot>
     </template>
     <template #content>
       <v-tabs v-model="currentTab" color="primary">
@@ -59,9 +45,9 @@
                     >
                       <template #image-default>
                         <div class="text-h3 flex-grow-1 text-center">
-                          <v-icon v-if="isSelected" color="primary"
-                            >mdi-check-circle</v-icon
-                          >
+                          <v-icon v-if="isSelected" color="primary">
+                            mdi-check-circle
+                          </v-icon>
                         </div>
                       </template>
                     </AppAttachmentCard>
@@ -151,7 +137,6 @@ import { toast } from 'vue-sonner';
 import AppFileUpload, {
   type UploadedAttachment,
 } from '@/components/app/AppFileUpload.vue';
-import AppGallery from '@/components/app/AppGallery.vue';
 import AppAttachmentCard from '@/components/app/AppAttachmentCard.vue';
 
 defineProps({

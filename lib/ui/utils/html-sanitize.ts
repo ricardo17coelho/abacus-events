@@ -51,6 +51,7 @@ export function getSanitizedHtml(content: string, config?: Config) {
         'tbody',
         'thead',
         'kbd',
+        'img',
       ],
     }),
   );

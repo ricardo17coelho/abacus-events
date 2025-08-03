@@ -7,8 +7,10 @@
 // https://vuetifyjs.com/features/sass-variables/`
 @forward 'vuetify/settings' with (
   //@forward 'vuetify/settings' with (
-  $rounded: ('lg': 12px, 'xl': 16px),
-
-    // VBtn
+  $rounded: (
+      'lg': 12px,
+      'xl': 16px,
+    ),
+  // VBtn
   $button-plain-opacity: 1 !default
 );

@@ -65,6 +65,9 @@
       @click="editor.chain().focus().redo().run()"
     />
 
+    <v-divider class="mr-2 mb-2" vertical />
+    <UiHtmlEditorToolbarTableMenu :editor="editor" />
+
     <slot></slot>
   </div>
 </template>
@@ -78,6 +81,7 @@ import UiHtmlEditorToolbarMenu from './UiHtmlEditorToolbarMenu.vue';
 // composables
 import { useI18n } from 'vue-i18n';
 import { type MenuItem } from '../menu';
+import UiHtmlEditorToolbarTableMenu from '@lib/ui/components/html-editor/extensions/UiHtmlEditorToolbarTableMenu.vue';
 
 interface Props {
   editor: Editor;

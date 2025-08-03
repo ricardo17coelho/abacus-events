@@ -84,6 +84,10 @@ import { EditorContent, useEditor } from '@tiptap/vue-3';
 import StarterKit from '@tiptap/starter-kit';
 import { CharacterCount } from '@tiptap/extensions';
 import Image from '@tiptap/extension-image';
+import { Table } from '@tiptap/extension-table';
+import TableRow from '@tiptap/extension-table-row';
+import TableHeader from '@tiptap/extension-table-header';
+import TableCell from '@tiptap/extension-table-cell';
 // components
 import UiFieldLocaleSelectMenu from '../fields/UiFieldLocaleSelectMenu.vue';
 import UiHtmlEditorToolbarActions from './UiHtmlEditorToolbarActions.vue';
@@ -154,6 +158,10 @@ const editor = useEditor({
       limit: props.characterLimit,
     }),
     Image,
+    Table.configure({ resizable: true }),
+    TableRow,
+    TableHeader,
+    TableCell,
   ],
   onUpdate: () => {
     updateEditorHeight();
@@ -234,6 +242,14 @@ defineExpose({ validate, setContent });
 }
 
 .editor-content {
+  --gray-1: #f5f5f5;
+  --gray-2: #e0e0e0;
+  --gray-3: #bdbdbd;
+  --purple: #9c27b0;
+  --purple-light: #e1bee7;
+  --black: #212121;
+  --white: #ffffff;
+
   max-height: 250px;
 
   :deep(.ProseMirror) {
@@ -292,6 +308,67 @@ defineExpose({ validate, setContent });
       border: none;
       border-top: 2px solid rgba(#0d0d0d, 0.1);
       margin: 2rem 0;
+    }
+
+    /* Table-specific styling */
+    table {
+      border-collapse: collapse;
+      margin: 0;
+      overflow: hidden;
+      table-layout: fixed;
+      width: 100%;
+
+      td,
+      th {
+        border: 1px solid var(--gray-3);
+        box-sizing: border-box;
+        min-width: 1em;
+        padding: 6px 8px;
+        position: relative;
+        vertical-align: top;
+
+        > * {
+          margin-bottom: 0;
+        }
+      }
+
+      th {
+        background-color: var(--gray-1);
+        font-weight: bold;
+        text-align: left;
+      }
+
+      .selectedCell:after {
+        background: var(--gray-2);
+        content: '';
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        pointer-events: none;
+        position: absolute;
+        z-index: 2;
+      }
+
+      .column-resize-handle {
+        background-color: var(--purple);
+        bottom: -2px;
+        pointer-events: none;
+        position: absolute;
+        right: -2px;
+        top: 0;
+        width: 4px;
+      }
+    }
+
+    .tableWrapper {
+      margin: 1.5rem 0;
+      overflow-x: auto;
+    }
+
+    &.resize-cursor {
+      cursor: ew-resize;
+      cursor: col-resize;
     }
   }
 }

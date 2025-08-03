@@ -22,6 +22,14 @@ defineProps({
 
 <style lang="scss" scoped>
 .html-render {
+  --gray-1: #f5f5f5;
+  --gray-2: #e0e0e0;
+  --gray-3: #bdbdbd;
+  --purple: #9c27b0;
+  --purple-light: #e1bee7;
+  --black: #212121;
+  --white: #ffffff;
+
   color: inherit;
 
   :deep(h1),
@@ -120,19 +128,46 @@ defineProps({
   :deep(table) {
     width: 100%;
     border-collapse: collapse;
-    margin-bottom: 1em;
-  }
+    margin: 1.5rem 0;
+    font-size: 0.95rem;
+    background-color: #fff;
+    border: 1px solid #e0e0e0;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+    table-layout: auto;
 
-  :deep(th),
-  :deep(td) {
-    padding: 0.5em;
-    border: 1px solid #ddd;
-  }
+    thead {
+      background-color: #f8f8f8;
+    }
 
-  :deep(th) {
-    background-color: #f4f4f4;
-    font-weight: bold;
-    text-align: left;
+    th,
+    td {
+      border: 1px solid #e0e0e0;
+      text-align: left;
+      padding: 12px 16px;
+      vertical-align: top;
+    }
+
+    th {
+      background-color: #f0f0f0;
+      font-weight: 600;
+      color: #333;
+    }
+
+    td {
+      color: #444;
+      background-color: #fafafa;
+    }
+
+    tr:nth-child(even) td {
+      background-color: #f5f5f5;
+    }
+
+    p {
+      margin: 0;
+      line-height: 1.4;
+      font-weight: bold;
+    }
   }
 }
 </style>

@@ -153,18 +153,26 @@
   },
   "ui_lib": {
     "html_editor": {
-      "blockquote": "Blockzitat",
+      "add_column_after": "Spalte nach hinzufügen",
+      "add_column_before": "Spalte vor hinzufügen",
+      "add_row_after": "Zeile nach hinzufügen",
+      "add_row_before": "Zeile vor hinzufügen",
+      "blockquote": "Zitatblock",
       "bold": "Fett",
       "bullet_list": "Aufzählungsliste",
       "clear_style": "Stil löschen",
-      "hard_break": "Zeilenumbruch",
+      "delete_column": "Spalte löschen",
+      "delete_row": "Zeile löschen",
+      "delete_table": "Tabelle löschen",
+      "hard_break": "Fester Zeilenumbruch",
       "heading": "Überschrift",
       "image": "Bild",
+      "insert_table": "Tabelle einfügen",
       "italic": "Kursiv",
       "ordered_list": "Nummerierte Liste",
       "paragraph": "Absatz",
       "redo": "Wiederholen",
-      "undo": "Rückgängig machen"
+      "undo": "Rückgängig"
     }
   },
   "validation": {

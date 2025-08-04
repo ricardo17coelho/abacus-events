@@ -1,16 +1,15 @@
 <template>
   <TheAppBar />
   <v-main class="overflow-auto">
-    <TheLayoutContainer class="container">
+    <v-container class="app-container container">
       <RouterView />
-    </TheLayoutContainer>
+    </v-container>
   </v-main>
   <TheFooter />
 </template>
 
 <script lang="ts" setup>
 import TheAppBar from '@/layouts/components/TheAppBar.vue';
-import TheLayoutContainer from '@/layouts/components/TheLayoutContainer.vue';
 import TheFooter from '@/layouts/components/TheFooter.vue';
 </script>
 <style lang="scss" scoped>

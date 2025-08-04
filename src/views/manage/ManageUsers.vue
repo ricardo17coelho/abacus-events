@@ -94,7 +94,6 @@ const actions = computed<MenuItem[]>(() => [
 
 // eslint-disable-next-line  @typescript-eslint/no-explicit-any
 function onSave(payload: any) {
-  console.warn('payload', payload);
   if (!users.value) return;
 
   const idx = users.value.findIndex((i) => i.id === payload.id);

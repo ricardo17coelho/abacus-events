@@ -28,7 +28,6 @@ const { t } = useI18n();
 function onSave(attachments?: string | string[]) {
   if (attachments && Array.isArray(attachments) && attachments.length) {
     attachments.forEach((attachment) => {
-      console.warn('attachment', attachment);
       props.editor
         ?.chain()
         .focus()

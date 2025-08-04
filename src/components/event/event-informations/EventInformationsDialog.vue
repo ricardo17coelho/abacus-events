@@ -154,7 +154,6 @@ async function onGetCompanyInformationsById(id: string) {
 watch(
   () => model.value,
   (newValue) => {
-    console.warn('WATCH => ', newValue);
     if (newValue && props.eventInformationsId) {
       onGetCompanyInformationsById(props.eventInformationsId);
     } else if (!newValue) {

@@ -104,7 +104,6 @@ const { removeEventInformation } = useApiEventInformations();
 const { items, categories, currentCategoryFilter } = useEventInformations();
 
 function onSuccess(payload: EventInformation) {
-  console.warn('onSuccess', payload);
   const idx = items.value.findIndex((i) => i.id === payload.id);
   if (idx > -1) {
     Object.assign(items.value[idx], payload);

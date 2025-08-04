@@ -1,10 +1,8 @@
 <template>
   <TheAppBar />
   <v-main class="overflow-auto">
-    <TheLayoutContainer>
-      <v-container class="container">
-        <RouterView />
-      </v-container>
+    <TheLayoutContainer class="container">
+      <RouterView />
     </TheLayoutContainer>
   </v-main>
   <TheFooter />

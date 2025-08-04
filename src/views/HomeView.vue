@@ -1,28 +1,29 @@
 <template>
-  <v-container>
-    <AppTitle>Upcoming events</AppTitle>
-    <v-row>
-      <v-col
-        v-for="event in upcomingEvents"
-        :key="event.id"
-        cols="12"
-        lg="3"
-        sm="6"
-      >
-        <EventCard
-          :event="event"
-          height="100%"
-          show-countdown
-          :to="{
-            name: 'event',
-            params: { eventId: event.slug || event.id },
-          }"
-        />
-      </v-col>
-    </v-row>
+  <Page>
+    <PageHeading title="Upcoming events" />
 
-    <v-row v-if="pastEvents.length">
-      <v-expansion-panels flat>
+    <PageContent>
+      <v-row>
+        <v-col
+          v-for="event in upcomingEvents"
+          :key="event.id"
+          cols="12"
+          lg="4"
+          sm="6"
+        >
+          <EventCard
+            :event="event"
+            height="100%"
+            show-countdown
+            :to="{
+              name: 'event',
+              params: { eventId: event.slug || event.id },
+            }"
+          />
+        </v-col>
+      </v-row>
+
+      <v-expansion-panels v-if="pastEvents.length" flat>
         <v-expansion-panel title="Past Events">
           <template #text>
             <v-container>
@@ -48,8 +49,8 @@
           </template>
         </v-expansion-panel>
       </v-expansion-panels>
-    </v-row>
-  </v-container>
+    </PageContent>
+  </Page>
 </template>
 
 <script setup lang="ts">
@@ -58,7 +59,7 @@ import type { Event } from '@/api/types/Event.ts';
 import { toast } from 'vue-sonner';
 import useApiEvents from '@/api/events.ts';
 import EventCard from '@/components/event/EventCard.vue';
-import AppTitle from '@/components/app/AppTitle.vue';
+import { Page, PageContent, PageHeading } from '@/components/page';
 
 const { t } = useI18n();
 

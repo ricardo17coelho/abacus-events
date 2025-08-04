@@ -45,7 +45,7 @@ import { ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import type { Editor } from '@tiptap/vue-3';
 import UiHtmlEditorToolbarBtn from '../UiHtmlEditorToolbarBtn.vue';
-import { UiDialog } from '@lib/ui';
+import UiDialog from '../../UiDialog.vue';
 
 interface Props {
   editor: Editor;

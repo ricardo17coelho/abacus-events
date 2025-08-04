@@ -12,10 +12,10 @@
 </template>
 
 <script setup lang="ts">
-import EventFilePicker from '@/components/event/EventFilePicker.vue';
 import type { Editor } from '@tiptap/vue-3';
-import UiHtmlEditorToolbarBtn from '../UiHtmlEditorToolbarBtn.vue';
 import { useI18n } from 'vue-i18n';
+import EventFilePicker from '../../../../../src/components/event/EventFilePicker.vue';
+import UiHtmlEditorToolbarBtn from '../UiHtmlEditorToolbarBtn.vue';
 
 interface Props {
   editor: Editor;

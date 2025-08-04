@@ -71,24 +71,23 @@
 
     <v-divider class="py-2 mx-1" vertical />
 
-    <UiHtmlEditorToolbarTableMenu :editor="editor" />
+    <UiHtmlEditorToolbarTable :editor="editor" />
 
     <slot></slot>
   </div>
 </template>
 <script setup lang="ts">
 import { computed } from 'vue';
-// tiptap components
 import type { Editor } from '@tiptap/vue-3';
-// components
 import UiHtmlEditorToolbarBtn from './UiHtmlEditorToolbarBtn.vue';
 import UiHtmlEditorToolbarMenu from './UiHtmlEditorToolbarMenu.vue';
-// composables
+import {
+  UiHtmlEditorToolbarImage,
+  UiHtmlEditorToolbarLink,
+  UiHtmlEditorToolbarTable,
+} from './extensions';
 import { useI18n } from 'vue-i18n';
 import { type MenuItem } from '../menu';
-import UiHtmlEditorToolbarTableMenu from './extensions/UiHtmlEditorToolbarTableMenu.vue';
-import UiHtmlEditorToolbarLink from './extensions/UiHtmlEditorToolbarLink.vue';
-import UiHtmlEditorToolbarImage from '@lib/ui/components/html-editor/extensions/UiHtmlEditorToolbarImage.vue';
 
 interface Props {
   editor: Editor;

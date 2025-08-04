@@ -127,7 +127,7 @@
 </template>
 
 <script setup lang="ts">
-import { UiDialog } from '@lib/ui';
+import UiDialog from '../../../lib/ui/components/UiDialog.vue';
 import { ref } from 'vue';
 import { requireInjection } from '@/utils/injection.ts';
 import { CURRENT_EVENT_KEY } from '@/types/injectionKeys.ts';

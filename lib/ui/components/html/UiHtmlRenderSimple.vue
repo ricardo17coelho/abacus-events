@@ -1,15 +1,10 @@
 <template>
-  <div v-if="content" :class="{ 'html-render': !unstyled }">
-    <component
-      :is="renderVNode(node)"
-      v-for="(node, index) in parseDocument(getSanitizedHtml(content)).children"
-      :key="index"
-    />
-  </div>
+  <div
+    :class="{ 'html-render': !unstyled }"
+    v-html="getSanitizedHtml(content)"
+  ></div>
 </template>
 <script setup lang="ts">
-import { parseDocument } from 'htmlparser2';
-import { renderVNode } from './render-vnode.ts';
 import { getSanitizedHtml } from '../../utils/html-sanitize';
 
 defineProps({

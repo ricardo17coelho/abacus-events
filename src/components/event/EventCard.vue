@@ -38,7 +38,7 @@
     </div>
 
     <v-card-subtitle v-if="event.description" class="text-wrap">
-      <UiHtmlRender
+      <UiHtmlRenderSimple
         :content="
           showDefaultTranslationOrEmpty(event.description)
             .split(' ')
@@ -46,14 +46,14 @@
             .join(' ') + '...'
         "
       >
-      </UiHtmlRender>
+      </UiHtmlRenderSimple>
     </v-card-subtitle>
   </v-card>
 </template>
 
 <script setup lang="ts">
 import { showDefaultTranslationOrEmpty } from '@/utils/showDefaultTranslationOrEmpty.ts';
-import { formatDateByFormat, UiHtmlRender } from '@lib/ui';
+import { formatDateByFormat, UiHtmlRenderSimple } from '@lib/ui';
 import { useDisplay } from 'vuetify/framework';
 import type { Event } from '@/api/types/Event.ts';
 import CountdownDate from '@/components/CountdownDate.vue';

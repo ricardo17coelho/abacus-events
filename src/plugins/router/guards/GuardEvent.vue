@@ -17,7 +17,6 @@ import type { Event } from '@/api/types/Event';
 import ErrorNotFound from '@/components/errors/ErrorNotFound.vue';
 import { CURRENT_EVENT_KEY } from '@/types/injectionKeys';
 import useBrand from '@/composables/brand.ts';
-import useApiParkingLot from '@/api/parking-lots.ts';
 import { supabase } from '@/services/supabase.ts';
 
 const { t } = useI18n();
@@ -89,8 +88,6 @@ watch(
 onUnmounted(() => clear());
 
 // PARKING LOTS
-const { getParkingLotsByEventId } = useApiParkingLot();
-
 // eslint-disable-next-line  @typescript-eslint/no-explicit-any
 function mutateParkingLotById(id: string, payload: Record<any, any>) {
   if (!currentEvent.value) return;
@@ -100,18 +97,6 @@ function mutateParkingLotById(id: string, payload: Record<any, any>) {
   }
 }
 
-const fetchDataParkingLots = async () => {
-  if (!currentEvent.value?.id) return;
-  const { data, error } = await getParkingLotsByEventId(currentEvent.value?.id);
-  if (error) {
-    toast.error(t('errors.error_occurred'));
-    return;
-  }
-  if (data && currentEvent.value) {
-    currentEvent.value.parking_lots = data;
-  }
-};
-
 const subscribeToChanges = () => {
   const channel = supabase
     .channel('parking_lots')
@@ -119,7 +104,6 @@ const subscribeToChanges = () => {
       'postgres_changes',
       { event: 'UPDATE', schema: 'public', table: 'parking_lots' },
       (payload) => {
-        fetchDataParkingLots();
         if (payload.new) {
           mutateParkingLotById(payload.new.id, payload.new);
         }

@@ -1,9 +1,11 @@
 <template>
-  <Page>
+  <Page class="h-100 d-flex flex-column">
     <PageHeading title="Events" />
-    <PageContent>
+    <PageContent class="flex-1-0 wrapper-flex-1-1-0">
       <UiTable
         :actions="actions"
+        class="h-100"
+        fixed-header
         :headers="headers"
         :items="events"
         subtitle="A list of all events."

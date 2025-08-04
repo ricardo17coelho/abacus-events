@@ -106,9 +106,3 @@ function onSave(payload: any) {
   }
 }
 </script>
-
-<style lang="scss" scoped>
-.wrapper-flex-1-1-0 :deep(.v-table__wrapper) {
-  flex: 1 1 0;
-}
-</style>

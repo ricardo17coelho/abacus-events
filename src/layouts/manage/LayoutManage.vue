@@ -5,7 +5,9 @@
     <LayoutManageAppBar v-model="drawer" />
 
     <v-main class="overflow-auto">
-      <RouterView />
+      <v-container class="h-100" fluid>
+        <RouterView />
+      </v-container>
     </v-main>
   </v-layout>
 </template>

@@ -1,17 +1,17 @@
 {
   "actions": {
     "add": "Aggiungi",
-    "add_alert": "",
+    "add_alert": "Aggiungi avviso",
     "add_schedule": "Aggiungi programma",
-    "cancel": "",
+    "cancel": "Annulla",
     "delete": "Cancellare",
     "edit": "Modifica",
     "install": "Installa",
-    "ok": "",
+    "ok": "OK",
     "open": "Aperto",
     "save": "Salva",
     "send": "Inviare",
-    "upload": "",
+    "upload": "Carica",
     "view": "Vista"
   },
   "categories": {
@@ -30,7 +30,7 @@
     }
   },
   "event": {
-    "feature": ""
+    "feature": "Feature"
   },
   "fields": {
     "color": {
@@ -53,13 +53,14 @@
     "hello": "Ciao"
   },
   "labels": {
-    "alert_hint": "",
-    "bio": "",
-    "brand": "",
+    "alert_hint": "Indicazione di allarme",
+    "bio": "Biografia",
+    "brand": "Marca",
     "category": "Categoria",
-    "contact": "",
+    "contact": "Contatto",
     "contact_types": {
-      "EMAIL": ""
+      "EMAIL": "E-mail",
+      "PHONE": "Telefono/Cellulare"
     },
     "copied": "Copiato",
     "copy": "Copia",
@@ -80,18 +81,18 @@
       "PROGRAM": "Programma",
       "SCHEDULE": "Piano"
     },
-    "first_name": "",
+    "first_name": "Nome",
     "icon": "Icona",
-    "last_name": "",
+    "last_name": "Cognome",
     "layout": "Layout",
-    "location": "",
-    "location_link": "",
+    "location": "Posizione",
+    "location_link": "Link di posizione",
     "location_name": "Nome della posizione",
     "location_url": "URL della posizione",
     "login": "Accedere",
     "logout": "Disconnettersi",
     "message": "Messaggio",
-    "more": "",
+    "more": "Più",
     "n_of_parking_spaces": "Numero di posti auto",
     "name": "Nome",
     "note": "Nota",
@@ -102,21 +103,21 @@
       "free": "Libero",
       "full": "Pieno"
     },
-    "person": "",
-    "persons": "",
+    "person": "Persona",
+    "persons": "Persone",
     "plan": "Planimetria",
     "program_timeline": "Cronologia del programma",
-    "program_timeline_category": "",
-    "program_timeline_location": "",
-    "programm": "",
+    "program_timeline_category": "Categorie",
+    "program_timeline_location": "Posizione",
+    "programm": "Programma",
     "public": "Pubblico",
     "return_journey": "Ritorno",
     "role": "Ruolo",
     "roles": {
-      "ADMIN": "",
-      "HELPER": ""
+      "ADMIN": "Amministratore",
+      "HELPER": "Helper"
     },
-    "settings": "",
+    "settings": "Impostazioni",
     "slots_filled": "Posti occupati",
     "slots_total": "Posti massimi",
     "slug": "URL slug",
@@ -124,10 +125,10 @@
     "subtitle": "Sottotitolo",
     "time_end": "Ora di fine",
     "time_start": "Ora di inizio",
-    "title": "",
-    "user": "",
-    "users": "",
-    "value": ""
+    "title": "Titolo",
+    "user": "Utente",
+    "users": "Utenti",
+    "value": "Valore"
   },
   "not_found": {
     "headline": "Ops, 404",
@@ -191,12 +192,12 @@
       "alert_01": "Se avete un PP fisso in AbaHome II, vi preghiamo di utilizzarlo. Grazie 😇"
     },
     "profile": {
-      "firstname": {
+      "first_name": {
         "label": "Cambia il tuo nome",
         "placeholder": "Scegli un nuovo nome"
       },
-      "lastname": {
-        "label": "Cambia il tuo cognome",
+      "last_name": {
+        "label": "Cognome",
         "placeholder": "Scegli un nuovo cognome"
       },
       "password_confirm": {

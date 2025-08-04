@@ -29,7 +29,7 @@
             density="compact"
             :prepend-icon="getRoleIcon(userrole)"
           >
-            {{ userrole }}
+            {{ t(`labels.roles.${userrole}`) }}
           </v-chip>
         </template>
       </UiTable>

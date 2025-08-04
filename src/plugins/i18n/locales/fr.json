@@ -1,17 +1,17 @@
 {
   "actions": {
     "add": "Ajouter",
-    "add_alert": "",
+    "add_alert": "Ajouter une alerte",
     "add_schedule": "Ajouter un programme",
-    "cancel": "",
+    "cancel": "Annuler",
     "delete": "Supprimer",
     "edit": "Editer",
     "install": "Installez",
-    "ok": "",
+    "ok": "OK",
     "open": "Ouvrir",
     "save": "Enregistrer",
     "send": "Envoyer",
-    "upload": "",
+    "upload": "Télécharger",
     "view": "Voir"
   },
   "categories": {
@@ -30,7 +30,7 @@
     }
   },
   "event": {
-    "feature": ""
+    "feature": "Feature"
   },
   "fields": {
     "color": {
@@ -53,13 +53,14 @@
     "hello": "Salut"
   },
   "labels": {
-    "alert_hint": "",
-    "bio": "",
-    "brand": "",
+    "alert_hint": "Alerte indice",
+    "bio": "Bio",
+    "brand": "Marque",
     "category": "Catégorie",
-    "contact": "",
+    "contact": "Contact",
     "contact_types": {
-      "EMAIL": ""
+      "EMAIL": "Courriel",
+      "PHONE": "Téléphone/Mobile"
     },
     "copied": "Copié",
     "copy": "Copie",
@@ -80,18 +81,18 @@
       "PROGRAM": "Programme",
       "SCHEDULE": "Schedule"
     },
-    "first_name": "",
+    "first_name": "Prénom",
     "icon": "Icône",
-    "last_name": "",
+    "last_name": "Nom de famille",
     "layout": "Layout",
-    "location": "",
-    "location_link": "",
+    "location": "Emplacement",
+    "location_link": "Lien de localisation",
     "location_name": "Nom du lieu",
     "location_url": "URL du lieu",
     "login": "Connexion",
     "logout": "Déconnexion",
     "message": "Message",
-    "more": "",
+    "more": "Plus",
     "n_of_parking_spaces": "Nombre de places de parking",
     "name": "Nom",
     "note": "Note",
@@ -102,21 +103,21 @@
       "free": "Libre",
       "full": "Complet"
     },
-    "person": "",
-    "persons": "",
+    "person": "Personne",
+    "persons": "Personnes",
     "plan": "Plan du site",
     "program_timeline": "Chronologie du programme",
-    "program_timeline_category": "",
-    "program_timeline_location": "",
-    "programm": "",
+    "program_timeline_category": "Catégorie",
+    "program_timeline_location": "Emplacement",
+    "programm": "Programme",
     "public": "Public",
     "return_journey": "Retour",
     "role": "Rôle",
     "roles": {
-      "ADMIN": "",
-      "HELPER": ""
+      "ADMIN": "Administrateur",
+      "HELPER": "Helper"
     },
-    "settings": "",
+    "settings": "Paramètres",
     "slots_filled": "Places occupées",
     "slots_total": "Nb max. de places",
     "slug": "URL slug",
@@ -124,10 +125,10 @@
     "subtitle": "Sous-titre",
     "time_end": "Heure de fin",
     "time_start": "Heure de début",
-    "title": "",
-    "user": "",
-    "users": "",
-    "value": ""
+    "title": "Titre",
+    "user": "Utilisateur",
+    "users": "Utilisateurs",
+    "value": "Valeur"
   },
   "not_found": {
     "headline": "Oups, 404",
@@ -191,13 +192,13 @@
       "alert_01": "Si tu as un PP fixe dans AbaHome II, merci de l'utiliser. Merci 😇"
     },
     "profile": {
-      "firstname": {
-        "label": "Changer votre prénom",
+      "first_name": {
+        "label": "Changez votre prénom",
         "placeholder": "Choisissez un nouveau prénom"
       },
-      "lastname": {
-        "label": "Changer votre nom",
-        "placeholder": "Choisissez un nouveau nom"
+      "last_name": {
+        "label": "Nom de famille",
+        "placeholder": "Choisissez un nouveau nom de famille"
       },
       "password_confirm": {
         "label": "Confirmez le mot de passe",

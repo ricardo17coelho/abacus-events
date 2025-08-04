@@ -109,7 +109,7 @@
     "program_timeline": "Program Timeline",
     "program_timeline_category": "Category",
     "program_timeline_location": "Location",
-    "programm": "Link",
+    "programm": "Program",
     "public": "Public",
     "return_journey": "Return Journey",
     "role": "Role | Roles",
@@ -192,12 +192,12 @@
       "alert_01": "If you have a fixed PP in AbaHome II, please use it. Thank you 😇"
     },
     "profile": {
-      "firstname": {
+      "first_name": {
         "label": "Change your first name",
         "placeholder": "Choose a new first name"
       },
-      "lastname": {
-        "label": "Change your last name",
+      "last_name": {
+        "label": "Last name",
         "placeholder": "Choose a new last name"
       },
       "password_confirm": {

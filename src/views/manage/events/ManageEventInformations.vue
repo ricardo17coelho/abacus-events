@@ -102,7 +102,7 @@ const { isUserAdmin } = useAuthUser();
 const { removeEventInformation } = useApiEventInformations();
 
 const { itemsSorted, items, categoriesSorted, currentCategoryFilter } =
-  useEventInformations();
+  useEventInformations({ autoSelectFirst: true });
 
 function onSuccess(payload: EventInformation) {
   const idx = items.value.findIndex((i) => i.id === payload.id);

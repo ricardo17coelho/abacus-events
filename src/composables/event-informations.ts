@@ -7,8 +7,13 @@ import type {
   EventInformationCategory,
 } from '@/api/types/EventInformation.ts';
 import useApiEventInformations from '@/api/event-informations.ts';
+export type EventInformationsOptions = {
+  autoSelectFirst: boolean;
+};
 
-export default function useEventInformations() {
+export default function useEventInformations(
+  options: EventInformationsOptions = { autoSelectFirst: false },
+) {
   const currentEvent = requireInjection(CURRENT_EVENT_KEY);
 
   const { t, locale } = useI18n();
@@ -30,8 +35,10 @@ export default function useEventInformations() {
     if (error) return;
     if (data) {
       categories.value = data;
-      if (categories.value.length > 0) {
-        currentCategoryFilter.value = categories.value[0].id;
+      if (options.autoSelectFirst) {
+        if (categories.value.length > 0) {
+          currentCategoryFilter.value = categories.value[0].id;
+        }
       }
     }
   }

@@ -63,5 +63,5 @@ import useEventInformations from '@/composables/event-informations.ts';
 
 const currentEvent = requireInjection(CURRENT_EVENT_KEY);
 const { itemsSorted, currentCategoryFilter, categoriesSorted } =
-  useEventInformations();
+  useEventInformations({ autoSelectFirst: true });
 </script>

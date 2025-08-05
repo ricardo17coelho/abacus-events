@@ -9,7 +9,7 @@
       mobile
     >
       <v-chip
-        v-for="category in categories"
+        v-for="category in categoriesSorted"
         :key="category.id"
         centered
         filter
@@ -48,7 +48,7 @@
     </v-row>
 
     <v-row>
-      <v-col v-for="info in items" :key="info.id" cols="12" :md="6">
+      <v-col v-for="info in itemsSorted" :key="info.id" cols="12" :md="6">
         <v-card
           height="100%"
           :title="showDefaultTranslationOrEmpty(info.title)"
@@ -101,7 +101,8 @@ const { isUserAdmin } = useAuthUser();
 
 const { removeEventInformation } = useApiEventInformations();
 
-const { items, categories, currentCategoryFilter } = useEventInformations();
+const { itemsSorted, items, categoriesSorted, currentCategoryFilter } =
+  useEventInformations();
 
 function onSuccess(payload: EventInformation) {
   const idx = items.value.findIndex((i) => i.id === payload.id);

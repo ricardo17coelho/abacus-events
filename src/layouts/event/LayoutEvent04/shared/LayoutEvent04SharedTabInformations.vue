@@ -7,7 +7,7 @@
       <v-row dense>
         <v-col>
           <v-chip-group
-            v-if="categories.length > 0"
+            v-if="categoriesSorted.length > 0"
             v-model="currentCategoryFilter"
             class="categories-chip-group"
             color="primary"
@@ -15,7 +15,7 @@
             mobile
           >
             <v-chip
-              v-for="category in categories"
+              v-for="category in categoriesSorted"
               :key="category.id"
               centered
               density="comfortable"
@@ -29,7 +29,11 @@
         </v-col>
       </v-row>
       <v-row dense>
-        <v-col v-for="information in items" :key="information.id" cols="12">
+        <v-col
+          v-for="information in itemsSorted"
+          :key="information.id"
+          cols="12"
+        >
           <v-card class="mx-0" variant="flat">
             <v-card-title class="px-0 text-wrap">
               {{ showDefaultTranslationOrEmpty(information.title) }}
@@ -58,5 +62,6 @@ import { UiHtmlRender } from '@lib/ui';
 import useEventInformations from '@/composables/event-informations.ts';
 
 const currentEvent = requireInjection(CURRENT_EVENT_KEY);
-const { items, currentCategoryFilter, categories } = useEventInformations();
+const { itemsSorted, currentCategoryFilter, categoriesSorted } =
+  useEventInformations();
 </script>

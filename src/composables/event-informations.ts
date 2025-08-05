@@ -11,7 +11,7 @@ import useApiEventInformations from '@/api/event-informations.ts';
 export default function useEventInformations() {
   const currentEvent = requireInjection(CURRENT_EVENT_KEY);
 
-  const { t } = useI18n();
+  const { t, locale } = useI18n();
   const currentCategoryFilter = ref();
 
   const items = ref<EventInformation[]>([]);
@@ -66,10 +66,28 @@ export default function useEventInformations() {
     },
   );
 
+  const itemsSorted = computed(() =>
+    items.value.sort((a, b) => {
+      const titleA = a.title?.[locale.value] || '';
+      const titleB = b.title?.[locale.value] || '';
+      return titleA.localeCompare(titleB);
+    }),
+  );
+
+  const categoriesSorted = computed(() =>
+    categories.value.sort((a, b) => {
+      const titleA = a.title?.[locale.value] || '';
+      const titleB = b.title?.[locale.value] || '';
+      return titleA.localeCompare(titleB);
+    }),
+  );
+
   return {
     items,
+    itemsSorted,
     currentCategoryFilter,
     categories,
+    categoriesSorted,
     isLoading,
     fetchData,
   };

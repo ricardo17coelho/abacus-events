@@ -5,57 +5,80 @@
     class="mobile-container"
     fluid
   >
-    <div v-if="currentTab === 'OVERVIEW'">
-      <LayoutEvent04MobileTabHero />
-    </div>
+    <LayoutEvent04MobileTabHero v-if="currentTab === 'OVERVIEW'" />
 
-    <div v-if="currentTab === EVENT_FEATURE_TYPE.PROGRAM">
-      <LayoutEvent04MobileTabProgram />
-    </div>
+    <template v-else>
+      <LayoutEvent04MobileTitle
+        v-if="currentTabFeature"
+        class="mb-4"
+        :prepend-icon="currentTabFeature.icon"
+        :title="
+          showDefaultTranslationOrEmpty(currentTabFeature.title) ??
+          t(`labels.features.${currentTabFeature.feature_id}`)
+        "
+      />
 
-    <div v-if="currentTab === EVENT_FEATURE_TYPE.PARKING">
-      <LayoutEvent04MobileTabParking />
-    </div>
+      <LayoutEvent04MobileTabProgram
+        v-if="currentTab === EVENT_FEATURE_TYPE.PROGRAM"
+      />
 
-    <div v-if="currentTab === EVENT_FEATURE_TYPE.SCHEDULE">
-      <LayoutEvent04MobileTabSchedule />
-    </div>
+      <LayoutEvent04MobileTabParking
+        v-if="currentTab === EVENT_FEATURE_TYPE.PARKING"
+      />
 
-    <div v-if="currentTab === EVENT_FEATURE_TYPE.INFORMATIONS">
-      <LayoutEvent04MobileTabInformations />
-    </div>
+      <LayoutEvent04MobileTabSchedule
+        v-if="currentTab === EVENT_FEATURE_TYPE.SCHEDULE"
+      />
 
-    <div v-if="currentTab === EVENT_FEATURE_TYPE.FILES">
-      <LayoutEvent04MobileTabFiles />
-    </div>
+      <LayoutEvent04MobileTabInformations
+        v-if="currentTab === EVENT_FEATURE_TYPE.INFORMATIONS"
+      />
+
+      <LayoutEvent04MobileTabFiles
+        v-if="currentTab === EVENT_FEATURE_TYPE.FILES"
+      />
+    </template>
 
     <div v-if="currentTab === 'MORE'" class="fill-height">
       <div v-if="currentMoreTab">
-        <v-btn icon="mdi-arrow-left" @click="currentMoreTab = undefined" />
+        <LayoutEvent04MobileTitle
+          v-if="currentMoreTabFeature"
+          :title="
+            showDefaultTranslationOrEmpty(currentMoreTabFeature.title) ??
+            t(`labels.features.${currentMoreTabFeature.feature_id}`)
+          "
+        >
+          <template #prepend>
+            <v-btn icon="mdi-arrow-left" @click="currentMoreTab = undefined" />
+            <v-icon v-if="currentMoreTabFeature.icon">
+              {{ currentMoreTabFeature.icon }}
+            </v-icon>
+          </template>
+        </LayoutEvent04MobileTitle>
 
-        <div v-if="currentMoreTab === EVENT_FEATURE_TYPE.PROGRAM">
-          <LayoutEvent04MobileTabProgram />
-        </div>
+        <LayoutEvent04MobileTabProgram
+          v-if="currentMoreTab === EVENT_FEATURE_TYPE.PROGRAM"
+        />
 
-        <div v-if="currentMoreTab === EVENT_FEATURE_TYPE.PARKING">
-          <LayoutEvent04MobileTabParking />
-        </div>
+        <LayoutEvent04MobileTabParking
+          v-if="currentMoreTab === EVENT_FEATURE_TYPE.PARKING"
+        />
 
-        <div v-if="currentMoreTab === EVENT_FEATURE_TYPE.SCHEDULE">
-          <LayoutEvent04MobileTabSchedule />
-        </div>
+        <LayoutEvent04MobileTabSchedule
+          v-if="currentMoreTab === EVENT_FEATURE_TYPE.SCHEDULE"
+        />
 
-        <div v-if="currentMoreTab === EVENT_FEATURE_TYPE.INFORMATIONS">
-          <LayoutEvent04MobileTabInformations />
-        </div>
+        <LayoutEvent04MobileTabInformations
+          v-if="currentMoreTab === EVENT_FEATURE_TYPE.INFORMATIONS"
+        />
 
-        <div v-if="currentMoreTab === EVENT_FEATURE_TYPE.FILES">
-          <LayoutEvent04MobileTabFiles />
-        </div>
+        <LayoutEvent04MobileTabFiles
+          v-if="currentMoreTab === EVENT_FEATURE_TYPE.FILES"
+        />
 
-        <div v-if="currentMoreTab === EVENT_FEATURE_TYPE.CONTACTS">
-          <LayoutEvent04MobileTabContacts />
-        </div>
+        <LayoutEvent04MobileTabContacts
+          v-if="currentMoreTab === EVENT_FEATURE_TYPE.CONTACTS"
+        />
       </div>
 
       <div v-else class="fill-height">
@@ -275,7 +298,6 @@ watch(
       currentTab.value = tabs.value[0].id;
     }
   },
-  { immediate: true },
 );
 
 function updateRouteHash(tabId: string) {
@@ -284,21 +306,73 @@ function updateRouteHash(tabId: string) {
   }
 }
 
-// Sync tab selection with the URL hash
-onMounted(() => {
-  const hashTab = route.hash.replace('#', '');
-  if (tabs.value.map((t) => t.id).includes(hashTab)) {
-    currentTab.value = hashTab;
-  }
-  if (currentTab.value) {
-    updateRouteHash(currentTab.value);
-  }
-});
-
 // Update the hash when the tab changes
 watch(currentTab, (newTab) => {
   updateRouteHash(newTab);
+  if (newTab !== 'MORE' && !!currentMoreTab.value) {
+    currentMoreTab.value = undefined;
+  }
 });
+
+function updateRouteQueryMoreTab(tabId: string) {
+  if (currentTab.value !== 'MORE' || !tabId) {
+    router.replace({
+      ...route,
+      query: {},
+    });
+    return;
+  }
+
+  if (tabId) {
+    router.replace({
+      ...route,
+      query: {
+        tab: tabId,
+      },
+    });
+  }
+}
+
+// Update the hash when the tab changes
+watch(currentMoreTab, (newTab) => {
+  updateRouteQueryMoreTab(newTab);
+});
+
+// Sync tab selection with the URL hash
+onMounted(() => {
+  const hashTab = route.hash.replace('#', '');
+  const queryTab = route.query?.tab as string;
+
+  if (hashTab) {
+    if (tabs.value.map((t) => t.id).includes(hashTab) || hashTab === 'MORE') {
+      currentTab.value = hashTab;
+    }
+    if (currentTab.value) {
+      updateRouteHash(currentTab.value);
+    }
+  }
+
+  if (queryTab) {
+    if (tabs.value.map((t) => t.id).includes(queryTab)) {
+      currentMoreTab.value = queryTab;
+    }
+    if (currentMoreTab.value) {
+      updateRouteQueryMoreTab(currentMoreTab.value);
+    }
+  }
+});
+
+const currentTabFeature = computed(() =>
+  currentEvent.value
+    ? getEventFeatureIfExists(currentEvent.value, currentTab.value)
+    : undefined,
+);
+
+const currentMoreTabFeature = computed(() =>
+  currentEvent.value
+    ? getEventFeatureIfExists(currentEvent.value, currentMoreTab.value)
+    : undefined,
+);
 </script>
 
 <style scoped lang="scss">

@@ -10,7 +10,7 @@
     <template #toolbar-actions>
       <EventInformationsCategoriesDialog
         v-model="showDialog"
-        :event-timeline-category-id="currentItemId"
+        :event-informations-category-id="currentItemId"
         @success="onSaveSuccess"
       >
         <template #activator="{ props: ActivatorProps }">

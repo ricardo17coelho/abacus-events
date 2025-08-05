@@ -16,6 +16,7 @@ export default function useApiEventSchedule() {
   function getEventSchedules(range = [0, 10]) {
     const orders: FindOrder[] = [
       ['order', { referencedTable: 'event_schedule_items', ascending: true }],
+      ['order', { ascending: true }],
     ];
     return find<EventSchedule>('event_schedule', [], baseSelect, range, orders);
   }
@@ -23,6 +24,7 @@ export default function useApiEventSchedule() {
   function getEventScheduleById(EventScheduleId: string) {
     const orders: FindOrder[] = [
       ['order', { referencedTable: 'event_schedule_items', ascending: true }],
+      ['order', { ascending: true }],
     ];
 
     return findById<EventSchedule>(

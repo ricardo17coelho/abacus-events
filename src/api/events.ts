@@ -46,6 +46,7 @@ export default function useApiEvents() {
         'order',
         { referencedTable: 'schedule.event_schedule_items', ascending: true },
       ],
+      ['order', { referencedTable: 'schedule', ascending: true }],
     ];
 
     return find<Event>('events', filters, select, range, orders);
@@ -62,6 +63,7 @@ export default function useApiEvents() {
         'order',
         { referencedTable: 'schedule.event_schedule_items', ascending: true },
       ],
+      ['order', { referencedTable: 'schedule', ascending: true }],
     ];
 
     return findById<Event>('events', eventId, baseSelect, 'id', [], orders);
@@ -73,6 +75,7 @@ export default function useApiEvents() {
         'order',
         { referencedTable: 'schedule.event_schedule_items', ascending: true },
       ],
+      ['order', { referencedTable: 'schedule', ascending: true }],
     ];
 
     return findById<Event>('events', slug, baseSelect, 'slug', [], orders);

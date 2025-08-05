@@ -1,3 +1,18 @@
+
+
+@forward './fonts';
+
+
+:root {
+  --app-font-family: 'Europa', Arial, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+  'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif,
+  'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+}
+
+body {
+  font-family: var(--app-font-family), serif;
+}
+
 // custom styles
 .prevent-select {
   -webkit-user-select: none; /* Safari */

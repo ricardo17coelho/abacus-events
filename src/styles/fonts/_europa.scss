@@ -1,0 +1,53 @@
+/*
+====================================================
+	FONTS STYLE – EUROPA
+====================================================
+*/
+
+@font-face {
+  font-family: 'Europa';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url('/fonts/europa/Europa-Light.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Europa';
+  font-style: italic;
+  font-weight: 300;
+  font-display: swap;
+  src: url('/fonts/europa/Europa-LightItalic.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Europa';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/europa/Europa-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Europa';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/europa/Europa-RegularItalic.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Europa';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('/fonts/europa/Europa-Bold.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Europa';
+  font-style: italic;
+  font-weight: 700;
+  font-display: swap;
+  src: url('/fonts/europa/Europa-BoldItalic.ttf') format('truetype');
+}

@@ -1,0 +1,23 @@
+@use 'sass:map';
+
+$custom-font-family: var(--app-font-family) !default;
+
+$custom-typography: () !default;
+$custom-typography: map.deep-merge(
+    (
+      'h1': ('weight': 700, 'line-height': 6.25rem, 'letter-spacing': 0),
+      'h2': ('weight': 700, 'line-height': 4rem, 'letter-spacing': 0),
+      'h3': ('weight': 700, 'line-height': 3.125rem),
+      'h4': ('weight': 700, 'line-height': 2.375rem, 'letter-spacing': 0),
+      'h5': ('weight': 700, 'line-height': 1.75rem),
+      'h6': ('weight': 700, 'line-height': 1.5rem, 'letter-spacing': 0),
+      'subtitle-1': ('weight': 400, 'line-height': 1.4rem, 'letter-spacing': 0),
+      'subtitle-2': ('weight': 400, 'line-height': 1.25rem, 'letter-spacing': 0),
+      'body-1': ('weight': 300, 'line-height': 1.4rem, 'letter-spacing': 0),
+      'body-2': ('weight': 300, 'line-height': 1.4rem, 'letter-spacing': 0),
+      'button': ('weight': 700, 'line-height': 0.875rem, 'letter-spacing': 0, 'text-transform': none),
+      'caption': ('weight': 300, 'line-height': 1rem, 'letter-spacing': 0),
+      'overline': ('weight': 300, 'line-height': 1rem, 'letter-spacing': 0, 'text-transform': none),
+    ),
+    $custom-typography
+);

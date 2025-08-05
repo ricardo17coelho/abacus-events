@@ -4,13 +4,23 @@
  * Configures SASS variables and Vuetify overwrites
  */
 
-// https://vuetifyjs.com/features/sass-variables/`
+@use './fonts/variables' as *;
+
+// https://vuetifyjs.com/features/sass-variables/
 @forward 'vuetify/settings' with (
-  //@forward 'vuetify/settings' with (
-  $rounded: (
-      'lg': 12px,
-      'xl': 16px,
-    ),
+  // typography
+  $body-font-family: $custom-font-family !default,
+  $heading-font-family: $custom-font-family !default,
+  $typography: $custom-typography !default,
+
+  // VList
+  $list-item-title-font-size: 0.875rem !default,
+  $list-item-title-line-height: 1.25rem !default,
+  $list-item-subtitle-line-height: 1.25rem !default,
+
   // VBtn
-  $button-plain-opacity: 1 !default
+  $button-plain-opacity: 1 !default,
+
+  // Rounded
+  $rounded: ('lg': 12px, 'xl': 16px)
 );

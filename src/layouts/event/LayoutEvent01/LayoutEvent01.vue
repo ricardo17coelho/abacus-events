@@ -13,14 +13,14 @@
       </v-container>
     </v-main>
 
-    <LayoutEvent01Footer v-if="isRouteRoot" :app="smAndUp" />
+    <TheFooter v-if="isRouteRoot" :app="smAndUp" />
   </v-layout>
 </template>
 
 <script lang="ts" setup>
 import LayoutEvent01AppBar from './LayoutEvent01AppBar.vue';
-import LayoutEvent01Footer from './LayoutEvent01Footer.vue';
 import { useDisplay } from 'vuetify';
+import TheFooter from '@/layouts/components/TheFooter.vue';
 
 const route = useRoute();
 const { smAndUp } = useDisplay();

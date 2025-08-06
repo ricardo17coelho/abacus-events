@@ -109,6 +109,10 @@
               @click="currentMoreTab = item.id"
             ></v-list-item>
           </v-list>
+
+          <div class="my-4 text-center">
+            <TheFooterPolicy />
+          </div>
         </div>
       </div>
     </div>
@@ -176,6 +180,7 @@ import LayoutEvent04MobileTitle from '@/layouts/event/LayoutEvent04/mobile/Layou
 import LayoutEvent04MobileTabContacts from '@/layouts/event/LayoutEvent04/mobile/LayoutEvent04MobileTabContacts.vue';
 import TheAppMenuLanguage from '@/components/TheAppMenuLanguage.vue';
 import LayoutEvent04MobileTabInformations from '@/layouts/event/LayoutEvent04/mobile/LayoutEvent04MobileTabInformations.vue';
+import TheFooterPolicy from '@/layouts/components/TheFooterPolicy.vue';
 
 const currentEvent = requireInjection(CURRENT_EVENT_KEY);
 
@@ -397,6 +402,6 @@ const currentMoreTabFeature = computed(() =>
 
 <style scoped lang="scss">
 .mobile-container {
-  height: calc(100% - 56px);
+  height: calc(100vh - 56px - 24px);
 }
 </style>

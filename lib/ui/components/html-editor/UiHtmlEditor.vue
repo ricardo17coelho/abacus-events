@@ -29,7 +29,7 @@
     <v-card-text class="px-0">
       <v-tabs-window v-model="currentView">
         <v-tabs-window-item value="editor">
-          <div class="editor-container">
+          <div class="editor-container mt-1">
             <div
               v-if="editor"
               ref="editorContainer"
@@ -236,11 +236,7 @@ defineExpose({ validate, setContent });
   overflow: auto;
   min-height: 250px;
   border: 1px solid #9e9e9e;
-  border-radius: 4px;
-}
-
-.editor-content-container :deep(.ProseMirror) {
-  padding: 12px;
+  border-radius: 8px;
 }
 
 .hide {
@@ -261,6 +257,8 @@ defineExpose({ validate, setContent });
   :deep(.ProseMirror) {
     min-height: 250px;
     padding: 12px;
+    border-radius: 8px;
+    outline-color: rgb(var(--v-theme-primary));
 
     > * + * {
       margin-top: 0.75em;

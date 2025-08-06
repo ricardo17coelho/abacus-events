@@ -83,6 +83,9 @@
     },
     "first_name": "Firstname",
     "icon": "Icon",
+    "informations": {
+      "title": "Informations"
+    },
     "last_name": "Lastname",
     "layout": "Layout",
     "location": "Location",

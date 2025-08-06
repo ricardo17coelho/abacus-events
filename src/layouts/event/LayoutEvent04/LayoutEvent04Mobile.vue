@@ -81,7 +81,7 @@
         />
       </div>
 
-      <div v-else class="fill-height">
+      <div v-else class="fill-height d-flex flex-column">
         <LayoutEvent04MobileTitle
           class="d-flex justify-space-between"
           :title="t('labels.more')"
@@ -91,7 +91,7 @@
           </template>
         </LayoutEvent04MobileTitle>
 
-        <div class="d-flex flex-column justify-space-between fill-height">
+        <div class="d-flex flex-column justify-space-between flex-1-0">
           <v-list base-color="primary" rounded="lg" variant="outlined">
             <v-list-item
               v-for="item in tabsItemsMore"
@@ -110,7 +110,7 @@
             ></v-list-item>
           </v-list>
 
-          <div class="my-4 text-center">
+          <div class="my-2 text-center">
             <TheFooterPolicy />
           </div>
         </div>
@@ -402,6 +402,6 @@ const currentMoreTabFeature = computed(() =>
 
 <style scoped lang="scss">
 .mobile-container {
-  height: calc(100vh - 56px - 24px);
+  height: calc(100vh - 56px);
 }
 </style>

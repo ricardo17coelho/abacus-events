@@ -333,19 +333,29 @@ function updateRouteQueryMoreTab(tabId: string) {
   }
 }
 
+const routeHashTab = computed(() => route.hash.replace('#', ''));
+
 // Update the hash when the tab changes
 watch(currentMoreTab, (newTab) => {
   updateRouteQueryMoreTab(newTab);
 });
 
+watch(routeHashTab, (newHashTab) => {
+  if (newHashTab && newHashTab !== currentTab.value) {
+    currentTab.value = newHashTab;
+  }
+});
+
 // Sync tab selection with the URL hash
 onMounted(() => {
-  const hashTab = route.hash.replace('#', '');
   const queryTab = route.query?.tab as string;
 
-  if (hashTab) {
-    if (tabs.value.map((t) => t.id).includes(hashTab) || hashTab === 'MORE') {
-      currentTab.value = hashTab;
+  if (routeHashTab.value) {
+    if (
+      tabs.value.map((t) => t.id).includes(routeHashTab.value) ||
+      routeHashTab.value === 'MORE'
+    ) {
+      currentTab.value = routeHashTab.value;
     }
     if (currentTab.value) {
       updateRouteHash(currentTab.value);

@@ -63,6 +63,7 @@ import LayoutEvent04DesktopTabFiles from '@/layouts/event/LayoutEvent04/desktop/
 import LayoutEvent04DesktopTabHero from '@/layouts/event/LayoutEvent04/desktop/LayoutEvent04DesktopTabHero.vue';
 import { useI18n } from 'vue-i18n';
 import LayoutEvent04DesktopTabInformations from '@/layouts/event/LayoutEvent04/desktop/LayoutEvent04DesktopTabInformations.vue';
+import { watch } from 'vue';
 
 const currentEvent = requireInjection(CURRENT_EVENT_KEY);
 
@@ -155,11 +156,18 @@ function updateRouteHash(tabId: string) {
   }
 }
 
+const routeHashTab = computed(() => route.hash.replace('#', ''));
+
+watch(routeHashTab, (newHashTab) => {
+  if (newHashTab && newHashTab !== currentTab.value) {
+    currentTab.value = newHashTab;
+  }
+});
+
 // Sync tab selection with the URL hash
 onMounted(() => {
-  const hashTab = route.hash.replace('#', '');
-  if (tabs.value.map((t) => t.id).includes(hashTab)) {
-    currentTab.value = hashTab;
+  if (tabs.value.map((t) => t.id).includes(routeHashTab.value)) {
+    currentTab.value = routeHashTab.value;
   }
   if (currentTab.value) {
     updateRouteHash(currentTab.value);

@@ -3,6 +3,7 @@
     <v-card-item :title="showDefaultTranslationOrEmpty(parkingLot.title)">
       <template #subtitle>
         <v-chip
+          density="compact"
           :href="parkingLot.location_url || undefined"
           prepend-icon="mdi-home-map-marker"
           size="small"

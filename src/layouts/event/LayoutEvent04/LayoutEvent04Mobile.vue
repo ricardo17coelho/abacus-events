@@ -188,6 +188,10 @@ const router = useRouter();
 const currentTab = ref();
 const currentMoreTab = ref();
 
+function resetCurrentTab() {
+  currentTab.value = 'OVERVIEW';
+}
+
 const tabs = computed(() => {
   if (!currentEvent.value) return [];
   const items = [];
@@ -293,7 +297,7 @@ watch(
   () => smAndDown.value,
   (newValue) => {
     if (newValue && !currentTab.value) {
-      currentTab.value = 'OVERVIEW';
+      resetCurrentTab();
     } else if (!newValue && currentTab.value === 'OVERVIEW') {
       currentTab.value = tabs.value[0].id;
     }
@@ -340,11 +344,17 @@ watch(currentMoreTab, (newTab) => {
   updateRouteQueryMoreTab(newTab);
 });
 
-watch(routeHashTab, (newHashTab) => {
-  if (newHashTab && newHashTab !== currentTab.value) {
-    currentTab.value = newHashTab;
-  }
-});
+watch(
+  routeHashTab,
+  (newHashTab) => {
+    if (newHashTab && newHashTab !== currentTab.value) {
+      currentTab.value = newHashTab;
+    } else if (!newHashTab) {
+      resetCurrentTab();
+    }
+  },
+  { immediate: true },
+);
 
 // Sync tab selection with the URL hash
 onMounted(() => {

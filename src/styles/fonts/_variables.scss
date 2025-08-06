@@ -4,20 +4,86 @@ $custom-font-family: var(--app-font-family) !default;
 
 $custom-typography: () !default;
 $custom-typography: map.deep-merge(
-    (
-      'h1': ('weight': 700, 'line-height': 6.25rem, 'letter-spacing': 0),
-      'h2': ('weight': 700, 'line-height': 4rem, 'letter-spacing': 0),
-      'h3': ('weight': 700, 'line-height': 3.125rem),
-      'h4': ('weight': 700, 'line-height': 2.375rem, 'letter-spacing': 0),
-      'h5': ('weight': 700, 'line-height': 1.75rem),
-      'h6': ('weight': 700, 'line-height': 1.5rem, 'letter-spacing': 0),
-      'subtitle-1': ('weight': 400, 'line-height': 1.4rem, 'letter-spacing': 0),
-      'subtitle-2': ('weight': 400, 'line-height': 1.25rem, 'letter-spacing': 0),
-      'body-1': ('weight': 300, 'line-height': 1.4rem, 'letter-spacing': 0),
-      'body-2': ('weight': 300, 'line-height': 1.4rem, 'letter-spacing': 0),
-      'button': ('weight': 700, 'line-height': 0.875rem, 'letter-spacing': 0, 'text-transform': none),
-      'caption': ('weight': 300, 'line-height': 1rem, 'letter-spacing': 0),
-      'overline': ('weight': 300, 'line-height': 1rem, 'letter-spacing': 0, 'text-transform': none),
+  (
+    'h1': (
+      'size': 6rem,
+      'weight': 300,
+      'line-height': 6.25rem,
+      'letter-spacing': normal,
     ),
-    $custom-typography
+    'h2': (
+      'size': 3.75rem,
+      'weight': 300,
+      'line-height': 4rem,
+      'letter-spacing': normal,
+    ),
+    'h3': (
+      'size': 3rem,
+      'weight': 400,
+      'line-height': 1.05rem,
+    ),
+    'h4': (
+      'size': 2.125rem,
+      'weight': 400,
+      'line-height': 2.375rem,
+      'letter-spacing': normal,
+    ),
+    'h5': (
+      'size': 1.5rem,
+      'weight': 700,
+      'line-height': 1.625rem,
+      'letter-spacing': normal,
+    ),
+    'h6': (
+      'size': 1.25rem,
+      'weight': 400,
+      'line-height': 1.75rem,
+      'letter-spacing': normal,
+    ),
+    'subtitle-1': (
+      'size': 1rem,
+      'weight': 700,
+      'line-height': 1.4rem,
+      'letter-spacing': normal,
+    ),
+    'subtitle-2': (
+      'size': 0.875rem,
+      'weight': 400,
+      'line-height': 1.25rem,
+      'letter-spacing': normal,
+    ),
+    'body-1': (
+      'size': 1rem,
+      'weight': 400,
+      'line-height': 1.4rem,
+      'letter-spacing': normal,
+    ),
+    'body-2': (
+      'size': 0.875rem,
+      'weight': 400,
+      'line-height': 1.25rem,
+      'letter-spacing': normal,
+    ),
+    'button': (
+      'size': 0.875rem,
+      'weight': 700,
+      'line-height': 1rem,
+      'letter-spacing': normal,
+      'text-transform': none,
+    ),
+    'caption': (
+      'size': 0.75rem,
+      'weight': 400,
+      'line-height': 1rem,
+      'letter-spacing': 0.0333333333em,
+    ),
+    'overline': (
+      'size': 0.75rem,
+      'weight': 400,
+      'line-height': 1rem,
+      'letter-spacing': normal,
+      'text-transform': none,
+    ),
+  ),
+  $custom-typography
 );

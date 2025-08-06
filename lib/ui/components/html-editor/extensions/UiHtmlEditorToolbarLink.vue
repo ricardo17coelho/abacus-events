@@ -8,10 +8,27 @@
 
   <UiDialog
     v-model="showDialog"
-    max-width="400"
+    max-width="450"
     :title="t('ui_lib.html_editor.add_link')"
   >
     <template #content>
+      <v-alert
+        class="mb-6"
+        density="compact"
+        rounded="lg"
+        type="info"
+        variant="tonal"
+      >
+        <template #text>
+          Internal Links should be added without "domain". Ex:
+          <br />
+          <b>https://abacus-events.ch/my-awesome-event</b>
+          <br />
+          should be added like:
+          <br />
+          <b>/my-awesome-event</b>
+        </template>
+      </v-alert>
       <v-row>
         <v-col cols="12">
           <v-text-field

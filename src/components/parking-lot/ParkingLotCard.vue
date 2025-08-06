@@ -13,7 +13,11 @@
       </template>
       <template #append>
         <slot name="actions" />
-        <v-chip :color="getStatusColor(parkingLot)">
+        <v-chip
+          :color="getStatusColor(parkingLot)"
+          density="compact"
+          size="small"
+        >
           {{ getParkingLotStatusText(parkingLot) }}
         </v-chip>
       </template>
@@ -21,20 +25,20 @@
 
     <v-divider />
 
-    <v-card-text class="text-medium-emphasis pa-6">
-      <div class="text-h6 mb-6">
+    <v-card-text class="text-medium-emphasis py-2 py-sm-4">
+      <div class="d-flex align-center ga-1 text-body-1 text-sm-h6 mb-sm-2">
         <v-icon>mdi-car</v-icon>
         {{ t('labels.n_of_parking_spaces') }}
       </div>
-      <div class="text-h4 font-weight-black mb-4">
+      <div class="text-h6 text-sm-h4 font-weight-black mb-sm-4">
         {{ parkingLot.filled_slots }} / {{ parkingLot.total_slots }}
       </div>
 
       <v-progress-linear
         bg-color="surface-variant"
-        class="mb-6"
+        class="mb-2"
         :color="getStatusColor(parkingLot)"
-        height="10"
+        height="6"
         :model-value="
           calculatePercentage(parkingLot.filled_slots, parkingLot.total_slots)
         "

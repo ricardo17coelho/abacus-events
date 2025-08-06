@@ -7,7 +7,7 @@
     "
     :id="`feature-${getEventFeatureIfExists(currentEvent, 'PARKING')?.id}`"
   >
-    <v-row>
+    <v-row dense>
       <v-col
         v-for="parkingLot in currentEvent.parking_lots"
         :key="parkingLot.id"

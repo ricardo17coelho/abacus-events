@@ -23,19 +23,19 @@
       />
 
       <LayoutEvent04MobileTabParking
-        v-if="currentTab === EVENT_FEATURE_TYPE.PARKING"
+        v-else-if="currentTab === EVENT_FEATURE_TYPE.PARKING"
       />
 
       <LayoutEvent04MobileTabSchedule
-        v-if="currentTab === EVENT_FEATURE_TYPE.SCHEDULE"
+        v-else-if="currentTab === EVENT_FEATURE_TYPE.SCHEDULE"
       />
 
       <LayoutEvent04MobileTabInformations
-        v-if="currentTab === EVENT_FEATURE_TYPE.INFORMATIONS"
+        v-else-if="currentTab === EVENT_FEATURE_TYPE.INFORMATIONS"
       />
 
       <LayoutEvent04MobileTabFiles
-        v-if="currentTab === EVENT_FEATURE_TYPE.FILES"
+        v-else-if="currentTab === EVENT_FEATURE_TYPE.FILES"
       />
     </template>
 

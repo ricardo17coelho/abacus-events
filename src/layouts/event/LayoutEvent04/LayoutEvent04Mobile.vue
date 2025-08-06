@@ -39,7 +39,7 @@
       />
     </template>
 
-    <div v-if="currentTab === 'MORE'" class="fill-height">
+    <div v-if="currentTab === 'MORE'" class="d-flex flex-column h-100">
       <div v-if="currentMoreTab">
         <LayoutEvent04MobileTitle
           v-if="currentMoreTabFeature"
@@ -81,7 +81,7 @@
         />
       </div>
 
-      <div v-else class="fill-height d-flex flex-column">
+      <div v-else class="d-flex flex-column flex-grow-1">
         <LayoutEvent04MobileTitle
           class="d-flex justify-space-between"
           :title="t('labels.more')"

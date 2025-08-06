@@ -260,7 +260,9 @@ const tabs = computed(() => {
       id: EVENT_FEATURE_TYPE.FILES,
       title: featureFiles.title || t('labels.features.FILES'),
       icon: featureFiles.icon,
-      show: () => hasEventFeature(currentEvent.value!, 'FILES'),
+      show: () =>
+        hasEventFeature(currentEvent.value!, 'FILES') &&
+        currentEvent.value?.files.some((f) => f.visible),
     });
   }
 

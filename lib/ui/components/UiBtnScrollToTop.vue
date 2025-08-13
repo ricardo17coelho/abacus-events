@@ -9,7 +9,7 @@
       fixed
       icon="mdi-arrow-up"
       location="bottom end"
-      style="width: calc(100% - 20px); bottom: 56px"
+      style="width: calc(100dvh - 20px); bottom: 56px"
       variant="elevated"
       v-bind="$attrs"
       @click="toTop"

@@ -181,6 +181,6 @@ const { sortedItems, currentCategoryFilter, categories } = useEventProgram();
 </script>
 <style scoped>
 .main-container {
-  height: calc(100svh - 64px);
+  height: calc(100dvh - 64px);
 }
 </style>

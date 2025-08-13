@@ -29,10 +29,10 @@ const isRouteRoot = computed(() => route.path === '/');
 </script>
 <style scoped>
 .main-container {
-  height: calc(100svh - 64px);
+  height: calc(100dvh - 64px);
 }
 
 .main-container-with-footer {
-  height: calc(100svh - 64px - 52px);
+  height: calc(100dvh - 64px - 52px);
 }
 </style>

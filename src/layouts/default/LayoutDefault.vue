@@ -14,6 +14,6 @@ import TheFooter from '@/layouts/components/TheFooter.vue';
 </script>
 <style lang="scss" scoped>
 .container {
-  height: calc(100vh - 64px - 64px);
+  height: calc(100dvh - 64px - 64px);
 }
 </style>

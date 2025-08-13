@@ -404,6 +404,6 @@ const currentMoreTabFeature = computed(() =>
 
 <style scoped lang="scss">
 .mobile-container {
-  max-height: calc(100dvh - 56px);
+  height: calc(100dvh - 56px);
 }
 </style>

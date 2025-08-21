@@ -1,15 +1,26 @@
-import { type App } from 'vue';
 import { isProdEnv } from '@/utils';
-import { VueUmamiPlugin } from '@jaseeey/vue-umami-plugin';
+import router from './router';
 
 export default {
-  install(app: App) {
-    console.log('installing umami plugin', isProdEnv());
+  install() {
+    if (!isProdEnv()) return;
 
-    if (isProdEnv()) {
-      app.use(VueUmamiPlugin, {
-        websiteID: import.meta.env.VITE_UMAMI_WEBSITE_ID,
-        scriptSrc: 'https://cloud.umami.is/script.js',
+    const websiteID = import.meta.env.VITE_UMAMI_WEBSITE_ID;
+    if (!websiteID) return;
+
+    // Inject Umami script
+    const script = document.createElement('script');
+    script.async = true;
+    script.defer = true;
+    script.src = 'https://cloud.umami.is/script.js';
+    script.setAttribute('data-website-id', websiteID);
+    document.head.appendChild(script);
+
+    // Track route changes
+    if (router) {
+      router.afterEach((to) => {
+        // @ts-expect-error global this
+        if (window.umami) window.umami.trackView(to.fullPath);
       });
     }
   },

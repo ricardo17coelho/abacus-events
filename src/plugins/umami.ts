@@ -5,7 +5,7 @@ import router from './router';
 
 export default {
   install(app: App) {
-    console.log('installing umami plugin');
+    console.log('installing umami plugin', isProdEnv());
 
     if (isProdEnv()) {
       app.use(VueUmamiPlugin, {

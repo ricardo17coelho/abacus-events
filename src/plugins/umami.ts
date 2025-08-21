@@ -1,7 +1,6 @@
 import { type App } from 'vue';
 import { isProdEnv } from '@/utils';
 import { VueUmamiPlugin } from '@jaseeey/vue-umami-plugin';
-import router from './router';
 
 export default {
   install(app: App) {
@@ -11,7 +10,6 @@ export default {
       app.use(VueUmamiPlugin, {
         websiteID: import.meta.env.VITE_UMAMI_WEBSITE_ID,
         scriptSrc: 'https://cloud.umami.is/script.js',
-        router,
       });
     }
   },

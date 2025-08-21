@@ -15,7 +15,7 @@ export function registerPlugins(app: App) {
   if (isProdEnv()) {
     app.use(VueUmamiPlugin, {
       websiteID: import.meta.env.VITE_UMAMI_WEBSITE_ID,
-      scriptSrc: 'https://cloud.umami.is/script.js',
+      // scriptSrc: 'https://cloud.umami.is/script.js',
       router,
     });
   }

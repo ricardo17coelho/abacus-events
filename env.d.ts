@@ -7,7 +7,7 @@ interface ImportMetaEnv {
 
   readonly VITE_DEV_USER_EMAIL: string;
   readonly VITE_DEV_USER_PW: string;
-  readonly VITE_GOOGLE_ANALYTICS_TRACKING_ID: string;
+  readonly VITE_UMAMI_WEBSITE_ID: string;
 
   readonly VITE_AUTH_SIGN_UP_ENABLED: string;
 }

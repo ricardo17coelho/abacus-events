@@ -65,17 +65,17 @@ const { t } = useI18n();
 
 const events = ref<Event[]>([]);
 
-// Get the current date/time
-const now = new Date();
+const stripTime = (date: Date): Date =>
+  new Date(date.getFullYear(), date.getMonth(), date.getDate());
 
-// Computed for upcoming events
-const upcomingEvents = computed(() =>
-  events.value.filter((event) => new Date(event.date) > now),
+const today = stripTime(new Date());
+
+const upcomingEvents = computed<Event[]>(() =>
+  events.value.filter((event) => stripTime(new Date(event.date)) >= today),
 );
 
-// Computed for past events
-const pastEvents = computed(() =>
-  events.value.filter((event) => new Date(event.date) <= now),
+const pastEvents = computed<Event[]>(() =>
+  events.value.filter((event) => stripTime(new Date(event.date)) < today),
 );
 
 const { getEventsPublic } = useApiEvents();

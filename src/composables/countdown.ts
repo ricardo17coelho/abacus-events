@@ -1,7 +1,9 @@
 import { computed, onBeforeUnmount, onMounted, type Ref, ref } from 'vue';
+import { useI18n } from 'vue-i18n';
 
 export function useDateCountdown(targetDate: Ref<string> | string) {
   const timeRemaining = ref(getTimeRemaining());
+  const { t } = useI18n();
 
   let intervalId: number | undefined;
 
@@ -15,7 +17,7 @@ export function useDateCountdown(targetDate: Ref<string> | string) {
 
   const formattedTime = computed(() => {
     const total = timeRemaining.value;
-    if (total <= 0) return 'Started';
+    if (total <= 0) return t('labels.today');
 
     const seconds = Math.floor(total / 1000);
     const minutes = Math.floor(seconds / 60);
